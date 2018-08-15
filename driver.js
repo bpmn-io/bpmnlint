@@ -1,23 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const BpmnModdle = require('bpmn-moddle');
+const linter = require('./lib/linter');
 
-const testRule = require('./lib/testRule');
-const labelRequired = require('./rules/label-required');
+const config = {
+  "label-required": 2,
+  "start-end-events-required": 2
+};
 
-const moddle = new BpmnModdle();
-const xml = fs.readFileSync('./resources/sample.bpmn', 'utf-8');
-
-
-// Testing
-moddle.fromXML(xml, function(err, root) {
-
-  if (err) {
-    return console.error('failed to parse XML', err);
-  }
-  
-  const errors = testRule(root, labelRequired);
-  console.log('errors: ', errors)
-});  
-
-
+linter('./resources/sample.bpmn', config)
+.then(result => console.log('result: ', result))
+.catch(console.error);
