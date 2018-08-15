@@ -1,0 +1,11 @@
+{
+  "name": "bpmnlint",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/siffogh/bpmnlint/",
+  "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bpmn-moddle": "^5.1.5"
+  }
+}
