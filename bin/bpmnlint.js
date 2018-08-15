@@ -1,10 +1,20 @@
 #!/usr/bin/env node
-
 const meow = require("meow");
 const fs = require("fs");
 const path = require("path");
+const { red, yellow, underline } = require("chalk"); 
 
 const linter = require("../lib/linter");
+
+/**
+ * @returns a formatted warning message
+ */
+const logWarning = warning => console.log(`${yellow("warning:")} ${underline(warning.id)} ${warning.message}`);
+
+/**
+ * @returns a formatted error message
+ */
+const logError = error => console.log(`${red("error:")} ${underline(error.id)} ${error.message}`);
 
 const cli = meow(
   `
@@ -39,7 +49,10 @@ function handleConfig(config) {
   try {
     const parsedConfig = JSON.parse(config);
     linter(cli.input[0], parsedConfig)
-      .then(result => console.log("result: ", result))
+      .then(({errors, warnings}) => {
+				errors.forEach(logError);
+				warnings.forEach(logWarning);
+			})
       .catch(console.error);
   } catch (e) {
     console.log(`Error parsing the configuration file: ${e}`);

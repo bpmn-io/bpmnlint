@@ -1,6 +1,6 @@
 const {isNodeOfType} = require('../lib/utils');
 
-const error = node => `Error: Element ${node.id} is missing a Start or End Event`;
+const error = node => `Process is missing a Start or End Event`;
 
 
 function hasStartEndEvents(node) {
