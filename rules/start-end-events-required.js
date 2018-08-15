@@ -1,6 +1,6 @@
 const {isNodeOfType} = require('../lib/utils');
 
-const error = node => `Process is missing a Start or End Event`;
+const ERROR = 'Missing a Start or End Event';
 
 
 function hasStartEndEvents(node) {
@@ -23,7 +23,7 @@ function hasStartEndEvents(node) {
 module.exports = function startEndEventsRequired(node, reporter) {
   if(isNodeOfType(node, 'Process')) {
     if(!hasStartEndEvents(node)) {
-      reporter.report(node.id, error(node));
+      reporter.report('Process', ERROR);
     }
   }
 }
