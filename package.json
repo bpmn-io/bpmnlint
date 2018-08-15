@@ -6,6 +6,6 @@
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bpmn-moddle": "^5.1.5"
+    "bpmn-moddle": "4.0"
   }
 }

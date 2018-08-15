@@ -2,37 +2,37 @@
 # yarn lockfile v1
 
 
-bpmn-moddle@^5.1.5:
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/bpmn-moddle/-/bpmn-moddle-5.1.5.tgz#cfbd8be1beb0d7dd10c998db7616f2615265823a"
+bpmn-moddle@4.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/bpmn-moddle/-/bpmn-moddle-4.0.0.tgz#a129724ca432e0a806bd03681ce838d0bf166fac"
   dependencies:
-    min-dash "^3.0.0"
-    moddle "^4.1.0"
-    moddle-xml "^7.2.3"
+    min-dash "^2.0.1"
+    moddle "^3.0.0"
+    moddle-xml "^6.0.0"
 
-min-dash@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/min-dash/-/min-dash-3.1.0.tgz#ba1d0f06dd233f163ac8041f115e3bb08ba7fda9"
+min-dash@^2.0.1:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/min-dash/-/min-dash-2.4.0.tgz#d6c69c3c2d624ab31cde5c4b8b150691f14f9e97"
 
-moddle-xml@^7.2.3:
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/moddle-xml/-/moddle-xml-7.2.3.tgz#99c13bc026976361252518d657368b3c78eae483"
+moddle-xml@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/moddle-xml/-/moddle-xml-6.0.0.tgz#365abd537f8a55f23f7e107aaa5cd9e531fa8218"
   dependencies:
-    min-dash "^3.0.0"
-    moddle "^4.1.0"
-    saxen "^8.0.0"
-    tiny-stack "^1.0.0"
+    min-dash "^2.0.1"
+    moddle "^3.0.0"
+    saxen "^7.0.1"
+    tiny-stack "^0.1.0"
 
-moddle@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/moddle/-/moddle-4.1.0.tgz#1b49f60dbe6c9565875605555c9fabe661e400b6"
+moddle@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/moddle/-/moddle-3.0.0.tgz#110b89a21af1bb697d5de61a6062de2df1de5874"
   dependencies:
-    min-dash "^3.0.0"
+    min-dash "^2.0.1"
 
-saxen@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/saxen/-/saxen-8.0.0.tgz#910e2878b1ffa58b214ef8cd2d827bb7a82b2b2b"
+saxen@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/saxen/-/saxen-7.0.1.tgz#5206dbd5073ffa65b56b7838546e27cd33ccfd31"
 
-tiny-stack@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/tiny-stack/-/tiny-stack-1.1.0.tgz#a5d65c5753709ea43b29e903e6f6323185b9ac21"
+tiny-stack@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-stack/-/tiny-stack-0.1.0.tgz#1a848173fc0bfc54e77bb2e9504d2d3c8ad79621"
