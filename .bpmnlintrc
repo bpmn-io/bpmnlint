@@ -1,6 +1,5 @@
 {
   "label-required": 2,
   "start-event-required": 2,
-  "end-event-required": 2,
-  "no-implicit-parallel-gateway": 2
+  "end-event-required": 2
 }
