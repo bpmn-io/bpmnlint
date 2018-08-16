@@ -1,6 +1,6 @@
 {
   "name": "bpmnlint",
-  "version": "1.0.0-alpha3",
+  "version": "1.0.0-alpha4",
   "main": "index.js",
   "repository": "https://github.com/siffogh/bpmnlint/",
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
