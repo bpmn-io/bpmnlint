@@ -10,10 +10,12 @@ function hasStartEvent(node) {
   );
 }
 
-module.exports = function startEventRequired(node, reporter) {
+function check(node, reporter) {
   if (isNodeOfType(node, "Process")) {
     if (!hasStartEvent(node)) {
-      reporter.report("Process", ERROR);
+      reporter.report(node, ERROR);
     }
   }
-};
+}
+
+module.exports = { check };

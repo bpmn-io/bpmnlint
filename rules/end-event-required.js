@@ -8,10 +8,12 @@ function hasEndEvent(node) {
   );
 }
 
-module.exports = function endEventRequired(node, reporter) {
+function check(node, reporter) {
   if (isNodeOfType(node, "Process")) {
     if (!hasEndEvent(node)) {
-      reporter.report("Process", ERROR);
+      reporter.report(node, ERROR);
     }
   }
-};
+}
+
+module.exports = { check };
