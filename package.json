@@ -6,7 +6,7 @@
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
   "license": "MIT",
   "bin": {
-    "bpmnlint": "./cli/bpmnlint.js"
+    "bpmnlint": "./bin/bpmnlint.js"
   },
   "dependencies": {
     "bpmn-moddle": "4.0",

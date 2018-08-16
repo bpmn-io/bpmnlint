@@ -11,7 +11,7 @@ function hasEndEvent(node) {
 function check(node, reporter) {
   if (isNodeOfType(node, "Process")) {
     if (!hasEndEvent(node)) {
-      reporter.report(node, ERROR);
+      reporter.report("Process", ERROR);
     }
   }
 }

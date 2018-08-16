@@ -30,37 +30,27 @@ async function getModdleRoot(sourcePath) {
 }
 
 /**
- * @returns a formatted warning message
+ * Logs formatted warning message
  */
 const logWarning = warning =>
   console.log(
-    `${yellow("warning:")} ${underline(warning.node.id)} ${warning.message}`
+    `${yellow("warning:")} ${underline(warning.id)} ${warning.message}`
   );
 
 /**
- * @returns a formatted error message
+ * Logs a formatted error message
  */
 const logError = error =>
-  console.log(`${red("error:")} ${underline(error.node.id)} ${error.message}`);
+  console.log(`${red("error:")} ${underline(error.id)} ${error.message}`);
 
 /**
- *
+ * Logs errors and warnings properly in the console
  * @param {*} errors
  * @param {*} warnings
  */
 const logReports = ({ errors, warnings }) => {
   errors.forEach(logError);
   warnings.forEach(logWarning);
-};
-
-/**
- * @param {*} errors
- * @param {*} warnings
- */
-const fixReports = ({ errors, warnings }) => {
-  errors.concat(warnings).forEach(report => {
-    report.fix();
-  });
 };
 
 const cli = meow(
@@ -70,7 +60,6 @@ const cli = meow(
 
 	Options
     --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
-    --fix         Automatically fix fixable errors and warnings
 
 	Examples
 		$ bpmnlint ./invoice.bpmn
@@ -81,15 +70,12 @@ const cli = meow(
       config: {
         type: "string",
         alias: "c"
-      },
-      fix: {
-        type: "boolean"
       }
     }
   }
 );
 
-const { config: configFlag, fix: fixFlag } = cli.flags;
+const { config: configFlag } = cli.flags;
 
 if (cli.input.length !== 1) {
   console.log("Error: bpmn file path missing.");
@@ -100,10 +86,8 @@ async function handleConfig(config) {
   try {
     const parsedConfig = JSON.parse(config);
     const moddleRoot = await getModdleRoot(cli.input[0]);
-    linter({ moddle, moddleRoot, config: parsedConfig })
-      .then(reports => {
-        fixFlag ? fixReports(reports) : logReports(reports);
-      })
+    linter({ moddleRoot, config: parsedConfig })
+      .then(logReports)
       .catch(console.error);
   } catch (e) {
     console.log(`Error parsing the configuration file: ${e}`);

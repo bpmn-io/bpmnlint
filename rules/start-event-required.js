@@ -13,7 +13,7 @@ function hasStartEvent(node) {
 function check(node, reporter) {
   if (isNodeOfType(node, "Process")) {
     if (!hasStartEvent(node)) {
-      reporter.report(node, ERROR);
+      reporter.report("Process", ERROR);
     }
   }
 }
