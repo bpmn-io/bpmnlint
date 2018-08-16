@@ -16,11 +16,11 @@ yarn add bpmnlint
 ## Usage
 
 ### As a command line tool
+#### Using a local **.bpmnlintrc** configuration file 
 - Make sure to have a **.bpmnlintrc** configuration file in the directory where you are running the tool:
 
 ```json
 // .bpmnlintrc  file
-
 {
   "label-required": 1,
   "start-event-required": 2,
@@ -33,7 +33,29 @@ yarn add bpmnlint
 bpmnlint ./sample.bpmn
 ```
 
-- Output:
+#### Using an explicit configuration file 
+- e.g. 
+```json
+// some-config.json file
+{
+  "label-required": 1,
+  "start-event-required": 2,
+  "end-event-required": 2
+}
+```
+
+- Run the following command:
+```sh
+bpmnlint ./sample.bpmn -c some-config.json
+```
+or
+```sh
+bpmnlint ./sample.bpmn --config some-config.json
+```
+
+> **Note:** For more information about the possible flags, run bpmnlint with the --help flag.
+
+#### Output:
 <img src="./output.png" />
 
 ### Configuration
@@ -58,7 +80,7 @@ If the specified value for a rule is a number, it will hold the rule status flag
 bpmnlint will then look for the rule first in the built-in rules. 
 If not found, bpmnlint will look for the rule in the npm packages installed as **bpmn-**rule-name (e.g. bpmn-no-implicit-parallel-gateway).
 
-> **Important: ** if you're referring to a non built-in rule, make sure to have it installed as an npm dependency.
+> **Important:** if you're referring to a non built-in rule, make sure to have it installed as an npm dependency.
 
 ### Explicit Configuration
 If the specified value for a rule is an object, it will hold the following information: 
@@ -91,3 +113,7 @@ Please check out the example of [no-implicit-parallel-gateway](https://github.co
   }
 }
 ```
+
+### As a Visual Linting Tool
+
+Please check out [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint).
