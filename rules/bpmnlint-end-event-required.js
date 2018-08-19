@@ -16,7 +16,7 @@ module.exports = utils => {
   function check(node, reporter) {
     if (isNodeOfType(node, "Process")) {
       if (!hasEndEvent(node)) {
-        reporter.report("Process", ERROR);
+        reporter.report(node.id, ERROR);
       }
     }
   }
