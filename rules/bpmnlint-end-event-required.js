@@ -8,8 +8,8 @@ module.exports = utils => {
 
   function hasEndEvent(node) {
     return (
-      node.flowElements.filter(node => isNodeOfType(node, "EndEvent")).length >
-      0
+      (node.flowElements || []).filter(node => isNodeOfType(node, "EndEvent"))
+        .length > 0
     );
   }
 

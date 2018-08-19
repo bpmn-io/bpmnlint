@@ -9,7 +9,7 @@ module.exports = utils => {
 
   function hasStartEvent(node) {
     return (
-      node.flowElements.filter(
+      (node.flowElements || []).filter(
         node => node.$type !== "String" && isNodeOfType(node, "StartEvent")
       ).length > 0
     );
