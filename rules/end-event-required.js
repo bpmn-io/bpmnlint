@@ -3,18 +3,19 @@
  */
 
 module.exports = utils => {
-  const { isNodeOfType } = utils;
+  const { is } = utils;
+
   const ERROR = 'is missing an End Event';
 
   function hasEndEvent(node) {
     return (
-      (node.flowElements || []).filter(node => isNodeOfType(node, 'EndEvent'))
+      (node.flowElements || []).filter(node => is(node, 'bpmn:EndEvent'))
         .length > 0
     );
   }
 
   function check(node, reporter) {
-    if (isNodeOfType(node, 'Process')) {
+    if (is(node, 'Process')) {
       if (!hasEndEvent(node)) {
         reporter.report(node.id, ERROR);
       }

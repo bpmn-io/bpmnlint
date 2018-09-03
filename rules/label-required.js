@@ -3,11 +3,16 @@
  */
 
 module.exports = utils => {
-  const { isNodeOfType } = utils;
+  const { is } = utils;
   const ERROR = 'Element is missing a label/name.';
 
   function check(node, reporter) {
-    if (isNodeOfType(node, 'FlowNode') && !(node.name || '').trim().length) {
+
+    if (is(node, 'bpmn:ParallelGateway')) {
+      return;
+    }
+
+    if (is(node, 'bpmn:FlowNode') && !(node.name || '').trim().length) {
       reporter.report(node.id, ERROR);
     }
   }

@@ -264,12 +264,12 @@ function fakeResolver(ruleMap) {
 function fakeRule(utils) {
 
   const {
-    isNodeOfType
+    is
   } = utils;
 
   function check(node, reporter) {
 
-    if (isNodeOfType(node, 'Definitions')) {
+    if (is(node, 'Definitions')) {
       reporter.report(node.id, 'Definitions detected');
     }
   }

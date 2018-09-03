@@ -45,7 +45,7 @@ describe('testRule', function() {
 
 function fakeRuleWithReports(utils) {
   function check(node, reporter) {
-    if (utils.isNodeOfType(node, 'Definitions')) {
+    if (utils.is(node, 'Definitions')) {
       reporter.report(node.id, 'Definitions detected');
     }
   }
