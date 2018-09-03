@@ -1,0 +1,5 @@
+test
+.eslintignore
+.eslintrc
+.travis.yml
+yarn.lock
