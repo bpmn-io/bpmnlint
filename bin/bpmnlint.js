@@ -12,6 +12,8 @@ const Linter = require("../lib/linter");
 
 const moddle = new BpmnModdle();
 
+const nodeResolver = require('../lib/rule-resolver/nodeResolver');
+
 /**
  * Reads XML form path and return moddle object
  * @param {*} sourcePath
@@ -88,6 +90,10 @@ async function handleConfig(config) {
     const diagramXML = await readFile(path.resolve(cli.input[0]), "utf-8");
 
     const moddleRoot = await getModdleFromXML(diagramXML);
+
+    const linter = new Linter({
+      ruleResolver: nodeResolver
+    });
 
     const lintResults = linter.lint({ moddleRoot, config: parsedConfig });
 
