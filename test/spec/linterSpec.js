@@ -14,7 +14,7 @@ describe('Linter', function() {
     let moddleRoot;
 
     const linter = new Linter({
-      ruleResolver: fakeResolver({})
+      resolver: fakeResolver({})
     });
 
 
@@ -69,18 +69,37 @@ describe('Linter', function() {
     });
 
 
+    it('should run without rules', async function() {
+
+      // given
+      const resolver = {
+        resolveRule() {
+          throw new Error('unexpected invocation');
+        }
+      };
+
+      const linter = new Linter({ resolver });
+
+      // when
+      const lintResults = await linter.lint(moddleRoot, {});
+
+      // then
+      expect(lintResults).to.eql({});
+    });
+
+
     it('should resolve rules', async function() {
 
       // given
-      const ruleResolver = {
-        resolve(ruleName) {
+      const resolver = {
+        resolveRule(ruleName) {
           expect(ruleName).to.eql('testRule');
 
           return fakeRule;
         }
       };
 
-      const linter = new Linter({ ruleResolver });
+      const linter = new Linter({ resolver });
 
       // when
       const lintResults = await linter.lint(moddleRoot, {
@@ -97,13 +116,13 @@ describe('Linter', function() {
     it('should handle unresolved rules', async function() {
 
       // given
-      const ruleResolver = {
-        resolve(ruleName) {
+      const resolver = {
+        resolveRule(ruleName) {
           return null;
         }
       };
 
-      const linter = new Linter({ ruleResolver });
+      const linter = new Linter({ resolver });
 
       let error;
 
@@ -130,7 +149,7 @@ describe('Linter', function() {
 
 function fakeResolver(ruleMap) {
   return {
-    resolve(ruleName) {
+    resolveRule(ruleName) {
       return ruleMap[ruleName];
     }
   };
