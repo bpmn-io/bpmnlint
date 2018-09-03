@@ -144,6 +144,111 @@ describe('Linter', function() {
 
   });
 
+
+  describe('#resolveConfiguredRules', function() {
+
+    describe('should resolve extended', function() {
+
+      it('single parent', async function() {
+
+        // given
+        const resolver = {
+
+          resolveRule(ruleName) {
+            expect(ruleName).to.eql('foo');
+
+            return { check() { } };
+          },
+
+          resolveConfig(configName) {
+            expect(configName).to.eql('bpmnlint/recommended');
+
+            return {
+              rules: {
+                foo: 'warn'
+              }
+            };
+          }
+
+        };
+
+        const linter = new Linter({ resolver });
+
+        const config = {
+          extends: 'bpmnlint/recommended'
+        };
+
+        // when
+        const rules = await linter.resolveConfiguredRules(config);
+
+        // then
+        expect(rules).to.have.keys('foo');
+      });
+
+
+      it('multiple parents', async function() {
+
+        // given
+        const resolver = {
+
+          resolveRule(ruleName) {
+            return { check() { } };
+          },
+
+          resolveConfig(configName) {
+
+            if (configName === 'bpmnlint/recommended') {
+              return {
+                rules: {
+                  foo: 'warn',
+                  bar: 'warn'
+                }
+              };
+            }
+
+            if (configName === 'plugin:foo/recommended') {
+              return {
+                extends: 'plugin:foo/base'
+              };
+            }
+
+            if (configName === 'plugin:foo/base') {
+              return {
+                rules: {
+                  bar: 'error',
+                  other: 'warn'
+                }
+              };
+            }
+
+            throw new Error(`unexpected config <${configName}>`);
+          }
+
+        };
+
+        const linter = new Linter({ resolver });
+
+        const config = {
+          extends: [
+            'bpmnlint/recommended',
+            'plugin:foo/recommended'
+          ]
+        };
+
+        // when
+        const rules = await linter.resolveConfiguredRules(config);
+
+        // then
+        expect(rules).to.eql({
+          'foo': 'warn',
+          'bar': 'error',
+          'other': 'warn'
+        });
+      });
+    });
+
+  });
+
 });
 
 
