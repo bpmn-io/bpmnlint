@@ -83,6 +83,12 @@ if (cli.input.length !== 1) {
   process.exit(1);
 }
 
+function logAndExit(...args) {
+  console.error(...args);
+
+  process.exit(1);
+}
+
 async function handleConfig(config) {
   try {
     const parsedConfig = JSON.parse(config);
@@ -99,15 +105,14 @@ async function handleConfig(config) {
 
     logReports(lintResults);
   } catch (e) {
-    console.log(`Error parsing the configuration file: ${e}`);
+    return logAndExit('Error: Could not parse configuration file', e);
   }
 }
 
 if (configFlag) {
   fs.readFile(configFlag, "utf-8", (error, config) => {
     if (error) {
-      console.log("Error: couldn't read specified config file.");
-      process.exit(1);
+      return logAndExit("Error: Could not read specified config file", error);
     }
 
     handleConfig(config);
@@ -115,8 +120,7 @@ if (configFlag) {
 } else {
   fs.readFile(path.resolve(".bpmnlintrc"), "utf-8", (error, config) => {
     if (error) {
-      console.log("Error: bpmnlint configuration file missing.");
-      process.exit(1);
+      return logAndExit("Error: Configuration file missing", error);
     }
 
     handleConfig(config);
