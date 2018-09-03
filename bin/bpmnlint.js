@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-const meow = require("meow");
-const fs = require("fs");
-const path = require("path");
-const { red, yellow, underline } = require("chalk");
-const BpmnModdle = require("bpmn-moddle");
+const meow = require('meow');
+const fs = require('fs');
+const path = require('path');
+const { red, yellow, underline } = require('chalk');
+const BpmnModdle = require('bpmn-moddle');
 
-const { promisify } = require("util");
+const { promisify } = require('util');
 
 const readFile = promisify(fs.readFile);
-const Linter = require("../lib/linter");
+const Linter = require('../lib/linter');
 
 const moddle = new BpmnModdle();
 
@@ -22,7 +22,7 @@ function getModdleFromXML(source) {
   return new Promise((resolve, reject) => {
     moddle.fromXML(source, (err, root) => {
       if (err) {
-        return reject(new Error("failed to parse XML", err));
+        return reject(new Error('failed to parse XML', err));
       }
 
       return resolve(root);
@@ -35,14 +35,14 @@ function getModdleFromXML(source) {
  */
 const logWarning = warning =>
   console.log(
-    `${yellow("warning:")} ${underline(warning.id)} ${warning.message}`
+    `${yellow('warning:')} ${underline(warning.id)} ${warning.message}`
   );
 
 /**
  * Logs a formatted error message
  */
 const logError = error =>
-  console.log(`${red("error:")} ${underline(error.id)} ${error.message}`);
+  console.log(`${red('error:')} ${underline(error.id)} ${error.message}`);
 
 /**
  * Logs errors and warnings properly in the console
@@ -69,8 +69,8 @@ const cli = meow(
   {
     flags: {
       config: {
-        type: "string",
-        alias: "c"
+        type: 'string',
+        alias: 'c'
       }
     }
   }
@@ -79,7 +79,7 @@ const cli = meow(
 const { config: configFlag } = cli.flags;
 
 if (cli.input.length !== 1) {
-  console.log("Error: bpmn file path missing.");
+  console.log('Error: bpmn file path missing.');
   process.exit(1);
 }
 
@@ -101,7 +101,7 @@ async function handleConfig(config) {
   let diagramXML;
 
   try {
-    diagramXML = await readFile(path.resolve(cli.input[0]), "utf-8");
+    diagramXML = await readFile(path.resolve(cli.input[0]), 'utf-8');
   } catch (e) {
     return logAndExit(`Error: Failed to read ${cli.input[0]}`, e);
   }
@@ -124,17 +124,17 @@ async function handleConfig(config) {
 }
 
 if (configFlag) {
-  fs.readFile(configFlag, "utf-8", (error, config) => {
+  fs.readFile(configFlag, 'utf-8', (error, config) => {
     if (error) {
-      return logAndExit("Error: Could not read specified config file", error);
+      return logAndExit('Error: Could not read specified config file', error);
     }
 
     handleConfig(config);
   });
 } else {
-  fs.readFile(path.resolve(".bpmnlintrc"), "utf-8", (error, config) => {
+  fs.readFile(path.resolve('.bpmnlintrc'), 'utf-8', (error, config) => {
     if (error) {
-      return logAndExit("Error: Configuration file missing", error);
+      return logAndExit('Error: Configuration file missing', error);
     }
 
     handleConfig(config);

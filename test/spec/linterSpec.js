@@ -164,5 +164,5 @@ function buildResults(category) {
         message: 'Definitions detected'
       }
     ]
-  }
+  };
 }

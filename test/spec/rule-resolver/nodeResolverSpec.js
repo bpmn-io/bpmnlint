@@ -26,4 +26,4 @@ describe('nodeResolver', function() {
     expect(path).to.eql('foo/rules/label-required');
   });
 
-})
+});
