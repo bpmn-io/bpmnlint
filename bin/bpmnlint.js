@@ -8,7 +8,7 @@ const BpmnModdle = require("bpmn-moddle");
 const { promisify } = require("util");
 
 const readFile = promisify(fs.readFile);
-const linter = require("../lib/linter");
+const Linter = require("../lib/linter");
 
 const moddle = new BpmnModdle();
 
@@ -81,14 +81,17 @@ if (cli.input.length !== 1) {
   process.exit(1);
 }
 
-function handleConfig(config) {
+async function handleConfig(config) {
   try {
     const parsedConfig = JSON.parse(config);
-    readFile(path.resolve(cli.input[0]), "utf-8")
-      .then(getModdleFromXML)
-      .then(moddleRoot => {
-        logReports(linter.lint({ moddleRoot, config: parsedConfig }));
-      });
+
+    const diagramXML = await readFile(path.resolve(cli.input[0]), "utf-8");
+
+    const moddleRoot = await getModdleFromXML(diagramXML);
+
+    const lintResults = linter.lint({ moddleRoot, config: parsedConfig });
+
+    logReports(lintResults);
   } catch (e) {
     console.log(`Error parsing the configuration file: ${e}`);
   }

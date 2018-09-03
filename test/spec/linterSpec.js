@@ -1,32 +1,47 @@
-import { lint, applyRule } from '../../lib/linter';
+import Linter from '../../lib/linter';
 
-import { expect, readModdle, createRule } from '../helper';
+import {
+  expect,
+  readModdle,
+  createRule
+} from '../helper';
 
-describe('linter', function() {
+
+describe('Linter', function() {
+
   describe('#applyRule', function() {
-    let root;
 
-    beforeEach(async function() {
-      const result = await readModdle({
-        filePath: __dirname + '/diagram.bpmn'
-      });
+    let moddleRoot;
 
-      root = result.root;
+    const linter = new Linter({
+      ruleResolver: fakeResolver({})
     });
 
+
+    beforeEach(async function() {
+      const result = await readModdle(__dirname + '/diagram.bpmn');
+
+      moddleRoot = result.root;
+    });
+
+
     describe('should apply categories', function() {
-      function test(flag, expectedResult) {
-        it(`${flag}`, function() {
+
+      function test(ruleFlag, expectedResult) {
+
+        it(`${ruleFlag}`, function() {
+
           // when
-          const results = applyRule({
-            moddleRoot: root,
-            ruleFlag: flag,
+          const results = linter.applyRule({
+            moddleRoot,
+            ruleFlag,
             rule: createRule(fakeRule)
           });
 
           // then
           expect(results).to.eql(expectedResult);
         });
+
       }
 
       test('off', {});
@@ -38,15 +53,94 @@ describe('linter', function() {
       test(2, buildResults('errors'));
       test('error', buildResults('errors'));
     });
+
+
   });
 
-  describe('lint', function() {});
+
+  describe('#lint', function() {
+
+    let moddleRoot;
+
+    before(async function() {
+      const result = await readModdle(__dirname + '/diagram.bpmn');
+
+      moddleRoot = result.root;
+    });
+
+
+    it('should resolve rules', async function() {
+
+      // given
+      const ruleResolver = {
+        resolve(ruleName) {
+          expect(ruleName).to.eql('testRule');
+
+          return createRule(fakeRule);
+        }
+      };
+
+      const linter = new Linter({ ruleResolver });
+
+      // when
+      const lintResults = await linter.lint(moddleRoot, {
+        testRule: 'warn'
+      });
+
+      // then
+      expect(lintResults).to.eql(buildResults('warnings'));
+    });
+
+
+    it('should handle unresolved rules', async function() {
+
+      // given
+      const ruleResolver = {
+        resolve(ruleName) {
+          return null;
+        }
+      };
+
+      const linter = new Linter({ ruleResolver });
+
+      let error;
+
+      try {
+        await linter.lint(moddleRoot, {
+          unknownRule: 'warn'
+        });
+      } catch (e) {
+        error = e;
+      }
+
+      // then
+      expect(error).to.exist;
+
+      expect(error.message).to.eql('unknown rule <unknownRule>');
+    });
+
+  });
+
 });
 
+
+function fakeResolver(ruleMap) {
+  return {
+    resolve(ruleName) {
+      return ruleMap[ruleName];
+    }
+  };
+}
+
+
 function fakeRule(utils) {
-  const { isNodeOfType } = utils;
+
+  const {
+    isNodeOfType
+  } = utils;
 
   function check(node, reporter) {
+
     if (isNodeOfType(node, 'Definitions')) {
       reporter.report(node.id, 'Definitions detected');
     }
@@ -58,6 +152,7 @@ function fakeRule(utils) {
 }
 
 function buildResults(category) {
+
   return {
     [category]: [
       {
@@ -65,5 +160,5 @@ function buildResults(category) {
         message: 'Definitions detected'
       }
     ]
-  };
+  }
 }
