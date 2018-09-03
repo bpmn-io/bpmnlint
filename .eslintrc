@@ -3,6 +3,9 @@
     "plugin:bpmn-io/es6",
     "plugin:prettier/recommended"
   ],
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }]
+  },
   "env": {
       "node": true,
       "es6": true,
