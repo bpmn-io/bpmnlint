@@ -1,14 +1,9 @@
 {
   "extends": [
-    "plugin:bpmn-io/es6",
-    "plugin:prettier/recommended"
+    "plugin:bpmn-io/es6"
   ],
-  "rules": {
-    "prettier/prettier": ["warn", { "singleQuote": true }]
-  },
   "env": {
     "node": true,
-    "es6": true,
-    "mocha": true
+    "es6": true
   }
 }
