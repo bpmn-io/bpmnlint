@@ -1,5 +1,9 @@
 # bpmnlint
-Linter for BPMN diagrams.
+
+[![Build Status](https://travis-ci.org/bpmn-io/bpmnlint.svg?branch=master)](https://travis-ci.org/bpmn-io/bpmnlint)
+
+Validate and improve your BPMN diagrams.
+
 
 ## Installing
 
