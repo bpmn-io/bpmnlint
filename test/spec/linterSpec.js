@@ -76,7 +76,7 @@ describe('Linter', function() {
         resolve(ruleName) {
           expect(ruleName).to.eql('testRule');
 
-          return createRule(fakeRule);
+          return fakeRule;
         }
       };
 
