@@ -113,8 +113,6 @@ async function handleConfig(config) {
       ruleResolver: nodeResolver
     });
 
-    console.error(moddleRoot, parsedConfig);
-
     const lintResults = await linter.lint(moddleRoot, parsedConfig);
 
     logReports(lintResults);
