@@ -5,6 +5,10 @@
   "repository": "https://github.com/siffogh/bpmnlint/",
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "npm test -- --watch",
+    "test": "mocha -r esm test/*"
+  },
   "bin": {
     "bpmnlint": "./bin/bpmnlint.js"
   },
@@ -19,6 +23,7 @@
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-bpmn-io": "^0.5.4",
     "eslint-plugin-prettier": "^2.6.2",
+    "esm": "^3.0.81",
     "mocha": "^5.2.0",
     "prettier": "^1.14.2"
   }
