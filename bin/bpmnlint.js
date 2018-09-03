@@ -101,7 +101,7 @@ async function handleConfig(config) {
       ruleResolver: nodeResolver
     });
 
-    const lintResults = linter.lint({ moddleRoot, config: parsedConfig });
+    const lintResults = linter.lint(moddleRoot, parsedConfig);
 
     logReports(lintResults);
   } catch (e) {
