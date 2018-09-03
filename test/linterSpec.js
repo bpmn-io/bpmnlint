@@ -1,7 +1,3 @@
-
-
-describe('linter', function() {
-
-  it('should work');
-
+describe("linter", function() {
+  it("should work");
 });
