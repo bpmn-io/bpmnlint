@@ -84,7 +84,9 @@ describe('Linter', function() {
 
       // when
       const lintResults = await linter.lint(moddleRoot, {
-        testRule: 'warn'
+        rules: {
+          testRule: 'warn'
+        }
       });
 
       // then
@@ -107,7 +109,9 @@ describe('Linter', function() {
 
       try {
         await linter.lint(moddleRoot, {
-          unknownRule: 'warn'
+          rules: {
+            unknownRule: 'warn'
+          }
         });
       } catch (e) {
         error = e;
