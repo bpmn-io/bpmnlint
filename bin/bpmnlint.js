@@ -62,7 +62,7 @@ const cli = meow(
 
 	Examples
 		$ bpmnlint ./invoice.bpmn
-		
+
 `,
   {
     flags: {
@@ -87,7 +87,7 @@ function handleConfig(config) {
     readFile(path.resolve(cli.input[0]), "utf-8")
       .then(getModdleFromXML)
       .then(moddleRoot => {
-        logReports(linter({ moddleRoot, config: parsedConfig }));
+        logReports(linter.lint({ moddleRoot, config: parsedConfig }));
       });
   } catch (e) {
     console.log(`Error parsing the configuration file: ${e}`);
