@@ -90,22 +90,36 @@ function logAndExit(...args) {
 }
 
 async function handleConfig(config) {
+  let parsedConfig;
+
   try {
-    const parsedConfig = JSON.parse(config);
+    parsedConfig = JSON.parse(config);
+  } catch (e) {
+    return logAndExit('Error: Could not parse configuration file', e);
+  }
 
-    const diagramXML = await readFile(path.resolve(cli.input[0]), "utf-8");
+  let diagramXML;
 
+  try {
+    diagramXML = await readFile(path.resolve(cli.input[0]), "utf-8");
+  } catch (e) {
+    return logAndExit(`Error: Failed to read ${cli.input[0]}`, e);
+  }
+
+  try {
     const moddleRoot = await getModdleFromXML(diagramXML);
 
     const linter = new Linter({
       ruleResolver: nodeResolver
     });
 
-    const lintResults = linter.lint(moddleRoot, parsedConfig);
+    console.error(moddleRoot, parsedConfig);
+
+    const lintResults = await linter.lint(moddleRoot, parsedConfig);
 
     logReports(lintResults);
   } catch (e) {
-    return logAndExit('Error: Could not parse configuration file', e);
+    return logAndExit(e);
   }
 }
 
