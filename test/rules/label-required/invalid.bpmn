@@ -10,9 +10,9 @@
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1j45to3" sourceRef="StartEvent_1murfw5" targetRef="Task_0frbpxl" />
     <bpmn:sequenceFlow id="SequenceFlow_0izr5sb" sourceRef="Task_0frbpxl" targetRef="ExclusiveGateway_1opgqct" />
-    <bpmn:parallelGateway id="ExclusiveGateway_1opgqct">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1opgqct">
       <bpmn:incoming>SequenceFlow_0izr5sb</bpmn:incoming>
-    </bpmn:parallelGateway>
+    </bpmn:exclusiveGateway>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">

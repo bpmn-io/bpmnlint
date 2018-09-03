@@ -8,6 +8,7 @@
       <bpmn:incoming>SequenceFlow_1j45to3</bpmn:incoming>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1j45to3" sourceRef="StartEvent_1murfw5" targetRef="Task_0frbpxl" />
+    <bpmn:parallelGateway id="ParallelGateway_0b11dbn" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
@@ -24,6 +25,9 @@
         <di:waypoint x="-2119" y="3109" />
         <di:waypoint x="-2066" y="3109" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_0wb4sqp_di" bpmnElement="ParallelGateway_0b11dbn">
+        <dc:Bounds x="-1991" y="3205" width="50" height="50" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
