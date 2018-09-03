@@ -1,9 +1,11 @@
 const execa = require('execa');
 
 async function testAll() {
-  const result = await execa('bpmnlint', [ 'diagram.bpmn' ]);
 
-  console.log(result);
+  await execa('bpmnlint', [ 'diagram.bpmn' ]);
+
+  await execa('bpmnlint', [ '-c', 'rule-extends.json', 'diagram.bpmn' ]);
+
 }
 
 

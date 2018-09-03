@@ -7,23 +7,69 @@ import {
 
 describe('nodeResolver', function() {
 
-  it('should resolve built in rule', function() {
+  describe('#resolveRule', function() {
 
-    // when
-    const path = nodeResolver.getRulePath('label-required');
+    it('should resolve built-in', async function() {
 
-    // then
-    expect(path).to.eql('../../rules/label-required');
+      // when
+      const { path } = nodeResolver.parseRuleName('label-required');
+
+      // then
+      expect(path).to.eql('../../rules/label-required');
+
+      // and when...
+      const localRule = await nodeResolver.resolveRule('label-required');
+
+      // then
+      expect(localRule).to.exist;
+    });
+
+
+    it('should resolve external', function() {
+
+      // when
+      const { path } = nodeResolver.parseRuleName('foo/label-required');
+
+      // then
+      expect(path).to.eql('foo/rules/label-required');
+    });
+
   });
 
 
-  it('should resolve external rule', function() {
+  describe('#resolveConfig', function() {
 
-    // when
-    const path = nodeResolver.getRulePath('foo/label-required');
+    it('should resolve built-in', async function() {
 
-    // then
-    expect(path).to.eql('foo/rules/label-required');
+      // when
+      const {
+        path
+      } = await nodeResolver.parseConfigName('bpmnlint:recommended');
+
+      // then
+      expect(path).to.eql('../../config/recommended');
+
+      // ...and when
+      const recommendedConfig = nodeResolver.resolveConfig('bpmnlint:recommended');
+
+      // then
+      expect(recommendedConfig).to.exist;
+    });
+
+
+    it('should resolve external', function() {
+
+      // when
+      const {
+        path,
+        config
+      } = nodeResolver.parseConfigName('plugin:foo/bar');
+
+      // then
+      expect(path).to.eql('foo');
+      expect(config).to.eql('bar');
+    });
+
   });
 
 });
