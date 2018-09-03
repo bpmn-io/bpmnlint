@@ -16,8 +16,7 @@ const moddle = new BpmnModdle();
  * Reads XML form path and return moddle object
  * @param {*} sourcePath
  */
-async function getModdleRoot(sourcePath) {
-  const source = await readFile(path.resolve(sourcePath), "utf-8");
+function getModdleFromXML(source) {
   return new Promise((resolve, reject) => {
     moddle.fromXML(source, (err, root) => {
       if (err) {
@@ -82,13 +81,14 @@ if (cli.input.length !== 1) {
   process.exit(1);
 }
 
-async function handleConfig(config) {
+function handleConfig(config) {
   try {
     const parsedConfig = JSON.parse(config);
-    const moddleRoot = await getModdleRoot(cli.input[0]);
-    linter({ moddleRoot, config: parsedConfig })
-      .then(logReports)
-      .catch(console.error);
+    readFile(path.resolve(cli.input[0]), "utf-8")
+      .then(getModdleFromXML)
+      .then(moddleRoot => {
+        logReports(linter({ moddleRoot, config: parsedConfig }));
+      });
   } catch (e) {
     console.log(`Error parsing the configuration file: ${e}`);
   }
