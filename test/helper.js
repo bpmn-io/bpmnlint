@@ -13,11 +13,11 @@ export { expect } from 'chai';
  *
  * @return {Promise<Object>}
  */
-export function createModdle(xml) {
+export function createModdle(xml, elementType = 'bpmn:Definitions') {
   const moddle = new BpmnModdle();
 
   return new Promise((resolve, reject) => {
-    moddle.fromXML(xml, { lax: true }, function(err, root, context) {
+    moddle.fromXML(xml, elementType, { lax: true }, function(err, root, context) {
       if (err) {
         return reject(err);
       } else {
