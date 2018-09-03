@@ -2,6 +2,14 @@
   "name": "bpmnlint",
   "version": "1.0.0-alpha4",
   "main": "index.js",
+  "keywords": [
+    "bpmnlint",
+    "bpmn",
+    "linter",
+    "cli",
+    "validation",
+    "rules"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bpmn-io/bpmnlint"
