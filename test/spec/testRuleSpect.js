@@ -2,7 +2,7 @@ import testRule from '../../lib/testRule';
 
 import { expect, createRule, readModdle } from '../helper';
 
-describe('#testRule', function() {
+describe('testRule', function() {
   let moddleRoot;
 
   beforeEach(async function() {

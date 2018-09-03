@@ -2,7 +2,7 @@ import { isNodeOfType } from '../../lib/utils';
 
 import { expect } from '../helper';
 
-describe('#utils', function() {
+describe('utils', function() {
   const node = {
     $descriptor: { allTypes: [{ name: 'bpmn:foo' }, { name: 'bpmn:bar' }] }
   };
