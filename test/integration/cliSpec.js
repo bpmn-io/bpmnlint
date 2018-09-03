@@ -1,7 +1,7 @@
 import execa from 'execa';
 
 
-describe('bpmnlint', function() {
+describe('cli', function() {
 
   before(async function() {
 
@@ -12,7 +12,7 @@ describe('bpmnlint', function() {
   });
 
 
-  it('should execute cli', async function() {
+  it('should execute bpmnlint', async function() {
 
     await execa('npm', [ 'test' ], { cwd: __dirname + '/cli' });
 
