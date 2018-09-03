@@ -17,23 +17,26 @@ RuleTester.verify('label-required', rule, {
       )
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid.parallel-gateway.part.bpmn')
+      moddleElement: readModdle(__dirname + '/label-required/valid.bpmn')
     }
   ],
   invalid: [
     {
-      moddleElement: '...',
+      moddleElement: createModdle(
+        '<startEvent xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="StartEvent_1" />',
+        'bpmn:StartEvent'
+      ),
       report: {
-        id: 'foo',
-        message: 'bar'
+        id: 'StartEvent_1',
+        message: 'Element is missing a label/name.'
       }
     },
     {
-      moddleElement: '...',
+      moddleElement: readModdle(__dirname + '/label-required/invalid.bpmn'),
       report: {
-        id: 'foo',
-        message: 'bar'
+        id: 'ExclusiveGateway_1opgqct',
+        message: 'Element is missing a label/name.'
       }
-    },
+    }
   ]
 });
