@@ -14,22 +14,44 @@ describe('linter', function() {
 
   describe('#applyRule', function() {
 
-    it('should apply rule', async function() {
+    let root;
 
-      const {
-        root
-      } = await readModdle(__dirname + '/diagram.bpmn');
+    beforeEach(async function() {
+      const result = await readModdle(__dirname + '/diagram.bpmn');
 
-      // when
-      const results = applyRule({
-        moddleRoot: root,
-        ruleFlag: 1,
-        rule: createRule(fakeRule)
-      });
-
-      // then
-      expect(results).to.exist;
+      root = result.root;
     });
+
+
+    describe('should apply categories', function() {
+
+      function test(flag, expectedResult) {
+
+        it(`should apply ${flag}`, function() {
+
+          // when
+          const results = applyRule({
+            moddleRoot: root,
+            ruleFlag: flag,
+            rule: createRule(fakeRule)
+          });
+
+          // then
+          expect(results).to.eql(expectedResult);
+        });
+
+      }
+
+      test('off', {});
+      test(0, {});
+
+      test(1, buildResults('warnings'));
+      test('WARN', buildResults('warnings'));
+
+      test(2, buildResults('errors'));
+      test('error', buildResults('errors'));
+    });
+
 
   });
 
@@ -58,4 +80,16 @@ function fakeRule(utils) {
   return {
     check
   };
+}
+
+function buildResults(category) {
+
+  return {
+    [category]: [
+      {
+        id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
+        message: 'Definitions detected'
+      }
+    ]
+  }
 }
