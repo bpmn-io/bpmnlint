@@ -9,7 +9,7 @@
     "all": "run-s lint test",
     "lint": "eslint .",
     "dev": "npm test -- --watch",
-    "test": "mocha -r esm 'test/**/*Spec.js'"
+    "test": "mocha -r esm 'test/@(spec|rules|integration)/*.js'"
   },
   "bin": {
     "bpmnlint": "./bin/bpmnlint.js"

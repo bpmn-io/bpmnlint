@@ -1,7 +1,9 @@
 const execa = require('execa');
 
 async function testAll() {
-  await execa('bpmnlint', [ 'diagram.bpmn' ]);
+  const result = await execa('bpmnlint', [ 'diagram.bpmn' ]);
+
+  console.log(result);
 }
 
 
