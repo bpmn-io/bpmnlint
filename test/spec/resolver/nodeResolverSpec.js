@@ -31,7 +31,7 @@ describe('nodeResolver', function() {
       const { path } = nodeResolver.parseRuleName('foo/label-required');
 
       // then
-      expect(path).to.eql('foo/rules/label-required');
+      expect(path).to.eql('bpmnlint-plugin-foo/rules/label-required');
     });
 
   });
@@ -66,7 +66,7 @@ describe('nodeResolver', function() {
       } = nodeResolver.parseConfigName('plugin:foo/bar');
 
       // then
-      expect(path).to.eql('foo');
+      expect(path).to.eql('bpmnlint-plugin-foo');
       expect(config).to.eql('bar');
     });
 
