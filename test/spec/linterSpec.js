@@ -1,34 +1,22 @@
-import {
-  lint,
-  applyRule
-} from '../../lib/linter';
+import { lint, applyRule } from '../../lib/linter';
 
-import {
-  expect,
-  readModdle,
-  createRule
-} from '../helper';
-
+import { expect, readModdle, createRule } from '../helper';
 
 describe('linter', function() {
-
   describe('#applyRule', function() {
-
     let root;
 
     beforeEach(async function() {
-      const result = await readModdle(__dirname + '/diagram.bpmn');
+      const result = await readModdle({
+        filePath: __dirname + '/diagram.bpmn'
+      });
 
       root = result.root;
     });
 
-
     describe('should apply categories', function() {
-
       function test(flag, expectedResult) {
-
         it(`${flag}`, function() {
-
           // when
           const results = applyRule({
             moddleRoot: root,
@@ -39,7 +27,6 @@ describe('linter', function() {
           // then
           expect(results).to.eql(expectedResult);
         });
-
       }
 
       test('off', {});
@@ -51,27 +38,15 @@ describe('linter', function() {
       test(2, buildResults('errors'));
       test('error', buildResults('errors'));
     });
-
-
   });
 
-
-  describe('lint', function() {
-
-  });
-
+  describe('lint', function() {});
 });
 
-
-
 function fakeRule(utils) {
-
-  const {
-    isNodeOfType
-  } = utils;
+  const { isNodeOfType } = utils;
 
   function check(node, reporter) {
-
     if (isNodeOfType(node, 'Definitions')) {
       reporter.report(node.id, 'Definitions detected');
     }
@@ -83,7 +58,6 @@ function fakeRule(utils) {
 }
 
 function buildResults(category) {
-
   return {
     [category]: [
       {
@@ -91,5 +65,5 @@ function buildResults(category) {
         message: 'Definitions detected'
       }
     ]
-  }
+  };
 }

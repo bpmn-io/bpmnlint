@@ -15,7 +15,6 @@ export function createModdle() {
   return new BpmnModdle();
 }
 
-
 /**
  * Return moddle instance, read from the given file.
  *
@@ -23,15 +22,13 @@ export function createModdle() {
  *
  * @return {Promise<ModdleElement>}
  */
-export function readModdle(filePath) {
-
-  const contents = readFileSync(filePath, 'utf8');
+export function readModdle({ filePath, content }) {
+  const contents = filePath ? readFileSync(filePath, 'utf8') : content;
 
   const moddle = createModdle();
 
   return new Promise((resolve, reject) => {
     moddle.fromXML(contents, { lax: true }, function(err, root, context) {
-
       if (err) {
         return reject(err);
       } else {
@@ -41,11 +38,9 @@ export function readModdle(filePath) {
           moddle
         });
       }
-    })
+    });
   });
-
 }
-
 
 export function createRule(ruleFactory) {
   return ruleFactory(utils);
