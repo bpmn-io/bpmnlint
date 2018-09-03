@@ -9,26 +9,15 @@ export { expect } from 'chai';
 /**
  * Create moddle instance.
  *
- * @return {Moddle}
- */
-export function createModdle() {
-  return new BpmnModdle();
-}
-
-/**
- * Return moddle instance, read from the given file.
+ * @param {String} xml the XML string
  *
- * @param  {String} filePath
- *
- * @return {Promise<ModdleElement>}
+ * @return {Promise<Object>}
  */
-export function readModdle({ filePath, content }) {
-  const contents = filePath ? readFileSync(filePath, 'utf8') : content;
-
-  const moddle = createModdle();
+export function createModdle(xml) {
+  const moddle = new BpmnModdle();
 
   return new Promise((resolve, reject) => {
-    moddle.fromXML(contents, { lax: true }, function(err, root, context) {
+    moddle.fromXML(xml, { lax: true }, function(err, root, context) {
       if (err) {
         return reject(err);
       } else {
@@ -40,6 +29,19 @@ export function readModdle({ filePath, content }) {
       }
     });
   });
+}
+
+/**
+ * Return moddle instance, read from the given file.
+ *
+ * @param  {String} filePath
+ *
+ * @return {Promise<Object>}
+ */
+export function readModdle(filePath) {
+  const contents = readFileSync(filePath, 'utf8');
+
+  return createModdle(contents);
 }
 
 export function createRule(ruleFactory) {

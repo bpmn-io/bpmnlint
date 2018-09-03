@@ -6,7 +6,7 @@ describe('testRule', function() {
   let moddleRoot;
 
   beforeEach(async function() {
-    const result = await readModdle({ filePath: __dirname + '/diagram.bpmn' });
+    const result = await readModdle(__dirname + '/diagram.bpmn');
 
     moddleRoot = result.root;
   });
