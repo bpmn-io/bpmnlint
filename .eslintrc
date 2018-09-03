@@ -4,11 +4,11 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "prettier/prettier": ["error", { "singleQuote": true }]
+    "prettier/prettier": ["warn", { "singleQuote": true }]
   },
   "env": {
-      "node": true,
-      "es6": true,
-      "mocha": true
+    "node": true,
+    "es6": true,
+    "mocha": true
   }
 }

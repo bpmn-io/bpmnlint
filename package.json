@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "all": "run-s lint test",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
     "dev": "npm test -- --watch",
     "test": "mocha -r esm 'test/**/*Spec.js'"
   },
