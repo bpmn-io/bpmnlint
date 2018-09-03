@@ -16,15 +16,17 @@ yarn add bpmnlint
 ## Usage
 
 ### As a command line tool
-#### Using a local **.bpmnlintrc** configuration file 
+#### Using a local **.bpmnlintrc** configuration file
 - Make sure to have a **.bpmnlintrc** configuration file in the directory where you are running the tool:
 
 ```json
 // .bpmnlintrc  file
 {
-  "label-required": 1,
-  "start-event-required": 2,
-  "end-event-required": 2
+  "rules": {
+    "label-required": "warn",
+    "start-event-required": "error",
+    "end-event-required": "error"
+  }
 }
 ```
 
@@ -33,14 +35,16 @@ yarn add bpmnlint
 bpmnlint ./sample.bpmn
 ```
 
-#### Using an explicit configuration file 
-- e.g. 
+#### Using an explicit configuration file
+- e.g.
 ```json
 // some-config.json file
 {
-  "label-required": 1,
-  "start-event-required": 2,
-  "end-event-required": 2
+  "rules": {
+    "label-required": "warn",
+    "start-event-required": "error",
+    "end-event-required": "error"
+  }
 }
 ```
 
@@ -66,37 +70,41 @@ These values can be specified in an implicit or explicit way.
 > **Note:** bpmnlint comes with a list of built-in rules: label-required, start-event-required, and end-event-required.
 
 ### Implicit Configuration
-If the specified value for a rule is a number, it will hold the rule status flag: 
+If the specified value for a rule is a number, it will hold the rule status flag:
 - 0: the rule is off
 - 1: problems reported by the rule are considered as warnings
 - 2: problems reported by the rule are considerd as errors
 
 ```json
 {
-  "label-required": 1
+  "rules": {
+    "label-required": "warn"
+  }
 }
 ```
 
-bpmnlint will then look for the rule first in the built-in rules. 
+bpmnlint will then look for the rule first in the built-in rules.
 If not found, bpmnlint will look for the rule in the npm packages installed as **bpmn-**rule-name (e.g. bpmn-no-implicit-parallel-gateway).
 
 > **Important:** if you're referring to a non built-in rule, make sure to have it installed as an npm dependency.
 
 ### Explicit Configuration
-If the specified value for a rule is an object, it will hold the following information: 
+If the specified value for a rule is an object, it will hold the following information:
 - path to the the rule.
 - flag: rule status flag
 
 ```json
 {
-  "bpmnlint-some-custom-rule": { 
-    "path": "some/local/path/bpmnlint-some-custom-rule", 
-    "flag": 2
+  "plugins": [
+    "custom-rules"
+  ],
+  "rules": {
+    "custom-rules/some-custom-rule": "error"
   }
 }
 ```
 
-### Adding Custom Rules 
+### Adding Custom Rules
 > **Important:** The rule needs to have a suffix of 'bpmnlint-'.
 
 Custom rules can be added in two ways:
@@ -107,9 +115,11 @@ Please check out the example of [no-implicit-parallel-gateway](https://github.co
 #### As a Local Module
 ```json
 {
-  "bpmnlint-some-custom-rule": { 
-    "path": "some/local/path/bpmnlint-some-custom-rule", 
-    "flag": 2
+  "plugins": [
+    "custom-rules"
+  ],
+  "rules": {
+    "custom-rules/some-custom-rule": "error"
   }
 }
 ```
