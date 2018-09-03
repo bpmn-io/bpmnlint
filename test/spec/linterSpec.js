@@ -27,7 +27,7 @@ describe('linter', function() {
 
       function test(flag, expectedResult) {
 
-        it(`should apply ${flag}`, function() {
+        it(`${flag}`, function() {
 
           // when
           const results = applyRule({
