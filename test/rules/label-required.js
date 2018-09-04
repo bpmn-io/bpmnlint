@@ -1,4 +1,4 @@
-import RuleTester from './rule-tester';
+import RuleTester from '../../lib/testers/rule-tester';
 
 import rule from '../../rules/label-required';
 
