@@ -7,7 +7,7 @@ describe('cli', function() {
 
     this.timeout(30000);
 
-    await execa('npm', [ 'install' ], { cwd: __dirname + '/cli' });
+    await execa('install-local', [ '../../..', '../bpmnlint-plugin-test' ], { cwd: __dirname + '/cli' });
 
   });
 
