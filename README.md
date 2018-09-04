@@ -46,7 +46,7 @@ Checkout [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-ex
 
 ## Visual Linting
 
-Checkout [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint) to learn how to add visual linting to your [next BPMN editor](https://github.com/bpmn-io/bpmn-js).
+Integrate the linter via [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint) into your [next BPMN editor](https://github.com/bpmn-io/bpmn-js).
 
 
 ## License
