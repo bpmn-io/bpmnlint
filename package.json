@@ -32,7 +32,7 @@
     "bpmnlint": "./bin/bpmnlint.js"
   },
   "dependencies": {
-    "bpmn-moddle": "4.0",
+    "bpmn-moddle": "^4.0.0",
     "chalk": "^2.4.1",
     "meow": "^5.0.0"
   },
