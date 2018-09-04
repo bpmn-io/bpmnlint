@@ -39,6 +39,11 @@ Add or customize rules using the `rules` block:
 ```
 
 
+## Writing / Consuming Custom Rules
+
+Checkout [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) to learn how to define and consume custom lint rules.
+
+
 ## Visual Linting
 
 Checkout [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint) to learn how to add visual linting to your [next BPMN editor](https://github.com/bpmn-io/bpmn-js).
