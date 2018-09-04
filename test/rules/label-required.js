@@ -5,7 +5,7 @@ import rule from '../../rules/label-required';
 import {
   createModdle,
   readModdle
-} from '../helper';
+} from '../../lib/testers/helper';
 
 
 RuleTester.verify('label-required', rule, {
