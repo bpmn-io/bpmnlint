@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bpmn-io/bpmnlint.svg?branch=master)](https://travis-ci.org/bpmn-io/bpmnlint)
 
-Validate your BPMN diagrams based configurable lint rules.
+Validate your BPMN diagrams based on configurable lint rules.
 
 
 ## Usage
