@@ -3,8 +3,6 @@
  */
 module.exports = function(utils) {
 
-  var is = utils.is;
-
   function check(node, reporter) {
     if (/^bar/.test(node.name || '')) {
       reporter.report(node.id, 'Element has non-sense label <' + node.name + '>');
