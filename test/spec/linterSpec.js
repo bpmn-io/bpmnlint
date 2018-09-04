@@ -161,7 +161,7 @@ describe('Linter', function() {
           },
 
           resolveConfig(configName) {
-            expect(configName).to.eql('bpmnlint/recommended');
+            expect(configName).to.eql('bpmnlint:recommended');
 
             return {
               rules: {
@@ -175,14 +175,16 @@ describe('Linter', function() {
         const linter = new Linter({ resolver });
 
         const config = {
-          extends: 'bpmnlint/recommended'
+          extends: 'bpmnlint:recommended'
         };
 
         // when
         const rules = await linter.resolveConfiguredRules(config);
 
         // then
-        expect(rules).to.have.keys('foo');
+        expect(rules).to.eql({
+          'bpmnlint/foo': 'warn'
+        });
       });
 
 
@@ -197,7 +199,7 @@ describe('Linter', function() {
 
           resolveConfig(configName) {
 
-            if (configName === 'bpmnlint/recommended') {
+            if (configName === 'bpmnlint:recommended') {
               return {
                 rules: {
                   foo: 'warn',
@@ -215,8 +217,8 @@ describe('Linter', function() {
             if (configName === 'plugin:foo/base') {
               return {
                 rules: {
-                  bar: 'error',
-                  other: 'warn'
+                  'bpmnlint/bar': 'error',
+                  'other': 'warn'
                 }
               };
             }
@@ -230,7 +232,7 @@ describe('Linter', function() {
 
         const config = {
           extends: [
-            'bpmnlint/recommended',
+            'bpmnlint:recommended',
             'plugin:foo/recommended'
           ]
         };
@@ -240,9 +242,9 @@ describe('Linter', function() {
 
         // then
         expect(rules).to.eql({
-          'foo': 'warn',
-          'bar': 'error',
-          'other': 'warn'
+          'bpmnlint/bar': 'error',
+          'bpmnlint/foo': 'warn',
+          'foo/other': 'warn'
         });
       });
     });

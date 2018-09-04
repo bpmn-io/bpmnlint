@@ -12,6 +12,22 @@ describe('nodeResolver', function() {
     it('should resolve built-in', async function() {
 
       // when
+      const { path } = nodeResolver.parseRuleName('bpmnlint/label-required');
+
+      // then
+      expect(path).to.eql('../../rules/label-required');
+
+      // and when...
+      const localRule = await nodeResolver.resolveRule('bpmnlint/label-required');
+
+      // then
+      expect(localRule).to.exist;
+    });
+
+
+    it('should resolve built-in without prefix', async function() {
+
+      // when
       const { path } = nodeResolver.parseRuleName('label-required');
 
       // then
