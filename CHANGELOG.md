@@ -6,6 +6,10 @@ All notable changes to [bpmn-js](https://github.com/bpmn-io/bpmnlinter) are docu
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.0.0-alpha6
+
+* `DOCS`: documentation simplification / improvements
+
 ## 1.0.0-alpha5
 
 __Initial stable release.__
