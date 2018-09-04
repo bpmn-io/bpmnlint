@@ -6,7 +6,8 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "bpmnlint": "file:../../.."
+    "bpmnlint": "file:../../..",
+    "bpmnlint-plugin-test": "file:../bpmnlint-plugin-test"
   },
   "devDependencies": {
     "execa": "^1.0.0"

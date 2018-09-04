@@ -4,7 +4,9 @@ async function testAll() {
 
   await execa('bpmnlint', [ 'diagram.bpmn' ]);
 
-  await execa('bpmnlint', [ '-c', 'rule-extends.json', 'diagram.bpmn' ]);
+  await execa('bpmnlint', [ '-c', 'extends-builtin.json', 'diagram.bpmn' ]);
+
+  await execa('bpmnlint', [ '-c', 'extends-external.json', 'diagram.bpmn' ]);
 
 }
 

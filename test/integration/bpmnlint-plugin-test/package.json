@@ -1,0 +1,6 @@
+{
+  "name": "bpmnlint-plugin-test",
+  "version": "0.0.0",
+  "description": "A test bpmnlint plug-in",
+  "main": "index.js"
+}
