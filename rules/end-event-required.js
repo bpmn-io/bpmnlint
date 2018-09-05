@@ -2,23 +2,30 @@
  * Rule is to impose the presence of an end event in the process.
  */
 
-module.exports = utils => {
-  const { is } = utils;
+module.exports = function(utils) {
 
-  const ERROR = 'is missing an End Event';
+  const is = utils.is;
+  const isAny = utils.isAny;
 
   function hasEndEvent(node) {
+    const flowElements = node.flowElements || [];
+
     return (
-      (node.flowElements || []).filter(node => is(node, 'bpmn:EndEvent'))
-        .length > 0
+      flowElements.some(node => is(node, 'bpmn:EndEvent'))
     );
   }
 
   function check(node, reporter) {
-    if (is(node, 'bpmn:Process')) {
-      if (!hasEndEvent(node)) {
-        reporter.report(node.id, ERROR);
-      }
+
+    if (!isAny(node, [
+      'bpmn:Process',
+      'bpmn:SubProcess'
+    ])) {
+      return;
+    }
+
+    if (!hasEndEvent(node)) {
+      reporter.report(node.id, 'is missing an end event');
     }
   }
 
