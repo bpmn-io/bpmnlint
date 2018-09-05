@@ -75,6 +75,10 @@ const logReports = (results) => {
   });
 
   console.log(`\nfound ${errorCount} errors and ${warningCount} warnings`);
+
+  if (errorCount > 0) {
+    process.exit(1);
+  }
 };
 
 const cli = meow(
