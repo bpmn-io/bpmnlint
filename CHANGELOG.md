@@ -6,6 +6,17 @@ All notable changes to [bpmn-js](https://github.com/bpmn-io/bpmnlinter) are docu
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.0.0
+
+* `FEAT`: add numerous new rules ([#5](https://github.com/bpmn-io/bpmnlint/issues/5))
+* `FEAT`: add `bpmnlint:all` configuration
+* `FEAT`: improve `label-required` rule ([#11](https://github.com/bpmn-io/bpmnlint/issues/11))
+* `FEAT`: group lint results by rule names
+* `FEAT`: exit cli with code=1 on lint errors
+* `FEAT`: add `isAny(node, [ ... types ])` method to `utils`
+* `CHORE`: improve / test cover existing rules
+* `CHORE`: include new rules in `bpmnlint:recommended` configuration
+
 ## 1.0.0-alpha6
 
 * `DOCS`: documentation simplification / improvements
