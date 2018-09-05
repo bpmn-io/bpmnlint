@@ -27,9 +27,14 @@ found 10 errors and 2 warnings
 ```
 
 
-## Rule Configuration
+## Rules
 
-Create a `.bpmnlintrc` file in your working directory:
+Checkout the [`./rules` folder](https://github.com/bpmn-io/bpmnlint/tree/master/rules) for the list of existing rules.
+
+
+## Configuration
+
+Create a `.bpmnlintrc` file in your working directory and inherit from a common configuration using the `extends` block:
 
 ```json
 {
@@ -43,7 +48,7 @@ Add or customize rules using the `rules` block:
 {
   "extends": "bpmnlint:recommended",
   "rules": {
-    "label-required": "off"
+    "bpmnlint:label-required": "off"
   }
 }
 ```
