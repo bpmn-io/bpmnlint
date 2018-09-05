@@ -49,6 +49,8 @@ found 2 errors and 0 warnings
   await exec('bpmnlint', [ '-c', 'extends-builtin.json', 'diagram.bpmn' ]).then(verifyResult({ code: 0 }));
 
   await exec('bpmnlint', [ '-c', 'extends-external.json', 'diagram.bpmn' ]).then(verifyResult({ code: 0 }));
+
+  await exec('bpmnlint', [ 'complex.bpmn' ]).then(verifyResult({ code: 0 }));
 }
 
 
