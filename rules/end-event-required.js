@@ -15,7 +15,7 @@ module.exports = utils => {
   }
 
   function check(node, reporter) {
-    if (is(node, 'Process')) {
+    if (is(node, 'bpmn:Process')) {
       if (!hasEndEvent(node)) {
         reporter.report(node.id, ERROR);
       }
