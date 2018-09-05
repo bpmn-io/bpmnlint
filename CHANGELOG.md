@@ -23,7 +23,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 1.0.0-alpha5
 
-__Initial stable release.__
+_Initial stable release._
 
 * `FEAT`: configure, resolve and execute local and external rules
 * `FEAT`: extend external configuration via `extends`
