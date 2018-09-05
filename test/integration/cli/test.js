@@ -4,11 +4,20 @@ const assert = require('assert');
 
 async function exec(...args) {
 
+  let result;
+
   try {
-    return await execa(...args);
+    result = await execa(...args);
   } catch (err) {
-    return err;
+    result = err;
   }
+
+  console.log(`
+${result.cmd}
+${result.stdout}
+  `);
+
+  return result;
 }
 
 function verifyResult({ code, stdout }) {
