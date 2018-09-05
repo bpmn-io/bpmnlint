@@ -44,14 +44,9 @@ describe('Linter', function() {
 
       }
 
-      test('off', {});
-      test(0, {});
-
-      test(1, buildResults('warnings'));
-      test('WARN', buildResults('warnings'));
-
-      test(2, buildResults('errors'));
-      test('error', buildResults('errors'));
+      test('off', []);
+      test('warn', buildResults());
+      test('error', buildResults());
     });
 
 
@@ -109,7 +104,9 @@ describe('Linter', function() {
       });
 
       // then
-      expect(lintResults).to.eql(buildResults('warnings'));
+      expect(lintResults).to.eql({
+        testRule: buildResults('warn')
+      });
     });
 
 
@@ -140,6 +137,40 @@ describe('Linter', function() {
       expect(error).to.exist;
 
       expect(error.message).to.eql('unknown rule <unknownRule>');
+    });
+
+  });
+
+
+  describe('#parseRuleValue', function() {
+
+    it('should extract { ruleFlag, ruleConfig }', function() {
+
+      // given
+      const linter = new Linter({ resolver: fakeResolver({}) });
+
+
+      // then
+      expect(linter.parseRuleValue(0)).to.eql({
+        ruleFlag: 'off',
+        ruleConfig: {}
+      });
+
+      expect(linter.parseRuleValue([ 0, 'A' ])).to.eql({
+        ruleFlag: 'off',
+        ruleConfig: 'A'
+      });
+
+      expect(linter.parseRuleValue(1)).to.eql({
+        ruleFlag: 'warn',
+        ruleConfig: {}
+      });
+
+      expect(linter.parseRuleValue(2)).to.eql({
+        ruleFlag: 'error',
+        ruleConfig: {}
+      });
+
     });
 
   });
@@ -282,13 +313,21 @@ function fakeRule(utils) {
 }
 
 function buildResults(category) {
+  const results = [
+    {
+      id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
+      message: 'Definitions detected'
+    }
+  ];
 
-  return {
-    [category]: [
-      {
-        id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
-        message: 'Definitions detected'
-      }
-    ]
-  };
+  if (typeof category === 'undefined') {
+    return results;
+  }
+
+  return results.map((result) => {
+    return {
+      ...result,
+      category
+    };
+  });
 }
