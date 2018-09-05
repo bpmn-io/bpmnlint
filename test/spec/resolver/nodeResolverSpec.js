@@ -55,21 +55,43 @@ describe('nodeResolver', function() {
 
   describe('#resolveConfig', function() {
 
-    it('should resolve built-in', async function() {
+    describe('should resolve built-in', function() {
 
-      // when
-      const {
-        path
-      } = await nodeResolver.parseConfigName('bpmnlint:recommended');
+      it('all', async function() {
 
-      // then
-      expect(path).to.eql('../../config/recommended');
+        // when
+        const {
+          path
+        } = await nodeResolver.parseConfigName('bpmnlint:all');
 
-      // ...and when
-      const recommendedConfig = nodeResolver.resolveConfig('bpmnlint:recommended');
+        // then
+        expect(path).to.eql('../../config/all');
 
-      // then
-      expect(recommendedConfig).to.exist;
+        // ...and when
+        const allConfig = nodeResolver.resolveConfig('bpmnlint:all');
+
+        // then
+        expect(allConfig).to.exist;
+      });
+
+
+      it('recommended', async function() {
+
+        // when
+        const {
+          path
+        } = await nodeResolver.parseConfigName('bpmnlint:recommended');
+
+        // then
+        expect(path).to.eql('../../config/recommended');
+
+        // ...and when
+        const recommendedConfig = nodeResolver.resolveConfig('bpmnlint:recommended');
+
+        // then
+        expect(recommendedConfig).to.exist;
+      });
+
     });
 
 
