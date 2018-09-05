@@ -3,39 +3,75 @@ import RuleTester from '../../lib/testers/rule-tester';
 import rule from '../../rules/label-required';
 
 import {
-  createModdle,
   readModdle
 } from '../../lib/testers/helper';
+
+
+const message = 'is missing label/name';
 
 
 RuleTester.verify('label-required', rule, {
   valid: [
     {
-      moddleElement: createModdle(
-        '<startEvent xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="StartEvent_1" name="hunger noticed" />',
-        'bpmn:StartEvent'
-      )
+      moddleElement: readModdle(__dirname + '/label-required/valid-boundary-event.bpmn')
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid.bpmn')
+      moddleElement: readModdle(__dirname + '/label-required/valid-conditional-flow.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/valid-data-objects.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/valid-gateways.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/valid-start-event.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/valid-participant-lanes.bpmn')
     }
   ],
   invalid: [
     {
-      moddleElement: createModdle(
-        '<startEvent xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="StartEvent_1" />',
-        'bpmn:StartEvent'
-      ),
+      moddleElement: readModdle(__dirname + '/label-required/invalid-conditional-flow.bpmn'),
       report: {
-        id: 'StartEvent_1',
-        message: 'Element is missing a label/name.'
+        id: 'ConditionalFlow',
+        message
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid.bpmn'),
+      moddleElement: readModdle(__dirname + '/label-required/invalid-event.bpmn'),
       report: {
-        id: 'ExclusiveGateway_1opgqct',
-        message: 'Element is missing a label/name.'
+        id: 'Element',
+        message
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/invalid-gateway-split.bpmn'),
+      report: {
+        id: 'Element',
+        message
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/invalid-participant.bpmn'),
+      report: {
+        id: 'Element',
+        message
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/invalid-lane.bpmn'),
+      report: {
+        id: 'Element',
+        message
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/label-required/invalid-task.bpmn'),
+      report: {
+        id: 'Element',
+        message
       }
     }
   ]
