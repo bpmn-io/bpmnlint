@@ -9,7 +9,10 @@ module.exports = function(utils) {
 
   function check(node, reporter) {
 
-    if (is(node, 'bpmn:ParallelGateway')) {
+    if (isAny(node, [
+      'bpmn:ParallelGateway',
+      'bpmn:EventBasedGateway'
+    ])) {
       return;
     }
 
