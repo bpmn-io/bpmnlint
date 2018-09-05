@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_027stl5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.16.2">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:exclusiveGateway id="Element">
+      <bpmn:outgoing>SequenceFlow_0a8mdfb</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_15hid3d</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_07om9id" name="A">
+      <bpmn:incoming>SequenceFlow_0a8mdfb</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0a8mdfb" sourceRef="Element" targetRef="IntermediateThrowEvent_07om9id" />
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0hczh6d" name="B">
+      <bpmn:incoming>SequenceFlow_15hid3d</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_15hid3d" sourceRef="Element" targetRef="IntermediateThrowEvent_0hczh6d" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="ExclusiveGateway_10dykii_di" bpmnElement="Element" isMarkerVisible="true">
+        <dc:Bounds x="169" y="141" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_07om9id_di" bpmnElement="IntermediateThrowEvent_07om9id">
+        <dc:Bounds x="308" y="86" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="323" y="129" width="7" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0a8mdfb_di" bpmnElement="SequenceFlow_0a8mdfb">
+        <di:waypoint x="194" y="141" />
+        <di:waypoint x="194" y="104" />
+        <di:waypoint x="308" y="104" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0hczh6d_di" bpmnElement="IntermediateThrowEvent_0hczh6d">
+        <dc:Bounds x="308" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="322" y="255" width="8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_15hid3d_di" bpmnElement="SequenceFlow_15hid3d">
+        <di:waypoint x="194" y="191" />
+        <di:waypoint x="194" y="230" />
+        <di:waypoint x="308" y="230" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
