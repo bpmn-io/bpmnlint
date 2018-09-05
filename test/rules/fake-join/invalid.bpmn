@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_06dilz7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.16.2">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_1lepxc8">
+      <bpmn:outgoing>SequenceFlow_1uh5qzh</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:task id="Element">
+      <bpmn:incoming>SequenceFlow_1uh5qzh</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1mrgwdi</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1uh5qzh" sourceRef="IntermediateThrowEvent_1lepxc8" targetRef="Element" />
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_1uolq2e">
+      <bpmn:outgoing>SequenceFlow_1mrgwdi</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1mrgwdi" sourceRef="IntermediateThrowEvent_1uolq2e" targetRef="Element" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_1lepxc8_di" bpmnElement="IntermediateThrowEvent_1lepxc8">
+        <dc:Bounds x="52" y="43" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1v7bpe8_di" bpmnElement="Element">
+        <dc:Bounds x="185" y="66" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1uh5qzh_di" bpmnElement="SequenceFlow_1uh5qzh">
+        <di:waypoint x="88" y="61" />
+        <di:waypoint x="137" y="61" />
+        <di:waypoint x="137" y="106" />
+        <di:waypoint x="185" y="106" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_1uolq2e_di" bpmnElement="IntermediateThrowEvent_1uolq2e">
+        <dc:Bounds x="52" y="129" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1mrgwdi_di" bpmnElement="SequenceFlow_1mrgwdi">
+        <di:waypoint x="88" y="147" />
+        <di:waypoint x="137" y="147" />
+        <di:waypoint x="137" y="106" />
+        <di:waypoint x="185" y="106" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
