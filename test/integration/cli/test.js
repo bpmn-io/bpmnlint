@@ -37,10 +37,10 @@ found 0 errors and 0 warnings`
     code: 1,
     stdout: `
 rule: start-event-required
-error: Process_08k516a is missing a Start Event
+error: Process_08k516a is missing a start event
 
 rule: end-event-required
-error: Process_08k516a is missing an End Event
+error: Process_08k516a is missing an end event
 
 found 2 errors and 0 warnings
 `
