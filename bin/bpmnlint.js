@@ -44,14 +44,37 @@ const logWarning = warning =>
 const logError = error =>
   console.log(`${red('error:')} ${underline(error.id)} ${error.message}`);
 
+const logRule = ruleName =>
+  console.log(`\nrule: ${ruleName}`);
+
 /**
  * Logs errors and warnings properly in the console
  * @param {*} errors
  * @param {*} warnings
  */
-const logReports = ({ errors, warnings }) => {
-  errors.forEach(logError);
-  warnings.forEach(logWarning);
+const logReports = (results) => {
+
+  let errorCount = 0;
+  let warningCount = 0;
+
+  Object.entries(results).forEach(function([ ruleName, reports ]) {
+
+    logRule(ruleName);
+
+    reports.forEach(function(report) {
+      if (report.category === 'error') {
+        errorCount++;
+
+        logError(report);
+      } else {
+        warningCount++;
+
+        logWarning(report);
+      }
+    });
+  });
+
+  console.log(`\nfound ${errorCount} errors and ${warningCount} warnings`);
 };
 
 const cli = meow(
