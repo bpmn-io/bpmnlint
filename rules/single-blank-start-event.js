@@ -13,7 +13,7 @@ module.exports = function(utils) {
 
     const blankStartEvents = node.flowElements.filter(function(flowElement) {
 
-      if (!is(flowElement, 'bpmn:Event')) {
+      if (!is(flowElement, 'bpmn:StartEvent')) {
         return false;
       }
 
