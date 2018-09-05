@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1su1lai" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.16.2">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:subProcess id="SubProcess_0x2wnf3">
+      <bpmn:startEvent id="StartEvent_04ta3gp">
+        <bpmn:messageEventDefinition id="MessageEventDefinition_161lvt6" />
+      </bpmn:startEvent>
+      <bpmn:startEvent id="StartEvent_1lb1dcv" />
+      <bpmn:startEvent id="StartEvent_0fkit0a">
+        <bpmn:timerEventDefinition id="TimerEventDefinition_1a7s0ct" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="SubProcess_0x2wnf3_di" bpmnElement="SubProcess_0x2wnf3" isExpanded="true">
+        <dc:Bounds x="58" y="62" width="350" height="355" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_04ta3gp_di" bpmnElement="StartEvent_04ta3gp">
+        <dc:Bounds x="121" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1lb1dcv_di" bpmnElement="StartEvent_1lb1dcv">
+        <dc:Bounds x="121" y="223" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0fkit0a_di" bpmnElement="StartEvent_0fkit0a">
+        <dc:Bounds x="121" y="326" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1su1lai" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.16.2">
+  <bpmn:collaboration id="Collaboration_0um0dck">
+    <bpmn:participant id="Participant_0cijm88" processRef="Process_0drkok3" />
+    <bpmn:participant id="Participant_08uajw9" processRef="Process_182z0ic" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0drkok3" isExecutable="false">
+    <bpmn:subProcess id="SubProcess_128s5f0">
+      <bpmn:startEvent id="StartEvent_014f09k" />
+    </bpmn:subProcess>
+    <bpmn:startEvent id="StartEvent_1uthmlt" />
+  </bpmn:process>
+  <bpmn:process id="Process_182z0ic" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_03um2oq" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0um0dck">
+      <bpmndi:BPMNShape id="StartEvent_014f09k_di" bpmnElement="StartEvent_014f09k">
+        <dc:Bounds x="241" y="131" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_0cijm88_di" bpmnElement="Participant_0cijm88">
+        <dc:Bounds x="64" y="47" width="558" height="226" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1uthmlt_di" bpmnElement="StartEvent_1uthmlt">
+        <dc:Bounds x="118" y="131" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_128s5f0_di" bpmnElement="SubProcess_128s5f0" isExpanded="true">
+        <dc:Bounds x="195" y="64" width="301" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_08uajw9_di" bpmnElement="Participant_08uajw9">
+        <dc:Bounds x="64" y="339" width="387" height="145" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_03um2oq_di" bpmnElement="StartEvent_03um2oq">
+        <dc:Bounds x="151" y="396" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
