@@ -3,7 +3,8 @@ module.exports = {
     recommended: {
       extends: 'bpmnlint:recommended',
       rules: {
-        'no-label-foo': 'error'
+        'no-label-foo': 'error',
+        'bpmnlint/no-disconnected': 'warn'
       }
     }
   }
