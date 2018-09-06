@@ -1,11 +1,13 @@
-import nodeResolver from '../../../lib/resolver/nodeResolver';
+import NodeResolver from '../../../lib/resolver/nodeResolver';
 
 import {
   expect
 } from '../../helper';
 
+const nodeResolver = new NodeResolver();
 
-describe('nodeResolver', function() {
+
+describe('NodeResolver', function() {
 
   describe('#resolveRule', function() {
 

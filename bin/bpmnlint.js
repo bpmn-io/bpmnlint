@@ -12,7 +12,7 @@ const Linter = require('../lib/linter');
 
 const moddle = new BpmnModdle();
 
-const nodeResolver = require('../lib/resolver/nodeResolver');
+const NodeResolver = require('../lib/resolver/nodeResolver');
 
 /**
  * Reads XML form path and return moddle object
@@ -136,7 +136,7 @@ async function handleConfig(config) {
     const moddleRoot = await getModdleFromXML(diagramXML);
 
     const linter = new Linter({
-      resolver: nodeResolver
+      resolver: new NodeResolver()
     });
 
     const lintResults = await linter.lint(moddleRoot, parsedConfig);
