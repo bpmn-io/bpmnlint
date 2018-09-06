@@ -6,6 +6,19 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlinter) are doc
 
 ___Note:__ Yet to be released changes appear here._
 
+#### Breaking Changes
+
+* `CHORE`: make `NodeResolver` a constructor
+* `CHORE`: unify file names to `dashed-case`
+* `CHORE`: rework `Resolver` APIs
+
+#### Other Enhancements
+
+* `FEAT`: add `StaticResolver` to load cached resources
+* `FEAT`: add `{ Linter }` as a library export
+* `CHORE`: move rule and config name resolution to linter
+* `CHORE`: catch all cli errors and exit accordingly
+
 ## 1.0.0
 
 * `FEAT`: add numerous new rules ([#5](https://github.com/bpmn-io/bpmnlint/issues/5))
