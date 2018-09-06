@@ -4,60 +4,44 @@ import {
   expect
 } from '../../helper';
 
-const nodeResolver = new NodeResolver();
-
 
 describe('NodeResolver', function() {
 
   describe('#resolveRule', function() {
 
+    const nodeResolver = createResolver(function(path) {
+
+      // mock node resolution
+      if (path === 'bpmnlint') {
+        throw new Error('not found');
+      }
+
+      return {
+        path
+      };
+    });
+
+
     it('should resolve built-in', async function() {
 
       // when
-      const parsed = nodeResolver.parseRuleName('bpmnlint/label-required');
+      const resolvedRule = await nodeResolver.resolveRule('bpmnlint', 'label-required');
 
       // then
-      expect(parsed).to.eql({
-        pkg: 'bpmnlint',
-        ruleName: 'label-required'
+      expect(resolvedRule).to.eql({
+        path: 'bpmnlint/rules/label-required'
       });
-
-      // and when...
-      const localRule = await nodeResolver.resolveRule('bpmnlint/label-required');
-
-      // then
-      expect(localRule).to.exist;
     });
 
 
-    it('should resolve built-in without prefix', async function() {
+    it('should resolve external', async function() {
 
       // when
-      const parsed = nodeResolver.parseRuleName('label-required');
+      const resolvedRule = await nodeResolver.resolveRule('foo', 'label-required');
 
       // then
-      expect(parsed).to.eql({
-        pkg: 'bpmnlint',
-        ruleName: 'label-required'
-      });
-
-      // and when...
-      const localRule = await nodeResolver.resolveRule('label-required');
-
-      // then
-      expect(localRule).to.exist;
-    });
-
-
-    it('should resolve external', function() {
-
-      // when
-      const parsed = nodeResolver.parseRuleName('foo/label-required');
-
-      // then
-      expect(parsed).to.eql({
-        pkg: 'bpmnlint-plugin-foo',
-        ruleName: 'label-required'
+      expect(resolvedRule).to.eql({
+        path: 'foo/rules/label-required'
       });
     });
 
@@ -66,60 +50,114 @@ describe('NodeResolver', function() {
 
   describe('#resolveConfig', function() {
 
+    const nodeResolver = createResolver(function(path) {
+
+      // mock node resolution
+      if (path.indexOf('bpmnlint/') === 0) {
+        throw new Error('not found');
+      }
+
+      if (path === 'bpmnlint-plugin-foo/config/embedded') {
+        throw new Error('not found');
+      }
+
+      // mimic $PKG/config/$NAME resolution
+      if (path === 'bpmnlint-plugin-foo/config/bar') {
+        return {
+          path,
+          bar: true
+        };
+      }
+
+      if (path.indexOf('config') !== -1) {
+        return {
+          path
+        };
+      }
+
+      // mimic $PKG.configs[$NAME] resolution
+      if (path === 'bpmnlint-plugin-foo') {
+        return {
+          configs: {
+            embedded: {
+              path,
+              embedded: true
+            }
+          }
+        };
+      }
+
+      throw new AssertionError('unexpected path <' + path + '>');
+    });
+
+
     describe('should resolve built-in', function() {
 
       it('all', async function() {
 
         // when
-        const parsed = await nodeResolver.parseConfigName('bpmnlint:all');
+        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint', 'all');
 
         // then
-        expect(parsed).to.eql({
-          pkg: 'bpmnlint',
-          configName: 'all'
+        expect(resolvedConfig).to.eql({
+          path: '../../config/all'
         });
-
-        // ...and when
-        const allConfig = nodeResolver.resolveConfig('bpmnlint:all');
-
-        // then
-        expect(allConfig).to.exist;
       });
 
 
       it('recommended', async function() {
 
         // when
-        const parsed = await nodeResolver.parseConfigName('bpmnlint:recommended');
+        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint', 'recommended');
 
         // then
-        expect(parsed).to.eql({
-          pkg: 'bpmnlint',
-          configName: 'recommended'
+        expect(resolvedConfig).to.eql({
+          path: '../../config/recommended'
         });
-
-        // ...and when
-        const recommendedConfig = nodeResolver.resolveConfig('bpmnlint:recommended');
-
-        // then
-        expect(recommendedConfig).to.exist;
       });
 
     });
 
 
-    it('should resolve external', function() {
+    describe('should resolve external', function() {
 
-      // when
-      const parsed = nodeResolver.parseConfigName('plugin:foo/bar');
+      it('via $PKG/config/$NAME', async function() {
 
-      // then
-      expect(parsed).to.eql({
-        pkg: 'bpmnlint-plugin-foo',
-        configName: 'bar'
+        // when
+        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint-plugin-foo', 'bar');
+
+        // then
+        expect(resolvedConfig).to.eql({
+          path: 'bpmnlint-plugin-foo/config/bar',
+          bar: true
+        });
+
+      });
+
+
+      it('via $PKG.configs[$NAME]', async function() {
+
+        // when
+        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint-plugin-foo', 'embedded');
+
+        // then
+        expect(resolvedConfig).to.eql({
+          path: 'bpmnlint-plugin-foo',
+          embedded: true
+        });
+
       });
     });
 
   });
 
 });
+
+
+// helpers /////////////////////////////
+
+function createResolver(requireFn) {
+  return new NodeResolver({
+    require: requireFn
+  });
+}

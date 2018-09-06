@@ -14,7 +14,7 @@ describe('Linter', function() {
     let moddleRoot;
 
     const linter = new Linter({
-      resolver: fakeResolver({})
+      resolver: fakeResolver()
     });
 
 
@@ -87,7 +87,9 @@ describe('Linter', function() {
 
       // given
       const resolver = {
-        resolveRule(ruleName) {
+        resolveRule(pkg, ruleName) {
+          expect(pkg).to.eql('bpmnlint');
+
           expect(ruleName).to.eql('testRule');
 
           return fakeRule;
@@ -147,7 +149,7 @@ describe('Linter', function() {
     it('should extract { ruleFlag, ruleConfig }', function() {
 
       // given
-      const linter = new Linter({ resolver: fakeResolver({}) });
+      const linter = new Linter({ resolver: fakeResolver() });
 
 
       // then
@@ -185,14 +187,18 @@ describe('Linter', function() {
         // given
         const resolver = {
 
-          resolveRule(ruleName) {
+          resolveRule(pkg, ruleName) {
+            expect(pkg).to.eql('bpmnlint');
+
             expect(ruleName).to.eql('foo');
 
             return { check() { } };
           },
 
-          resolveConfig(configName) {
-            expect(configName).to.eql('bpmnlint:recommended');
+          resolveConfig(pkg, configName) {
+            expect(pkg).to.eql('bpmnlint');
+
+            expect(configName).to.eql('recommended');
 
             return {
               rules: {
@@ -228,9 +234,9 @@ describe('Linter', function() {
             return { check() { } };
           },
 
-          resolveConfig(configName) {
+          resolveConfig(pkg, configName) {
 
-            if (configName === 'bpmnlint:recommended') {
+            if (pkg === 'bpmnlint' && configName === 'recommended') {
               return {
                 rules: {
                   foo: 'warn',
@@ -239,19 +245,21 @@ describe('Linter', function() {
               };
             }
 
-            if (configName === 'plugin:foo/recommended') {
-              return {
-                extends: 'plugin:foo/base'
-              };
-            }
+            if (pkg === 'bpmnlint-plugin-foo') {
+              if (configName === 'recommended') {
+                return {
+                  extends: 'plugin:foo/base'
+                };
+              }
 
-            if (configName === 'plugin:foo/base') {
-              return {
-                rules: {
-                  'bpmnlint/bar': 'error',
-                  'other': 'warn'
-                }
-              };
+              if (configName === 'base') {
+                return {
+                  rules: {
+                    'bpmnlint/bar': 'error',
+                    'other': 'warn'
+                  }
+                };
+              }
             }
 
             throw new Error(`unexpected config <${configName}>`);
@@ -282,13 +290,117 @@ describe('Linter', function() {
 
   });
 
+
+  describe('#parseConfigName', function() {
+
+    const linter = new Linter({
+      resolver: fakeRule({})
+    });
+
+
+    it('should parse built-in', async function() {
+
+      // when
+      const parsed = linter.parseRuleName('bpmnlint/label-required');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint',
+        ruleName: 'label-required'
+      });
+    });
+
+
+    it('should parse built-in without prefix', async function() {
+
+      // when
+      const parsed = linter.parseRuleName('label-required');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint',
+        ruleName: 'label-required'
+      });
+    });
+
+
+    it('should parse external', function() {
+
+      // when
+      const parsed = linter.parseRuleName('foo/label-required');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        ruleName: 'label-required'
+      });
+    });
+
+  });
+
+
+  describe('#parseConfigName', function() {
+
+    const linter = new Linter({
+      resolver: fakeRule({})
+    });
+
+
+    describe('should parse built-in', function() {
+
+      it('all', function() {
+
+        // when
+        const parsed = linter.parseConfigName('bpmnlint:all');
+
+        // then
+        expect(parsed).to.eql({
+          pkg: 'bpmnlint',
+          configName: 'all'
+        });
+      });
+
+
+      it('recommended', function() {
+
+        // when
+        const parsed = linter.parseConfigName('bpmnlint:recommended');
+
+        // then
+        expect(parsed).to.eql({
+          pkg: 'bpmnlint',
+          configName: 'recommended'
+        });
+      });
+
+    });
+
+
+    it('should parse external', function() {
+
+      // when
+      const parsed = linter.parseConfigName('plugin:foo/bar');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        configName: 'bar'
+      });
+    });
+
+  });
+
 });
 
 
-function fakeResolver(ruleMap) {
+function fakeResolver(cache = {}) {
   return {
-    resolveRule(ruleName) {
-      return ruleMap[ruleName];
+    resolveRule(pkg, ruleName) {
+      return cache[`${pkg}-${ruleName}`];
+    },
+
+    resolveConfig(pkg, configName) {
+      return cache[`config-${pkg}-${ruleName}`];
     }
   };
 }
