@@ -1,4 +1,4 @@
-import NodeResolver from '../../../lib/resolver/nodeResolver';
+import NodeResolver from '../../../lib/resolver/node-resolver';
 
 import {
   expect

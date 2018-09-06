@@ -1,8 +1,9 @@
-import testRule from '../../lib/testRule';
+import testRule from '../../lib/test-rule';
 
 import { expect, createRule, readModdle } from '../helper';
 
-describe('testRule', function() {
+describe('test-rule', function() {
+
   let moddleRoot;
 
   beforeEach(async function() {

@@ -1,4 +1,4 @@
-import StaticResolver from '../../../lib/resolver/staticResolver';
+import StaticResolver from '../../../lib/resolver/static-resolver';
 
 import {
   expect
