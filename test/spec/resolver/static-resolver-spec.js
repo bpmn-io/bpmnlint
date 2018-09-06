@@ -31,7 +31,7 @@ describe('StaticResolver', function() {
 
       // when
       try {
-        const resolvedRule = await resolver.resolveRule('bpmnlint', 'non-existing-rule');
+        await resolver.resolveRule('bpmnlint', 'non-existing-rule');
       } catch (e) {
         error = e;
       }
@@ -62,7 +62,7 @@ describe('StaticResolver', function() {
 
       // when
       try {
-        const resolvedConfig = await resolver.resolveConfig('bpmnlint', 'non-existing-config');
+        await resolver.resolveConfig('bpmnlint', 'non-existing-config');
       } catch (e) {
         error = e;
       }

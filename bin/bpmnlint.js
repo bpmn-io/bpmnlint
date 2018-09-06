@@ -3,16 +3,17 @@ const meow = require('meow');
 const fs = require('fs');
 const path = require('path');
 const { red, yellow, underline } = require('chalk');
-const BpmnModdle = require('bpmn-moddle');
 
 const { promisify } = require('util');
 
 const readFile = promisify(fs.readFile);
+
+const BpmnModdle = require('bpmn-moddle');
+
 const Linter = require('../lib/linter');
+const NodeResolver = require('../lib/resolver/node-resolver');
 
 const moddle = new BpmnModdle();
-
-const NodeResolver = require('../lib/resolver/node-resolver');
 
 /**
  * Reads XML form path and return moddle object
@@ -156,7 +157,7 @@ readFile(configPath, 'utf-8').then(handleConfig, (error) => {
   const message = (
     config
       ? `Error: Could not read ${ config }`
-      : `Error: Could not locate configuration`
+      : 'Error: Could not locate configuration'
   );
 
   logAndExit(message, error);

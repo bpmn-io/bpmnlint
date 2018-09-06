@@ -400,7 +400,7 @@ function fakeResolver(cache = {}) {
     },
 
     resolveConfig(pkg, configName) {
-      return cache[`config-${pkg}-${ruleName}`];
+      return cache[`config-${pkg}-${configName}`];
     }
   };
 }
