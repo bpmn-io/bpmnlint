@@ -1,7 +1,7 @@
 {
   "name": "bpmnlint",
   "version": "1.0.1",
-  "main": "index.js",
+  "main": "lib/index.js",
   "keywords": [
     "bpmnlint",
     "bpmn",
