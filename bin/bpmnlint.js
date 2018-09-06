@@ -103,7 +103,6 @@ const cli = meow(
   }
 );
 
-const { config: configFlag } = cli.flags;
 
 if (cli.input.length !== 1) {
   console.log('Error: bpmn file path missing.');
@@ -148,20 +147,17 @@ async function handleConfig(config) {
   }
 }
 
-if (configFlag) {
-  fs.readFile(configFlag, 'utf-8', (error, config) => {
-    if (error) {
-      return logAndExit('Error: Could not read specified config file', error);
-    }
+const { config } = cli.flags;
 
-    handleConfig(config);
-  });
-} else {
-  fs.readFile(path.resolve('.bpmnlintrc'), 'utf-8', (error, config) => {
-    if (error) {
-      return logAndExit('Error: Configuration file missing', error);
-    }
+const configPath = config || '.bpmnlintrc';
 
-    handleConfig(config);
-  });
-}
+readFile(configPath, 'utf-8').then(handleConfig, (error) => {
+
+  const message = (
+    config
+      ? `Error: Could not read ${ config }`
+      : `Error: Could not locate configuration`
+  );
+
+  logAndExit(message, error);
+}).catch(logAndExit);
