@@ -9,7 +9,7 @@ describe('NodeResolver', function() {
 
   describe('#resolveRule', function() {
 
-    const nodeResolver = createResolver(function(path) {
+    const resolver = createResolver(function(path) {
 
       // mock node resolution
       if (path === 'bpmnlint') {
@@ -25,7 +25,7 @@ describe('NodeResolver', function() {
     it('should resolve built-in', async function() {
 
       // when
-      const resolvedRule = await nodeResolver.resolveRule('bpmnlint', 'label-required');
+      const resolvedRule = await resolver.resolveRule('bpmnlint', 'label-required');
 
       // then
       expect(resolvedRule).to.eql({
@@ -37,7 +37,7 @@ describe('NodeResolver', function() {
     it('should resolve external', async function() {
 
       // when
-      const resolvedRule = await nodeResolver.resolveRule('foo', 'label-required');
+      const resolvedRule = await resolver.resolveRule('foo', 'label-required');
 
       // then
       expect(resolvedRule).to.eql({
@@ -50,7 +50,7 @@ describe('NodeResolver', function() {
 
   describe('#resolveConfig', function() {
 
-    const nodeResolver = createResolver(function(path) {
+    const resolver = createResolver(function(path) {
 
       // mock node resolution
       if (path.indexOf('bpmnlint/') === 0) {
@@ -96,7 +96,7 @@ describe('NodeResolver', function() {
       it('all', async function() {
 
         // when
-        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint', 'all');
+        const resolvedConfig = await resolver.resolveConfig('bpmnlint', 'all');
 
         // then
         expect(resolvedConfig).to.eql({
@@ -108,7 +108,7 @@ describe('NodeResolver', function() {
       it('recommended', async function() {
 
         // when
-        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint', 'recommended');
+        const resolvedConfig = await resolver.resolveConfig('bpmnlint', 'recommended');
 
         // then
         expect(resolvedConfig).to.eql({
@@ -124,7 +124,7 @@ describe('NodeResolver', function() {
       it('via $PKG/config/$NAME', async function() {
 
         // when
-        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint-plugin-foo', 'bar');
+        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foo', 'bar');
 
         // then
         expect(resolvedConfig).to.eql({
@@ -138,7 +138,7 @@ describe('NodeResolver', function() {
       it('via $PKG.configs[$NAME]', async function() {
 
         // when
-        const resolvedConfig = await nodeResolver.resolveConfig('bpmnlint-plugin-foo', 'embedded');
+        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foo', 'embedded');
 
         // then
         expect(resolvedConfig).to.eql({
