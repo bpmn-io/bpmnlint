@@ -7,7 +7,7 @@ import {
 } from '../helper';
 
 
-describe('Linter', function() {
+describe('linter', function() {
 
   describe('#applyRule', function() {
 

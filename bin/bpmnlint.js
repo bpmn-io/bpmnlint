@@ -12,7 +12,7 @@ const Linter = require('../lib/linter');
 
 const moddle = new BpmnModdle();
 
-const NodeResolver = require('../lib/resolver/nodeResolver');
+const NodeResolver = require('../lib/resolver/node-resolver');
 
 /**
  * Reads XML form path and return moddle object
