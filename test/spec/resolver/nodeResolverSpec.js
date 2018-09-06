@@ -12,10 +12,13 @@ describe('nodeResolver', function() {
     it('should resolve built-in', async function() {
 
       // when
-      const { path } = nodeResolver.parseRuleName('bpmnlint/label-required');
+      const parsed = nodeResolver.parseRuleName('bpmnlint/label-required');
 
       // then
-      expect(path).to.eql('../../rules/label-required');
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint',
+        ruleName: 'label-required'
+      });
 
       // and when...
       const localRule = await nodeResolver.resolveRule('bpmnlint/label-required');
@@ -28,10 +31,13 @@ describe('nodeResolver', function() {
     it('should resolve built-in without prefix', async function() {
 
       // when
-      const { path } = nodeResolver.parseRuleName('label-required');
+      const parsed = nodeResolver.parseRuleName('label-required');
 
       // then
-      expect(path).to.eql('../../rules/label-required');
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint',
+        ruleName: 'label-required'
+      });
 
       // and when...
       const localRule = await nodeResolver.resolveRule('label-required');
@@ -44,10 +50,13 @@ describe('nodeResolver', function() {
     it('should resolve external', function() {
 
       // when
-      const { path } = nodeResolver.parseRuleName('foo/label-required');
+      const parsed = nodeResolver.parseRuleName('foo/label-required');
 
       // then
-      expect(path).to.eql('bpmnlint-plugin-foo/rules/label-required');
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        ruleName: 'label-required'
+      });
     });
 
   });
@@ -60,12 +69,13 @@ describe('nodeResolver', function() {
       it('all', async function() {
 
         // when
-        const {
-          path
-        } = await nodeResolver.parseConfigName('bpmnlint:all');
+        const parsed = await nodeResolver.parseConfigName('bpmnlint:all');
 
         // then
-        expect(path).to.eql('../../config/all');
+        expect(parsed).to.eql({
+          pkg: 'bpmnlint',
+          configName: 'all'
+        });
 
         // ...and when
         const allConfig = nodeResolver.resolveConfig('bpmnlint:all');
@@ -78,12 +88,13 @@ describe('nodeResolver', function() {
       it('recommended', async function() {
 
         // when
-        const {
-          path
-        } = await nodeResolver.parseConfigName('bpmnlint:recommended');
+        const parsed = await nodeResolver.parseConfigName('bpmnlint:recommended');
 
         // then
-        expect(path).to.eql('../../config/recommended');
+        expect(parsed).to.eql({
+          pkg: 'bpmnlint',
+          configName: 'recommended'
+        });
 
         // ...and when
         const recommendedConfig = nodeResolver.resolveConfig('bpmnlint:recommended');
@@ -98,14 +109,13 @@ describe('nodeResolver', function() {
     it('should resolve external', function() {
 
       // when
-      const {
-        path,
-        config
-      } = nodeResolver.parseConfigName('plugin:foo/bar');
+      const parsed = nodeResolver.parseConfigName('plugin:foo/bar');
 
       // then
-      expect(path).to.eql('bpmnlint-plugin-foo');
-      expect(config).to.eql('bar');
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        configName: 'bar'
+      });
     });
 
   });
