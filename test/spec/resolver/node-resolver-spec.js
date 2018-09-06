@@ -87,7 +87,7 @@ describe('NodeResolver', function() {
         };
       }
 
-      throw new AssertionError('unexpected path <' + path + '>');
+      throw new Error('unexpected path <' + path + '>');
     });
 
 
