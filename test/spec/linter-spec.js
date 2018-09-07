@@ -138,7 +138,7 @@ describe('linter', function() {
       // then
       expect(error).to.exist;
 
-      expect(error.message).to.eql('unknown rule <bpmnlint/unknownRule>');
+      expect(error.message).to.eql('unknown rule <unknownRule>');
     });
 
   });
@@ -220,7 +220,7 @@ describe('linter', function() {
 
         // then
         expect(rules).to.eql({
-          'bpmnlint/foo': 'warn'
+          'foo': 'warn'
         });
       });
 
@@ -239,18 +239,19 @@ describe('linter', function() {
             if (pkg === 'bpmnlint' && configName === 'recommended') {
               return {
                 rules: {
-                  foo: 'warn',
-                  bar: 'warn'
+                  'foo': 'warn',
+                  'bar': 'warn'
                 }
               };
             }
 
-            if (pkg === 'bpmnlint-plugin-foo') {
+            if (pkg === 'bpmnlint-plugin-test') {
               if (configName === 'recommended') {
                 return {
-                  extends: 'plugin:foo/base',
+                  extends: 'plugin:test/base',
                   rules: {
-                    other: 'warn'
+                    'test/other': 'warn',
+                    'test/bar': 'warn'
                   }
                 };
               }
@@ -258,8 +259,9 @@ describe('linter', function() {
               if (configName === 'base') {
                 return {
                   rules: {
-                    'bpmnlint/bar': 'error',
-                    'other': 'error'
+                    'bar': 'error',
+                    'test/bar': 'error',
+                    'test/other': 'error'
                   }
                 };
               }
@@ -279,7 +281,7 @@ describe('linter', function() {
           const config = {
             extends: [
               'bpmnlint:recommended',
-              'plugin:foo/recommended'
+              'plugin:test/recommended'
             ]
           };
 
@@ -288,9 +290,10 @@ describe('linter', function() {
 
           // then
           expect(rules).to.eql({
-            'bpmnlint/bar': 'error',
-            'bpmnlint/foo': 'warn',
-            'foo/other': 'warn'
+            'bar': 'error',
+            'foo': 'warn',
+            'test/bar': 'warn',
+            'test/other': 'warn'
           });
         });
 
@@ -303,10 +306,11 @@ describe('linter', function() {
           const config = {
             extends: [
               'bpmnlint:recommended',
-              'plugin:foo/recommended'
+              'plugin:test/recommended'
             ],
             rules: {
-              foo: 'error'
+              'foo': 'error',
+              'test/bar': 'off'
             }
           };
 
@@ -315,9 +319,10 @@ describe('linter', function() {
 
           // then
           expect(rules).to.eql({
-            'bpmnlint/bar': 'error',
-            'bpmnlint/foo': 'error',
-            'foo/other': 'warn'
+            'bar': 'error',
+            'foo': 'error',
+            'test/bar': 'off',
+            'test/other': 'warn'
           });
         });
 
