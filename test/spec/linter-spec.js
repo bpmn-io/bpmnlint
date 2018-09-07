@@ -138,7 +138,7 @@ describe('linter', function() {
       // then
       expect(error).to.exist;
 
-      expect(error.message).to.eql('unknown rule <unknownRule>');
+      expect(error.message).to.eql('unknown rule <bpmnlint/unknownRule>');
     });
 
   });
@@ -225,7 +225,7 @@ describe('linter', function() {
       });
 
 
-      it('multiple parents', async function() {
+      describe('multiple parents', function() {
 
         // given
         const resolver = {
@@ -248,7 +248,10 @@ describe('linter', function() {
             if (pkg === 'bpmnlint-plugin-foo') {
               if (configName === 'recommended') {
                 return {
-                  extends: 'plugin:foo/base'
+                  extends: 'plugin:foo/base',
+                  rules: {
+                    other: 'warn'
+                  }
                 };
               }
 
@@ -256,7 +259,7 @@ describe('linter', function() {
                 return {
                   rules: {
                     'bpmnlint/bar': 'error',
-                    'other': 'warn'
+                    'other': 'error'
                   }
                 };
               }
@@ -267,25 +270,59 @@ describe('linter', function() {
 
         };
 
-        const linter = new Linter({ resolver });
 
-        const config = {
-          extends: [
-            'bpmnlint:recommended',
-            'plugin:foo/recommended'
-          ]
-        };
+        it('should resolve extended', async function() {
 
-        // when
-        const rules = await linter.resolveConfiguredRules(config);
+          // given
+          const linter = new Linter({ resolver });
 
-        // then
-        expect(rules).to.eql({
-          'bpmnlint/bar': 'error',
-          'bpmnlint/foo': 'warn',
-          'foo/other': 'warn'
+          const config = {
+            extends: [
+              'bpmnlint:recommended',
+              'plugin:foo/recommended'
+            ]
+          };
+
+          // when
+          const rules = await linter.resolveConfiguredRules(config);
+
+          // then
+          expect(rules).to.eql({
+            'bpmnlint/bar': 'error',
+            'bpmnlint/foo': 'warn',
+            'foo/other': 'warn'
+          });
         });
+
+
+        it('should normalize rule names', async function() {
+
+          // given
+          const linter = new Linter({ resolver });
+
+          const config = {
+            extends: [
+              'bpmnlint:recommended',
+              'plugin:foo/recommended'
+            ],
+            rules: {
+              foo: 'error'
+            }
+          };
+
+          // when
+          const rules = await linter.resolveConfiguredRules(config);
+
+          // then
+          expect(rules).to.eql({
+            'bpmnlint/bar': 'error',
+            'bpmnlint/foo': 'error',
+            'foo/other': 'warn'
+          });
+        });
+
       });
+
     });
 
   });
