@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.0
+
 #### Breaking Changes
 
 * `CHORE`: make `NodeResolver` a constructor
