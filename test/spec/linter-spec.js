@@ -64,7 +64,7 @@ describe('linter', function() {
     });
 
 
-    it('should run without rules', async function() {
+    it('should run with global config', async function() {
 
       // given
       const resolver = {
@@ -73,7 +73,34 @@ describe('linter', function() {
         }
       };
 
-      const linter = new Linter({ resolver });
+      const config = {};
+
+      const linter = new Linter({ resolver, config });
+
+      // when
+      const lintResults = await linter.lint(moddleRoot);
+
+      // then
+      expect(lintResults).to.eql({});
+    });
+
+
+    it('should run without local config', async function() {
+
+      // given
+      const resolver = {
+        resolveRule() {
+          throw new Error('unexpected invocation');
+        }
+      };
+
+      const config = {
+        rules: {
+          nonExistingRule: 'warn'
+        }
+      };
+
+      const linter = new Linter({ resolver, config });
 
       // when
       const lintResults = await linter.lint(moddleRoot, {});
