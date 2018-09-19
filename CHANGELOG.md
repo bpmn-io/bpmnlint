@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.2.0
+
+* `FEAT`: add ability to pass linter configuration via constructor
+
 ## 3.1.0
 
 * `FEAT`: add support script to compile `.bpmnlintrc` files to JavaScript ([`cf53a389`](https://github.com/bpmn-io/bpmnlint/commit/cf53a3894b6bd821e18ddfc7bdaa8da857356a37))
