@@ -116,11 +116,11 @@ function logAndExit(...args) {
   process.exit(1);
 }
 
-async function handleConfig(config) {
-  let parsedConfig;
+async function handleConfig(configString) {
+  let config;
 
   try {
-    parsedConfig = JSON.parse(config);
+    config = JSON.parse(configString);
   } catch (e) {
     return logAndExit('Error: Could not parse configuration file', e);
   }
@@ -137,10 +137,11 @@ async function handleConfig(config) {
     const moddleRoot = await getModdleFromXML(diagramXML);
 
     const linter = new Linter({
+      config,
       resolver: new NodeResolver()
     });
 
-    const lintResults = await linter.lint(moddleRoot, parsedConfig);
+    const lintResults = await linter.lint(moddleRoot);
 
     logReports(lintResults);
   } catch (e) {
