@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.3.0
+
+* `FEAT`: do not expose disabled rules when bundling `.bpmnlintrc`
+
 ## 3.2.1
 
 * `DOCS`: fix readme code snippet
