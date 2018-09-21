@@ -48,7 +48,7 @@ Add or customize rules using the `rules` block:
 {
   "extends": "bpmnlint:recommended",
   "rules": {
-    "bpmnlint:label-required": "off"
+    "bpmnlint/label-required": "off"
   }
 }
 ```
