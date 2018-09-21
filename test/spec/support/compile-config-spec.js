@@ -20,8 +20,8 @@ describe('support/compile-config', function() {
     expect(code).to.contain('import rule_0 from \'bpmnlint/rules/conditional-flows\'');
     expect(code).to.contain('cache[\'bpmnlint/conditional-flows\'] = rule_0');
 
-    // does not import disabled rule
-    expect(code).not.to.contain('from \'bpmnlint/rules/single-blank-start-event\'');
+    // does not contain disabled rule
+    expect(code).not.to.contain('bpmnlint/rules/single-blank-start-event');
 
     // exports config and resolver
     expect(code).to.contain('export { resolver, config };');
