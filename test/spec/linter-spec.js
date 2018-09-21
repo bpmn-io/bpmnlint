@@ -25,30 +25,17 @@ describe('linter', function() {
     });
 
 
-    describe('should apply categories', function() {
+    it('should test rule', function() {
 
-      function test(ruleFlag, expectedResult) {
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        createRule(fakeRule)
+      );
 
-        it(`${ruleFlag}`, function() {
-
-          // when
-          const results = linter.applyRule({
-            moddleRoot,
-            ruleFlag,
-            rule: createRule(fakeRule)
-          });
-
-          // then
-          expect(results).to.eql(expectedResult);
-        });
-
-      }
-
-      test('off', []);
-      test('warn', buildResults());
-      test('error', buildResults());
+      // then
+      expect(results).to.eql(buildResults());
     });
-
 
   });
 
@@ -64,108 +51,141 @@ describe('linter', function() {
     });
 
 
-    it('should run with global config', async function() {
+    describe('config', function() {
 
-      // given
-      const resolver = {
-        resolveRule() {
-          throw new Error('unexpected invocation');
-        }
-      };
+      it('should apply global config', async function() {
 
-      const config = {};
+        // given
+        const resolver = {
+          resolveRule() {
+            throw new Error('unexpected invocation');
+          }
+        };
 
-      const linter = new Linter({ resolver, config });
+        const config = {};
 
-      // when
-      const lintResults = await linter.lint(moddleRoot);
+        const linter = new Linter({ resolver, config });
 
-      // then
-      expect(lintResults).to.eql({});
-    });
+        // when
+        const lintResults = await linter.lint(moddleRoot);
 
-
-    it('should run without local config', async function() {
-
-      // given
-      const resolver = {
-        resolveRule() {
-          throw new Error('unexpected invocation');
-        }
-      };
-
-      const config = {
-        rules: {
-          nonExistingRule: 'warn'
-        }
-      };
-
-      const linter = new Linter({ resolver, config });
-
-      // when
-      const lintResults = await linter.lint(moddleRoot, {});
-
-      // then
-      expect(lintResults).to.eql({});
-    });
-
-
-    it('should resolve rules', async function() {
-
-      // given
-      const resolver = {
-        resolveRule(pkg, ruleName) {
-          expect(pkg).to.eql('bpmnlint');
-
-          expect(ruleName).to.eql('testRule');
-
-          return fakeRule;
-        }
-      };
-
-      const linter = new Linter({ resolver });
-
-      // when
-      const lintResults = await linter.lint(moddleRoot, {
-        rules: {
-          testRule: 'warn'
-        }
+        // then
+        expect(lintResults).to.eql({});
       });
 
-      // then
-      expect(lintResults).to.eql({
-        testRule: buildResults('warn')
-      });
-    });
 
+      it('should apply local config', async function() {
 
-    it('should handle unresolved rules', async function() {
+        // given
+        const resolver = {
+          resolveRule() {
+            throw new Error('unexpected invocation');
+          }
+        };
 
-      // given
-      const resolver = {
-        resolveRule(ruleName) {
-          return null;
-        }
-      };
-
-      const linter = new Linter({ resolver });
-
-      let error;
-
-      try {
-        await linter.lint(moddleRoot, {
+        const config = {
           rules: {
-            unknownRule: 'warn'
+            nonExistingRule: 'warn'
+          }
+        };
+
+        const linter = new Linter({ resolver, config });
+
+        // when
+        const lintResults = await linter.lint(moddleRoot, {});
+
+        // then
+        expect(lintResults).to.eql({});
+      });
+
+    });
+
+
+    describe('rules', function() {
+
+      it('should resolve', async function() {
+
+        // given
+        const resolver = {
+          resolveRule(pkg, ruleName) {
+            expect(pkg).to.eql('bpmnlint');
+
+            expect(ruleName).to.eql('testRule');
+
+            return fakeRule;
+          }
+        };
+
+        const linter = new Linter({ resolver });
+
+        // when
+        const lintResults = await linter.lint(moddleRoot, {
+          rules: {
+            testRule: 'warn'
           }
         });
-      } catch (e) {
-        error = e;
-      }
 
-      // then
-      expect(error).to.exist;
+        // then
+        expect(lintResults).to.eql({
+          testRule: buildResults('warn')
+        });
+      });
 
-      expect(error.message).to.eql('unknown rule <unknownRule>');
+
+      it('should handle unresolved', async function() {
+
+        // given
+        const resolver = {
+          resolveRule(ruleName) {
+            return null;
+          }
+        };
+
+        const linter = new Linter({ resolver });
+
+        let error;
+
+        try {
+          await linter.lint(moddleRoot, {
+            rules: {
+              unknownRule: 'warn'
+            }
+          });
+        } catch (e) {
+          error = e;
+        }
+
+        // then
+        expect(error).to.exist;
+
+        expect(error.message).to.eql('unknown rule <unknownRule>');
+      });
+
+
+      it('should not resolve disabled', async function() {
+
+        // given
+        const resolver = {
+          resolveRule(ruleName) {
+            throw new Error('unexpected resolve call');
+          }
+        };
+
+        const config = {
+          rules: {
+            unknownRule: 'off'
+          }
+        };
+
+        const linter = new Linter({ resolver, config });
+
+        // when
+        const results = await linter.lint(moddleRoot);
+
+        // then
+        expect(results).to.eql({});
+      });
+
     });
 
   });
@@ -173,7 +193,7 @@ describe('linter', function() {
 
   describe('#parseRuleValue', function() {
 
-    it('should extract { ruleFlag, ruleConfig }', function() {
+    it('should extract { category, config }', function() {
 
       // given
       const linter = new Linter({ resolver: fakeResolver() });
@@ -181,23 +201,23 @@ describe('linter', function() {
 
       // then
       expect(linter.parseRuleValue(0)).to.eql({
-        ruleFlag: 'off',
-        ruleConfig: {}
+        category: 'off',
+        config: {}
       });
 
       expect(linter.parseRuleValue([ 0, 'A' ])).to.eql({
-        ruleFlag: 'off',
-        ruleConfig: 'A'
+        category: 'off',
+        config: 'A'
       });
 
       expect(linter.parseRuleValue(1)).to.eql({
-        ruleFlag: 'warn',
-        ruleConfig: {}
+        category: 'warn',
+        config: {}
       });
 
       expect(linter.parseRuleValue(2)).to.eql({
-        ruleFlag: 'error',
-        ruleConfig: {}
+        category: 'error',
+        config: {}
       });
 
     });
