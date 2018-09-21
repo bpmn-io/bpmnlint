@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: don't resolve disabled rules ([`6c45f3f9`](https://github.com/bpmn-io/bpmnlint/commit/6c45f3f952a412dda05deb5c57861a1c76af23bb))
+
 ## 3.3.1
 
 * `FIX`: handle empty flow element containers in rules
