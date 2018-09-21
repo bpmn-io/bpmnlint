@@ -13,6 +13,12 @@ RuleTester.verify('event-sub-process-typed-start-event', rule, {
       moddleElement: readModdle(__dirname + '/event-sub-process-typed-start-event/valid.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/event-sub-process-typed-start-event/valid-empty.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/event-sub-process-typed-start-event/valid-empty-sub-process.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/event-sub-process-typed-start-event/valid-intermediate-event.bpmn')
     },
     {

@@ -13,6 +13,9 @@ RuleTester.verify('single-blank-start-event', rule, {
       moddleElement: readModdle(__dirname + '/single-blank-start-event/valid.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-empty.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-end-event.bpmn')
     },
     {

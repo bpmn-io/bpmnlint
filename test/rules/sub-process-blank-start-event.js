@@ -13,6 +13,9 @@ RuleTester.verify('sub-process-blank-start-event', rule, {
       moddleElement: readModdle(__dirname + '/sub-process-blank-start-event/valid.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/sub-process-blank-start-event/valid-empty.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/sub-process-blank-start-event/valid-intermediate-event.bpmn')
     },
     {

@@ -11,7 +11,9 @@ module.exports = function(utils) {
       return;
     }
 
-    const blankStartEvents = node.flowElements.filter(function(flowElement) {
+    const flowElements = node.flowElements || [];
+
+    const blankStartEvents = flowElements.filter(function(flowElement) {
 
       if (!is(flowElement, 'bpmn:StartEvent')) {
         return false;

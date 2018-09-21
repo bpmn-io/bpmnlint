@@ -11,7 +11,9 @@ module.exports = function(utils) {
       return;
     }
 
-    node.flowElements.forEach(function(flowElement) {
+    const flowElements = node.flowElements || [];
+
+    flowElements.forEach(function(flowElement) {
 
       if (!is(flowElement, 'bpmn:StartEvent')) {
         return false;
