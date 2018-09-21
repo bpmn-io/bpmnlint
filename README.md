@@ -56,9 +56,9 @@ Add or customize rules using the `rules` block:
 Checkout [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) to learn how to define and consume custom lint rules.
 
 
-## Visual Linting
+## Visual Feedback
 
-Integrate the linter via [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint) into your [next BPMN editor](https://github.com/bpmn-io/bpmn-js).
+Integrate the linter via [bpmn-js-bpmnlint](https://github.com/philippfromme/bpmn-js-bpmnlint) into [bpmn-js](https://github.com/bpmn-io/bpmn-js) and get direct feedback during modeling.
 
 
 ## License
