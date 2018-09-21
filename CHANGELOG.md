@@ -33,7 +33,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: add support script to compile `.bpmnlintrc` files to JavaScript ([`cf53a389`](https://github.com/bpmn-io/bpmnlint/commit/cf53a3894b6bd821e18ddfc7bdaa8da857356a37))
 
-## 3.0.0
+## 3.0.0bpmnlinter
 
 #### Breaking Changes
 
@@ -78,7 +78,7 @@ _Initial stable release._
 * `FEAT`: make rule and configuration resolution async
 * `FEAT`: provide `bpmnlint:recommended` configuration
 * `CHORE`: `linter` is now a constructor, offering a `#lint(moddleElement, config)` method
-* `CHORE`: moved library to [bpmn-io/bpmnlinter](https://github.com/bpmn-io/bpmnlinter)
+* `CHORE`: moved library to [bpmn-io/bpmnlint](https://github.com/bpmn-io/bpmnlint)
 * `CHORE`: full rewrite of internals
 * `CHORE`: `utils` API change
 
