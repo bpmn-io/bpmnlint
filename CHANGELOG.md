@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.2.1
+
+* `DOCS`: fix readme code snippet
+
 ## 3.2.0
 
 * `FEAT`: add ability to pass linter configuration via constructor
