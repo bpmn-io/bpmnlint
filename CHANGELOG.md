@@ -10,6 +10,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: add ability to batch lint multiple files via CLI
 * `FEAT`: don't resolve disabled rules ([`6c45f3f9`](https://github.com/bpmn-io/bpmnlint/commit/6c45f3f952a412dda05deb5c57861a1c76af23bb))
+* `CHORE`: unify names of built-in rules
 * `CHORE`: adopt cli output to eslint styling
 
 ## 3.3.1
