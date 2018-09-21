@@ -6,7 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.0.0
+
+* `FEAT`: add ability to batch lint multiple files via CLI
 * `FEAT`: don't resolve disabled rules ([`6c45f3f9`](https://github.com/bpmn-io/bpmnlint/commit/6c45f3f952a412dda05deb5c57861a1c76af23bb))
+* `CHORE`: adopt cli output to eslint styling
 
 ## 3.3.1
 
