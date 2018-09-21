@@ -2,7 +2,7 @@
 const meow = require('meow');
 const fs = require('fs');
 const path = require('path');
-const { red, yellow, underline } = require('chalk');
+const { red, yellow, underline, bold } = require('chalk');
 
 const { promisify } = require('util');
 
@@ -13,7 +13,19 @@ const BpmnModdle = require('bpmn-moddle');
 const Linter = require('../lib/linter');
 const NodeResolver = require('../lib/resolver/node-resolver');
 
+const Table = require('cli-table');
+
+const pluralize = require('pluralize');
+
 const moddle = new BpmnModdle();
+
+function boldRed(str) {
+  return bold(red(str));
+}
+
+function boldYellow(str) {
+  return bold(yellow(str));
+}
 
 /**
  * Reads XML form path and return moddle object
@@ -31,56 +43,111 @@ function getModdleFromXML(source) {
   });
 }
 
-/**
- * Logs formatted warning message
- */
-const logWarning = warning =>
-  console.log(
-    `${yellow('warning:')} ${underline(warning.id)} ${warning.message}`
-  );
+const categoryMap = {
+  warn: 'warning'
+};
 
 /**
- * Logs a formatted error message
+ * Logs a formatted  message
  */
-const logError = error =>
-  console.log(`${red('error:')} ${underline(error.id)} ${error.message}`);
+function tableEntry(report) {
+  const category = report.category;
 
-const logRule = ruleName =>
-  console.log(`\nrule: ${ruleName}`);
+  const color = category === 'error' ? red : yellow;
+
+  return [ report.id, color(categoryMap[category] || category), report.message, report.name ];
+}
+
+function createTable() {
+  return new Table({
+    chars: {
+      'top': '',
+      'top-mid': '',
+      'top-left': '',
+      'top-right': '',
+      'bottom': '',
+      'bottom-mid': '',
+      'bottom-left': '',
+      'bottom-right': '',
+      'left': '  ',
+      'left-mid': '',
+      'mid': '',
+      'mid-mid': '',
+      'right': '',
+      'right-mid': '',
+      'middle': '  '
+    },
+    style: {
+      'padding-left': 0,
+      'padding-right': 0
+    }
+  });
+}
+
 
 /**
- * Logs errors and warnings properly in the console
- * @param {*} errors
- * @param {*} warnings
+ * Prints lint results to the console
+ *
+ * @param {String} filePath
+ * @param {Object} results
  */
-const logReports = (results) => {
+function printReports(filePath, results) {
 
   let errorCount = 0;
   let warningCount = 0;
 
-  Object.entries(results).forEach(function([ ruleName, reports ]) {
+  const table = createTable();
 
-    logRule(ruleName);
+  Object.entries(results).forEach(function([ name, reports ]) {
 
     reports.forEach(function(report) {
-      if (report.category === 'error') {
-        errorCount++;
 
-        logError(report);
+      const {
+        category,
+        id,
+        message
+      } = report;
+
+      table.push(tableEntry({
+        category,
+        id,
+        message,
+        name
+      }));
+
+      if (category === 'error') {
+        errorCount++;
       } else {
         warningCount++;
-
-        logWarning(report);
       }
     });
   });
 
-  console.log(`\nfound ${errorCount} errors and ${warningCount} warnings`);
+  let color;
 
-  if (errorCount > 0) {
-    process.exit(1);
+  const problemCount = warningCount + errorCount;
+
+  if (warningCount) {
+    color = boldYellow;
   }
-};
+
+  if (errorCount) {
+    color = boldRed;
+  }
+
+  if (problemCount) {
+    console.log();
+    console.log();
+    console.log(underline(path.resolve(filePath)));
+    console.log(table.toString());
+    console.log();
+    console.log(color(
+      `✖ ${problemCount} ${pluralize('problem', problemCount)} (${errorCount} ${pluralize('error', errorCount)}, ${warningCount} ${pluralize('warning', warningCount)})`
+    ));
+  }
+
+  return errorCount;
+}
 
 const cli = meow(
   `
@@ -117,6 +184,9 @@ function logAndExit(...args) {
 }
 
 async function handleConfig(configString) {
+
+  const inputFile = cli.input[0];
+
   let config;
 
   try {
@@ -128,9 +198,9 @@ async function handleConfig(configString) {
   let diagramXML;
 
   try {
-    diagramXML = await readFile(path.resolve(cli.input[0]), 'utf-8');
+    diagramXML = await readFile(path.resolve(inputFile), 'utf-8');
   } catch (e) {
-    return logAndExit(`Error: Failed to read ${cli.input[0]}`, e);
+    return logAndExit(`Error: Failed to read ${inputFile}`, e);
   }
 
   try {
@@ -143,7 +213,11 @@ async function handleConfig(configString) {
 
     const lintResults = await linter.lint(moddleRoot);
 
-    logReports(lintResults);
+    const withErrors = printReports(inputFile, lintResults);
+
+    if (withErrors) {
+      process.exit(1);
+    }
   } catch (e) {
     return logAndExit(e);
   }

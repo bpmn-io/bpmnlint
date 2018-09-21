@@ -2,6 +2,9 @@ const execa = require('execa');
 
 const assert = require('assert');
 
+const path = require('path');
+
+
 async function exec(...args) {
 
   let result;
@@ -29,7 +32,7 @@ function verifyResult({ code, stdout }) {
     }
 
     if (typeof stdout !== 'undefined') {
-      assert.equal(result.stdout, stdout);
+      assert.equal(result.stdout.replace(/( )+\n/g, '\n'), stdout);
     }
   };
 }
@@ -38,20 +41,18 @@ async function testAll() {
 
   await exec('bpmnlint', [ 'diagram.bpmn' ]).then(verifyResult({
     code: 0,
-    stdout: `
-found 0 errors and 0 warnings`
+    stdout: ''
   }));
 
   await exec('bpmnlint', [ 'diagram-invalid.bpmn' ]).then(verifyResult({
     code: 1,
     stdout: `
-rule: start-event-required
-error: Process_08k516a is missing a start event
 
-rule: end-event-required
-error: Process_08k516a is missing an end event
+${path.resolve(__dirname + '/diagram-invalid.bpmn')}
+  Process_08k516a  error  is missing a start event  start-event-required
+  Process_08k516a  error  is missing an end event   end-event-required
 
-found 2 errors and 0 warnings
+✖ 2 problems (2 errors, 0 warnings)
 `
   }));
 
