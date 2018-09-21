@@ -24,7 +24,7 @@ RuleTester.verify('no-gateway-join-fork', rule, {
       moddleElement: readModdle(__dirname + '/no-gateway-join-fork/invalid.bpmn'),
       report: {
         id: 'Gateway',
-        message: 'forks and joins'
+        message: 'Gateway forks and joins'
       }
     }
   ]

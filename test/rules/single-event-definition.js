@@ -21,7 +21,7 @@ RuleTester.verify('single-event-definition', rule, {
       moddleElement: readModdle(__dirname + '/single-event-definition/invalid.bpmn'),
       report: {
         id: 'Event',
-        message: 'contains multiple event definitions'
+        message: 'Event has multiple event definitions'
       }
     }
   ]

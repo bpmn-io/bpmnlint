@@ -7,7 +7,7 @@ import {
 } from '../../lib/testers/helper';
 
 
-const message = 'is missing label/name';
+const message = 'Element is missing label/name';
 
 
 RuleTester.verify('label-required', rule, {

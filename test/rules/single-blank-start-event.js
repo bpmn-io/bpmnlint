@@ -36,14 +36,14 @@ RuleTester.verify('single-blank-start-event', rule, {
       moddleElement: readModdle(__dirname + '/single-blank-start-event/invalid.bpmn'),
       report: {
         id: 'Process',
-        message: 'contains multiple blank start events'
+        message: 'Process has multiple blank start events'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/single-blank-start-event/invalid-sub-process.bpmn'),
       report: {
         id: 'SubProcess',
-        message: 'contains multiple blank start events'
+        message: 'Sub process has multiple blank start events'
       }
     }
   ]

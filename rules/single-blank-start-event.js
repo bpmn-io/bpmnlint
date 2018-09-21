@@ -25,7 +25,9 @@ module.exports = function(utils) {
     });
 
     if (blankStartEvents.length > 1) {
-      reporter.report(node.id, 'contains multiple blank start events');
+      const type = is(node, 'bpmn:SubProcess') ? 'Sub process' : 'Process';
+
+      reporter.report(node.id, type + ' has multiple blank start events');
     }
   }
 

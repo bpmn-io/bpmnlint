@@ -15,7 +15,7 @@ module.exports = function(utils) {
     const outgoing = node.outgoing || [];
 
     if (incoming.length > 1 && outgoing.length > 1) {
-      reporter.report(node.id, 'forks and joins');
+      reporter.report(node.id, 'Gateway forks and joins');
     }
   }
 

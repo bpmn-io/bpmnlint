@@ -24,7 +24,7 @@ module.exports = function(utils) {
     });
 
     if (outgoingWithoutCondition.length > 1) {
-      reporter.report(node.id, 'must not split implicitly');
+      reporter.report(node.id, 'Flow splits implicitly');
     }
   }
 

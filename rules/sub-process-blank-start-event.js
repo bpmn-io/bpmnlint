@@ -22,7 +22,7 @@ module.exports = function(utils) {
       const eventDefinitions = flowElement.eventDefinitions || [];
 
       if (eventDefinitions.length > 0) {
-        reporter.report(flowElement.id, 'must not contain event definition');
+        reporter.report(flowElement.id, 'Start event must be blank');
       }
     });
   }

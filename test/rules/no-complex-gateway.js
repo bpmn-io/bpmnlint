@@ -18,7 +18,7 @@ RuleTester.verify('no-complex-gateway', rule, {
       moddleElement: readModdle(__dirname + '/no-complex-gateway/invalid.bpmn'),
       report: {
         id: 'Gateway',
-        message: 'has disallowed type <bpmn:ComplexGateway>'
+        message: 'Element has disallowed type <bpmn:ComplexGateway>'
       }
     }
   ]

@@ -47,7 +47,7 @@ module.exports = function(utils) {
       const name = (node.name || '').trim();
 
       if (name.length === 0) {
-        reporter.report(node.id, 'is missing label/name');
+        reporter.report(node.id, 'Element is missing label/name');
       }
     }
   }

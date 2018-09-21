@@ -30,7 +30,7 @@ RuleTester.verify('event-sub-process-typed-start-event', rule, {
       moddleElement: readModdle(__dirname + '/event-sub-process-typed-start-event/invalid.bpmn'),
       report: {
         id: 'StartEvent',
-        message: 'is missing event definition'
+        message: 'Start event is missing event definition'
       }
     }
   ]

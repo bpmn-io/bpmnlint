@@ -14,7 +14,7 @@ module.exports = function(utils) {
     const eventDefinitions = node.eventDefinitions || [];
 
     if (eventDefinitions.length > 1) {
-      reporter.report(node.id, 'contains multiple event definitions');
+      reporter.report(node.id, 'Event has multiple event definitions');
     }
   }
 

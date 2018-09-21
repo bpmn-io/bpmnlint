@@ -21,7 +21,7 @@ RuleTester.verify('fake-join', rule, {
       moddleElement: readModdle(__dirname + '/fake-join/invalid.bpmn'),
       report: {
         id: 'Element',
-        message: 'does not join'
+        message: 'Incoming flows do not join'
       }
     }
   ]

@@ -18,7 +18,7 @@ RuleTester.verify('no-inclusive-gateway', rule, {
       moddleElement: readModdle(__dirname + '/no-inclusive-gateway/invalid.bpmn'),
       report: {
         id: 'Gateway',
-        message: 'has disallowed type <bpmn:InclusiveGateway>'
+        message: 'Element has disallowed type <bpmn:InclusiveGateway>'
       }
     }
   ]

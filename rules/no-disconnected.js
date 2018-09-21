@@ -21,7 +21,7 @@ module.exports = function(utils) {
     const outgoing = node.outgoing || [];
 
     if (!incoming.length && !outgoing.length) {
-      reporter.report(node.id, 'is not connected');
+      reporter.report(node.id, 'Element is not connected');
     }
   }
 

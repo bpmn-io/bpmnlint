@@ -21,14 +21,14 @@ RuleTester.verify('end-event-required', rule, {
       moddleElement: readModdle(__dirname + '/end-event-required/invalid.bpmn'),
       report: {
         id: 'Process',
-        message: 'is missing an end event'
+        message: 'Process is missing end event'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/end-event-required/invalid-sub-process.bpmn'),
       report: {
         id: 'SubProcess',
-        message: 'is missing an end event'
+        message: 'Sub process is missing end event'
       }
     }
   ]

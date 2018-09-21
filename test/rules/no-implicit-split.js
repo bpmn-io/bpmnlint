@@ -21,14 +21,14 @@ RuleTester.verify('no-implicit-split', rule, {
       moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-event.bpmn'),
       report: {
         id: 'Element',
-        message: 'must not split implicitly'
+        message: 'Flow splits implicitly'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-task.bpmn'),
       report: {
         id: 'Element',
-        message: 'must not split implicitly'
+        message: 'Flow splits implicitly'
       }
     }
   ]

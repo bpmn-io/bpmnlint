@@ -49,8 +49,8 @@ async function testAll() {
     stdout: `
 
 ${path.resolve(__dirname + '/diagram-invalid.bpmn')}
-  Process_08k516a  error  is missing a start event  start-event-required
-  Process_08k516a  error  is missing an end event   end-event-required
+  Process_08k516a  error  Process is missing start event  start-event-required
+  Process_08k516a  error  Process is missing end event    end-event-required
 
 ✖ 2 problems (2 errors, 0 warnings)
 `

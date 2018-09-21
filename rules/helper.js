@@ -15,7 +15,7 @@ function disallowNodeType(type) {
     function check(node, reporter) {
 
       if (is(node, type)) {
-        reporter.report(node.id, 'has disallowed type <' + type + '>');
+        reporter.report(node.id, 'Element has disallowed type <' + type + '>');
       }
     }
 

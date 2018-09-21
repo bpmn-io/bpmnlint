@@ -21,14 +21,14 @@ RuleTester.verify('start-event-required', rule, {
       moddleElement: readModdle(__dirname + '/start-event-required/invalid.bpmn'),
       report: {
         id: 'Process',
-        message: 'is missing a start event'
+        message: 'Process is missing start event'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/start-event-required/invalid-sub-process.bpmn'),
       report: {
         id: 'SubProcess',
-        message: 'is missing a start event'
+        message: 'Sub process is missing start event'
       }
     }
   ]

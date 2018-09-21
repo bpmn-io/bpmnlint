@@ -21,7 +21,7 @@ RuleTester.verify('no-disconnected', rule, {
       moddleElement: readModdle(__dirname + '/no-disconnected/invalid.bpmn'),
       report: {
         id: 'Element',
-        message: 'is not connected'
+        message: 'Element is not connected'
       }
     }
   ]
