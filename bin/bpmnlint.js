@@ -31,14 +31,14 @@ function boldYellow(str) {
  * Reads XML form path and return moddle object
  * @param {*} sourcePath
  */
-function getModdleFromXML(source) {
+function parseDiagram(diagramXML) {
   return new Promise((resolve, reject) => {
-    moddle.fromXML(source, (err, root) => {
+    moddle.fromXML(diagramXML, (err, moddleElement) => {
       if (err) {
         return reject(new Error('failed to parse XML', err));
       }
 
-      return resolve(root);
+      return resolve(moddleElement);
     });
   });
 }
@@ -123,36 +123,24 @@ function printReports(filePath, results) {
     });
   });
 
-  let color;
-
   const problemCount = warningCount + errorCount;
-
-  if (warningCount) {
-    color = boldYellow;
-  }
-
-  if (errorCount) {
-    color = boldRed;
-  }
 
   if (problemCount) {
     console.log();
-    console.log();
     console.log(underline(path.resolve(filePath)));
     console.log(table.toString());
-    console.log();
-    console.log(color(
-      `✖ ${problemCount} ${pluralize('problem', problemCount)} (${errorCount} ${pluralize('error', errorCount)}, ${warningCount} ${pluralize('warning', warningCount)})`
-    ));
   }
 
-  return errorCount;
+  return {
+    errorCount,
+    warningCount
+  };
 }
 
 const cli = meow(
   `
 	Usage
-	  $ bpmnlint <file.bpmn>
+	  $ bpmnlint diagram.bpmn
 
 	Options
     --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
@@ -172,7 +160,7 @@ const cli = meow(
 );
 
 
-if (cli.input.length !== 1) {
+if (cli.input.length === 0) {
   console.log('Error: bpmn file path missing.');
   process.exit(1);
 }
@@ -183,9 +171,34 @@ function logAndExit(...args) {
   process.exit(1);
 }
 
-async function handleConfig(configString) {
+async function lintDiagram(diagramPath, config) {
 
-  const inputFile = cli.input[0];
+  let diagramXML;
+
+  try {
+    diagramXML = await readFile(path.resolve(diagramPath), 'utf-8');
+  } catch (e) {
+    return logAndExit(`Error: Failed to read ${diagramPath}`, e);
+  }
+
+  try {
+    const moddleRoot = await parseDiagram(diagramXML);
+
+    const linter = new Linter({
+      config,
+      resolver: new NodeResolver()
+    });
+
+    const lintResults = await linter.lint(moddleRoot);
+
+    return printReports(diagramPath, lintResults);
+  } catch (e) {
+    return logAndExit(e);
+  }
+}
+
+async function handleConfig(configString) {
+  console.log();
 
   let config;
 
@@ -195,32 +208,39 @@ async function handleConfig(configString) {
     return logAndExit('Error: Could not parse configuration file', e);
   }
 
-  let diagramXML;
+  let errorCount = 0;
+  let warningCount = 0;
 
-  try {
-    diagramXML = await readFile(path.resolve(inputFile), 'utf-8');
-  } catch (e) {
-    return logAndExit(`Error: Failed to read ${inputFile}`, e);
+  for (let i = 0; i < cli.input.length; i++) {
+    let results = await lintDiagram(cli.input[i], config);
+
+    errorCount += results.errorCount;
+    warningCount += results.warningCount;
   }
 
-  try {
-    const moddleRoot = await getModdleFromXML(diagramXML);
+  const problemCount = errorCount + warningCount;
 
-    const linter = new Linter({
-      config,
-      resolver: new NodeResolver()
-    });
+  let color;
 
-    const lintResults = await linter.lint(moddleRoot);
-
-    const withErrors = printReports(inputFile, lintResults);
-
-    if (withErrors) {
-      process.exit(1);
-    }
-  } catch (e) {
-    return logAndExit(e);
+  if (warningCount) {
+    color = boldYellow;
   }
+
+  if (errorCount) {
+    color = boldRed;
+  }
+
+  if (problemCount) {
+    console.log();
+    console.log(color(
+      `✖ ${problemCount} ${pluralize('problem', problemCount)} (${errorCount} ${pluralize('error', errorCount)}, ${warningCount} ${pluralize('warning', warningCount)})`
+    ));
+  }
+
+  if (errorCount) {
+    process.exit(1);
+  }
+
 }
 
 const { config } = cli.flags;
