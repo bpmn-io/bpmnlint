@@ -35,14 +35,8 @@ describe('traverse', function() {
         <?xml version="1.0" encoding="UTF-8"?>
         <definitions
             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-            xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-            xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
-            xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2"
-            targetNamespace="http://bpmn.io/bpmn"
-            exporter="http://bpmn.io"
-            exporterVersion="0.10.1">
+            targetNamespace="http://bpmn.io/bpmn">
         </definitions>
       `;
 
@@ -58,6 +52,36 @@ describe('traverse', function() {
 
       // then
       expect(nodesCount).to.eql(1);
+    });
+
+
+    it('diagram with generic element', async function() {
+      // given
+      const xmlStr = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <definitions
+            xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+            xmlns:asd="http://asd"
+            id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2"
+            targetNamespace="http://bpmn.io/bpmn">
+          <extensionElements>
+            <asd:foo bar="BAR" />
+          </extensionElements>
+        </definitions>
+      `;
+
+      const {
+        root
+      } = await createModdle(xmlStr);
+
+      let nodesCount = 0;
+      const traverseCb = () => nodesCount++;
+
+      // when
+      traverse(root, traverseCb);
+
+      // then
+      expect(nodesCount).to.eql(3);
     });
 
   });
