@@ -33,12 +33,20 @@ function boldYellow(str) {
  */
 function parseDiagram(diagramXML) {
   return new Promise((resolve, reject) => {
-    moddle.fromXML(diagramXML, (err, moddleElement) => {
-      if (err) {
-        return reject(new Error('failed to parse XML', err));
+    moddle.fromXML(diagramXML, (error, moddleElement, context) => {
+
+      if (error) {
+        return resolve({
+          error
+        });
       }
 
-      return resolve(moddleElement);
+      const warnings = context.warnings || [];
+
+      return resolve({
+        moddleElement,
+        warnings
+      });
     });
   });
 }
@@ -55,7 +63,7 @@ function tableEntry(report) {
 
   const color = category === 'error' ? red : yellow;
 
-  return [ report.id, color(categoryMap[category] || category), report.message, report.name ];
+  return [ report.id || '', color(categoryMap[category] || category), report.message, report.name || '' ];
 }
 
 function createTable() {
@@ -105,14 +113,15 @@ function printReports(filePath, results) {
       const {
         category,
         id,
-        message
+        message,
+        name: reportName
       } = report;
 
       table.push(tableEntry({
         category,
         id,
         message,
-        name
+        name: reportName || name
       }));
 
       if (category === 'error') {
@@ -181,17 +190,56 @@ async function lintDiagram(diagramPath, config) {
     return logAndExit(`Error: Failed to read ${diagramPath}`, e);
   }
 
-  try {
-    const moddleRoot = await parseDiagram(diagramXML);
 
+  const {
+    error: importError,
+    warnings: importWarnings,
+    moddleElement
+  } = await parseDiagram(diagramXML);
+
+  if (importError) {
+    return printReports(diagramPath, {
+      '': [
+        {
+          message: 'Parse error: ' + importError.message,
+          category: 'error'
+        }
+      ]
+    });
+  }
+
+  const importReports = importWarnings.length ? {
+    '': importWarnings.map(function(warning) {
+
+      const {
+        element,
+        message
+      } = warning;
+
+      const id = element && element.id;
+
+      return {
+        id,
+        message: 'Import warning: ' + message.split(/\n/)[0],
+        category: 'error'
+      };
+    })
+  } : {};
+
+  try {
     const linter = new Linter({
       config,
       resolver: new NodeResolver()
     });
 
-    const lintResults = await linter.lint(moddleRoot);
+    const lintReports = await linter.lint(moddleElement);
 
-    return printReports(diagramPath, lintResults);
+    const allResults = {
+      ...importReports,
+      ...lintReports
+    };
+
+    return printReports(diagramPath, allResults);
   } catch (e) {
     return logAndExit(e);
   }

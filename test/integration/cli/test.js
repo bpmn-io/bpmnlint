@@ -37,6 +37,7 @@ function verifyResult({ code, stdout }) {
   };
 }
 
+
 async function testAll() {
 
   await exec('bpmnlint', [ 'diagram.bpmn' ]).then(verifyResult({
@@ -53,6 +54,31 @@ ${path.resolve(__dirname + '/diagram-invalid.bpmn')}
   Process_08k516a  error  Process is missing end event    end-event-required
 
 ✖ 2 problems (2 errors, 0 warnings)
+`
+  }));
+
+  await exec('bpmnlint', [ 'diagram-broken.bpmn' ]).then(verifyResult({
+    code: 1,
+    stdout: `
+
+${path.resolve(__dirname + '/diagram-broken.bpmn')}
+    error  Parse error: failed to parse document as <bpmn:Definitions>
+
+✖ 1 problem (1 error, 0 warnings)
+`
+  }));
+
+  await exec('bpmnlint', [ 'diagram-import-warnings.bpmn' ]).then(verifyResult({
+    code: 1,
+    stdout: `
+
+${path.resolve(__dirname + '/diagram-import-warnings.bpmn')}
+  MessageFlow_1ofxm38     error  Import warning: unresolved reference <Participant_1w6hx42>
+  Participant_1sh3ce3_di  error  Import warning: unresolved reference <Participant_1w6hx42>
+  Process_1               error  Process is missing start event                              start-event-required
+  Process_1               error  Process is missing end event                                end-event-required
+
+✖ 4 problems (4 errors, 0 warnings)
 `
   }));
 
