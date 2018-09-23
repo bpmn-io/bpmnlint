@@ -25,17 +25,48 @@ describe('linter', function() {
     });
 
 
-    it('should test rule', function() {
+    it('should succeed', function() {
 
       // when
       const results = linter.applyRule(
         moddleRoot,
-        createRule(fakeRule)
+        {
+          name: 'test-rule',
+          config: { },
+          rule: createRule(fakeRule),
+          category: 'error'
+        }
       );
 
       // then
-      expect(results).to.eql(buildResults());
+      expect(results).to.eql(buildResults('error'));
     });
+
+
+    it('should fail', function() {
+
+      const failingRule = {};
+
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: failingRule,
+          category: 'warn'
+        }
+      );
+
+      // then
+      expect(results).to.eql([
+        {
+          category: 'error',
+          message: 'Rule error: rule.check is not a function'
+        }
+      ]);
+    });
+
 
   });
 
