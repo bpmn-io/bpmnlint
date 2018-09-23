@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 4.1.0
+
+* `FEAT`: handle and report diagram import errors and warnings via CLI
+* `FEAT`: properly handle generic moddle elements during rule checking
+* `FEAT`: report rule execution errors
+
 ## 4.0.0
 
 * `FEAT`: add ability to batch lint multiple files via CLI
