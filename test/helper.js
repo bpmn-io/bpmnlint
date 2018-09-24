@@ -1,4 +1,4 @@
-import utils from '../lib/utils';
+import * as utils from 'bpmnlint-utils';
 
 export * from '../lib/testers/helper';
 
