@@ -1,9 +1,12 @@
-// verify that start events inside an event sub-process
-// are typed.
+const {
+  is
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
-
-  const is = utils.is;
+/**
+ * A rule that checks that start events inside an event sub-process
+ * are typed.
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

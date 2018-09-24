@@ -1,9 +1,13 @@
-// verify that start events inside a normal sub-process
-// are blank (do not have an event definition).
+const {
+  is
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
 
-  const is = utils.is;
+/**
+ * A rule that checks that start events inside a normal sub-processes
+ * are blank (do not have an event definition).
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

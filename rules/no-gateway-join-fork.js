@@ -1,9 +1,13 @@
-// verify that a gateway does not fork and join
-// at the same time.
+const {
+  is
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
 
-  const is = utils.is;
+/**
+ * A rule that checks, whether a gateway forks and joins
+ * at the same time.
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

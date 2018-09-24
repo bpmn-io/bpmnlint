@@ -1,11 +1,13 @@
+const {
+  is,
+  isAny
+} = require('bpmnlint-utils');
+
+
 /**
- * Rule is to impose the presence of an end event in the process.
+ * A rule that checks the presence of an end event per scope.
  */
-
 module.exports = function(utils) {
-
-  const is = utils.is;
-  const isAny = utils.isAny;
 
   function hasEndEvent(node) {
     const flowElements = node.flowElements || [];

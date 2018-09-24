@@ -1,10 +1,14 @@
-// verify that there exists no disconnected
-// flow elements, i.e. elements without incoming
-// _or_ outgoing sequence flows
+const {
+  isAny
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
 
-  const isAny = utils.isAny;
+/**
+ * A rule that verifies that there exists no disconnected
+ * flow elements, i.e. elements without incoming
+ * _or_ outgoing sequence flows
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

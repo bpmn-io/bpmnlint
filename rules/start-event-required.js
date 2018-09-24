@@ -1,11 +1,13 @@
+const {
+  is,
+  isAny
+} = require('bpmnlint-utils');
+
+
 /**
- * Rule is to impose the presence of a start event in the process.
+ * A rule that checks for the presence of a start event per scope.
  */
-
-module.exports = function(utils) {
-
-  const is = utils.is;
-  const isAny = utils.isAny;
+module.exports = function() {
 
   function hasStartEvent(node) {
     const flowElements = node.flowElements || [];

@@ -1,3 +1,6 @@
+const {
+  is
+} = require('bpmnlint-utils');
 
 /**
  * Create a checker that disallows the given element type.
@@ -8,9 +11,7 @@
  */
 function disallowNodeType(type) {
 
-  return function(utils) {
-
-    const is = utils.is;
+  return function() {
 
     function check(node, reporter) {
 

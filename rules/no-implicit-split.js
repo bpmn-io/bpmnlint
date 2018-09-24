@@ -1,12 +1,16 @@
-// verify that no implicit split is modeled
-// starting from a task.
-//
-// users should model the parallel splitting gateway
-// explicitly instead.
+const {
+  isAny
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
 
-  const isAny = utils.isAny;
+/**
+ * A rule that checks that no implicit split is modeled
+ * starting from a task.
+ *
+ * users should model the parallel splitting gateway
+ * explicitly instead.
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

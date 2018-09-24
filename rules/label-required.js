@@ -1,11 +1,13 @@
+const {
+  is,
+  isAny
+} = require('bpmnlint-utils');
+
+
 /**
- * Rule is to impose the presence of a label for every flow node.
+ * A rule that checks the presence of a label.
  */
-
-module.exports = function(utils) {
-
-  const is = utils.is;
-  const isAny = utils.isAny;
+module.exports = function() {
 
   function check(node, reporter) {
 

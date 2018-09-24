@@ -1,8 +1,9 @@
-// verify that sequence flows outgoing from a
-// conditional forking gateway or activity are
-// either default flows _or_ have a condition attached
-
-module.exports = function(utils) {
+/**
+ * A rule that checks that sequence flows outgoing from a
+ * conditional forking gateway or activity are
+ * either default flows _or_ have a condition attached
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

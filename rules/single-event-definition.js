@@ -1,9 +1,12 @@
-// verify that an event contains maximum one
-// event definition
+const {
+  is
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
 
-  const is = utils.is;
+/**
+ * A rule that verifies that an event contains maximum one event definition.
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 

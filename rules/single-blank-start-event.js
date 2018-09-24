@@ -1,9 +1,12 @@
-// verify that there exists only a single blank
-// start event per scope
+const {
+  is
+} = require('bpmnlint-utils');
 
-module.exports = function(utils) {
-
-  const is = utils.is;
+/**
+ * A rule that checks whether not more than one blank start event
+ * exists per scope.
+ */
+module.exports = function() {
 
   function check(node, reporter) {
 
