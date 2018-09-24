@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.0.0
+
+* `FEAT`: don't expose utils to rules; use `bpmnlint-utils` instead
+
 ## 4.1.0
 
 * `FEAT`: handle and report diagram import errors and warnings via CLI
