@@ -2,6 +2,9 @@ import testRule from '../../lib/test-rule';
 
 import { expect, createRule, readModdle } from '../helper';
 
+import { is } from 'bpmnlint-utils';
+
+
 describe('test-rule', function() {
 
   let moddleRoot;
@@ -29,6 +32,7 @@ describe('test-rule', function() {
     expect(messages).to.eql(expectedMessages);
   });
 
+
   it('should empty messages', () => {
     // given
     const expectedMessages = [];
@@ -42,11 +46,12 @@ describe('test-rule', function() {
     // then
     expect(messages).to.eql(expectedMessages);
   });
+
 });
 
-function fakeRuleWithReports(utils) {
+function fakeRuleWithReports() {
   function check(node, reporter) {
-    if (utils.is(node, 'Definitions')) {
+    if (is(node, 'Definitions')) {
       reporter.report(node.id, 'Definitions detected');
     }
   }

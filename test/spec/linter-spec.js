@@ -6,6 +6,8 @@ import {
   createRule
 } from '../helper';
 
+import { is } from 'bpmnlint-utils';
+
 
 describe('linter', function() {
 
@@ -526,11 +528,7 @@ function fakeResolver(cache = {}) {
 }
 
 
-function fakeRule(utils) {
-
-  const {
-    is
-  } = utils;
+function fakeRule() {
 
   function check(node, reporter) {
 
