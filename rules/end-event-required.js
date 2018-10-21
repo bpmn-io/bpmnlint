@@ -7,7 +7,7 @@ const {
 /**
  * A rule that checks the presence of an end event per scope.
  */
-module.exports = function(utils) {
+module.exports = function() {
 
   function hasEndEvent(node) {
     const flowElements = node.flowElements || [];
