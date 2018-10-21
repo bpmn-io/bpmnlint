@@ -1,7 +1,7 @@
 /**
  * Rule that reports bar labels.
  */
-module.exports = function(utils) {
+module.exports = function() {
 
   function check(node, reporter) {
     if (/^bar/.test(node.name || '')) {

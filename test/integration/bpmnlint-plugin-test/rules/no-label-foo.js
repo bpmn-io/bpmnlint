@@ -1,7 +1,7 @@
 /**
  * Rule that reports foo labels.
  */
-module.exports = function(utils) {
+module.exports = function() {
 
   function check(node, reporter) {
     if (/^foo/.test(node.name || '')) {
