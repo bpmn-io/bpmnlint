@@ -11,6 +11,19 @@ import { is } from 'bpmnlint-utils';
 
 describe('linter', function() {
 
+  describe('constructor', function() {
+
+    it('should require { resolver } config', function() {
+
+      expect(() => {
+        new Linter();
+      }).to.throw('must provide <options.resolver>');
+
+    });
+
+  });
+
+
   describe('#applyRule', function() {
 
     let moddleRoot;
@@ -389,6 +402,7 @@ describe('linter', function() {
               'plugin:test/recommended'
             ],
             rules: {
+              'bpmnlint/foo': 'error',
               'foo': 'error',
               'test/bar': 'off'
             }
@@ -408,6 +422,36 @@ describe('linter', function() {
 
       });
 
+    });
+
+
+    it('should throw on missing', async function() {
+
+      // given
+      const resolver = {
+        resolveConfig(pkg, configName) {
+          return null;
+        }
+      };
+
+      const linter = new Linter({ resolver });
+
+      let err;
+
+      // when
+      try {
+        await linter.resolveConfiguredRules({
+          extends: 'plugin:foo/bar'
+        });
+      } catch (e) {
+        // then
+        expect(e.message).to.eql('unknown config <plugin:foo/bar>');
+
+        err = e;
+      }
+
+      // verify
+      expect(err).to.exist;
     });
 
   });
@@ -510,7 +554,19 @@ describe('linter', function() {
       });
     });
 
+
+    it('should throw on invalid name', async function() {
+
+      expect(() => {
+        linter.parseConfigName('foo:bar');
+      }).to.throw('invalid config name <foo:bar>');
+
+    });
+
   });
+
+
+  it('caching behavior');
 
 });
 

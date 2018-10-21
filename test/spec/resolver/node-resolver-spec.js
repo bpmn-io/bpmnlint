@@ -5,14 +5,22 @@ import {
 } from '../../helper';
 
 
-describe('NodeResolver', function() {
+describe('resolver/node-resolver', function() {
 
   describe('#resolveRule', function() {
 
     const resolver = createResolver(function(path) {
 
+      if (path === 'not/rules/found') {
+        throw new Error('not found');
+      }
+
       // mock node resolution
       if (path === 'bpmnlint') {
+        throw new Error('not found');
+      }
+
+      if (path === 'bpmnlint/rules/local-fallback') {
         throw new Error('not found');
       }
 
@@ -45,6 +53,37 @@ describe('NodeResolver', function() {
       });
     });
 
+
+    it('should fail to resolve external', async function() {
+
+      let err;
+
+      // when
+      try {
+        await resolver.resolveRule('not', 'found');
+      } catch (e) {
+        // then
+        expect(e.message).to.eql('not found');
+
+        err = e;
+      }
+
+      // verify
+      expect(err).to.exist;
+    });
+
+
+    it('should resolve built-in rule relative', async function() {
+
+      // when
+      const resolvedRule = await resolver.resolveRule('bpmnlint', 'local-fallback');
+
+      // then
+      expect(resolvedRule).to.eql({
+        path: '../../rules/local-fallback'
+      });
+    });
+
   });
 
 
@@ -57,10 +96,6 @@ describe('NodeResolver', function() {
         throw new Error('not found');
       }
 
-      if (path === 'bpmnlint-plugin-foo/config/embedded') {
-        throw new Error('not found');
-      }
-
       // mimic $PKG/config/$NAME resolution
       if (path === 'bpmnlint-plugin-foo/config/bar') {
         return {
@@ -68,6 +103,11 @@ describe('NodeResolver', function() {
           bar: true
         };
       }
+
+      if (path.startsWith('bpmnlint-plugin-foo/config')) {
+        throw new Error('not found');
+      }
+
 
       if (path.indexOf('config') !== -1) {
         return {
@@ -147,6 +187,27 @@ describe('NodeResolver', function() {
         });
 
       });
+
+    });
+
+
+    it('should fail to resolve external', async function() {
+
+      let err;
+
+      // when
+      try {
+        await resolver.resolveConfig('bpmnlint-plugin-foo', 'non-existing');
+      } catch (e) {
+        expect(e.message).to.eql(
+          'cannot resolve config <non-existing> in <bpmnlint-plugin-foo>'
+        );
+
+        err = e;
+      }
+
+      // verify
+      expect(err).to.exist;
     });
 
   });

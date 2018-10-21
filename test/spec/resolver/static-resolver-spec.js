@@ -5,7 +5,7 @@ import {
 } from '../../helper';
 
 
-describe('StaticResolver', function() {
+describe('resolver/static-resolver', function() {
 
   const resolver = new StaticResolver({
     'rule:bpmnlint/label-required': 'RULE',
