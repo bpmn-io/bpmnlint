@@ -1,97 +1,49 @@
 const execa = require('execa');
 
-const assert = require('assert');
+/**
+ * Execute bpmnlint as provided via arguments.
+ *
+ * Report { stdout, stderr, code } via output
+ * for further processing.
+ */
 
-const path = require('path');
+const [
+  bin,
+  ...args
+] = process.argv.slice(2);
 
+execa(bin, args).then(
+  function(result) {
+    return result;
+  },
+  function(err) {
+    return err;
+  }
+).then(function(result) {
+  const {
+    stdout,
+    stderr,
+    code
+  } = result;
 
-async function exec(...args) {
+  console.log('---- STDOUT');
 
-  let result;
-
-  try {
-    result = await execa(...args);
-  } catch (err) {
-    result = err;
+  if (stdout) {
+    console.log(stdout);
   }
 
-  console.log(`
-${result.cmd}
-${result.stdout}
-  `);
+  console.log('---- STDOUT');
+  console.log('---- STDERR');
 
-  return result;
-}
+  if (stderr) {
+    console.log(stderr);
+  }
 
-function verifyResult({ code, stdout }) {
+  console.log('---- STDERR');
+  console.log('---- CODE');
 
-  return (result) => {
+  console.log(code);
 
-    if (typeof code !== 'undefined') {
-      assert.equal(result.code, code);
-    }
-
-    if (typeof stdout !== 'undefined') {
-      assert.equal(result.stdout.replace(/( )+\n/g, '\n'), stdout);
-    }
-  };
-}
-
-
-async function testAll() {
-
-  await exec('bpmnlint', [ 'diagram.bpmn' ]).then(verifyResult({
-    code: 0,
-    stdout: ''
-  }));
-
-  await exec('bpmnlint', [ 'diagram-invalid.bpmn' ]).then(verifyResult({
-    code: 1,
-    stdout: `
-
-${path.resolve(__dirname + '/diagram-invalid.bpmn')}
-  Process_08k516a  error  Process is missing start event  start-event-required
-  Process_08k516a  error  Process is missing end event    end-event-required
-
-✖ 2 problems (2 errors, 0 warnings)
-`
-  }));
-
-  await exec('bpmnlint', [ 'diagram-broken.bpmn' ]).then(verifyResult({
-    code: 1,
-    stdout: `
-
-${path.resolve(__dirname + '/diagram-broken.bpmn')}
-    error  Parse error: failed to parse document as <bpmn:Definitions>
-
-✖ 1 problem (1 error, 0 warnings)
-`
-  }));
-
-  await exec('bpmnlint', [ 'diagram-import-warnings.bpmn' ]).then(verifyResult({
-    code: 1,
-    stdout: `
-
-${path.resolve(__dirname + '/diagram-import-warnings.bpmn')}
-  MessageFlow_1ofxm38     error  Import warning: unresolved reference <Participant_1w6hx42>
-  Participant_1sh3ce3_di  error  Import warning: unresolved reference <Participant_1w6hx42>
-  Process_1               error  Process is missing start event                              start-event-required
-  Process_1               error  Process is missing end event                                end-event-required
-
-✖ 4 problems (4 errors, 0 warnings)
-`
-  }));
-
-  await exec('bpmnlint', [ '-c', 'extends-builtin.json', 'diagram.bpmn' ]).then(verifyResult({ code: 0 }));
-
-  await exec('bpmnlint', [ '-c', 'extends-external.json', 'diagram.bpmn' ]).then(verifyResult({ code: 0 }));
-
-  await exec('bpmnlint', [ 'complex.bpmn' ]).then(verifyResult({ code: 0 }));
-}
-
-
-testAll().catch((err) => {
-  console.error(err);
-
-  process.exit(1);
+  console.log('---- CODE');
+  console.log('---- END');
 });
