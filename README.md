@@ -7,7 +7,13 @@ Validate your BPMN diagrams based on configurable lint rules.
 
 ## Usage
 
-Install the utility via [npm](https://www.npmjs.com/package/bpmnlint) and validate your diagrams via the commandline:
+Install the utility via [npm](https://www.npmjs.com/package/bpmnlint):
+
+```sh
+npm install -g bpmnlint
+```
+
+Validate your diagrams via the commandline:
 
 ```sh
 > bpmnlint invoice.bpmn
