@@ -35,7 +35,7 @@
   "dependencies": {
     "bpmn-moddle": "^4.0.0",
     "bpmnlint-utils": "^1.0.1",
-    "chalk": "^2.4.1",
+    "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
     "meow": "^5.0.0",
     "pluralize": "^7.0.0"
