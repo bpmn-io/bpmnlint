@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.1.1
+
+* `CHORE`: exclude additional development assets from distribution
+
 ## 5.1.0
 
 * `FEAT`: add `no-duplicate-sequence-flows` rule ([#22](https://github.com/bpmn-io/bpmnlint/issues/22))
