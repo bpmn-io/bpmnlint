@@ -149,6 +149,8 @@ function test(options) {
 
   (only ? it.only : it)(cmd.join(' '), async function() {
 
+    this.timeout(3000);
+
     // when
     const {
       stdout
