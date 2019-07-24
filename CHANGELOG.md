@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 5.1.0
 
-* `FEAT`: add `no-duplicate-sequenceflows` rule ([#22](https://github.com/bpmn-io/bpmnlint/issues/22))
+* `FEAT`: add `no-duplicate-sequence-flows` rule ([#22](https://github.com/bpmn-io/bpmnlint/issues/22))
 * `FEAT`: catch more BPMN parse errors
 * `FEAT`: be able to define multiple expected test results in `RuleTester`
 * `FIX`: make `nyc` a development dependency
