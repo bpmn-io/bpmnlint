@@ -6,6 +6,7 @@ const allRules = [
   'label-required',
   'no-complex-gateway',
   'no-disconnected',
+  'no-duplicate-sequence-flows',
   'no-gateway-join-fork',
   'no-implicit-split',
   'no-inclusive-gateway',

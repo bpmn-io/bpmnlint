@@ -7,6 +7,7 @@ module.exports = {
     'label-required': 'error',
     'no-complex-gateway': 'error',
     'no-disconnected': 'error',
+    'no-duplicate-sequence-flows': 'error',
     'no-gateway-join-fork': 'error',
     'no-implicit-split': 'error',
     'no-inclusive-gateway': 'error',
