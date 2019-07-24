@@ -6,6 +6,14 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.1.0
+
+* `FEAT`: add `no-duplicate-sequenceflows` rule ([#22](https://github.com/bpmn-io/bpmnlint/issues/22))
+* `FEAT`: catch more BPMN parse errors
+* `FEAT`: be able to define multiple expected test results in `RuleTester`
+* `FIX`: make `nyc` a development dependency
+* `CHORE`: update to `bpmn-modddle@6`
+
 ## 5.0.0
 
 * `FEAT`: don't expose utils to rules; use `bpmnlint-utils` instead
