@@ -50,7 +50,6 @@ describe('cli', function() {
             Process_08k516a  error  Process is missing end event    end-event-required
 
           ✖ 2 problems (2 errors, 0 warnings)
-
         `
       }
     });
@@ -66,7 +65,6 @@ describe('cli', function() {
               error  Parse error: failed to parse document as <bpmn:Definitions>
 
           ✖ 1 problem (1 error, 0 warnings)
-
         `
       }
     });
@@ -86,7 +84,6 @@ describe('cli', function() {
             Process_1               error  Process is missing end event                                end-event-required
 
           ✖ 4 problems (4 errors, 0 warnings)
-
         `
       }
     });

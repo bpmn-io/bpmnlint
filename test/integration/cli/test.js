@@ -23,7 +23,7 @@ execa(bin, args).then(
   const {
     stdout,
     stderr,
-    code
+    exitCode
   } = result;
 
   console.log('---- STDOUT');
@@ -42,7 +42,7 @@ execa(bin, args).then(
   console.log('---- STDERR');
   console.log('---- CODE');
 
-  console.log(code);
+  console.log(exitCode);
 
   console.log('---- CODE');
   console.log('---- END');
