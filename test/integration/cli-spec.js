@@ -155,15 +155,6 @@ function test(options) {
     } = await exec('npm', [ 'test', '--', ...cmd ]);
 
     // then
-    if ('code' in expected) {
-      const code = parseInt(
-        parseOutput(stdout, '---- CODE'),
-        10
-      );
-
-      expect(code).to.eql(expected.code);
-    }
-
     if ('stderr' in expected) {
       expect(
         parseOutput(stdout, '---- STDERR')
