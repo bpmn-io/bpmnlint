@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.1.2
+
+* `DOCS`: add package description
+
 ## 5.1.1
 
 * `CHORE`: exclude additional development assets from distribution
