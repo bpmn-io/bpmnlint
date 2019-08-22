@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.0-nightly">
+  <process id="Process_1op1zl3" isExecutable="false">
+    <endEvent id="EndEvent_13jvvgq" name="End">
+      <incoming>SequenceFlow_17e37wu</incoming>
+    </endEvent>
+    <startEvent id="StartEvent_0s8f0jo" name="Start">
+      <outgoing>SequenceFlow_17e37wu</outgoing>
+    </startEvent>
+    <sequenceFlow id="SequenceFlow_17e37wu" sourceRef="StartEvent_0s8f0jo" targetRef="EndEvent_13jvvgq" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1op1zl3">
+      <bpmndi:BPMNShape id="EndEvent_13jvvgq_di" bpmnElement="EndEvent_13jvvgq">
+        <omgdc:Bounds x="342" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="350" y="165" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0s8f0jo_di" bpmnElement="StartEvent_0s8f0jo">
+        <omgdc:Bounds x="161" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="167" y="165" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17e37wu_di" bpmnElement="SequenceFlow_17e37wu">
+        <omgdi:waypoint x="197" y="140" />
+        <omgdi:waypoint x="342" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

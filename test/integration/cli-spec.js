@@ -15,14 +15,7 @@ describe('cli', function() {
 
     this.timeout(30000);
 
-    return exec(
-      'install-local',
-      [
-        '../../..',
-        '../bpmnlint-plugin-test'
-      ]
-    );
-
+    return exec('install-local', [], __dirname + '/cli');
   });
 
 
@@ -148,14 +141,32 @@ describe('cli', function() {
   });
 
 
+  describe('should resolve plug-ins from working directory', function() {
+
+    before(function() {
+
+      this.timeout(30000);
+
+      return exec('install-local', [], __dirname + '/cli/child');
+    });
+
+
+    test({
+      cmd: [ 'bpmnlint', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/child'
+    });
+
+  });
+
 });
 
 
 // helper /////////////////////////////
 
-function exec(prog, args, options = {}) {
+function exec(prog, args, cwd, options = {}) {
+
   return execa(prog, args, {
-    cwd: __dirname + '/cli',
+    cwd,
     ...options
   });
 }
@@ -178,7 +189,7 @@ function test(options) {
     // when
     const {
       stdout
-    } = await exec('npm', [ 'test', '--', ...cmd ], {
+    } = await exec('npm', [ 'test', '--', ...cmd ], __dirname + '/cli', {
       env: {
         BPMNLINT_TEST_CWD: cwd
       }
@@ -193,13 +204,14 @@ function test(options) {
       expectOutput(parseOutput(stdout, '---- STDOUT'), expected.stdout);
     }
 
-    if ('code' in expected) {
-      expect(
-        parseInt(
-          parseOutput(stdout, '---- CODE'), 10
-        )
-      ).to.eql(expected.code);
-    }
+
+    const code = expected.code || 0;
+
+    expect(
+      parseInt(
+        parseOutput(stdout, '---- CODE'), 10
+      )
+    ).to.eql(code);
   });
 
 }

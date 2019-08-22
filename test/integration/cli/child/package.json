@@ -1,0 +1,11 @@
+{
+  "name": "sibling",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bpmnlint-plugin-test2": "file:../../bpmnlint-plugin-test2"
+  },
+  "localDependencies": {
+    "bpmnlint-plugin-test2": "../../bpmnlint-plugin-test2"
+  }
+}

@@ -11,5 +11,9 @@
   },
   "devDependencies": {
     "execa": "^1.0.0"
+  },
+  "localDependencies": {
+    "bpmnlint": "../../..",
+    "bpmnlint-plugin-test": "../bpmnlint-plugin-test"
   }
 }

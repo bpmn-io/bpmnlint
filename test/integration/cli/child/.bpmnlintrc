@@ -1,0 +1,6 @@
+{
+  "extends": "plugin:test2/recommended",
+  "rules": {
+    "test2/no-label-xxx": "warn"
+  }
+}
