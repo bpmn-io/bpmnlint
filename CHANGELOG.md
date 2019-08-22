@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.2.0
+
+* `FEAT`: provide help on missing `.bpmnlintrc`
+
 ## 5.1.2
 
 * `DOCS`: add package description
