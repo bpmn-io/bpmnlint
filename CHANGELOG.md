@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 5.3.0
+
+* `FEAT`: add `--init` option to create `.bpmnlintrc` in current working directory
+
 ## 5.2.0
 
 * `FEAT`: provide help on missing `.bpmnlintrc`
