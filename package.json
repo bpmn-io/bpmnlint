@@ -22,6 +22,9 @@
       "url": "https://github.com/bpmn-io"
     }
   ],
+  "engines": {
+    "node": ">= 10.12"
+  },
   "license": "MIT",
   "scripts": {
     "all": "run-s lint test-coverage",
