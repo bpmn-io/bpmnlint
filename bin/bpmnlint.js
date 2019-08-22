@@ -245,19 +245,12 @@ async function lintDiagram(diagramPath, config) {
   }
 }
 
-async function handleConfig(configString) {
-  console.log();
-
-  let config;
-
-  try {
-    config = JSON.parse(configString);
-  } catch (e) {
-    return logAndExit('Error: Could not parse configuration file', e);
-  }
+async function lint(config) {
 
   let errorCount = 0;
   let warningCount = 0;
+
+  console.log();
 
   for (let i = 0; i < cli.input.length; i++) {
     let results = await lintDiagram(cli.input[i], config);
@@ -291,17 +284,34 @@ async function handleConfig(configString) {
 
 }
 
-const { config } = cli.flags;
+async function run() {
 
-const configPath = config || '.bpmnlintrc';
+  const configOverridePath = cli.flags.config;
 
-readFile(configPath, 'utf-8').then(handleConfig, (error) => {
+  const configPath = configOverridePath || '.bpmnlintrc';
 
-  const message = (
-    config
-      ? `Error: Could not read ${ config }`
-      : 'Error: Could not locate configuration'
-  );
+  let configString, config;
 
-  logAndExit(message, error);
-}).catch(logAndExit);
+  try {
+    configString = await readFile(configPath, 'utf-8');
+  } catch (error) {
+
+    const message = (
+      configOverridePath
+        ? `Error: Could not read ${ configOverridePath }`
+        : 'Error: Could not locate bpmnlint configuration'
+    );
+
+    return logAndExit(message, error);
+  }
+
+  try {
+    config = JSON.parse(configString);
+  } catch (err) {
+    return logAndExit('Error: Could not parse ' + configPath, err);
+  }
+
+  return lint(config);
+}
+
+run().catch(logAndExit);
