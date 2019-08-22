@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.0.0
+
+* `FEAT`: resolve plug-in provided rules/configuration local to working directory
+* `CHORE`: improve errors on rule/plugin resolution failures
+* `CHORE`: require `>= node@10.12`
+
 ## 5.3.0
 
 * `FEAT`: add `--init` option to create `.bpmnlintrc` in current working directory
