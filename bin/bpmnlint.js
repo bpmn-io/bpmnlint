@@ -175,7 +175,7 @@ const cli = meow(
 
 if (cli.flags.init) {
   if (fs.existsSync('.bpmnlintrc')) {
-    console.error('Not overriding existing .bpmnlintrc');
+    console.warn('Not overriding existing .bpmnlintrc');
     process.exit(1);
   }
 
