@@ -11,16 +11,16 @@ describe('resolver/node-resolver', function() {
 
     const resolver = createResolver(function(path) {
 
-      if (path === 'not/rules/found') {
+      if (path === 'baz/rules/non-existing') {
         throw new Error('not found');
       }
 
-      // mock node resolution
-      if (path === 'bpmnlint') {
-        throw new Error('not found');
-      }
+      return {
+        path
+      };
+    }, function(path) {
 
-      if (path === 'bpmnlint/rules/local-fallback') {
+      if (path === '../../rules/non-existing') {
         throw new Error('not found');
       }
 
@@ -37,8 +37,27 @@ describe('resolver/node-resolver', function() {
 
       // then
       expect(resolvedRule).to.eql({
-        path: 'bpmnlint/rules/label-required'
+        path: '../../rules/label-required'
       });
+    });
+
+
+    it('should fail to resolve built-in', async function() {
+
+      let err;
+
+      // when
+      try {
+        await resolver.resolveRule('bpmnlint', 'non-existing');
+      } catch (e) {
+        // then
+        expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
+
+        err = e;
+      }
+
+      // verify
+      expect(err).to.exist;
     });
 
 
@@ -60,10 +79,10 @@ describe('resolver/node-resolver', function() {
 
       // when
       try {
-        await resolver.resolveRule('not', 'found');
+        await resolver.resolveRule('baz', 'non-existing');
       } catch (e) {
         // then
-        expect(e.message).to.eql('not found');
+        expect(e.message).to.eql('Cannot resolve rule <non-existing> from <baz>');
 
         err = e;
       }
@@ -72,29 +91,12 @@ describe('resolver/node-resolver', function() {
       expect(err).to.exist;
     });
 
-
-    it('should resolve built-in rule relative', async function() {
-
-      // when
-      const resolvedRule = await resolver.resolveRule('bpmnlint', 'local-fallback');
-
-      // then
-      expect(resolvedRule).to.eql({
-        path: '../../rules/local-fallback'
-      });
-    });
-
   });
 
 
   describe('#resolveConfig', function() {
 
     const resolver = createResolver(function(path) {
-
-      // mock node resolution
-      if (path.indexOf('bpmnlint/') === 0) {
-        throw new Error('not found');
-      }
 
       // mimic $PKG/config/$NAME resolution
       if (path === 'bpmnlint-plugin-foo/config/bar') {
@@ -128,6 +130,15 @@ describe('resolver/node-resolver', function() {
       }
 
       throw new Error('unexpected path <' + path + '>');
+    }, function(path) {
+
+      if (path === '../../config/non-existing') {
+        throw new Error('not found');
+      }
+
+      return {
+        path
+      };
     });
 
 
@@ -156,6 +167,26 @@ describe('resolver/node-resolver', function() {
         });
       });
 
+    });
+
+
+    it('should fail to resolve built-in', async function() {
+
+      let err;
+
+      // when
+      try {
+        await resolver.resolveConfig('bpmnlint', 'non-existing');
+      } catch (e) {
+        expect(e.message).to.eql(
+          'Cannot resolve config <non-existing> from <bpmnlint>'
+        );
+
+        err = e;
+      }
+
+      // verify
+      expect(err).to.exist;
     });
 
 
@@ -200,7 +231,7 @@ describe('resolver/node-resolver', function() {
         await resolver.resolveConfig('bpmnlint-plugin-foo', 'non-existing');
       } catch (e) {
         expect(e.message).to.eql(
-          'cannot resolve config <non-existing> in <bpmnlint-plugin-foo>'
+          'Cannot resolve config <non-existing> from <bpmnlint-plugin-foo>'
         );
 
         err = e;
@@ -217,8 +248,9 @@ describe('resolver/node-resolver', function() {
 
 // helpers /////////////////////////////
 
-function createResolver(requireFn) {
+function createResolver(require, requireLocal) {
   return new NodeResolver({
-    require: requireFn
+    require,
+    requireLocal
   });
 }
