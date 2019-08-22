@@ -204,8 +204,8 @@ async function lintDiagram(diagramPath, config) {
 
   try {
     diagramXML = await readFile(path.resolve(diagramPath), 'utf-8');
-  } catch (e) {
-    return logAndExit(`Error: Failed to read ${diagramPath}`, e);
+  } catch (error) {
+    return logAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
   }
 
 
@@ -326,7 +326,7 @@ async function run() {
   try {
     config = JSON.parse(configString);
   } catch (err) {
-    return logAndExit('Error: Could not parse ' + configPath + ': ' + err.message);
+    return logAndExit('Error: Could not parse %s\n\n%s', configPath, err.message);
   }
 
   return lint(config);
