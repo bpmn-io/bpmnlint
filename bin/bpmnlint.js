@@ -148,18 +148,23 @@ function printReports(filePath, results) {
 
 const cli = meow(
   `
-	Usage
-	  $ bpmnlint diagram.bpmn
+  Usage
+    $ bpmnlint diagram.bpmn
 
-	Options
+  Options
     --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
+    --init        Generate a .bpmnlintrc file in the current working directory
 
-	Examples
-		$ bpmnlint ./invoice.bpmn
+  Examples
+    $ bpmnlint ./invoice.bpmn
+    $ bpmnlint --init
 
 `,
   {
     flags: {
+      init: {
+        type: 'boolean'
+      },
       config: {
         type: 'string',
         alias: 'c'
@@ -168,6 +173,19 @@ const cli = meow(
   }
 );
 
+if (cli.flags.init) {
+  if (fs.existsSync('.bpmnlintrc')) {
+    console.error('Not overriding existing .bpmnlintrc');
+    process.exit(1);
+  }
+
+  fs.writeFileSync('.bpmnlintrc', `{
+  "extends": "bpmnlint:recommended"
+}`, 'utf8');
+
+  console.error('Created .bpmnlintrc file');
+  process.exit(0);
+}
 
 if (cli.input.length === 0) {
   console.log('Error: bpmn file path missing.');
