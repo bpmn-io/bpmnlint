@@ -124,16 +124,39 @@ describe('cli', function() {
       }
     });
 
+
+    test({
+      cmd: [ 'bpmnlint', '-c', 'non-existing.json', 'diagram.bpmn' ],
+      expect: {
+        code: 1,
+        stderr: /^Error: Could not read non-existing\.json/,
+        stdout: EMPTY
+      }
+    });
+
+
+    test({
+      cmd: [ 'bpmnlint', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/empty',
+      expect: {
+        code: 1,
+        stderr: /^Error: Could not locate local \.bpmnlintrc file, please create one: /,
+        stdout: EMPTY
+      }
+    });
+
   });
+
 
 });
 
 
 // helper /////////////////////////////
 
-function exec(prog, args) {
+function exec(prog, args, options = {}) {
   return execa(prog, args, {
-    cwd: __dirname + '/cli'
+    cwd: __dirname + '/cli',
+    ...options
   });
 }
 
@@ -141,40 +164,33 @@ function test(options) {
 
   const {
     cmd,
+    cwd,
     expect: _expect,
     only
   } = options;
 
   const expected = _expect || { code: 0 };
 
-  (only ? it.only : it)(cmd.join(' '), async function() {
+  (only ? it.only : it)(cmd.join(' ') + (cwd ? ', custom cwd' : ''), async function() {
 
     this.timeout(3000);
 
     // when
     const {
       stdout
-    } = await exec('npm', [ 'test', '--', ...cmd ]);
+    } = await exec('npm', [ 'test', '--', ...cmd ], {
+      env: {
+        BPMNLINT_TEST_CWD: cwd
+      }
+    });
 
     // then
     if ('stderr' in expected) {
-      expect(
-        parseOutput(stdout, '---- STDERR')
-      ).to.eql(
-        trimRight(
-          stripIndent(expected.stderr)
-        )
-      );
+      expectOutput(parseOutput(stdout, '---- STDERR'), expected.stderr);
     }
 
     if ('stdout' in expected) {
-      expect(
-        parseOutput(stdout, '---- STDOUT')
-      ).to.eql(
-        trimRight(
-          stripIndent(expected.stdout)
-        )
-      );
+      expectOutput(parseOutput(stdout, '---- STDOUT'), expected.stdout);
     }
 
     if ('code' in expected) {
@@ -205,6 +221,23 @@ function parseOutput(output, separator) {
   const regexp = new RegExp(separator + '\n');
 
   return trimRight(output.split(regexp)[1]);
+}
+
+function expectOutput(actual, expected) {
+
+  let matcher;
+
+  if (expected instanceof RegExp) {
+    matcher = 'match';
+  } else {
+    expected = trimRight(
+      stripIndent(expected)
+    );
+
+    matcher = 'eql';
+  }
+
+  expect(actual).to[matcher](expected);
 }
 
 function trimRight(output) {

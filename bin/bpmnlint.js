@@ -299,16 +299,16 @@ async function run() {
     const message = (
       configOverridePath
         ? `Error: Could not read ${ configOverridePath }`
-        : 'Error: Could not locate bpmnlint configuration'
+        : 'Error: Could not locate local .bpmnlintrc file, please create one: https://github.com/bpmn-io/bpmnlint#configuration'
     );
 
-    return logAndExit(message, error);
+    return logAndExit(message);
   }
 
   try {
     config = JSON.parse(configString);
   } catch (err) {
-    return logAndExit('Error: Could not parse ' + configPath, err);
+    return logAndExit('Error: Could not parse ' + configPath + ': ' + err.message);
   }
 
   return lint(config);

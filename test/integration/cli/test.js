@@ -12,7 +12,9 @@ const [
   ...args
 ] = process.argv.slice(2);
 
-execa(bin, args).then(
+const options = process.env.BPMNLINT_TEST_CWD ? { cwd: process.env.BPMNLINT_TEST_CWD } : {};
+
+execa(bin, args, options).then(
   function(result) {
     return result;
   },
