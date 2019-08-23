@@ -6,9 +6,13 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.1.0
+
+* `FEAT`: resolve local rules in plug-ins without prefix ([`640e411a`](https://github.com/bpmn-io/bpmnlint/commit/ 640e411ac8c6045198bd09b79b5c53c6e29e251c))
+
 ## 6.0.0
 
-* `FEAT`: resolve plug-in provided rules/configuration local to working directory
+* `FEAT`: resolve plug-in provided rules/configuration local to working directory ([`f1bf331f`](https://github.com/bpmn-io/bpmnlint/commit/f1bf331f4bcece62de16da34bb3f8fda08182fbc))
 * `CHORE`: improve errors on rule/plugin resolution failures
 * `CHORE`: require `>= node@10.12`
 
