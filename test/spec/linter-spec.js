@@ -323,7 +323,7 @@ describe('linter', function() {
         // given
         const resolver = {
 
-          resolveRule(ruleName) {
+          resolveRule(pkg, ruleName) {
             return { check() { } };
           },
 
@@ -343,8 +343,8 @@ describe('linter', function() {
                 return {
                   extends: 'plugin:test/base',
                   rules: {
-                    'test/other': 'warn',
-                    'test/bar': 'warn'
+                    'test/bar': 'warn',
+                    'other': 'warn'
                   }
                 };
               }
@@ -352,9 +352,9 @@ describe('linter', function() {
               if (configName === 'base') {
                 return {
                   rules: {
+                    'bpmnlint/bar': 'error',
                     'bar': 'error',
-                    'test/bar': 'error',
-                    'test/other': 'error'
+                    'other': 'error'
                   }
                 };
               }
