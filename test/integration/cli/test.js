@@ -7,14 +7,21 @@ const execa = require('execa');
  * for further processing.
  */
 
+
 const [
   bin,
   ...args
 ] = process.argv.slice(2);
 
-const options = process.env.BPMNLINT_TEST_CWD ? { cwd: process.env.BPMNLINT_TEST_CWD } : {};
+const cwd = process.env.BPMNLINT_TEST_CWD || process.cwd();
 
-execa(bin, args, options).then(
+console.log('---- CMD');
+console.log('%s %s (cwd: %s)', bin, args.join(' '), cwd);
+console.log('---- CMD');
+
+execa(bin, args, {
+  cwd
+}).then(
   function(result) {
     return result;
   },
