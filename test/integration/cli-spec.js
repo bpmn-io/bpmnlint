@@ -133,7 +133,7 @@ describe('cli', function() {
       cwd: __dirname + '/cli/empty',
       expect: {
         code: 1,
-        stderr: /^Error: Could not locate local \.bpmnlintrc file, please create one: /,
+        stderr: /^Error: Could not locate local \.bpmnlintrc file/,
         stdout: EMPTY
       }
     });
