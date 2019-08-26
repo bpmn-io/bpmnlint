@@ -182,7 +182,7 @@ function test(options) {
 
   const expected = _expect || { code: 0 };
 
-  (only ? it.only : it)(cmd.join(' ') + (cwd ? ', custom cwd' : ''), async function() {
+  (only ? it.only : it)(cmd.join(' ') + (cwd ? `(cwd: ${cwd})` : ''), async function() {
 
     this.timeout(3000);
 
@@ -191,7 +191,7 @@ function test(options) {
       stdout
     } = await exec('npm', [ 'test', '--', ...cmd ], __dirname + '/cli', {
       env: {
-        BPMNLINT_TEST_CWD: cwd
+        BPMNLINT_TEST_CWD: cwd || ''
       }
     });
 
