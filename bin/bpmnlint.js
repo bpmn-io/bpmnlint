@@ -2,7 +2,13 @@
 const meow = require('meow');
 const fs = require('fs');
 const path = require('path');
-const { red, yellow, underline, bold } = require('chalk');
+const {
+  red,
+  yellow,
+  underline,
+  bold,
+  magenta
+} = require('chalk');
 
 const { promisify } = require('util');
 
@@ -183,12 +189,12 @@ if (cli.flags.init) {
   "extends": "bpmnlint:recommended"
 }`, 'utf8');
 
-  console.error('Created .bpmnlintrc file');
+  console.error(`Created ${magenta('.bpmnlintrc')} file`);
   process.exit(0);
 }
 
 if (cli.input.length === 0) {
-  console.log('Error: bpmn file path missing.');
+  console.log('Error: bpmn file path missing');
   process.exit(1);
 }
 
@@ -317,7 +323,11 @@ async function run() {
     const message = (
       configOverridePath
         ? `Error: Could not read ${ configOverridePath }`
-        : 'Error: Could not locate local .bpmnlintrc file, please create one: https://github.com/bpmn-io/bpmnlint#configuration'
+        : `Error: Could not locate local ${ magenta('.bpmnlintrc') } file. Create one via
+
+  ${magenta('bpmnlint --init')}
+
+Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#configuration`
     );
 
     return logAndExit(message);
