@@ -3,7 +3,7 @@ const {
 } = require('bpmnlint-utils');
 
 /**
- * A rule that verifies that there exists no disconnected
+ * A rule that verifies that there are no disconnected
  * flow elements, i.e. elements without incoming
  * _or_ outgoing sequence flows
  */
