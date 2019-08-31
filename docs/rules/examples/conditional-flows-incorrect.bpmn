@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_03rs7oy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.0">
+  <bpmn:process id="Process_0fdmpyf" isExecutable="true">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_13buf0z" default="SequenceFlow_0254t4j">
+      <bpmn:outgoing>SequenceFlow_0254t4j</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0q9ussl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_0h1puhz">
+      <bpmn:incoming>SequenceFlow_0254t4j</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0254t4j" name="Default Flow" sourceRef="ExclusiveGateway_13buf0z" targetRef="Task_0h1puhz" />
+    <bpmn:task id="Task_0xzclls">
+      <bpmn:incoming>SequenceFlow_0q9ussl</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0q9ussl" name="Conditional" sourceRef="ExclusiveGateway_13buf0z" targetRef="Task_0xzclls" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0fdmpyf">
+      <bpmndi:BPMNShape id="ExclusiveGateway_13buf0z_di" bpmnElement="ExclusiveGateway_13buf0z" isMarkerVisible="true">
+        <dc:Bounds x="195" y="125" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0h1puhz_di" bpmnElement="Task_0h1puhz">
+        <dc:Bounds x="360" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0254t4j_di" bpmnElement="SequenceFlow_0254t4j">
+        <di:waypoint x="245" y="150" />
+        <di:waypoint x="360" y="150" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="272" y="132" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_0xzclls_di" bpmnElement="Task_0xzclls">
+        <dc:Bounds x="360" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0q9ussl_di" bpmnElement="SequenceFlow_0q9ussl">
+        <di:waypoint x="220" y="175" />
+        <di:waypoint x="220" y="280" />
+        <di:waypoint x="360" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="202" y="296" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

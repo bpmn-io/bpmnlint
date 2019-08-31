@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1739ee3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:subProcess id="SubProcess_1">
+      <bpmn:startEvent id="StartEvent_1">
+        <bpmn:messageEventDefinition />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="SubProcess_04mex4s_di" bpmnElement="SubProcess_1" isExpanded="true">
+        <dc:Bounds x="160" y="80" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0t7jh04_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="200" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1j2ets7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:task id="Task_1qtl0m7">
+      <bpmn:outgoing>SequenceFlow_0yz5iun</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_07atjtq">
+      <bpmn:outgoing>SequenceFlow_1c34bt5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_0euuqfa">
+      <bpmn:incoming>SequenceFlow_020u03i</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0jiblbo">
+      <bpmn:incoming>SequenceFlow_0yz5iun</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1c34bt5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_020u03i</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0yz5iun" sourceRef="Task_1qtl0m7" targetRef="ExclusiveGateway_0jiblbo" />
+    <bpmn:sequenceFlow id="SequenceFlow_1c34bt5" sourceRef="Task_07atjtq" targetRef="ExclusiveGateway_0jiblbo" />
+    <bpmn:sequenceFlow id="SequenceFlow_020u03i" sourceRef="ExclusiveGateway_0jiblbo" targetRef="Task_0euuqfa" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Task_1qtl0m7_di" bpmnElement="Task_1qtl0m7">
+        <dc:Bounds x="180" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_07atjtq_di" bpmnElement="Task_07atjtq">
+        <dc:Bounds x="310" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0euuqfa_di" bpmnElement="Task_0euuqfa">
+        <dc:Bounds x="430" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0jiblbo_di" bpmnElement="ExclusiveGateway_0jiblbo" isMarkerVisible="true">
+        <dc:Bounds x="335" y="235" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yz5iun_di" bpmnElement="SequenceFlow_0yz5iun">
+        <di:waypoint x="280" y="260" />
+        <di:waypoint x="335" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1c34bt5_di" bpmnElement="SequenceFlow_1c34bt5">
+        <di:waypoint x="360" y="180" />
+        <di:waypoint x="360" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_020u03i_di" bpmnElement="SequenceFlow_020u03i">
+        <di:waypoint x="385" y="260" />
+        <di:waypoint x="430" y="260" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
