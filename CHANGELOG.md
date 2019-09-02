@@ -50,7 +50,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: catch more BPMN parse errors
 * `FEAT`: be able to define multiple expected test results in `RuleTester`
 * `FIX`: make `nyc` a development dependency
-* `CHORE`: update to `bpmn-modddle@6`
+* `CHORE`: update to `bpmn-moddle@6`
 
 ## 5.0.0
 
