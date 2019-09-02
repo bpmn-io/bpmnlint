@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.1.2
+
+* `FIX`: exclude event-based sub-processes from `no-disconnected` check ([#31](https://github.com/bpmn-io/bpmnlint/issues/31))
+
 ## 6.1.1
 
 * `FEAT`: allow tool to be used with `Node >= 8`
