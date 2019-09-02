@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.2.0
+
+* `DOCS`: document existing rules ([#14](https://github.com/bpmn-io/bpmnlint/issues/14))
+
 ## 6.1.2
 
 * `FIX`: exclude event-based sub-processes from `no-disconnected` check ([#31](https://github.com/bpmn-io/bpmnlint/issues/31))
