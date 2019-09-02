@@ -16,7 +16,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 6.1.0
 
-* `FEAT`: resolve local rules in plug-ins without prefix ([`640e411a`](https://github.com/bpmn-io/bpmnlint/commit/ 640e411ac8c6045198bd09b79b5c53c6e29e251c))
+* `FEAT`: resolve local rules in plug-ins without prefix ([`640e411a`](https://github.com/bpmn-io/bpmnlint/commit/640e411ac8c6045198bd09b79b5c53c6e29e251c))
 
 ## 6.0.0
 
