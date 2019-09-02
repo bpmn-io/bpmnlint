@@ -14,6 +14,9 @@ RuleTester.verify('no-disconnected', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-disconnected/valid-text-annotation.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-disconnected/valid-event-subprocess.bpmn')
     }
   ],
   invalid: [

@@ -17,7 +17,7 @@ module.exports = function() {
       'bpmn:Gateway',
       'bpmn:SubProcess',
       'bpmn:Event'
-    ])) {
+    ]) || node.triggeredByEvent) {
       return;
     }
 
