@@ -32,7 +32,9 @@ Validate your diagrams via the commandline:
 
 ## Rules
 
-Checkout the [`./rules` folder](https://github.com/bpmn-io/bpmnlint/tree/master/rules) for the list of existing rules.
+Our [documentation](https://github.com/bpmn-io/bpmnlint/tree/master/docs/rules#rules) lists all currenty implemented rules, the [`./rules` folder](https://github.com/bpmn-io/bpmnlint/tree/master/rules) contains each rules implementation.
+
+Do you miss a rule that should be included? [Propose a new rule](https://github.com/bpmn-io/bpmnlint/issues/new?template=NEW_RULE.md).
 
 
 ## Configuration
