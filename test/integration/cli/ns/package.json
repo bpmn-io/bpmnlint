@@ -1,0 +1,9 @@
+{
+  "name": "ns",
+  "version": "0.0.0",
+  "private": true,
+  "localDependencies": {
+    "bpmnlint-plugin-test2": "../../bpmnlint-plugin-test2",
+    "@ns/bpmnlint-plugin-test": "../../bpmnlint-plugin-test-ns"
+  }
+}
