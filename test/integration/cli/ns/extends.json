@@ -1,0 +1,6 @@
+{
+  "extends": "plugin:@ns/bpmnlint-plugin-test/recommended",
+  "rules": {
+    "test2/no-label-xxx": "error"
+  }
+}

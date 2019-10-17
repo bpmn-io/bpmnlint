@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "test2/no-label-xxx": "error",
+    "@ns/bpmnlint-plugin-test/no-label-xxx": "error"
+  }
+}

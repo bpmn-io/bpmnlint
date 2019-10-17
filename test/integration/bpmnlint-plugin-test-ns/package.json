@@ -1,0 +1,6 @@
+{
+  "name": "@ns/bpmnlint-plugin-test",
+  "version": "0.0.0",
+  "description": "A namespaced test bpmnlint plug-in",
+  "main": "index.js"
+}
