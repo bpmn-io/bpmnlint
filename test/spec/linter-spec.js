@@ -360,16 +360,6 @@ describe('linter', function() {
               }
             }
 
-            if (pkg === '@ns/bpmnlint-plugin-test2') {
-              if (configName === 'recommended') {
-                return {
-                  rules: {
-                    'bar': 'off',
-                  }
-                };
-              }
-            }
-
             throw new Error(`unexpected config <${configName}>`);
           }
 
@@ -409,8 +399,7 @@ describe('linter', function() {
           const config = {
             extends: [
               'bpmnlint:recommended',
-              'plugin:test/recommended',
-              'plugin:@ns/bpmnlint-plugin-test2/recommended'
+              'plugin:test/recommended'
             ],
             rules: {
               'bpmnlint/foo': 'error',
@@ -424,11 +413,133 @@ describe('linter', function() {
 
           // then
           expect(rules).to.eql({
-            '@ns/bpmnlint-plugin-test2/bar': 'off',
             'bar': 'error',
             'foo': 'error',
             'test/bar': 'off',
             'test/other': 'warn'
+          });
+        });
+
+      });
+
+
+      describe('scoped', function() {
+
+        // given
+        const resolver = {
+
+          resolveRule(pkg, ruleName) {
+            return { check() { } };
+          },
+
+          resolveConfig(pkg, configName) {
+
+            if (pkg === 'bpmnlint-plugin-test') {
+              if (configName === 'recommended') {
+                return {
+                  rules: {
+                    '@ns/bpmnlint-plugin-test/bar': 'warn'
+                  }
+                };
+              }
+            }
+
+            if (pkg === '@ns/bpmnlint-plugin-test') {
+              if (configName === 'recommended') {
+                return {
+                  rules: {
+                    'bar': 'off'
+                  }
+                };
+              }
+
+              if (configName === 'other') {
+                return {
+                  rules: {
+                    'foo': 'warn'
+                  }
+                };
+              }
+            }
+
+            throw new Error(`unexpected config <${configName}>`);
+          }
+
+        };
+
+
+        it('should normalize shortcut', async function() {
+
+          // given
+          const linter = new Linter({ resolver });
+
+          const config = {
+            extends: [
+              'plugin:@ns/test/other'
+            ],
+            rules: {
+              '@ns/bpmnlint-plugin-test/foo': 'error'
+            }
+          };
+
+          // when
+          const rules = await linter.resolveConfiguredRules(config);
+
+          // then
+          expect(rules).to.eql({
+            '@ns/test/foo': 'error'
+          });
+        });
+
+
+        it('should normalize full package name', async function() {
+
+          // given
+          const linter = new Linter({ resolver });
+
+          const config = {
+            extends: [
+              'plugin:@ns/bpmnlint-plugin-test/other'
+            ],
+            rules: {
+              '@ns/test/foo': 'error'
+            }
+          };
+
+          // when
+          const rules = await linter.resolveConfiguredRules(config);
+
+          // then
+          expect(rules).to.eql({
+            '@ns/test/foo': 'error'
+          });
+        });
+
+
+        it('should normalize multiple', async function() {
+
+          // given
+          const linter = new Linter({ resolver });
+
+          const config = {
+            extends: [
+              'plugin:@ns/test/other',
+              'plugin:@ns/bpmnlint-plugin-test/recommended',
+              'plugin:test/recommended'
+            ],
+            rules: {
+              '@ns/bpmnlint-plugin-test/bar': 'off',
+              '@ns/bpmnlint-plugin-test/foo': 'error'
+            }
+          };
+
+          // when
+          const rules = await linter.resolveConfiguredRules(config);
+
+          // then
+          expect(rules).to.eql({
+            '@ns/test/foo': 'error',
+            '@ns/test/bar': 'off'
           });
         });
 
@@ -469,7 +580,7 @@ describe('linter', function() {
   });
 
 
-  describe('#parseConfigName', function() {
+  describe('#parseRuleName', function() {
 
     const linter = new Linter({
       resolver: fakeRule({})
@@ -514,13 +625,61 @@ describe('linter', function() {
       });
     });
 
+
+    it('should parse external with full package name', function() {
+
+      // when
+      const parsed = linter.parseRuleName('bpmnlint-plugin-foo/label-required');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        ruleName: 'label-required'
+      });
+    });
+
+
     it ('should parse scoped', function() {
+
+      // when
       const parsed = linter.parseRuleName('@scoped/bpmnlint-plugin-foo/label-required');
+
+      // then
       expect(parsed).to.eql({
         pkg: '@scoped/bpmnlint-plugin-foo',
         ruleName: 'label-required'
       });
     });
+
+
+    it ('should parse scoped with full package name', function() {
+
+      // when
+      const parsed = linter.parseRuleName('@scoped/foo/label-required');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: '@scoped/bpmnlint-plugin-foo',
+        ruleName: 'label-required'
+      });
+    });
+
+
+    it ('should fail to parse with missing package', function() {
+
+      expect(() => {
+        linter.parseRuleName('@scoped/label-required');
+      }).to.throw('unparseable rule name <@scoped/label-required>');
+    });
+
+
+    it ('should fail to parse nonsense', function() {
+
+      expect(() => {
+        linter.parseRuleName('foo/bar/goings');
+      }).to.throw('unparseable rule name <foo/bar/goings>');
+    });
+
   });
 
 
@@ -573,8 +732,33 @@ describe('linter', function() {
       });
     });
 
+
+    it('should parse external with full package name', function() {
+
+      // when
+      const parsed = linter.parseConfigName('plugin:bpmnlint-plugin-foo/bar');
+
+      // then
+      expect(parsed).to.eql({
+        pkg: 'bpmnlint-plugin-foo',
+        configName: 'bar'
+      });
+    });
+
+
     it('should parse scoped', function() {
+      const parsed = linter.parseConfigName('plugin:@ns/foo/bar');
+
+      expect(parsed).to.eql({
+        pkg: '@ns/bpmnlint-plugin-foo',
+        configName: 'bar'
+      });
+    });
+
+
+    it('should parse scoped with full package name', function() {
       const parsed = linter.parseConfigName('plugin:@ns/bpmnlint-plugin-foo/bar');
+
       expect(parsed).to.eql({
         pkg: '@ns/bpmnlint-plugin-foo',
         configName: 'bar'
@@ -586,14 +770,34 @@ describe('linter', function() {
 
       expect(() => {
         linter.parseConfigName('foo:bar');
-      }).to.throw('invalid config name <foo:bar>');
+      }).to.throw('unparseable config name <foo:bar>');
 
     });
 
 
-    it('should throw error on invalid scoped plugin', function() {
-      expect(() => linter.parseConfigName('plugin:@ns/not-valid')).to.throw('invalid config name <plugin:@ns/not-valid>');
+    it('should throw error on invalid scoped name', function() {
+
+      expect(() => {
+        linter.parseConfigName('plugin:@ns/not-valid');
+      }).to.throw('unparseable config name <plugin:@ns/not-valid>');
     });
+
+
+    it('should throw error on namespaced default config', function() {
+
+      expect(() => {
+        linter.parseConfigName('bpmnlint:@ns/not-valid');
+      }).to.throw('unparseable config name <bpmnlint:@ns/not-valid>');
+    });
+
+
+    it('should throw error on non-sense name', function() {
+
+      expect(() => {
+        linter.parseConfigName('bpmnlint:asd/not-valid/asd');
+      }).to.throw('unparseable config name <bpmnlint:asd/not-valid/asd>');
+    });
+
   });
 
 
