@@ -249,7 +249,7 @@ function test(options) {
 
   const expected = _expect || { code: 0 };
 
-  (only ? it.only : it)(cmd.join(' ') + (cwd ? `(cwd: ${cwd})` : ''), async function() {
+  (only ? it.only : it)(cmd.join(' ') + (cwd ? ` (cwd: ${cwd})` : ''), async function() {
 
     this.timeout(3000);
 
