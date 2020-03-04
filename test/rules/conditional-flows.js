@@ -17,6 +17,9 @@ RuleTester.verify('conditional-flows', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/conditional-flows/valid-conditional-fork.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/conditional-flows/valid-no-condition-after-merge.bpmn')
     }
   ],
   invalid: [

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0ywozy0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="Process_1ynf27w" isExecutable="true">
+    <bpmn:task id="Activity_1iagtrs">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1xr6n8v">
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_0rt3cwz">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Activity_1iagtrs" targetRef="Gateway_0rt3cwz" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_1xr6n8v" targetRef="Gateway_0rt3cwz" />
+    <bpmn:task id="Activity_0cichv5">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_0rt3cwz" targetRef="Activity_0cichv5" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1ynf27w">
+      <bpmndi:BPMNShape id="Activity_1iagtrs_di" bpmnElement="Activity_1iagtrs">
+        <dc:Bounds x="160" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xr6n8v_di" bpmnElement="Activity_1xr6n8v">
+        <dc:Bounds x="160" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rt3cwz_di" bpmnElement="Gateway_0rt3cwz" isMarkerVisible="true">
+        <dc:Bounds x="365" y="165" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="260" y="120" />
+        <di:waypoint x="390" y="120" />
+        <di:waypoint x="390" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="260" y="260" />
+        <di:waypoint x="390" y="260" />
+        <di:waypoint x="390" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0cichv5_di" bpmnElement="Activity_0cichv5">
+        <dc:Bounds x="520" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1jbm80a_di" bpmnElement="Flow_3">
+        <di:waypoint x="415" y="190" />
+        <di:waypoint x="520" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
