@@ -6,6 +6,7 @@ This library implements the following lint rules:
 * [End Event Required](./end-event-required.md)
 * [Event Sub-Process Typed Start Event](./event-sub-process-typed-start-event.md)
 * [Fake Join](./fake-join.md)
+* [Superfluous Gateway](./superfluous-gateway.md)
 * [Label Required](./label-required.md)
 * [No Complex Gateway](./no-complex-gateway.md)
 * [No Disconnected](./no-disconnected.md)

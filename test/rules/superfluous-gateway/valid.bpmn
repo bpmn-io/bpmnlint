@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0abcwwx" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="Process_1bekk3v" isExecutable="true">
+    <bpmn:startEvent id="Event_19zu6rb">
+      <bpmn:outgoing>Flow_0idibma</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_1krer3g">
+      <bpmn:incoming>Flow_0idibma</bpmn:incoming>
+      <bpmn:outgoing>Flow_15dbmhy</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1vtacgk</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0idibma" sourceRef="Event_19zu6rb" targetRef="Gateway_1krer3g" />
+    <bpmn:endEvent id="Event_15vfkdu">
+      <bpmn:incoming>Flow_15dbmhy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_15dbmhy" sourceRef="Gateway_1krer3g" targetRef="Event_15vfkdu" />
+    <bpmn:endEvent id="Event_1pjz16g">
+      <bpmn:incoming>Flow_1vtacgk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1vtacgk" sourceRef="Gateway_1krer3g" targetRef="Event_1pjz16g" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1bekk3v">
+      <bpmndi:BPMNShape id="Event_19zu6rb_di" bpmnElement="Event_19zu6rb">
+        <dc:Bounds x="122" y="42" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1krer3g_di" bpmnElement="Gateway_1krer3g" isMarkerVisible="true">
+        <dc:Bounds x="215" y="35" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0idibma_di" bpmnElement="Flow_0idibma">
+        <di:waypoint x="158" y="60" />
+        <di:waypoint x="215" y="60" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_15vfkdu_di" bpmnElement="Event_15vfkdu">
+        <dc:Bounds x="322" y="42" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_15dbmhy_di" bpmnElement="Flow_15dbmhy">
+        <di:waypoint x="265" y="60" />
+        <di:waypoint x="322" y="60" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1pjz16g_di" bpmnElement="Event_1pjz16g">
+        <dc:Bounds x="322" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1vtacgk_di" bpmnElement="Flow_1vtacgk">
+        <di:waypoint x="240" y="85" />
+        <di:waypoint x="240" y="170" />
+        <di:waypoint x="322" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
