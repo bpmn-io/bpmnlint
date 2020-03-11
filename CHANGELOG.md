@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.4.0
+
+* `FEAT`: add `superfluous-gateway` check ([#42](https://github.com/bpmn-io/bpmnlint/pull/42/files))
+
 ## 6.3.0
 
 * `FEAT`: support rules and configuration provided by scoped packages ([#35](https://github.com/bpmn-io/bpmnlint/issues/35))
