@@ -42,7 +42,8 @@
     "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
     "meow": "^5.0.0",
-    "pluralize": "^7.0.0"
+    "pluralize": "^7.0.0",
+    "tiny-glob": "^0.2.8"
   },
   "devDependencies": {
     "chai": "^4.2.0",

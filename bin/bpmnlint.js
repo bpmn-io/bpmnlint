@@ -12,6 +12,7 @@ const {
 
 const { promisify } = require('util');
 
+const tinyGlob = require('tiny-glob');
 const readFile = promisify(fs.readFile);
 
 const BpmnModdle = require('bpmn-moddle');
@@ -31,6 +32,14 @@ function boldRed(str) {
 
 function boldYellow(str) {
   return bold(yellow(str));
+}
+
+function glob(files) {
+  return Promise.all(
+    cli.input.map(
+      file => tinyGlob(file, { dot: true })
+    )
+  ).then(files => [].concat(...files));
 }
 
 /**
@@ -276,8 +285,10 @@ async function lint(config) {
 
   console.log();
 
-  for (let i = 0; i < cli.input.length; i++) {
-    let results = await lintDiagram(cli.input[i], config);
+  const files = await glob(cli.input);
+
+  for (let i = 0; i < files.length; i++) {
+    let results = await lintDiagram(files[i], config);
 
     errorCount += results.errorCount;
     warningCount += results.warningCount;

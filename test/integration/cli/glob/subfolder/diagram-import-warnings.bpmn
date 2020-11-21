@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="http://bpmn.io" exporterVersion="0.10.1">
+  <collaboration id="Collaboration_0wzd2dx">
+    <participant id="Participant_03hz6qm" name="A" processRef="Process_1" />
+    <messageFlow id="MessageFlow_1ofxm38" sourceRef="Participant_03hz6qm" targetRef="Participant_1w6hx42" />
+  </collaboration>
+  <process id="Process_1" isExecutable="false" />
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Collaboration_0wzd2dx">
+      <bpmndi:BPMNShape id="Participant_03hz6qm_di" bpmnElement="Participant_03hz6qm">
+        <omgdc:Bounds x="177" y="115" width="446" height="138" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_1ofxm38_di" bpmnElement="MessageFlow_1ofxm38">
+        <omgdi:waypoint x="400" y="253" />
+        <omgdi:waypoint x="400" y="328" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_1sh3ce3_di" bpmnElement="Participant_1w6hx42">
+        <omgdc:Bounds x="169" y="328" width="453" height="104" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
