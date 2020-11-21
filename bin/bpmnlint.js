@@ -12,6 +12,7 @@ const {
 
 const { promisify } = require('util');
 
+const fg = require('fast-glob');
 const readFile = promisify(fs.readFile);
 
 const BpmnModdle = require('bpmn-moddle');
@@ -276,8 +277,11 @@ async function lint(config) {
 
   console.log();
 
-  for (let i = 0; i < cli.input.length; i++) {
-    let results = await lintDiagram(cli.input[i], config);
+
+  const files = await fg(cli.input, { dot: true });
+
+  for (let i = 0; i < files.length; i++) {
+    let results = await lintDiagram(files[i], config);
 
     errorCount += results.errorCount;
     warningCount += results.warningCount;

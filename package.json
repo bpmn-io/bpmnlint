@@ -41,6 +41,7 @@
     "bpmnlint-utils": "^1.0.1",
     "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
+    "fast-glob": "^3.2.4",
     "meow": "^5.0.0",
     "pluralize": "^7.0.0"
   },
