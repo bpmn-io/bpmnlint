@@ -6,6 +6,11 @@ node_js:
   - 10
   - 8
 
+os:
+  - linux
+  - osx
+  - windows
+
 script:
   - npm run all
   - npx codecov
