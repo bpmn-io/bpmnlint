@@ -69,26 +69,34 @@ function glob(files) {
 
 /**
  * Reads XML form path and return moddle object
- * @param {*} sourcePath
+ *
+ * @param {string} diagramXML
+ *
+ * @return { { rootElement: any; warnings: Error[], error?: Error } } parseResult
  */
-function parseDiagram(diagramXML) {
-  return new Promise((resolve, reject) => {
-    moddle.fromXML(diagramXML, (error, moddleElement, context) => {
+async function parseDiagram(diagramXML) {
 
-      if (error) {
-        return resolve({
-          error
-        });
-      }
+  try {
+    const {
+      rootElement: moddleElement,
+      warnings = []
+    } = await moddle.fromXML(diagramXML);
 
-      const warnings = context.warnings || [];
+    return {
+      moddleElement,
+      warnings
+    };
+  } catch (error) {
 
-      return resolve({
-        moddleElement,
-        warnings
-      });
-    });
-  });
+    const {
+      warnings = []
+    } = error;
+
+    return {
+      error,
+      warnings
+    };
+  }
 }
 
 const categoryMap = {
