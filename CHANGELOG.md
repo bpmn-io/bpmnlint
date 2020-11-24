@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.0.0
+
+* `CHORE`: update to `bpmn-moddle@7`
+* `CHORE`: reduce library footprint
+* `CHORE`: require `NodeJS>=10`
+
 ## 6.5.0
 
 * `FEAT`: add globbing support ([#46](https://github.com/bpmn-io/bpmnlint/issues/46))
