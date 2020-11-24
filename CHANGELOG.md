@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 6.5.0
+
+* `FEAT`: add globbing support ([#46](https://github.com/bpmn-io/bpmnlint/issues/46))
+* `DOCS`: add explaination to `no-inclusive-gateway` rule
+
 ## 6.4.0
 
 * `FEAT`: add `superfluous-gateway` check ([#42](https://github.com/bpmn-io/bpmnlint/pull/42/files))
