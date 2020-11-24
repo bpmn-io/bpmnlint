@@ -37,10 +37,11 @@
     "bpmnlint": "./bin/bpmnlint.js"
   },
   "dependencies": {
+    "ansi-colors": "^4.1.1",
     "bpmn-moddle": "^6.0.0",
     "bpmnlint-utils": "^1.0.1",
-    "chalk": "^2.4.2",
     "cli-table": "^0.3.1",
+    "color-support": "^1.1.3",
     "meow": "^5.0.0",
     "pluralize": "^7.0.0",
     "tiny-glob": "^0.2.8"

@@ -2,13 +2,17 @@
 const meow = require('meow');
 const fs = require('fs');
 const path = require('path');
+const colors = require('ansi-colors');
+
+colors.enabled = require('color-support').hasBasic;
+
 const {
   red,
   yellow,
   underline,
   bold,
   magenta
-} = require('chalk');
+} = colors;
 
 const { promisify } = require('util');
 
