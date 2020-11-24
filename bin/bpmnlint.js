@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const meow = require('meow');
+const mri = require('mri');
 const fs = require('fs');
 const path = require('path');
 const colors = require('ansi-colors');
@@ -28,6 +28,27 @@ const Table = require('cli-table');
 
 const pluralize = require('pluralize');
 
+const CONFIG_NAME = '.bpmnlintrc';
+
+const DEFAULT_CONFIG_CONTENTS = `{
+  "extends": "bpmnlint:recommended"
+}`;
+
+const HELP_STRING = `
+Usage
+    $ bpmnlint diagram.bpmn
+
+  Options
+    --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
+    --init        Generate a .bpmnlintrc file in the current working directory
+
+  Examples
+    $ bpmnlint ./invoice.bpmn
+    $ bpmnlint --init
+
+`;
+
+
 const moddle = new BpmnModdle();
 
 function boldRed(str) {
@@ -40,7 +61,7 @@ function boldYellow(str) {
 
 function glob(files) {
   return Promise.all(
-    cli.input.map(
+    files.map(
       file => tinyGlob(file, { dot: true })
     )
   ).then(files => [].concat(...files));
@@ -111,6 +132,17 @@ function createTable() {
   });
 }
 
+function errorAndExit(...args) {
+  console.error(...args);
+
+  process.exit(1);
+}
+
+function infoAndExit(...args) {
+  console.log(...args);
+
+  process.exit(0);
+}
 
 /**
  * Prints lint results to the console
@@ -165,58 +197,6 @@ function printReports(filePath, results) {
   };
 }
 
-const cli = meow(
-  `
-  Usage
-    $ bpmnlint diagram.bpmn
-
-  Options
-    --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
-    --init        Generate a .bpmnlintrc file in the current working directory
-
-  Examples
-    $ bpmnlint ./invoice.bpmn
-    $ bpmnlint --init
-
-`,
-  {
-    flags: {
-      init: {
-        type: 'boolean'
-      },
-      config: {
-        type: 'string',
-        alias: 'c'
-      }
-    }
-  }
-);
-
-if (cli.flags.init) {
-  if (fs.existsSync('.bpmnlintrc')) {
-    console.warn('Not overriding existing .bpmnlintrc');
-    process.exit(1);
-  }
-
-  fs.writeFileSync('.bpmnlintrc', `{
-  "extends": "bpmnlint:recommended"
-}`, 'utf8');
-
-  console.error(`Created ${magenta('.bpmnlintrc')} file`);
-  process.exit(0);
-}
-
-if (cli.input.length === 0) {
-  console.log('Error: bpmn file path missing');
-  process.exit(1);
-}
-
-function logAndExit(...args) {
-  console.error(...args);
-
-  process.exit(1);
-}
-
 async function lintDiagram(diagramPath, config) {
 
   let diagramXML;
@@ -224,7 +204,7 @@ async function lintDiagram(diagramPath, config) {
   try {
     diagramXML = await readFile(path.resolve(diagramPath), 'utf-8');
   } catch (error) {
-    return logAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
+    return errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
   }
 
 
@@ -278,18 +258,16 @@ async function lintDiagram(diagramPath, config) {
 
     return printReports(diagramPath, allResults);
   } catch (e) {
-    return logAndExit(e);
+    return errorAndExit(e);
   }
 }
 
-async function lint(config) {
+async function lint(files, config) {
 
   let errorCount = 0;
   let warningCount = 0;
 
   console.log();
-
-  const files = await glob(cli.input);
 
   for (let i = 0; i < files.length; i++) {
     let results = await lintDiagram(files[i], config);
@@ -325,9 +303,37 @@ async function lint(config) {
 
 async function run() {
 
-  const configOverridePath = cli.flags.config;
+  const {
+    help,
+    init,
+    config: configOverridePath,
+    _: files
+  } = mri(process.argv.slice(2), {
+    string: [ 'config' ],
+    alias: {
+      c: 'config'
+    }
+  });
 
-  const configPath = configOverridePath || '.bpmnlintrc';
+  if (help) {
+    return infoAndExit(HELP_STRING);
+  }
+
+  if (init) {
+    if (fs.existsSync(CONFIG_NAME)) {
+      return errorAndExit('Not overriding existing .bpmnlintrc');
+    }
+
+    fs.writeFileSync(CONFIG_NAME, DEFAULT_CONFIG_CONTENTS, 'utf8');
+
+    return infoAndExit(`Created ${magenta(CONFIG_NAME)} file`);
+  }
+
+  if (files.length === 0) {
+    return errorAndExit('Error: bpmn file path missing');
+  }
+
+  const configPath = configOverridePath || CONFIG_NAME;
 
   let configString, config;
 
@@ -337,24 +343,26 @@ async function run() {
 
     const message = (
       configOverridePath
-        ? `Error: Could not read ${ configOverridePath }`
-        : `Error: Could not locate local ${ magenta('.bpmnlintrc') } file. Create one via
+        ? `Error: Could not read ${ magenta(configOverridePath) }`
+        : `Error: Could not locate local ${ magenta(CONFIG_NAME) } file. Create one via
 
   ${magenta('bpmnlint --init')}
 
 Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#configuration`
     );
 
-    return logAndExit(message);
+    return errorAndExit(message);
   }
 
   try {
     config = JSON.parse(configString);
   } catch (err) {
-    return logAndExit('Error: Could not parse %s\n\n%s', configPath, err.message);
+    return errorAndExit('Error: Could not parse %s\n\n%s', configPath, err.message);
   }
 
-  return lint(config);
+  const actualFiles = await glob(files);
+
+  return lint(actualFiles, config);
 }
 
-run().catch(logAndExit);
+run().catch(errorAndExit);
