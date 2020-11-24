@@ -16,6 +16,7 @@ describe('test-rule', function() {
   });
 
   it('should return reported messages', () => {
+
     // given
     const expectedMessages = [
       {
@@ -34,6 +35,7 @@ describe('test-rule', function() {
 
 
   it('should empty messages', () => {
+
     // given
     const expectedMessages = [];
 

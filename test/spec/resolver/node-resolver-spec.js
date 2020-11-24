@@ -50,6 +50,7 @@ describe('resolver/node-resolver', function() {
       try {
         await resolver.resolveRule('bpmnlint', 'non-existing');
       } catch (e) {
+
         // then
         expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
 
@@ -81,6 +82,7 @@ describe('resolver/node-resolver', function() {
       try {
         await resolver.resolveRule('baz', 'non-existing');
       } catch (e) {
+
         // then
         expect(e.message).to.eql('Cannot resolve rule <non-existing> from <baz>');
 

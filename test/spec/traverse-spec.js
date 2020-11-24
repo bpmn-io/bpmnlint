@@ -12,6 +12,7 @@ describe('traverse', function() {
   describe('should visit each node', function() {
 
     it('diagram with multiple nodes', async function() {
+
       // given
       const {
         root
@@ -30,6 +31,7 @@ describe('traverse', function() {
 
 
     it('diagram with one node', async function() {
+
       // given
       const xmlStr = `
         <?xml version="1.0" encoding="UTF-8"?>
@@ -56,6 +58,7 @@ describe('traverse', function() {
 
 
     it('diagram with generic element', async function() {
+
       // given
       const xmlStr = `
         <?xml version="1.0" encoding="UTF-8"?>

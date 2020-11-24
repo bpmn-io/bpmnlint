@@ -567,6 +567,7 @@ describe('linter', function() {
           extends: 'plugin:foo/bar'
         });
       } catch (e) {
+
         // then
         expect(e.message).to.eql('unknown config <plugin:foo/bar>');
 

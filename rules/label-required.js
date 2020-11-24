@@ -29,6 +29,7 @@ module.exports = function() {
 
     // ignore sub-processes
     if (is(node, 'bpmn:SubProcess')) {
+
       // TODO(nikku): better ignore expanded sub-processes only
       return;
     }
