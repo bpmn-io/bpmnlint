@@ -10,13 +10,13 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - name: Checkout
+    - name: &checkout Checkout
       uses: actions/checkout@v2
-    - name: Use Node.js ${{matrix.node-version}}
+    - name: &install-node Use Node.js ${{matrix.node-version}}
       uses: actions/setup-node@v1
       with:
         node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
+    - name: &cache Cache Node.js modules
       uses: actions/cache@v2
       with:
         # npm cache files are stored in `~/.npm` on Linux/macOS
@@ -26,7 +26,7 @@ jobs:
           ${{ runner.OS }}-node-${{matrix.node-version}}-
           ${{ runner.OS }}-node-
           ${{ runner.OS }}-
-    - name: Install dependencies
+    - name: &install-dependencies Install dependencies
       run: npm ci
     - name: Build
       run: COVERAGE=1 npm run all
@@ -41,24 +41,10 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{matrix.node-version}}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-${{matrix.node-version}}-
-          ${{ runner.OS }}-node-
-          ${{ runner.OS }}-
-    - name: Install dependencies
-      run: npm ci
+    - *checkout
+    - *install-node
+    - *cache
+    - *install-dependencies
     - name: Build
       run: npm run all
   build-platforms:
@@ -70,23 +56,9 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{matrix.node-version}}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        # npm cache files are stored in `~/.npm` on Linux/macOS
-        path: ~/.npm
-        key: ${{ runner.OS }}-node-${{matrix.node-version}}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS}}-node-${{matrix.node-version}}-
-          ${{ runner.OS}}-node-
-          ${{ runner.OS }}-
-    - name: Install dependencies
-      run: npm ci
+    - *checkout
+    - *install-node
+    - *cache
+    - *install-dependencies
     - name: Build
       run: npm run all
