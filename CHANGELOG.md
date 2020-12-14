@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.0.1
+
+* `CHORE`: drop debug log statement
+
 ## 7.0.0
 
 * `CHORE`: update to `bpmn-moddle@7`
