@@ -28,8 +28,6 @@ module.exports = function() {
       const sourceId = node.sourceRef.id;
       const targetId = node.targetRef.id;
 
-      console.log(sourceId, targetId);
-
       if (!outgoingReported[sourceId]) {
         reporter.report(sourceId, 'Duplicate outgoing sequence flows');
 
