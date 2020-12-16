@@ -178,6 +178,31 @@ describe('linter', function() {
       });
 
 
+      it('should resolve async', async function() {
+
+        // given
+        const resolver = {
+          resolveRule(pkg, ruleName) {
+            return fakeAsyncRule;
+          }
+        };
+
+        const linter = new Linter({ resolver });
+
+        // when
+        const lintResults = await linter.lint(moddleRoot, {
+          rules: {
+            testRule: 'warn'
+          }
+        });
+
+        // then
+        expect(lintResults).to.eql({
+          testRule: buildResults('warn')
+        });
+      });
+
+
       it('should handle unresolved', async function() {
 
         // given
@@ -584,7 +609,7 @@ describe('linter', function() {
   describe('#parseRuleName', function() {
 
     const linter = new Linter({
-      resolver: fakeRule({})
+      resolver: fakeResolver()
     });
 
 
@@ -687,7 +712,7 @@ describe('linter', function() {
   describe('#parseConfigName', function() {
 
     const linter = new Linter({
-      resolver: fakeRule({})
+      resolver: fakeResolver()
     });
 
 
@@ -819,6 +844,20 @@ function fakeResolver(cache = {}) {
   };
 }
 
+
+async function fakeAsyncRule() {
+
+  function check(node, reporter) {
+
+    if (is(node, 'Definitions')) {
+      reporter.report(node.id, 'Definitions detected');
+    }
+  }
+
+  return {
+    check
+  };
+}
 
 function fakeRule() {
 
