@@ -265,6 +265,66 @@ describe('traverse', function() {
 
   });
 
+
+  describe('sub-tree skipping', function() {
+
+    it('should skip if <enter> returns false', async function() {
+
+      // given
+      const xmlStr = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <definitions
+            xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+            id="Definitions"
+            targetNamespace="http://bpmn.io/bpmn">
+          <bpmn:process id="Process_1">
+            <bpmn:task id="Task_1" />
+          </bpmn:process>
+          <bpmn:process id="Process_2">
+            <bpmn:task id="Task_2" />
+          </bpmn:process>
+        </definitions>
+      `;
+
+      const {
+        root
+      } = await createModdle(xmlStr);
+
+      const {
+        nodes,
+        log
+      } = createLogger([ 'enter', 'leave' ]);
+
+      // when
+      traverse(root, {
+        enter: (node) => {
+          log.enter(node);
+
+          if (node.id === 'Process_1') {
+            return false;
+          }
+
+          // does nothing
+          return null;
+        },
+        leave: log.leave
+      });
+
+      // then
+      expect(nodes).to.eql([
+        'bpmn:Definitions#Definitions - enter',
+        'bpmn:Process#Process_1 - enter',
+        'bpmn:Process#Process_1 - leave',
+        'bpmn:Process#Process_2 - enter',
+        'bpmn:Task#Task_2 - enter',
+        'bpmn:Task#Task_2 - leave',
+        'bpmn:Process#Process_2 - leave',
+        'bpmn:Definitions#Definitions - leave'
+      ]);
+    });
+
+  });
+
 });
 
 
