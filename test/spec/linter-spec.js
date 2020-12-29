@@ -54,11 +54,29 @@ describe('linter', function() {
       );
 
       // then
-      expect(results).to.eql(buildResults('error'));
+      expect(results).to.eql(buildFakeResults('error'));
     });
 
 
-    it('should fail', function() {
+    it('should succeed with <enter> and <leave> hooks', function() {
+
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: createRule(fakeEnterLeaveRule),
+          category: 'error'
+        }
+      );
+
+      // then
+      expect(results).to.eql(buildFakeEnterLeaveResults('error'));
+    });
+
+
+    it('should fail without check', function() {
 
       const failingRule = {};
 
@@ -77,11 +95,35 @@ describe('linter', function() {
       expect(results).to.eql([
         {
           category: 'error',
-          message: 'Rule error: rule.check is not a function'
+          message: 'Rule error: no check implemented'
         }
       ]);
     });
 
+
+    it('should fail without <enter> or <leave> hook', function() {
+
+      const failingRule = { check: {} };
+
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: failingRule,
+          category: 'warn'
+        }
+      );
+
+      // then
+      expect(results).to.eql([
+        {
+          category: 'error',
+          message: 'Rule error: enter is not a function'
+        }
+      ]);
+    });
 
   });
 
@@ -173,7 +215,7 @@ describe('linter', function() {
 
         // then
         expect(lintResults).to.eql({
-          testRule: buildResults('warn')
+          testRule: buildFakeResults('warn')
         });
       });
 
@@ -198,7 +240,7 @@ describe('linter', function() {
 
         // then
         expect(lintResults).to.eql({
-          testRule: buildResults('warn')
+          testRule: buildFakeResults('warn')
         });
       });
 
@@ -873,11 +915,65 @@ function fakeRule() {
   };
 }
 
-function buildResults(category) {
+
+function buildFakeResults(category) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
       message: 'Definitions detected'
+    }
+  ];
+
+  if (typeof category === 'undefined') {
+    return results;
+  }
+
+  return results.map((result) => {
+    return {
+      ...result,
+      category
+    };
+  });
+}
+
+
+function fakeEnterLeaveRule() {
+
+  const seen = {};
+
+  function enter(node, reporter) {
+
+    if (node.id) {
+      seen[node.id] = node;
+    }
+
+  }
+
+  function leave(node, reporter) {
+
+    if (node.id) {
+      expect(seen[node.id]).to.equal(node);
+    }
+
+    if (is(node, 'Definitions') && seen[node.id]) {
+      reporter.report(node.id, 'Definitions seen');
+    }
+  }
+
+  return {
+    check: {
+      enter,
+      leave
+    }
+  };
+}
+
+
+function buildFakeEnterLeaveResults(category) {
+  const results = [
+    {
+      id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
+      message: 'Definitions seen'
     }
   ];
 
