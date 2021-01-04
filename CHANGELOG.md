@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.1.0
+
+* `FEAT`: allow rules to skip sub-tree traversal ([#53](https://github.com/bpmn-io/bpmnlint/issues/53))
+* `FEAT`: allow rules to hook into node `enter` and `leave` ([#52](https://github.com/bpmn-io/bpmnlint/issues/52))
+
 ## 7.0.1
 
 * `CHORE`: drop debug log statement
