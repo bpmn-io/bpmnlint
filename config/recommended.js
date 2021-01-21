@@ -5,6 +5,7 @@ module.exports = {
     'event-sub-process-typed-start-event': 'error',
     'fake-join': 'warn',
     'label-required': 'error',
+    'no-bpmndi': 'error',
     'no-complex-gateway': 'error',
     'no-disconnected': 'error',
     'no-duplicate-sequence-flows': 'error',
