@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_0udodh2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <bpmn:collaboration id="Collaboration_1wujzz1">
+    <bpmn:participant id="Participant_03p1xtd" processRef="Process_2" />
+    <bpmn:participant id="Participant_10uwa1p" processRef="Process" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_2" isExecutable="true">
+    <bpmn:subProcess id="Activity_0mrqzwi">
+      <bpmn:startEvent id="Event_0zhbcyv" />
+      <bpmn:subProcess id="Activity_1lvwhe4">
+        <bpmn:startEvent id="Event_0ymzg57" />
+        <bpmn:subProcess id="Activity_1fiun57">
+          <bpmn:task id="task1" />
+        </bpmn:subProcess>
+      </bpmn:subProcess>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:process id="Process" isExecutable="false" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1wujzz1">
+      <bpmndi:BPMNShape id="Participant_03p1xtd_di" bpmnElement="Participant_03p1xtd" isHorizontal="true">
+        <dc:Bounds x="170" y="380" width="980" height="450" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mrqzwi_di" bpmnElement="Activity_0mrqzwi" isExpanded="true">
+        <dc:Bounds x="300" y="400" width="770" height="360" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zhbcyv_di" bpmnElement="Event_0zhbcyv">
+        <dc:Bounds x="340" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1lvwhe4_di" bpmnElement="Activity_1lvwhe4" isExpanded="true">
+        <dc:Bounds x="420" y="450" width="550" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ymzg57_di" bpmnElement="Event_0ymzg57">
+        <dc:Bounds x="460" y="532" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fiun57_di" bpmnElement="Activity_1fiun57" isExpanded="true">
+        <dc:Bounds x="520" y="470" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_10uwa1p_di" bpmnElement="Participant_10uwa1p" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="600" height="250" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

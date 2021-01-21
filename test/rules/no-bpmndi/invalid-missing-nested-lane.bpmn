@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_0bw10z8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <bpmn:collaboration id="Collaboration_1ckz0f2">
+    <bpmn:participant id="Participant_0d703f0" processRef="Process_04kh5cl" />
+    <bpmn:participant id="Participant_0k0frzx" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_04kh5cl" isExecutable="true" />
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1p0a2ra">
+      <bpmn:lane id="visibibleLane1" />
+      <bpmn:lane id="Lane_1t82kit">
+        <bpmn:childLaneSet id="LaneSet_0iykupl">
+          <bpmn:lane id="visibleLane2" />
+          <bpmn:lane id="lane_1" />
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+      <bpmn:lane id="visibleLane3" />
+    </bpmn:laneSet>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ckz0f2">
+      <bpmndi:BPMNShape id="Participant_0d703f0_di" bpmnElement="Participant_0d703f0" isHorizontal="true">
+        <dc:Bounds x="140" y="100" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_0k0frzx_di" bpmnElement="Participant_0k0frzx" isHorizontal="true">
+        <dc:Bounds x="130" y="380" width="600" height="610" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1m6lnmn_di" bpmnElement="visibleLane3" isHorizontal="true">
+        <dc:Bounds x="160" y="870" width="570" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1t82kit_di" bpmnElement="Lane_1t82kit" isHorizontal="true">
+        <dc:Bounds x="160" y="505" width="570" height="365" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0lf83db_di" bpmnElement="visibleLane2" isHorizontal="true">
+        <dc:Bounds x="190" y="505" width="540" height="63" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1s1pyih_di" bpmnElement="visibibleLane1" isHorizontal="true">
+        <dc:Bounds x="160" y="380" width="570" height="125" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

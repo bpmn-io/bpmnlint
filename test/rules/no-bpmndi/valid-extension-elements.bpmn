@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1pqwzxy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <bpmn:process id="Process_10iyjrm" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_187fguh</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_187fguh" sourceRef="StartEvent_1" targetRef="Activity_1ifk0jx" />
+    <bpmn:endEvent id="Event_1jxzfmt">
+      <bpmn:incoming>Flow_01ww5tt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01ww5tt" sourceRef="Activity_1ifk0jx" targetRef="Event_1jxzfmt" />
+    <bpmn:serviceTask id="Activity_1ifk0jx">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2f6hhbs" />
+          <camunda:inputParameter name="Input_142lrtk" />
+          <camunda:outputParameter name="Output_3qt4d5r" />
+          <camunda:outputParameter name="Output_0ubfcmi" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_187fguh</bpmn:incoming>
+      <bpmn:outgoing>Flow_01ww5tt</bpmn:outgoing>
+      <bpmn:property id="Property_02aue6s" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0g2way2">
+        <bpmn:sourceRef>DataStoreReference_0g6p0om</bpmn:sourceRef>
+        <bpmn:targetRef>Property_02aue6s</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:dataStoreReference id="DataStoreReference_0g6p0om" />
+    <bpmn:textAnnotation id="TextAnnotation_019z3vv">
+      <bpmn:text>Some Text</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1imp7ij" sourceRef="DataStoreReference_0g6p0om" targetRef="TextAnnotation_019z3vv" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_10iyjrm">
+      <bpmndi:BPMNShape id="TextAnnotation_019z3vv_di" bpmnElement="TextAnnotation_019z3vv">
+        <dc:Bounds x="440" y="180" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_187fguh_di" bpmnElement="Flow_187fguh">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01ww5tt_di" bpmnElement="Flow_01ww5tt">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="432" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jxzfmt_di" bpmnElement="Event_1jxzfmt">
+        <dc:Bounds x="432" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0c8y71y_di" bpmnElement="Activity_1ifk0jx">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_0g6p0om_di" bpmnElement="DataStoreReference_0g6p0om">
+        <dc:Bounds x="385" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1imp7ij_di" bpmnElement="Association_1imp7ij">
+        <di:waypoint x="431" y="265" />
+        <di:waypoint x="477" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0g2way2_di" bpmnElement="DataInputAssociation_0g2way2">
+        <di:waypoint x="397" y="265" />
+        <di:waypoint x="341" y="157" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
