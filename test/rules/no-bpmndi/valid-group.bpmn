@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0xidc83" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.3.0">
+  <bpmn:process id="Process_1b01g2k" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ufksze</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_10h38iw">
+      <bpmn:incoming>Flow_0ufksze</bpmn:incoming>
+      <bpmn:outgoing>Flow_1usqscc</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0ufksze" sourceRef="StartEvent_1" targetRef="Activity_10h38iw" />
+    <bpmn:endEvent id="Event_1bsor3a">
+      <bpmn:incoming>Flow_1usqscc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1usqscc" sourceRef="Activity_10h38iw" targetRef="Event_1bsor3a" />
+    <bpmn:group id="Group_1" categoryValueRef="CategoryValue_0y9f3r6" />
+  </bpmn:process>
+  <bpmn:category id="Category_1l34xem">
+    <bpmn:categoryValue id="CategoryValue_0y9f3r6" />
+  </bpmn:category>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1b01g2k">
+      <bpmndi:BPMNEdge id="Flow_0ufksze_di" bpmnElement="Flow_0ufksze">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1usqscc_di" bpmnElement="Flow_1usqscc">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="432" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10h38iw_di" bpmnElement="Activity_10h38iw">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bsor3a_di" bpmnElement="Event_1bsor3a">
+        <dc:Bounds x="432" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_04cddyv_di" bpmnElement="Group_1">
+        <dc:Bounds x="170" y="40" width="300" height="300" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

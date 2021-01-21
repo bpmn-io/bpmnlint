@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: add `no-bpmndi` rule ([#55](https://github.com/bpmn-io/bpmnlint/issues/55))
+
 ## 7.1.0
 
 * `FEAT`: allow rules to skip sub-tree traversal ([#53](https://github.com/bpmn-io/bpmnlint/issues/53))
