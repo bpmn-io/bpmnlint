@@ -31,7 +31,7 @@ jobs:
       run: COVERAGE=1 npm run all
     - name: Upload coverage
       run: npx codecov
-  build-nodes:
+  Build (Nodes):
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -59,7 +59,7 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run all
-  build-platforms:
+  Build (Platforms):
     runs-on: ${{ matrix.os }}
 
     strategy:
