@@ -1,6 +1,6 @@
 # bpmnlint
 
-[![Build Status](https://travis-ci.com/bpmn-io/bpmnlint.svg?branch=master)](https://travis-ci.com/bpmn-io/bpmnlint)
+[![CI](https://github.com/bpmn-io/bpmnlint/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmnlint/actions?query=workflow%3ACI)
 
 Validate your BPMN diagrams based on configurable lint rules.
 
