@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{matrix.node-version}}
     - name: Cache Node.js modules
@@ -31,7 +31,7 @@ jobs:
       run: COVERAGE=1 npm run all
     - name: Upload coverage
       run: npx codecov
-  Build (Nodes):
+  Build-Nodes:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -43,7 +43,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{matrix.node-version}}
     - name: Cache Node.js modules
@@ -59,7 +59,7 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run all
-  Build (Platforms):
+  Build-Platforms:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -71,7 +71,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{matrix.node-version}}
     - name: Cache Node.js modules
