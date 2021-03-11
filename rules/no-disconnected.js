@@ -13,11 +13,11 @@ module.exports = function() {
   function check(node, reporter) {
 
     if (!isAny(node, [
-    'bpmn:Task',
-    'bpmn:Gateway',
-    'bpmn:SubProcess',
-    'bpmn:Event'
-  ]) || node.triggeredByEvent) {
+      'bpmn:Task',
+      'bpmn:Gateway',
+      'bpmn:SubProcess',
+      'bpmn:Event'
+    ]) || node.triggeredByEvent) {
       return;
     }
 
