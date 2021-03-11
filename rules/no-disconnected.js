@@ -16,18 +16,18 @@ module.exports = function() {
       return;
     }
 
-  //Check for compensation boundary events
+  // Check for compensation boundary events
 
-    if(node.$type == 'bpmn:BoundaryEvent'){
+    if (node.$type == 'bpmn:BoundaryEvent'){
      var eventDefinitions = node.get('eventDefinitions');      
-      if(eventDefinitions.length == 1){
-          if(node.eventDefinitions[0].$type == 'bpmn:CompensateEventDefinition'){
+      if (eventDefinitions.length == 1){
+          if (node.eventDefinitions[0].$type == 'bpmn:CompensateEventDefinition'){
           return;
         }
       }
      }
 
-  //Check for compensation task
+  // Check for compensation task
 
     if (node.isForCompensation){
       return;
