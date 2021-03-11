@@ -12,7 +12,12 @@ module.exports = function() {
 
   function check(node, reporter) {
 
-    if (!isAny(node, ['bpmn:Task','bpmn:Gateway','bpmn:SubProcess','bpmn:Event']) || node.triggeredByEvent) {
+    if (!isAny(node, [
+    'bpmn:Task',
+    'bpmn:Gateway',
+    'bpmn:SubProcess',
+    'bpmn:Event'
+  ]) || node.triggeredByEvent) {
       return;
     }
 
@@ -20,7 +25,7 @@ module.exports = function() {
 
     if (node.$type == 'bpmn:BoundaryEvent') {
       var eventDefinitions = node.get('eventDefinitions');
-      if (eventDefinitions.length == 1) {
+      if (eventDefinitions.length === 1) {
         if (eventDefinitions[0].$type == 'bpmn:CompensateEventDefinition') {
           return;
         }
