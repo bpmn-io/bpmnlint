@@ -17,7 +17,12 @@ RuleTester.verify('no-disconnected', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-disconnected/valid-event-subprocess.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-disconnected/valid-compensation.bpmn')
     }
+
+
   ],
   invalid: [
     {

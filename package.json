@@ -3,6 +3,7 @@
   "description": "Validate your BPMN diagrams based on configurable lint rules",
   "version": "7.2.0",
   "main": "lib/index.js",
+  "module": "lib/main.js",
   "keywords": [
     "bpmnlint",
     "bpmn",
@@ -13,14 +14,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bpmn-io/bpmnlint"
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git"
   },
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
   "contributors": [
-    {
-      "name": "bpmn.io contributors",
-      "url": "https://github.com/bpmn-io"
-    }
+    "bpmn.io contributors (https://github.com/bpmn-io)"
   ],
   "engines": {
     "node": ">= 10"
@@ -34,7 +32,7 @@
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test"
   },
   "bin": {
-    "bpmnlint": "./bin/bpmnlint.js"
+    "bpmnlint": "bin/bpmnlint.js"
   },
   "dependencies": {
     "ansi-colors": "^4.1.1",
@@ -58,5 +56,14 @@
     "npm-run-all": "^4.1.5",
     "nyc": "^15.1.0",
     "strip-indent": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/bpmn-io/bpmnlint/issues"
+  },
+  "homepage": "https://github.com/bpmn-io/bpmnlint#readme",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
   }
 }
