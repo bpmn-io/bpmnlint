@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 7.2.1
 
-* `FIX`: exclude compensation boundary and activity in `no-disconnected` check ([#https://github.com/bpmn-io/bpmnlint/pull/60](https://github.com/bpmn-io/bpmnlint/pull/60))
+* `FIX`: exclude compensation boundary and activity in `no-disconnected` check ([#60](https://github.com/bpmn-io/bpmnlint/pull/60))
 
 ## 7.2.0
 
