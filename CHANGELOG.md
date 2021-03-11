@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.2.1
+
+* `FIX`: exclude compensation boundary and activity in `no-disconnected` check ([#https://github.com/bpmn-io/bpmnlint/pull/60](https://github.com/bpmn-io/bpmnlint/pull/60))
+
 ## 7.2.0
 
 * `FEAT`: add `no-bpmndi` rule ([#55](https://github.com/bpmn-io/bpmnlint/issues/55))
