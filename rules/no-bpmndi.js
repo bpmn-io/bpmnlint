@@ -30,7 +30,9 @@ module.exports = function() {
     // (4) Report elements without BPMNDI
     visualBpmnElements.forEach((element) => {
       if (diBpmnReferences.indexOf(element.id) === -1) {
-        reporter.report(element.id, 'Element is missing bpmndi');
+
+        // report on root level, since the actual element will not be visible (due to missing di)
+        reporter.report(getRootElement(element).id, `Element <${element.id}> is missing bpmndi`);
       }
     });
   }
@@ -79,7 +81,8 @@ function getAllBpmnElements(rootElements) {
 
         return {
           id: element.id,
-          $type: element.$type
+          $type: element.$type,
+          $parent: element.$parent
         };
       });
     } else {
@@ -111,6 +114,21 @@ function getAllDiBpmnReferences(definitionsNode) {
       });
     })
   );
+}
+
+/**
+ * Traverse the moddle element tree and return the closest root element
+ *
+ * @param {ModdleElement} element
+ * @return {ModdleElement} - the closest root element to the provided element
+ */
+function getRootElement(element) {
+
+  function isRoot(element) {
+    return is(element, 'bpmn:Process') || is(element, 'bpmn:Collaboration');
+  }
+
+  return isRoot(element) ? element : getRootElement(element.$parent);
 }
 
 function hasVisualRepresentation(element) {

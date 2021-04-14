@@ -50,107 +50,106 @@ RuleTester.verify('no-bpmndi', rule, {
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-catch-event.bpmn'),
       report: {
-        id: 'boundaryEvent',
-        message: 'Element is missing bpmndi'
-
+        id: 'Process',
+        message: 'Element <boundaryEvent> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-sub-processes.bpmn'),
       report: {
-        id: 'boundaryEvent_1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <boundaryEvent_1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-multiple-sub-processes.bpmn'),
       report: {
-        id: 'boundaryEvent',
-        message: 'Element is missing bpmndi'
+        id: 'Process_3',
+        message: 'Element <boundaryEvent> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-sequence-flow.bpmn'),
       report: {
-        id: 'sequenceFlow',
-        message: 'Element is missing bpmndi'
+        id: 'Process',
+        message: 'Element <sequenceFlow> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-participant.bpmn'),
       report: {
-        id: 'Participant_1',
-        message: 'Element is missing bpmndi'
+        id: 'Collaboration_1',
+        message: 'Element <Participant_1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-group.bpmn'),
       report: {
-        id: 'Group_1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <Group_1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-group.bpmn'),
       report: {
-        id: 'Group_1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <Group_1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
       report: {
-        id: 'lane2',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <lane2> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
       report: {
-        id: 'lane2',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <lane2> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-collapsed-pool.bpmn'),
       report: {
-        id: 'participant1',
-        message: 'Element is missing bpmndi'
+        id: 'Collaboration1',
+        message: 'Element <participant1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-nested-boundary.bpmn'),
       report: {
-        id: 'boundaryEvent',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <boundaryEvent> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-multiple-nested-levels.bpmn'),
       report: {
-        id: 'task1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_2',
+        message: 'Element <task1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-nested-lanes.bpmn'),
       report: {
-        id: 'task1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_2',
+        message: 'Element <task1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-missing-nested-lane.bpmn'),
       report: {
-        id: 'lane_1',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <lane_1> is missing bpmndi'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-missing-nested-lane-deep.bpmn'),
       report: {
-        id: 'lane7',
-        message: 'Element is missing bpmndi'
+        id: 'Process_1',
+        message: 'Element <lane7> is missing bpmndi'
       }
     }
   ]
