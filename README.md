@@ -5,13 +5,16 @@
 Validate your BPMN diagrams based on configurable lint rules.
 
 
-## Usage
+## Installation
 
 Install the utility via [npm](https://www.npmjs.com/package/bpmnlint):
 
 ```sh
 npm install -g bpmnlint
 ```
+
+
+## Usage
 
 Validate your diagrams via the commandline:
 
