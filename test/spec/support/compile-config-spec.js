@@ -1,5 +1,7 @@
 const { expect } = require('chai');
 
+import NodeResolver from '../../../lib/resolver/node-resolver';
+
 import compileConfig from '../../../lib/support/compile-config';
 
 
@@ -42,6 +44,42 @@ describe('support/compile-config', function() {
     // then
     expect(code).to.contain('import rule_0 from \'@foo/bpmnlint-plugin-bar/rules/rule\'');
     expect(code).to.contain('cache[\'@foo/bpmnlint-plugin-bar/rule\'] = rule_0');
+  });
+
+
+  it('should import local', async function() {
+
+    // given
+    const resolver = new NodeResolver({
+      require: function(path) {
+
+        if (path === './package.json') {
+          return {
+            name: 'bpmnlint-plugin-local'
+          };
+        }
+
+        if (path === './config/recommended') {
+          return {
+            rules: {
+              'foo': 'error'
+            }
+          };
+        }
+
+        throw new Error('not found');
+      }
+    });
+
+
+    // when
+    const code = await compileConfig({
+      extends: 'plugin:local/recommended'
+    }, resolver);
+
+    // then
+    expect(code).to.contain('import rule_0 from \'./rules/foo\'');
+    expect(code).to.contain('cache[\'bpmnlint-plugin-local/foo\'] = rule_0');
   });
 
 
