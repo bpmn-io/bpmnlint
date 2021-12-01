@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.3.0
+
+* `FEAT`: support `--version` command line flag ([#65](https://github.com/bpmn-io/bpmnlint/pull/65))
+* `FEAT`: allow rule testers to provide custom `it`
+* `FIX`: make `no-bpmndi` handle missing `LaneSet#lanes` gracefully ([#63](https://github.com/bpmn-io/bpmnlint/issues/63), [#66](https://github.com/bpmn-io/bpmnlint/pull/66))
+
 ## 7.2.1
 
 * `FIX`: exclude compensation boundary and activity in `no-disconnected` check ([#60](https://github.com/bpmn-io/bpmnlint/pull/60))
