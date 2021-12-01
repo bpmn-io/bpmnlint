@@ -146,6 +146,12 @@ function errorAndExit(...args) {
   process.exit(1);
 }
 
+function showVersionAndExit() {
+  console.log(require('../package.json').version);
+
+  process.exit(0);
+}
+
 function infoAndExit(...args) {
   console.log(...args);
 
@@ -314,6 +320,7 @@ async function run() {
   const {
     help,
     init,
+    version,
     config: configOverridePath,
     _: files
   } = mri(process.argv.slice(2), {
@@ -322,6 +329,10 @@ async function run() {
       c: 'config'
     }
   });
+
+  if (version) {
+    return showVersionAndExit();
+  }
 
   if (help) {
     return infoAndExit(HELP_STRING);

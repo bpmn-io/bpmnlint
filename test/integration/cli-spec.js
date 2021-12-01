@@ -138,6 +138,16 @@ describe('cli', function() {
       }
     });
 
+
+    test({
+      cmd: [ 'bpmnlint', '--version' ],
+      expct: {
+        code: 0,
+        stderr: EMPTY,
+        stdout: require('../../package.json').version
+      }
+    });
+
   });
 
 
