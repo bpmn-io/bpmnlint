@@ -44,6 +44,9 @@ RuleTester.verify('no-bpmndi', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/valid-empty.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-no-lanes.bpmn')
     }
   ],
   invalid: [
@@ -52,7 +55,6 @@ RuleTester.verify('no-bpmndi', rule, {
       report: {
         id: 'boundaryEvent',
         message: 'Element is missing bpmndi'
-
       }
     },
     {
