@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.4.0
+
+* `FEAT`: resolve local package by name ([#64](https://github.com/bpmn-io/bpmnlint/pull/64))
+
 ## 7.3.0
 
 * `FEAT`: support `--version` command line flag ([#65](https://github.com/bpmn-io/bpmnlint/pull/65))
