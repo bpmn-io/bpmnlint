@@ -10,20 +10,25 @@ import {
 RuleTester.verify('conditional-flows', rule, {
   valid: [
     {
+      name: 'split',
       moddleElement: readModdle(__dirname + '/conditional-flows/valid-split.bpmn')
     },
     {
+      name: 'split after task',
       moddleElement: readModdle(__dirname + '/conditional-flows/valid-split-after-task.bpmn')
     },
     {
+      name: 'conditional fork',
       moddleElement: readModdle(__dirname + '/conditional-flows/valid-conditional-fork.bpmn')
     },
     {
+      name: 'no condition after merge',
       moddleElement: readModdle(__dirname + '/conditional-flows/valid-no-condition-after-merge.bpmn')
     }
   ],
   invalid: [
     {
+      name: 'fork after exclusive gateway',
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-exclusive-gateway.bpmn'),
       report: {
         id: 'Flow_2',
@@ -31,6 +36,7 @@ RuleTester.verify('conditional-flows', rule, {
       }
     },
     {
+      name: 'fork after exclusive gateway default',
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-exclusive-gateway-default.bpmn'),
       report: {
         id: 'Flow_1',
@@ -38,6 +44,7 @@ RuleTester.verify('conditional-flows', rule, {
       }
     },
     {
+      name: 'fork after task',
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-task.bpmn'),
       report: {
         id: 'Flow_1',
@@ -45,6 +52,7 @@ RuleTester.verify('conditional-flows', rule, {
       }
     },
     {
+      name: 'fork after task default',
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-task-default.bpmn'),
       report: {
         id: 'Flow_1',
