@@ -107,11 +107,21 @@ const categoryMap = {
  * Logs a formatted  message
  */
 function tableEntry(report) {
-  const category = report.category;
+  let {
+    category,
+    id = '',
+    message,
+    name = '',
+    path
+  } = report;
+
+  if (path) {
+    id = `${ id }#${ pathStringify(path) }`;
+  }
 
   const color = category === 'error' ? red : yellow;
 
-  return [ report.id || '', color(categoryMap[category] || category), report.message, report.name || '' ];
+  return [ id, color(categoryMap[ category ] || category), message, name ];
 }
 
 function createTable() {
@@ -385,3 +395,15 @@ Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#confi
 }
 
 run().catch(errorAndExit);
+
+// helpers //////////
+
+/**
+ * @param {(number|string)[]} path
+ * @param {string} [separator]
+ *
+ * @returns {string}
+ */
+function pathStringify(path, separator = '.') {
+  return path.join(separator);
+}
