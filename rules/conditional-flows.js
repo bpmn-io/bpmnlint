@@ -20,7 +20,7 @@ module.exports = function() {
       );
 
       if (missingCondition) {
-        reporter.report(flow.id, 'Sequence flow is missing condition');
+        reporter.report(flow.id, 'Sequence flow is missing condition', [ 'conditionExpression' ]);
       }
     });
   }
