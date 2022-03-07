@@ -28,6 +28,8 @@ const Table = require('cli-table');
 
 const pluralize = require('pluralize');
 
+const { pathStringify } = require('@philippfromme/moddle-helpers');
+
 const CONFIG_NAME = '.bpmnlintrc';
 
 const DEFAULT_CONFIG_CONTENTS = `{
@@ -395,15 +397,3 @@ Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#confi
 }
 
 run().catch(errorAndExit);
-
-// helpers //////////
-
-/**
- * @param {(number|string)[]} path
- * @param {string} [separator]
- *
- * @returns {string}
- */
-function pathStringify(path, separator = '.') {
-  return path.join(separator);
-}
