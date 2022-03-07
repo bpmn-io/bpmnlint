@@ -32,7 +32,8 @@ RuleTester.verify('conditional-flows', rule, {
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-exclusive-gateway.bpmn'),
       report: {
         id: 'Flow_2',
-        message: 'Sequence flow is missing condition'
+        message: 'Sequence flow is missing condition',
+        path: [ 'conditionExpression' ]
       }
     },
     {
@@ -40,7 +41,8 @@ RuleTester.verify('conditional-flows', rule, {
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-exclusive-gateway-default.bpmn'),
       report: {
         id: 'Flow_1',
-        message: 'Sequence flow is missing condition'
+        message: 'Sequence flow is missing condition',
+        path: [ 'conditionExpression' ]
       }
     },
     {
@@ -48,7 +50,8 @@ RuleTester.verify('conditional-flows', rule, {
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-task.bpmn'),
       report: {
         id: 'Flow_1',
-        message: 'Sequence flow is missing condition'
+        message: 'Sequence flow is missing condition',
+        path: [ 'conditionExpression' ]
       }
     },
     {
@@ -56,7 +59,8 @@ RuleTester.verify('conditional-flows', rule, {
       moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-task-default.bpmn'),
       report: {
         id: 'Flow_1',
-        message: 'Sequence flow is missing condition'
+        message: 'Sequence flow is missing condition',
+        path: [ 'conditionExpression' ]
       }
     }
   ]

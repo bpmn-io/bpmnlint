@@ -36,42 +36,48 @@ RuleTester.verify('label-required', rule, {
       moddleElement: readModdle(__dirname + '/label-required/invalid-conditional-flow.bpmn'),
       report: {
         id: 'ConditionalFlow',
-        message
+        message,
+        path: [ 'name' ]
       }
     },
     {
       moddleElement: readModdle(__dirname + '/label-required/invalid-event.bpmn'),
       report: {
         id: 'Element',
-        message
+        message,
+        path: [ 'name' ]
       }
     },
     {
       moddleElement: readModdle(__dirname + '/label-required/invalid-gateway-split.bpmn'),
       report: {
         id: 'Element',
-        message
+        message,
+        path: [ 'name' ]
       }
     },
     {
       moddleElement: readModdle(__dirname + '/label-required/invalid-participant.bpmn'),
       report: {
         id: 'Element',
-        message
+        message,
+        path: [ 'name' ]
       }
     },
     {
       moddleElement: readModdle(__dirname + '/label-required/invalid-lane.bpmn'),
       report: {
         id: 'Element',
-        message
+        message,
+        path: [ 'name' ]
       }
     },
     {
       moddleElement: readModdle(__dirname + '/label-required/invalid-task.bpmn'),
       report: {
         id: 'Element',
-        message
+        message,
+        path: [ 'name' ]
       }
     }
   ]

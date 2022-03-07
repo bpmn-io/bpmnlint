@@ -27,7 +27,8 @@ RuleTester.verify('sub-process-blank-start-event', rule, {
       moddleElement: readModdle(__dirname + '/sub-process-blank-start-event/invalid.bpmn'),
       report: {
         id: 'StartEvent',
-        message: 'Start event must be blank'
+        message: 'Start event must be blank',
+        path: [ 'eventDefinitions' ]
       }
     }
   ]
