@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.5.0
+
+* `FEAT`: add optional `path` parameter to `Reporter#report` ([#73](https://github.com/bpmn-io/bpmnlint/pull/73))
+* `FEAT`: add optional `name` parameter to `RuleTester#verify` ([#68](https://github.com/bpmn-io/bpmnlint/pull/68))
+* `CHORE`: update to `bpmn-moddle@7.1.2`
+
 ## 7.4.0
 
 * `FEAT`: resolve local package by name ([#64](https://github.com/bpmn-io/bpmnlint/pull/64))
