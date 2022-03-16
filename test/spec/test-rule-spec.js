@@ -55,6 +55,27 @@ describe('test-rule', function() {
   });
 
 
+  it('should return check function reported messages (id, message, { path })', () => {
+
+    // given
+    const expectedMessages = [
+      {
+        id: 'Collaboration_0wzd2dx',
+        message: 'Collaboration detected',
+        path: [ 'rootElements', 0 ],
+        foo: 'foo'
+      }
+    ];
+    const messages = testRule({
+      moddleRoot,
+      rule: createRule(fakeCheckRuleWithObject)
+    });
+
+    // then
+    expect(messages).to.eql(expectedMessages);
+  });
+
+
   it('should return { enter, leave } hook reported messages', () => {
 
     // given
@@ -109,6 +130,19 @@ function fakeCheckRuleWithPath() {
   function check(node, reporter) {
     if (is(node, 'Collaboration')) {
       reporter.report(node.id, 'Collaboration detected', [ 'rootElements', 0 ]);
+    }
+  }
+
+  return { check };
+}
+
+function fakeCheckRuleWithObject() {
+  function check(node, reporter) {
+    if (is(node, 'Collaboration')) {
+      reporter.report(node.id, 'Collaboration detected', {
+        path: [ 'rootElements', 0 ],
+        foo: 'foo'
+      });
     }
   }
 

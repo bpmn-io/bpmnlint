@@ -235,6 +235,7 @@ describe('cli', function() {
     });
   });
 
+
   describe('should handle glob star patterns', function() {
     test({
       cmd: [ 'bpmnlint', '*.bpmn'],
@@ -298,6 +299,7 @@ describe('cli', function() {
       }
     });
   });
+
 });
 
 // helper /////////////////////////////
