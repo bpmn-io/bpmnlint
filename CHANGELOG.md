@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.6.0
+
+* `FEAT`: allow passing object as third parameter to `Reporter#report` ([#75](https://github.com/bpmn-io/bpmnlint/pull/75))
+
+
 ## 7.5.0
 
 * `FEAT`: add optional `path` parameter to `Reporter#report` ([#73](https://github.com/bpmn-io/bpmnlint/pull/73))
