@@ -25,7 +25,11 @@ module.exports = function() {
       const eventDefinitions = flowElement.eventDefinitions || [];
 
       if (eventDefinitions.length === 0) {
-        reporter.report(flowElement.id, 'Start event is missing event definition', [ 'eventDefinitions' ]);
+        reporter.report({
+          id: flowElement.id,
+          message: 'Start event is missing event definition',
+          path: [ 'eventDefinitions' ]
+        });
       }
     });
   }

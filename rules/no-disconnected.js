@@ -33,7 +33,10 @@ module.exports = function() {
     const outgoing = node.outgoing || [];
 
     if (!incoming.length && !outgoing.length) {
-      reporter.report(node.id, 'Element is not connected');
+      reporter.report({
+        id: node.id,
+        message: 'Element is not connected'
+      });
     }
   }
 

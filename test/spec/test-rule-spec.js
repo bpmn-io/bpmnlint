@@ -25,50 +25,10 @@ describe('test-rule', function() {
         message: 'Definitions detected'
       }
     ];
+
     const messages = testRule({
       moddleRoot,
       rule: createRule(fakeCheckRuleWithReports)
-    });
-
-    // then
-    expect(messages).to.eql(expectedMessages);
-  });
-
-
-  it('should return check function reported messages (id, message, path)', () => {
-
-    // given
-    const expectedMessages = [
-      {
-        id: 'Collaboration_0wzd2dx',
-        message: 'Collaboration detected',
-        path: [ 'rootElements', 0 ]
-      }
-    ];
-    const messages = testRule({
-      moddleRoot,
-      rule: createRule(fakeCheckRuleWithPath)
-    });
-
-    // then
-    expect(messages).to.eql(expectedMessages);
-  });
-
-
-  it('should return check function reported messages (id, message, { path })', () => {
-
-    // given
-    const expectedMessages = [
-      {
-        id: 'Collaboration_0wzd2dx',
-        message: 'Collaboration detected',
-        path: [ 'rootElements', 0 ],
-        foo: 'foo'
-      }
-    ];
-    const messages = testRule({
-      moddleRoot,
-      rule: createRule(fakeCheckRuleWithObject)
     });
 
     // then
@@ -119,29 +79,9 @@ describe('test-rule', function() {
 function fakeCheckRuleWithReports() {
   function check(node, reporter) {
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions detected');
-    }
-  }
-
-  return { check };
-}
-
-function fakeCheckRuleWithPath() {
-  function check(node, reporter) {
-    if (is(node, 'Collaboration')) {
-      reporter.report(node.id, 'Collaboration detected', [ 'rootElements', 0 ]);
-    }
-  }
-
-  return { check };
-}
-
-function fakeCheckRuleWithObject() {
-  function check(node, reporter) {
-    if (is(node, 'Collaboration')) {
-      reporter.report(node.id, 'Collaboration detected', {
-        path: [ 'rootElements', 0 ],
-        foo: 'foo'
+      reporter.report({
+        id: node.id,
+        message: 'Definitions detected'
       });
     }
   }
@@ -152,13 +92,19 @@ function fakeCheckRuleWithObject() {
 function fakeEnterLeaveRuleWithReports() {
   function enter(node, reporter) {
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions enter');
+      reporter.report({
+        id: node.id,
+        message: 'Definitions enter'
+      });
     }
   }
 
   function leave(node, reporter) {
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions leave');
+      reporter.report({
+        id: node.id,
+        message: 'Definitions leave'
+      });
     }
   }
 

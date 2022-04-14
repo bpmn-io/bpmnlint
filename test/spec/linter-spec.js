@@ -892,7 +892,10 @@ async function fakeAsyncRule() {
   function check(node, reporter) {
 
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions detected');
+      reporter.report({
+        id: node.id,
+        message: 'Definitions detected'
+      });
     }
   }
 
@@ -906,7 +909,10 @@ function fakeRule() {
   function check(node, reporter) {
 
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions detected');
+      reporter.report({
+        id: node.id,
+        message: 'Definitions detected'
+      });
     }
   }
 
@@ -956,7 +962,10 @@ function fakeEnterLeaveRule() {
     }
 
     if (is(node, 'Definitions') && seen[node.id]) {
-      reporter.report(node.id, 'Definitions seen');
+      reporter.report({
+        id: node.id,
+        message: 'Definitions seen'
+      });
     }
   }
 

@@ -19,7 +19,10 @@ module.exports = function() {
     const outgoing = node.outgoing || [];
 
     if (incoming.length > 1 && outgoing.length > 1) {
-      reporter.report(node.id, 'Gateway forks and joins');
+      reporter.report({
+        id: node.id,
+        message: 'Gateway forks and joins'
+      });
     }
   }
 

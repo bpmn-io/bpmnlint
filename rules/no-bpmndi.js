@@ -30,7 +30,10 @@ module.exports = function() {
     // (4) Report elements without BPMNDI
     visualBpmnElements.forEach((element) => {
       if (diBpmnReferences.indexOf(element.id) === -1) {
-        reporter.report(element.id, 'Element is missing bpmndi');
+        reporter.report({
+          id: element.id,
+          message: 'Element is missing bpmndi'
+        });
       }
     });
   }

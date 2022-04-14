@@ -26,7 +26,11 @@ module.exports = function() {
       const eventDefinitions = flowElement.eventDefinitions || [];
 
       if (eventDefinitions.length > 0) {
-        reporter.report(flowElement.id, 'Start event must be blank', [ 'eventDefinitions' ]);
+        reporter.report({
+          id: flowElement.id,
+          message: 'Start event must be blank',
+          path: [ 'eventDefinitions' ]
+        });
       }
     });
   }
