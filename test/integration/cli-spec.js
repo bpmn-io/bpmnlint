@@ -15,7 +15,7 @@ describe('cli', function() {
 
     this.timeout(30000);
 
-    return exec('install-local', [], __dirname + '/cli');
+    return exec('install-local', [], path.normalize(__dirname + '/cli'));
   });
 
 
@@ -304,12 +304,19 @@ describe('cli', function() {
 
 // helper /////////////////////////////
 
-function exec(prog, args, cwd, options = {}) {
+async function exec(prog, args, cwd, options = {}) {
+  let result;
 
-  return execa(prog, args, {
-    cwd,
-    ...options
-  });
+  try {
+    result = await execa(prog, args, {
+      cwd,
+      ...options
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  return result;
 }
 
 function test(options) {
@@ -330,7 +337,7 @@ function test(options) {
     // when
     const {
       stdout
-    } = await exec('npm', [ 'test', '--', ...cmd ], __dirname + '/cli', {
+    } = await exec('npm', [ 'test', '--', ...cmd ], path.normalize(__dirname + '/cli'), {
       env: {
         BPMNLINT_TEST_CWD: cwd || ''
       }
@@ -366,7 +373,7 @@ function testOnly(options) {
 }
 
 function diagramPath(diagramName) {
-  return path.resolve(`${__dirname}/cli/${diagramName}`);
+  return path.resolve(path.normalize(`${__dirname}/cli/${diagramName}`));
 }
 
 function parseOutput(output, separator) {
