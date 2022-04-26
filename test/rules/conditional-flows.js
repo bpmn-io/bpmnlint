@@ -33,7 +33,8 @@ RuleTester.verify('conditional-flows', rule, {
       report: {
         id: 'Flow_2',
         message: 'Sequence flow is missing condition',
-        path: [ 'conditionExpression' ]
+        path: [ 'conditionExpression' ],
+        fix: '...'
       }
     },
     {
@@ -62,6 +63,19 @@ RuleTester.verify('conditional-flows', rule, {
         message: 'Sequence flow is missing condition',
         path: [ 'conditionExpression' ]
       }
+    }
+  ],
+  fix: [
+    {
+      name: 'fork after exclusive gateway',
+      moddleElement: readModdle(__dirname + '/conditional-flows/invalid-fork-after-exclusive-gateway.bpmn'),
+      report: {
+        id: 'Flow_2',
+        message: 'Sequence flow is missing condition',
+        path: [ 'conditionExpression' ]
+      },
+      fix: true,
+      it: it.only
     }
   ]
 });

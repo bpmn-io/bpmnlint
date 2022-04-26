@@ -18,6 +18,7 @@ const { promisify } = require('util');
 
 const tinyGlob = require('tiny-glob');
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 const BpmnModdle = require('bpmn-moddle');
 
@@ -97,6 +98,23 @@ async function parseDiagram(diagramXML) {
     return {
       error,
       warnings
+    };
+  }
+}
+
+async function stringifyDiagram(moddleElement) {
+
+  try {
+    const {
+      xml
+    } = await moddle.toXML(moddleElement);
+
+    return {
+      xml
+    };
+  } catch (error) {
+    return {
+      error
     };
   }
 }
@@ -282,6 +300,15 @@ async function lintDiagram(diagramPath, config) {
       ...lintReports
     };
 
+    if (config.fix) {
+      const { xml } = await stringifyDiagram(moddleElement);
+
+      const parts = diagramPath.split('.'),
+            fixedDiagramPath = [ ...parts.slice(0, -1), '-fixed', ...parts.slice(-1) ];
+
+      await writeFile(fixedDiagramPath, xml);
+    }
+
     return printReports(diagramPath, allResults);
   } catch (e) {
     return errorAndExit(e);
@@ -334,7 +361,8 @@ async function run() {
     init,
     version,
     config: configOverridePath,
-    _: files
+    _: files,
+    fix = false
   } = mri(process.argv.slice(2), {
     string: [ 'config' ],
     alias: {
@@ -393,7 +421,10 @@ Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#confi
 
   const actualFiles = await glob(files);
 
-  return lint(actualFiles, config);
+  return lint(actualFiles, {
+    ...config,
+    fix
+  });
 }
 
 run().catch(errorAndExit);

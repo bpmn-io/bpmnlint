@@ -23,7 +23,10 @@ module.exports = function() {
         reporter.report({
           id: flow.id,
           message: 'Sequence flow is missing condition',
-          path: [ 'conditionExpression' ]
+          path: [ 'conditionExpression' ],
+          fix: () => {
+            flow.set('conditionExpression', 'foo');
+          }
         });
       }
     });
