@@ -2,7 +2,8 @@ import BpmnModdle from 'bpmn-moddle';
 
 import {
   expectEqual,
-  getTitle
+  getTitle,
+  replacer
 } from '../../../lib/testers/rule-tester';
 
 import { expect } from '../../helper';
@@ -76,6 +77,42 @@ describe('rule-tester', function() {
 
       // then
       expect(title).to.equal('test case #2 foo');
+    });
+
+  });
+
+
+  describe('replacer', function() {
+
+    it('should replace node', function() {
+
+      // given
+      const report = {
+        foo: 'bar',
+        bar: 0,
+        baz: [
+          {
+            foo: 'bar'
+          },
+          moddle.create('bpmn:Task'),
+          1
+        ]
+      };
+
+      // when
+      // then
+      expect(JSON.stringify(report, replacer, 2)).to.eql(JSON.stringify({
+        foo: 'bar',
+        bar: 0,
+        baz: [
+          {
+            foo: 'bar'
+          },
+          'bpmn:Task',
+          1
+        ]
+      }, null, 2));
+
     });
 
   });
