@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.7.0
+
+* `FEAT`: fuzzy test for equality of nodes when using `RuleTester#verify` ([#79](https://github.com/bpmn-io/bpmnlint/pull/79/files))
+
 ## 7.6.0
 
 * `FEAT`: allow passing object as third parameter to `Reporter#report` ([#75](https://github.com/bpmn-io/bpmnlint/pull/75))
