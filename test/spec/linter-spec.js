@@ -220,6 +220,35 @@ describe('linter', function() {
       });
 
 
+      it('should resolve and configure', async function() {
+
+        // given
+        const resolver = {
+          resolveRule(pkg, ruleName) {
+            expect(pkg).to.eql('bpmnlint');
+
+            expect(ruleName).to.eql('testRule');
+
+            return fakeRule;
+          }
+        };
+
+        const linter = new Linter({ resolver });
+
+        // when
+        const lintResults = await linter.lint(moddleRoot, {
+          rules: {
+            testRule: [ 'error', { message: 'foo' } ]
+          }
+        });
+
+        // then
+        expect(lintResults).to.eql({
+          testRule: buildFakeResults('error', 'foo')
+        });
+      });
+
+
       it('should resolve async', async function() {
 
         // given
@@ -901,12 +930,13 @@ async function fakeAsyncRule() {
   };
 }
 
-function fakeRule() {
+function fakeRule(config = {}) {
+  const { message } = config;
 
   function check(node, reporter) {
 
     if (is(node, 'Definitions')) {
-      reporter.report(node.id, 'Definitions detected');
+      reporter.report(node.id, message || 'Definitions detected');
     }
   }
 
@@ -916,11 +946,11 @@ function fakeRule() {
 }
 
 
-function buildFakeResults(category) {
+function buildFakeResults(category, message) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
-      message: 'Definitions detected'
+      message: message || 'Definitions detected'
     }
   ];
 
