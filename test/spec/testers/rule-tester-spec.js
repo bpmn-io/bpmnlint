@@ -3,10 +3,14 @@ import BpmnModdle from 'bpmn-moddle';
 import {
   expectEqual,
   getTitle,
-  replacer
+  replacer,
+  verify
 } from '../../../lib/testers/rule-tester';
 
-import { expect } from '../../helper';
+import {
+  createModdle,
+  expect
+} from '../../helper';
 
 
 describe('rule-tester', function() {
@@ -18,7 +22,7 @@ describe('rule-tester', function() {
   });
 
 
-  describe('expectEqual', function() {
+  describe('#expectEqual', function() {
 
     it('should not be equal', function() {
 
@@ -82,7 +86,7 @@ describe('rule-tester', function() {
   });
 
 
-  describe('replacer', function() {
+  describe('#replacer', function() {
 
     it('should replace node', function() {
 
@@ -112,6 +116,36 @@ describe('rule-tester', function() {
           1
         ]
       }, null, 2));
+
+    });
+
+  });
+
+
+  describe('#verify', function() {
+
+    describe('with local config', function() {
+
+      verify('with-local-config', (config) => {
+        return {
+          check: (node, reporter) => {
+            reporter.report(node.get('id'), config);
+          }
+        };
+      }, {
+        valid: [],
+        invalid: [
+          {
+            name: 'with config',
+            config: 'foo',
+            moddleElement: createModdle('<bpmn:Task id="Task_1" />', 'bpmn:Task'),
+            report: {
+              id: 'Task_1',
+              message: 'foo'
+            }
+          }
+        ]
+      });
 
     });
 
