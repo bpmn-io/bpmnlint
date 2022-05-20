@@ -1,0 +1,12 @@
+{
+  "name": "moddle-extension-test",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bpmnlint-plugin-test-camunda": "file:../../bpmnlint-plugin-test-camunda",
+    "camunda-bpmn-moddle": "^6.1.2"
+  },
+  "localDependencies": {
+    "bpmnlint-plugin-test-camunda": "../../bpmnlint-plugin-test-camunda"
+  }
+}

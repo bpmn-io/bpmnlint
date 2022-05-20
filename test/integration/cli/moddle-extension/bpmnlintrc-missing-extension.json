@@ -1,0 +1,6 @@
+{
+  "extends": "plugin:test-camunda/recommended",
+  "moddleExtensions": {
+    "missing-extension": "./non-existing.json"
+  }
+}

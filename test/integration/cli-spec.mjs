@@ -384,6 +384,50 @@ describe('cli', function() {
     });
   });
 
+
+  describe('should handle moddle extensions', function() {
+
+    before(function() {
+
+      this.timeout(30000);
+
+      return exec('install-local', [], __dirname + '/cli/moddle-extension');
+    });
+
+
+    verify({
+      cmd: [ 'bpmnlint', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/moddle-extension',
+      expect: {
+        code: 1,
+        stderr: EMPTY,
+        stdout: `
+
+        ${diagramPath('moddle-extension/diagram.bpmn')}
+          ServiceTask  error  Element is a camunda:ServiceTaskLike <Service Task>  test-camunda/no-service-task-like
+
+        ✖ 1 problem (1 error, 0 warnings)
+      `
+      }
+    });
+
+
+    verify({
+      cmd: [ 'bpmnlint', '-c', 'bpmnlintrc-missing-extension.json', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/moddle-extension',
+      expect: {
+        code: 1,
+        stderr: `
+        Error: Could not load moddle extension <missing-extension> from ./non-existing.json
+         Cannot find module './non-existing.json'
+        Require stack:
+        - ${diagramPath('moddle-extension/__placeholder__.js')}
+        `,
+        stdout: EMPTY
+      }
+    });
+  });
+
 });
 
 // helper /////////////////////////////
@@ -429,11 +473,11 @@ function verify(options) {
 
     // then
     if (expected.stderr || actualStderr) {
-      expectOutput(actualStderr, expected.stderr || '');
+      expectOutput(actualStderr, expected.stderr || '', 'stderr');
     }
 
     if (expected.stdout || actualStdout) {
-      expectOutput(actualStdout, expected.stdout || '');
+      expectOutput(actualStdout, expected.stdout || '', 'stdout');
     }
 
     expect(actualCode).to.eql(expected.code || 0);
@@ -460,7 +504,7 @@ function parseOutput(output, separator) {
   return trimRight(output.split(regexp)[1]);
 }
 
-function expectOutput(actual, expected) {
+function expectOutput(actual, expected, name) {
 
   let matcher;
 
@@ -474,7 +518,7 @@ function expectOutput(actual, expected) {
     matcher = 'eql';
   }
 
-  expect(actual).to[matcher](expected);
+  expect(actual, name).to[matcher](expected);
 }
 
 function trimRight(output) {
