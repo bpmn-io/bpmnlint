@@ -1,0 +1,6 @@
+{
+  "extends": "plugin:test-camunda/recommended",
+  "moddleExtensions": {
+    "camunda": "camunda-bpmn-moddle/resources/camunda.json"
+  }
+}
