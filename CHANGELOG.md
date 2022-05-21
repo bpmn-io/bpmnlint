@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.8.0
+
+* `FEAT`: be able to configure rules ([#82](https://github.com/bpmn-io/bpmnlint/pull/82))
+* `FEAT`: be able to configure rules when testing ([#83](https://github.com/bpmn-io/bpmnlint/pull/83))
+
 ## 7.7.0
 
 * `FEAT`: fuzzy test for equality of nodes when using `RuleTester#verify` ([#79](https://github.com/bpmn-io/bpmnlint/pull/79/files))
