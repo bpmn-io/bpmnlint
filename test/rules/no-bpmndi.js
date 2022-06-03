@@ -47,6 +47,9 @@ RuleTester.verify('no-bpmndi', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/valid-no-lanes.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-message-flow.bpmn')
     }
   ],
   invalid: [
@@ -152,6 +155,13 @@ RuleTester.verify('no-bpmndi', rule, {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-missing-nested-lane-deep.bpmn'),
       report: {
         id: 'lane7',
+        message: 'Element is missing bpmndi'
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-message-flow.bpmn'),
+      report: {
+        id: 'danglingMessageFlow',
         message: 'Element is missing bpmndi'
       }
     }

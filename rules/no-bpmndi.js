@@ -53,7 +53,6 @@ module.exports = function() {
  */
 function getAllBpmnElements(rootElements) {
   return flatten(rootElements.map((rootElement) => {
-
     const laneSet =
       rootElement.laneSets && rootElement.laneSets[0] || rootElement.childLaneSet;
 
@@ -66,13 +65,15 @@ function getAllBpmnElements(rootElements) {
     // * nested laneSets
     // * childLaneSets
     // * nested childLaneSets
+    // * messageFlows
     const elements = flatten([].concat(
       rootElement.flowElements || [],
       (rootElement.flowElements && getAllBpmnElements(rootElement.flowElements.filter(hasFlowElements))) || [],
       rootElement.participants || [],
       rootElement.artifacts || [],
       laneSet && laneSet.lanes || [],
-      laneSet && laneSet.lanes && getAllBpmnElements(laneSet.lanes.filter(hasChildLaneSet)) || []
+      laneSet && laneSet.lanes && getAllBpmnElements(laneSet.lanes.filter(hasChildLaneSet)) || [],
+      rootElement.messageFlows || []
     ));
 
     if (elements.length > 0) {
