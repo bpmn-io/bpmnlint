@@ -30,7 +30,7 @@ jobs:
     - name: Build
       run: COVERAGE=1 npm run all
     - name: Upload coverage
-      run: npx codecov
+      uses: codecov/codecov-action@v2
   Build-Nodes:
     runs-on: ${{ matrix.os }}
 
