@@ -28,7 +28,7 @@ const Table = require('cli-table');
 
 const pluralize = require('pluralize');
 
-const { pathStringify } = require('@philippfromme/moddle-helpers');
+const { pathStringify } = require('@bpmn-io/moddle-utils');
 
 const CONFIG_NAME = '.bpmnlintrc';
 
