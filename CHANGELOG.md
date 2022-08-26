@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 7.9.0
+
+* `FEAT`: detect messageflows without DI ([#85](https://github.com/bpmn-io/bpmnlint/pull/85))
+* `DEPS`: depend on @bpmn-io/moddle-utils ([`31de95a3`](https://github.com/bpmn-io/bpmnlint/commit/31de95a349fb3784d2b51e3b4071abc1d82d8d7a))
+
 ## 7.8.0
 
 * `FEAT`: be able to configure rules ([#82](https://github.com/bpmn-io/bpmnlint/pull/82))
