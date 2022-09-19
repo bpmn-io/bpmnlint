@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.0.0
+
+* `FEAT`: serialize disabled rules ([#90](https://github.com/bpmn-io/bpmnlint/pull/90))
+* `CHORE`: drop `Node@10` support
+
 ## 7.9.0
 
 * `FEAT`: detect messageflows without DI ([#85](https://github.com/bpmn-io/bpmnlint/pull/85))
