@@ -396,6 +396,6 @@ function expectOutput(actual, expected) {
 function trimRight(output) {
   return output
     .split(/\n/)
-    .map(s => s.replace(/\s+$/, EMPTY))
+    .map(s => s.replace(/\s+$/, EMPTY)).filter(s => s)
     .join('\n');
 }
