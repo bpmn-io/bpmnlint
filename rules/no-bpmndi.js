@@ -116,7 +116,7 @@ function getAllDiBpmnReferences(definitionsNode) {
 }
 
 function hasVisualRepresentation(element) {
-  const noVisRepresentation = ['bpmn:DataObject'];
+  const noVisRepresentation = [ 'bpmn:DataObject' ];
 
   return noVisRepresentation.includes(element.$type) ? false : true;
 }

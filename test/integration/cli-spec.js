@@ -238,7 +238,7 @@ describe('cli', function() {
 
   describe('should handle glob star patterns', function() {
     test({
-      cmd: [ 'bpmnlint', '*.bpmn'],
+      cmd: [ 'bpmnlint', '*.bpmn' ],
       cwd: __dirname + '/cli',
       expect: {
         code: 1,
@@ -277,7 +277,7 @@ describe('cli', function() {
     });
 
     test({
-      cmd: [ 'bpmnlint', 'glob/**/*.bpmn'],
+      cmd: [ 'bpmnlint', 'glob/**/*.bpmn' ],
       cwd: __dirname + '/cli',
       expect: {
         code: 1,

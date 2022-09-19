@@ -1,9 +1,5 @@
 {
   "extends": [
-    "plugin:bpmn-io/es6"
-  ],
-  "env": {
-    "node": true,
-    "es6": true
-  }
+    "plugin:bpmn-io/node"
+  ]
 }
