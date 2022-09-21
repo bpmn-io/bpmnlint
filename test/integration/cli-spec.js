@@ -118,6 +118,44 @@ describe('cli', function() {
     });
 
 
+    describe('--max-warnings', function() {
+
+      test({
+        cmd: [ 'bpmnlint', '--max-warnings=3', 'diagram-warnings.bpmn' ],
+        expect: {
+          code: 0,
+          stderr: EMPTY,
+          stdout: `
+
+            ${diagramPath('diagram-warnings.bpmn')}
+              Event_1h4k8sc  warning  Element is missing label/name  label-required
+              Event_0ye2l10  warning  Element is missing label/name  label-required
+
+            ✖ 2 problems (0 errors, 2 warnings)
+          `
+        }
+      });
+
+
+      test({
+        cmd: [ 'bpmnlint', '--max-warnings=0', 'diagram-warnings.bpmn' ],
+        expect: {
+          code: 1,
+          stderr: EMPTY,
+          stdout: `
+
+            ${diagramPath('diagram-warnings.bpmn')}
+              Event_1h4k8sc  warning  Element is missing label/name  label-required
+              Event_0ye2l10  warning  Element is missing label/name  label-required
+
+            ✖ 2 problems (0 errors, 2 warnings)
+          `
+        }
+      });
+
+    });
+
+
     test({
       cmd: [ 'bpmnlint', '-c', 'non-existing.json', 'diagram.bpmn' ],
       expect: {
@@ -271,7 +309,11 @@ describe('cli', function() {
             Process_08k516a  error  Process is missing start event  start-event-required
             Process_08k516a  error  Process is missing end event    end-event-required
 
-          ✖ 18 problems (8 errors, 10 warnings)
+          ${diagramPath('diagram-warnings.bpmn')}
+            Event_1h4k8sc  warning  Element is missing label/name  label-required
+            Event_0ye2l10  warning  Element is missing label/name  label-required
+
+          ✖ 20 problems (8 errors, 12 warnings)
         `
       }
     });
