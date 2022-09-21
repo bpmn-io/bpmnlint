@@ -41,11 +41,12 @@ Usage
     $ bpmnlint diagram.bpmn
 
   Options
-    --config, -c  Path to configuration file. It overrides .bpmnlintrc if present.
-    --init        Generate a .bpmnlintrc file in the current working directory
+    --config, -c    Path to configuration file. It overrides .bpmnlintrc if present
+    --init          Generate a .bpmnlintrc file in the current working directory
+    --max-warnings  Number of warnings to trigger nonzero exit code - default: -1
 
   Examples
-    $ bpmnlint ./invoice.bpmn
+    $ bpmnlint ./invoice.bpmn --max-warnings=0
     $ bpmnlint --init
 
 `;
@@ -288,7 +289,7 @@ async function lintDiagram(diagramPath, config) {
   }
 }
 
-async function lint(files, config) {
+async function lint(files, config, maxWarnings) {
 
   let errorCount = 0;
   let warningCount = 0;
@@ -321,7 +322,7 @@ async function lint(files, config) {
     ));
   }
 
-  if (errorCount) {
+  if (errorCount || (maxWarnings >= 0 && maxWarnings < warningCount)) {
     process.exit(1);
   }
 
@@ -334,11 +335,15 @@ async function run() {
     init,
     version,
     config: configOverridePath,
+    'max-warnings': maxWarnings,
     _: files
   } = mri(process.argv.slice(2), {
     string: [ 'config' ],
     alias: {
       c: 'config'
+    },
+    default: {
+      'max-warnings': -1
     }
   });
 
@@ -393,7 +398,7 @@ Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#confi
 
   const actualFiles = await glob(files);
 
-  return lint(actualFiles, config);
+  return lint(actualFiles, config, maxWarnings);
 }
 
 run().catch(errorAndExit);

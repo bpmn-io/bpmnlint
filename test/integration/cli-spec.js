@@ -117,6 +117,37 @@ describe('cli', function() {
       }
     });
 
+    [0, 1].forEach((v) => test({
+      cmd: [ 'bpmnlint', 'diagram-warnings.bpmn' ],
+      expect: {
+        code: 1,
+        stderr: EMPTY,
+        stdout: `
+
+          ${diagramPath('diagram-warnings.bpmn')}
+            Activity_14kz74k  warning  Incoming flows do not join  fake-join
+            Activity_1b4a52y  warning  Incoming flows do not join  fake-join
+
+          ✖ 2 problems (0 errors, 2 warnings)
+        `
+      }
+    }));
+
+    [-1, 2, 3].forEach((v) => test({
+      cmd: [ 'bpmnlint', 'diagram-warnings.bpmn' ],
+      expect: {
+        code: 0,
+        stderr: EMPTY,
+        stdout: `
+
+          ${diagramPath('diagram-warnings.bpmn')}
+            Activity_14kz74k  warning  Incoming flows do not join  fake-join
+            Activity_1b4a52y  warning  Incoming flows do not join  fake-join
+
+          ✖ 2 problems (0 errors, 2 warnings)
+        `
+      }
+    }));
 
     test({
       cmd: [ 'bpmnlint', '-c', 'non-existing.json', 'diagram.bpmn' ],
