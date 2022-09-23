@@ -8,13 +8,10 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 8.0.0
 
-* `FEAT`: serialize disabled rules ([#90](https://github.com/bpmn-io/bpmnlint/pull/90))
-* `CHORE`: drop `Node@10` support
-
-## 7.9.0
-
 * `FEAT`: detect messageflows without DI ([#85](https://github.com/bpmn-io/bpmnlint/pull/85))
+* `FEAT`: serialize disabled rules ([#90](https://github.com/bpmn-io/bpmnlint/pull/90))
 * `DEPS`: depend on @bpmn-io/moddle-utils ([`31de95a3`](https://github.com/bpmn-io/bpmnlint/commit/31de95a349fb3784d2b51e3b4071abc1d82d8d7a))
+* `CHORE`: drop `Node@10` support
 
 ## 7.8.0
 
