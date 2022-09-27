@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.1.0
+
+* `FEAT`: add `--max-warnings` cli switch ([#92](https://github.com/bpmn-io/bpmnlint/pull/92))
+
 ## 8.0.0
 
 * `FEAT`: detect messageflows without DI ([#85](https://github.com/bpmn-io/bpmnlint/pull/85))
