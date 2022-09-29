@@ -16,6 +16,6 @@ module.exports = {
     'single-event-definition': 'error',
     'start-event-required': 'error',
     'sub-process-blank-start-event': 'error',
-    'superfluous-gateway': 'warning'
+    'superfluous-gateway': 'warn'
   }
 };
