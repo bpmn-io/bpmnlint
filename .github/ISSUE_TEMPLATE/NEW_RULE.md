@@ -1,7 +1,7 @@
 ---
 name: Propose new Rule
 about: Use this template to propose new modeling rules to be included in the library.
-
+labels: [ "rules" ]
 ---
 
 #### The rule should detect the following modeling patterns
@@ -20,7 +20,7 @@ Describe how people would benefit from this modeling rule. This will be included
 #### Rule Details
 
 * Name: 
-* Default notification level: `error|warning|off`
+* Default notification level: `error|warn|off`
 
 
 #### What alternatives did you consider? 
