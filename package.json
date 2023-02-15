@@ -31,7 +31,8 @@
     "lint": "eslint .",
     "dev": "npm test -- --watch",
     "test": "mocha -r esm --exclude 'test/integration/cli/**' 'test/**/*.js'",
-    "test-coverage": "nyc --reporter=lcov --reporter=html npm test"
+    "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
+    "generate-docs-images": "npx @bpmn-io/bpmnlint-generate-docs-images ."
   },
   "bin": {
     "bpmnlint": "./bin/bpmnlint.js"
