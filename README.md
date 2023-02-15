@@ -64,15 +64,13 @@ Add or customize rules using the `rules` block:
 
 ## Writing a Plug-in
 
-Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) for details on how to define, test, and consume custom lint rules.
-
 Create your first plug-in using the [plugin creator](https://github.com/nikku/create-bpmnlint-plugin):
 
 ```sh
 npm init bpmnlint-plugin {PLUGIN_NAME}
 ```
 
-Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
+Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) for details on how to define, test, and consume custom lint rules. Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
 
 
 ## Visual Feedback
