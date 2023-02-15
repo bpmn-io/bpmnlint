@@ -69,13 +69,17 @@ Integrate the linter via [bpmn-js-bpmnlint](https://github.com/bpmn-io/bpmn-js-b
 To try out visual validation, checkout the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground).
 
 
-## Writing / Consuming Custom Rules
-
-Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
-
-Create your first plug-in using the [plugin creator](https://github.com/nikku/create-bpmnlint-plugin).
+## Writing a Plug-in
 
 Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) for details on how to define, test, and consume custom lint rules.
+
+Create your first plug-in using the [plugin creator](https://github.com/nikku/create-bpmnlint-plugin):
+
+```sh
+npm init bpmnlint-plugin {PLUGIN_NAME}
+```
+
+Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
 
 
 ## License
