@@ -9,11 +9,11 @@
       <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_1" />
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1">
+    <bpmn:parallelGateway id="ExclusiveGateway_1">
       <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_4</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
+    </bpmn:parallelGateway>
     <bpmn:sequenceFlow id="SequenceFlow_2" sourceRef="Task_1" targetRef="ExclusiveGateway_1" />
     <bpmn:endEvent id="EndEvent_1">
       <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
