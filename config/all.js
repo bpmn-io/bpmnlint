@@ -1,6 +1,7 @@
 const allRules = [
   'conditional-flows',
   'end-event-required',
+  'event-scopes',
   'event-sub-process-typed-start-event',
   'fake-join',
   'label-required',

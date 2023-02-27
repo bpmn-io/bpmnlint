@@ -2,6 +2,7 @@ module.exports = {
   rules: {
     'conditional-flows': 'error',
     'end-event-required': 'error',
+    'event-scopes': 'error',
     'event-sub-process-typed-start-event': 'error',
     'fake-join': 'warn',
     'label-required': 'error',

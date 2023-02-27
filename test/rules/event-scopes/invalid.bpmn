@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_04rgkmg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.8.0-rc.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:task id="Task_1" />
+    <bpmn:subProcess id="EventSubProcess_1" triggeredByEvent="true">
+      <bpmn:startEvent id="ErrorStartEvent_1">
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0cwp2ah" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:boundaryEvent id="ErrorBoundaryEvent_1" attachedToRef="Task_1">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0ndh5dy" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="ErrorBoundaryEvent_2" attachedToRef="Task_1">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0jc1gvd" errorRef="Error_0gtm0xq" />
+    </bpmn:boundaryEvent>
+    <bpmn:subProcess id="EventSubProcess_2" triggeredByEvent="true">
+      <bpmn:startEvent id="ErrorStartEvent_2">
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_1r7yy17" errorRef="Error_0gtm0xq" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:task id="Task_2" />
+    <bpmn:boundaryEvent id="EscalationBoundaryEvent_1" attachedToRef="Task_2">
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1vanwkv" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="EscalationBoundaryEvent_2" attachedToRef="Task_2">
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1bdky9f" escalationRef="Escalation_24li51p" />
+    </bpmn:boundaryEvent>
+    <bpmn:subProcess id="EventSubProcess_3" triggeredByEvent="true">
+      <bpmn:startEvent id="EscalationStartEvent_1">
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_1omdvnr" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="EventSubProcess_4" triggeredByEvent="true">
+      <bpmn:startEvent id="EscalationStartEvent_2">
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_1ew5qbw" escalationRef="Escalation_24li51p" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:error id="Error_0gtm0xq" name="Error_1" />
+  <bpmn:escalation id="Escalation_24li51p" name="Escalation_1" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Activity_1f6p5b9_di" bpmnElement="Task_1">
+        <dc:Bounds x="160" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xf805i_di" bpmnElement="Task_2">
+        <dc:Bounds x="330" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zs9trq_di" bpmnElement="EventSubProcess_1" isExpanded="true">
+        <dc:Bounds x="160" y="210" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0umywyf_di" bpmnElement="ErrorStartEvent_1">
+        <dc:Bounds x="200" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1oe717r_di" bpmnElement="EventSubProcess_2" isExpanded="true">
+        <dc:Bounds x="160" y="440" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xkrvt0_di" bpmnElement="ErrorStartEvent_2">
+        <dc:Bounds x="200" y="522" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zsx1ll_di" bpmnElement="EventSubProcess_3" isExpanded="true">
+        <dc:Bounds x="550" y="210" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hvp5m6_di" bpmnElement="EscalationStartEvent_1">
+        <dc:Bounds x="590" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1l74lpc" bpmnElement="EventSubProcess_4" isExpanded="true">
+        <dc:Bounds x="550" y="440" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1h9mdut" bpmnElement="EscalationStartEvent_2">
+        <dc:Bounds x="590" y="522" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lswrm0_di" bpmnElement="ErrorBoundaryEvent_2">
+        <dc:Bounds x="242" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0i6u62b_di" bpmnElement="ErrorBoundaryEvent_1">
+        <dc:Bounds x="142" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00kq7ve_di" bpmnElement="EscalationBoundaryEvent_1">
+        <dc:Bounds x="312" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0aijfox_di" bpmnElement="EscalationBoundaryEvent_2">
+        <dc:Bounds x="412" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
