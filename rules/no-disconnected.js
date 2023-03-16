@@ -32,7 +32,12 @@ module.exports = function() {
     const incoming = node.incoming || [];
     const outgoing = node.outgoing || [];
 
-    if (!incoming.length && !outgoing.length) {
+    // one of the connections is enough for events.
+    // Other elements need both incoming and outgoing present
+    const isEventDisconnected = is(node, 'bpmn:Event') && !incoming.length && !outgoing.length;
+    const isNonEventDisconnected = !is(node, 'bpmn:Event') && (!incoming.length || !outgoing.length);
+
+    if (isEventDisconnected || isNonEventDisconnected) {
       reporter.report(node.id, 'Element is not connected');
     }
   }
