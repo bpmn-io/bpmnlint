@@ -62,6 +62,52 @@ Add or customize rules using the `rules` block:
 ```
 
 
+## API
+
+Invoke the tool directly from [NodeJS](https://nodejs.org/en):
+
+```javascript
+import Linter from 'bpmnlint';
+import NodeResolver from 'bpmnlint/lib/resolver/node-resolver';
+
+import BpmnModdle from 'bpmn-moddle';
+
+const linter = new Linter({ 
+  config: {
+    extends: 'bpmnlint:recommended'
+  },
+  resolver: new NodeResolver()
+});
+
+const xmlStr = `
+  <?xml version="1.0" encoding="UTF-8"?>
+  <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+                     id="definitions" 
+                     targetNamespace="http://bpmn.io/schema/bpmn">
+    <bpmn:process id="process" />
+  </bpmn:definitions>
+`;
+
+const {
+  rootElement: definitions
+} = await moddle.fromXML(xmlStr);
+
+const reports = linter.lint(definitions);
+
+// {
+//    "end-event-required": [
+//      {
+//        "id": "process",
+//        "message": "Process is missing end event"
+//      }
+//    ],
+//    ...
+// }
+```
+
+For browser usage include your [linting configuration](#configuration) using your favorite bundler plug-in ([Rollup](https://www.npmjs.com/package/rollup-plugin-bpmnlint), [Webpack](https://www.npmjs.com/package/bpmnlint-loader)).
+
+
 ## Writing a Plug-in
 
 Create your first plug-in using the [plugin creator](https://github.com/nikku/create-bpmnlint-plugin):
