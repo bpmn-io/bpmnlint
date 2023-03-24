@@ -220,7 +220,7 @@ describe('linter', function() {
       });
 
 
-      it('should resolve and configure', async function() {
+      describe('should resolve and configure', function() {
 
         // given
         const resolver = {
@@ -233,19 +233,26 @@ describe('linter', function() {
           }
         };
 
-        const linter = new Linter({ resolver });
+        [ 'warn', 'error', 'info' ].forEach(category => {
 
-        // when
-        const lintResults = await linter.lint(moddleRoot, {
-          rules: {
-            testRule: [ 'error', { message: 'foo' } ]
-          }
+          it(category, async function() {
+
+            const linter = new Linter({ resolver });
+
+            // when
+            const lintResults = await linter.lint(moddleRoot, {
+              rules: {
+                testRule: [ category, { message: 'foo' } ]
+              }
+            });
+
+            // then
+            expect(lintResults).to.eql({
+              testRule: buildFakeResults(category, 'foo')
+            });
+          });
         });
 
-        // then
-        expect(lintResults).to.eql({
-          testRule: buildFakeResults('error', 'foo')
-        });
       });
 
 
@@ -362,6 +369,11 @@ describe('linter', function() {
         config: {}
       });
 
+      expect(linter.parseRuleValue(3)).to.eql({
+        category: 'info',
+        config: {}
+      });
+
     });
 
   });
@@ -440,7 +452,7 @@ describe('linter', function() {
                   extends: 'plugin:test/base',
                   rules: {
                     'test/bar': 'warn',
-                    'other': 'warn'
+                    'other': 'info'
                   }
                 };
               }
@@ -482,7 +494,7 @@ describe('linter', function() {
             'bar': 'error',
             'foo': 'warn',
             'test/bar': 'warn',
-            'test/other': 'warn'
+            'test/other': 'info'
           });
         });
 
@@ -512,7 +524,7 @@ describe('linter', function() {
             'bar': 'error',
             'foo': 'error',
             'test/bar': 'off',
-            'test/other': 'warn'
+            'test/other': 'info'
           });
         });
 
