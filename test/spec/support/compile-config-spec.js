@@ -13,7 +13,10 @@ describe('support/compile-config', function() {
     const code = await compileConfig({
       rules: {
         'conditional-flows': 'error',
-        'single-blank-start-event': 'off'
+        'single-blank-start-event': 'off',
+        'end-event-required': 'info',
+        'no-bpmndi': 1,
+        'no-implicit-split': 'warn'
       }
     });
 
@@ -22,13 +25,25 @@ describe('support/compile-config', function() {
     expect(code).to.contain('import rule_0 from \'bpmnlint/rules/conditional-flows\'');
     expect(code).to.contain('cache[\'bpmnlint/conditional-flows\'] = rule_0');
 
+    expect(code).to.contain('import rule_2 from \'bpmnlint/rules/end-event-required\'');
+    expect(code).to.contain('cache[\'bpmnlint/end-event-required\'] = rule_2');
+
+    expect(code).to.contain('import rule_3 from \'bpmnlint/rules/no-bpmndi\'');
+    expect(code).to.contain('cache[\'bpmnlint/no-bpmndi\'] = rule_3');
+
+    expect(code).to.contain('import rule_4 from \'bpmnlint/rules/no-implicit-split\'');
+    expect(code).to.contain('cache[\'bpmnlint/no-implicit-split\'] = rule_4');
+
     // does not import disabled rule
     expect(code).not.to.contain('cache[\'bpmnlint/single-blank-start-event\']');
     expect(code).not.to.contain('bpmnlint/rules/single-blank-start-event');
 
-    // configures both rules regardless
+    // configures all rules
     expect(code).to.contain('"conditional-flows": "error"');
     expect(code).to.contain('"single-blank-start-event": 0');
+    expect(code).to.contain('"end-event-required": "info"');
+    expect(code).to.contain('"no-bpmndi": 1');
+    expect(code).to.contain('"no-implicit-split": "warn"');
 
     // exports config and resolver
     expect(code).to.contain('export { resolver, config };');
