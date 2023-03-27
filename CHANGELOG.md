@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.2.0
+
+* `FEAT`: support `info` type ([#102](https://github.com/bpmn-io/bpmnlint/pull/102))
+
 ## 8.1.1
 
 * `FIX`: correct category in `recommended` config ([#94](https://github.com/bpmn-io/bpmnlint/pull/94))
