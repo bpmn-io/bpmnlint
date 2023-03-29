@@ -11,125 +11,178 @@ describe('resolver/node-resolver', function() {
 
     const resolver = createResolver(function(path) {
 
-      // mimic local package look-up
+      // mock local package.json resolving
       if (path === './package.json') {
         return {
           name: 'bpmnlint-plugin-local'
         };
       }
 
-      if (path.includes('rules/non-existing')) {
-        throw new Error('not found');
+      /**
+       * Resolve local plugin rules.
+       */
+
+      // mock resolving of rules ($PKG/rules/$NAME)
+      if (path === './rules/rule') {
+        return {
+          path
+        };
       }
 
-      return {
-        path
-      };
+      /**
+       * Resolve foreign plugin rules.
+       */
+
+      // mock resolving of rules ($PKG/rules/$NAME)
+      if (path === 'bpmnlint-plugin-foreign/rules/rule') {
+        return {
+          path
+        };
+      }
+
+      throw new Error('not found');
     }, function(path) {
 
-      if (path === '../../rules/non-existing') {
-        throw new Error('not found');
+      /**
+       * Resolve built-in rules.
+       */
+
+      // mock resolving local
+      if (path === '../../rules/label-required') {
+        return {
+          path
+        };
       }
 
-      return {
-        path
-      };
+      throw new Error('not found');
     });
 
 
-    it('should resolve built-in', async function() {
+    describe('built-in', function() {
 
-      // when
-      const resolvedRule = await resolver.resolveRule('bpmnlint', 'label-required');
+      it('should resolve', async function() {
 
-      // then
-      expect(resolvedRule).to.eql({
-        path: '../../rules/label-required'
-      });
-    });
-
-
-    it('should fail to resolve built-in', async function() {
-
-      let err;
-
-      // when
-      try {
-        await resolver.resolveRule('bpmnlint', 'non-existing');
-      } catch (e) {
+        // when
+        const resolvedRule = await resolver.resolveRule('bpmnlint', 'label-required');
 
         // then
-        expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
-
-        err = e;
-      }
-
-      // verify
-      expect(err).to.exist;
-    });
-
-
-    it('should resolve external', async function() {
-
-      // when
-      const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foo', 'label-required');
-
-      // then
-      expect(resolvedRule).to.eql({
-        path: 'bpmnlint-plugin-foo/rules/label-required'
+        expect(resolvedRule).to.eql({
+          path: '../../rules/label-required'
+        });
       });
-    });
 
 
-    it('should resolve local package', async function() {
+      it('should fail to resolve', async function() {
 
-      // when
-      const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'label-required');
+        let err;
 
-      // then
-      expect(resolvedRule).to.eql({
-        path: './rules/label-required'
+        // when
+        try {
+          await resolver.resolveRule('bpmnlint', 'non-existing');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
       });
+
     });
 
 
-    it('should fail to resolve external', async function() {
+    describe('plugin - foreign', function() {
 
-      let err;
+      it('should resolve ($PKG/rules/$NAME)', async function() {
 
-      // when
-      try {
-        await resolver.resolveRule('bpmnlint-plugin-baz', 'non-existing');
-      } catch (e) {
+        // when
+        const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'rule');
 
         // then
-        expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-baz>');
+        expect(resolvedRule).to.eql({
+          path: 'bpmnlint-plugin-foreign/rules/rule'
+        });
+      });
 
-        err = e;
-      }
 
-      // verify
-      expect(err).to.exist;
+      it('should fail to resolve (non-existing plugin)', async function() {
+
+        let err;
+
+        // when
+        try {
+          await resolver.resolveRule('bpmnlint-plugin-non-existing', 'exported');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve rule <exported> from <bpmnlint-plugin-non-existing>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
+      });
+
+
+      it('should fail to resolve (non-existing rule)', async function() {
+
+        let err;
+
+        // when
+        try {
+          await resolver.resolveRule('bpmnlint-plugin-foreign', 'non-existing');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-foreign>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
+      });
+
     });
 
 
-    it('should fail to resolve local', async function() {
+    describe('plugin - local', function() {
 
-      let err;
+      it('should resolve ($PKG/rules/$NAME)', async function() {
 
-      // when
-      try {
-        await resolver.resolveRule('bpmnlint-plugin-local', 'non-existing');
-      } catch (e) {
+        // when
+        const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'rule');
 
         // then
-        expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
+        expect(resolvedRule).to.eql({
+          path: './rules/rule'
+        });
+      });
 
-        err = e;
-      }
 
-      // verify
-      expect(err).to.exist;
+      it('should fail to resolve', async function() {
+
+        let err;
+
+        // when
+        try {
+          await resolver.resolveRule('bpmnlint-plugin-local', 'non-existing');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
+      });
+
     });
 
   });
@@ -139,53 +192,76 @@ describe('resolver/node-resolver', function() {
 
     const resolver = createResolver(function(path) {
 
-      // mimic local package look-up
+      // mock local package.json resolving
       if (path === './package.json') {
         return {
-          path,
           name: 'bpmnlint-plugin-local'
         };
       }
 
-      // mimic $PKG/config/$NAME resolution
-      if (path.includes('config/bar')) {
-        return {
-          path,
-          bar: true
-        };
-      }
+      /**
+       * Resolve local plugin configs.
+       */
 
-      // mimic embedded config not found via $PKG/config/$NAME
-      if (path.includes('config/embedded')) {
-        throw new Error('not found');
-      }
-
-      // mimic $PKG.configs[$NAME] resolution
-      if (path === 'bpmnlint-plugin-foo' || path === '.') {
+      // mock resolving of exported configs ($PKG.configs[$NAME])
+      if (path === '.') {
         return {
           configs: {
-            embedded: {
-              path,
-              embedded: true
+            exported: {
+              path: './lib/config/exported'
             }
           }
         };
       }
 
-      throw new Error('unexpected path <' + path + '>');
-    }, function(path) {
-
-      if (path === '../../config/non-existing') {
-        throw new Error('not found');
+      // mock resolving of non-exported configs ($PKG/config/$NAME)
+      if (path === './config/non-exported') {
+        return {
+          path
+        };
       }
 
-      return {
-        path
-      };
+      /**
+       * Resolve foreign plugin configs.
+       */
+
+      // mock resolving of exported configs ($PKG.configs[$NAME])
+      if (path === 'bpmnlint-plugin-foreign') {
+        return {
+          configs: {
+            exported: {
+              path: 'bpmnlint-plugin-foreign/lib/config/exported'
+            }
+          }
+        };
+      }
+
+      // mock resolving of non-exported configs ($PKG/config/$NAME)
+      if (path === 'bpmnlint-plugin-foreign/config/non-exported') {
+        return {
+          path
+        };
+      }
+
+      throw new Error('not found');
+    }, function(path) {
+
+      /**
+       * Resolve built-in configs.
+       */
+
+      // mock resolving local
+      if (path === '../../config/all' || path === '../../config/recommended') {
+        return {
+          path
+        };
+      }
+
+      throw new Error('not found');
     });
 
 
-    describe('should resolve built-in', function() {
+    describe('built-in', function() {
 
       it('all', async function() {
 
@@ -210,128 +286,151 @@ describe('resolver/node-resolver', function() {
         });
       });
 
-    });
 
+      it('should fail to resolve', async function() {
 
-    it('should fail to resolve built-in', async function() {
-
-      let err;
-
-      // when
-      try {
-        await resolver.resolveConfig('bpmnlint', 'non-existing');
-      } catch (e) {
-        expect(e.message).to.eql(
-          'Cannot resolve config <non-existing> from <bpmnlint>'
-        );
-
-        err = e;
-      }
-
-      // verify
-      expect(err).to.exist;
-    });
-
-
-    describe('should resolve external', function() {
-
-      it('via $PKG/config/$NAME', async function() {
+        let err;
 
         // when
-        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foo', 'bar');
+        try {
+          await resolver.resolveConfig('bpmnlint', 'non-existing');
+        } catch (e) {
 
-        // then
-        expect(resolvedConfig).to.eql({
-          path: 'bpmnlint-plugin-foo/config/bar',
-          bar: true
-        });
+          // then
+          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint>');
 
-      });
+          err = e;
+        }
 
-
-      it('via $PKG.configs[$NAME]', async function() {
-
-        // when
-        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foo', 'embedded');
-
-        // then
-        expect(resolvedConfig).to.eql({
-          path: 'bpmnlint-plugin-foo',
-          embedded: true
-        });
-
+        // verify
+        expect(err).to.exist;
       });
 
     });
 
 
-    describe('should resolve local package', function() {
+    describe('plugin - foreign', function() {
 
-      it('via ./config/$NAME', async function() {
+      describe('should resolve', function() {
 
-        // when
-        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-local', 'bar');
+        it('exported ($PKG.configs[$NAME])', async function() {
 
-        // then
-        expect(resolvedConfig).to.eql({
-          path: './config/bar',
-          bar: true
+          // when
+          const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foreign', 'exported');
+
+          // then
+          expect(resolvedConfig).to.eql({
+            path: 'bpmnlint-plugin-foreign/lib/config/exported'
+          });
+
         });
+
+
+        it('non-exported ($PKG/config/$NAME)', async function() {
+
+          // when
+          const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-foreign', 'non-exported');
+
+          // then
+          expect(resolvedConfig).to.eql({
+            path: 'bpmnlint-plugin-foreign/config/non-exported'
+          });
+        });
+
       });
 
 
-      it('via .configs[$NAME]', async function() {
+      it('should fail to resolve (non-existing plugin)', async function() {
+
+        let err;
 
         // when
-        const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-local', 'embedded');
+        try {
+          await resolver.resolveConfig('bpmnlint-plugin-non-existing', 'exported');
+        } catch (e) {
 
-        // then
-        expect(resolvedConfig).to.eql({
-          path: '.',
-          embedded: true
-        });
+          // then
+          expect(e.message).to.eql('Cannot resolve config <exported> from <bpmnlint-plugin-non-existing>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
+      });
+
+
+      it('should fail to resolve (non-existing config)', async function() {
+
+        let err;
+
+        // when
+        try {
+          await resolver.resolveConfig('bpmnlint-plugin-foreign', 'non-existing');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint-plugin-foreign>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
       });
 
     });
 
 
-    it('should fail to resolve external', async function() {
+    describe('plugin - local', function() {
 
-      let err;
+      describe('should resolve', function() {
 
-      // when
-      try {
-        await resolver.resolveConfig('bpmnlint-plugin-foo', 'non-existing');
-      } catch (e) {
-        expect(e.message).to.eql(
-          'Cannot resolve config <non-existing> from <bpmnlint-plugin-foo>'
-        );
+        it('exported ($PKG.configs[$NAME])', async function() {
 
-        err = e;
-      }
+          // when
+          const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-local', 'exported');
 
-      // verify
-      expect(err).to.exist;
-    });
+          // then
+          expect(resolvedConfig).to.eql({
+            path: './lib/config/exported'
+          });
+        });
 
 
-    it('should fail to resolve local', async function() {
+        it('non-exported ($PKG/config/$NAME)', async function() {
 
-      let err;
+          // when
+          const resolvedConfig = await resolver.resolveConfig('bpmnlint-plugin-local', 'non-exported');
 
-      // when
-      try {
-        await resolver.resolveConfig('bpmnlint-plugin-local', 'non-existing');
-      } catch (e) {
-        expect(e.message).to.eql(
-          'Cannot resolve config <non-existing> from <bpmnlint-plugin-local>'
-        );
+          // then
+          expect(resolvedConfig).to.eql({
+            path: './config/non-exported'
+          });
+        });
 
-        err = e;
-      }
+      });
 
-      // verify
-      expect(err).to.exist;
+
+      it('should fail to resolve', async function() {
+
+        let err;
+
+        // when
+        try {
+          await resolver.resolveConfig('bpmnlint-plugin-local', 'non-existing');
+        } catch (e) {
+
+          // then
+          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint-plugin-local>');
+
+          err = e;
+        }
+
+        // verify
+        expect(err).to.exist;
+      });
+
     });
 
   });
