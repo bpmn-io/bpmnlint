@@ -231,6 +231,16 @@
 
   var rule_2 = /*@__PURE__*/getDefaultExportFromCjs(endEventRequired);
 
+  var foo = function foo() {
+    return {
+      check: function() {
+        console.log('foo');
+      }
+    };
+  };
+
+  var rule_3 = /*@__PURE__*/getDefaultExportFromCjs(foo);
+
   const cache = {};
 
   /**
@@ -263,7 +273,8 @@
   const rules = {
     "label-required": 1,
     "start-event-required": "info",
-    "end-event-required": 2
+    "end-event-required": 2,
+    "exported/foo": "error"
   };
 
   const config = {
@@ -274,9 +285,14 @@
     resolver: resolver,
     config: config
   };
+
   cache['bpmnlint/label-required'] = rule_0;
+
   cache['bpmnlint/start-event-required'] = rule_1;
+
   cache['bpmnlint/end-event-required'] = rule_2;
+
+  cache['bpmnlint-plugin-exported/foo'] = rule_3;
 
   console.log(bundle);
 

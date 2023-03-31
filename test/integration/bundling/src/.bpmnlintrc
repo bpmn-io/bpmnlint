@@ -2,6 +2,7 @@
   "rules": {
     "label-required": 1,
     "start-event-required": "info",
-    "end-event-required": 2
+    "end-event-required": 2,
+    "bpmnlint-plugin-exported/foo": "error"
   }
 }

@@ -22,8 +22,24 @@ describe('resolver/node-resolver', function() {
        * Resolve local plugin rules.
        */
 
-      // mock resolving of rules ($PKG/rules/$NAME)
-      if (path === './rules/rule') {
+      // mock resolving of exported rules ($PKG.rules[$NAME])
+      if (path === '.') {
+        return {
+          rules: {
+            'exported-invalid': () => {},
+            'exported-path': 'lib/rules/exported-path'
+          }
+        };
+      }
+
+      if (path === './lib/rules/exported-path') {
+        return {
+          path
+        };
+      }
+
+      // mock resolving of non-exported rules ($PKG/rules/$NAME)
+      if (path === './rules/non-exported') {
         return {
           path
         };
@@ -33,8 +49,24 @@ describe('resolver/node-resolver', function() {
        * Resolve foreign plugin rules.
        */
 
-      // mock resolving of rules ($PKG/rules/$NAME)
-      if (path === 'bpmnlint-plugin-foreign/rules/rule') {
+      // mock resolving of exported rules ($PKG.rules[$NAME])
+      if (path === 'bpmnlint-plugin-foreign') {
+        return {
+          rules: {
+            'exported-invalid': () => {},
+            'exported-path': 'lib/rules/exported-path'
+          }
+        };
+      }
+
+      if (path === 'bpmnlint-plugin-foreign/lib/rules/exported-path') {
+        return {
+          path
+        };
+      }
+
+      // mock resolving of non-exported rules ($PKG/rules/$NAME)
+      if (path === 'bpmnlint-plugin-foreign/rules/non-exported') {
         return {
           path
         };
@@ -80,15 +112,12 @@ describe('resolver/node-resolver', function() {
         try {
           await resolver.resolveRule('bpmnlint', 'non-existing');
         } catch (e) {
-
-          // then
-          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
-
           err = e;
         }
 
-        // verify
+        // then
         expect(err).to.exist;
+        expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
       });
 
     });
@@ -96,55 +125,91 @@ describe('resolver/node-resolver', function() {
 
     describe('plugin - foreign', function() {
 
-      it('should resolve ($PKG/rules/$NAME)', async function() {
+      describe('should resolve', function() {
 
-        // when
-        const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'rule');
+        it('via custom path (exported through $PKG.rules[$NAME])', async function() {
 
-        // then
-        expect(resolvedRule).to.eql({
-          path: 'bpmnlint-plugin-foreign/rules/rule'
+          // when
+          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'exported-path');
+
+          // then
+          expect(resolvedRule).to.eql({
+            path: 'bpmnlint-plugin-foreign/lib/rules/exported-path'
+          });
+
         });
+
+
+        it('via default location ($PKG/rules/$NAME)', async function() {
+
+          // when
+          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'non-exported');
+
+          // then
+          expect(resolvedRule).to.eql({
+            path: 'bpmnlint-plugin-foreign/rules/non-exported'
+          });
+        });
+
       });
 
 
-      it('should fail to resolve (non-existing plugin)', async function() {
+      describe('should fail to resolve', function() {
 
-        let err;
+        it('handling non-existing rule', async function() {
 
-        // when
-        try {
-          await resolver.resolveRule('bpmnlint-plugin-non-existing', 'exported');
-        } catch (e) {
+          let err;
 
-          // then
-          expect(e.message).to.eql('Cannot resolve rule <exported> from <bpmnlint-plugin-non-existing>');
+          // when
+          try {
+            await resolver.resolveRule('bpmnlint-plugin-foreign', 'non-existing');
+          } catch (e) {
 
-          err = e;
-        }
-
-        // verify
-        expect(err).to.exist;
-      });
-
-
-      it('should fail to resolve (non-existing rule)', async function() {
-
-        let err;
-
-        // when
-        try {
-          await resolver.resolveRule('bpmnlint-plugin-foreign', 'non-existing');
-        } catch (e) {
+            err = e;
+          }
 
           // then
-          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-foreign>');
+          expect(err).to.exist;
+          expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-foreign>');
+        });
 
-          err = e;
-        }
 
-        // verify
-        expect(err).to.exist;
+        it('handling non-existing plugin', async function() {
+
+          let err;
+
+          // when
+          try {
+            await resolver.resolveRule('bpmnlint-plugin-non-existing', 'exported');
+          } catch (e) {
+
+            err = e;
+          }
+
+          // then
+          expect(err).to.exist;
+          expect(err.message).to.eql('Cannot resolve rule <exported> from <bpmnlint-plugin-non-existing>');
+        });
+
+
+        it('handling illegal $PKG.rules[$NAME] export', async function() {
+
+          let err;
+
+          // when
+          try {
+            await resolver.resolveRule('bpmnlint-plugin-foreign', 'exported-invalid');
+          } catch (e) {
+            err = e;
+          }
+
+          // then
+          expect(err).to.exist;
+          expect(err.message).to.eql(
+            'Cannot resolve rule <exported-invalid> from <bpmnlint-plugin-foreign>: illegal rule export (expected path reference)'
+          );
+        });
+
       });
 
     });
@@ -152,35 +217,72 @@ describe('resolver/node-resolver', function() {
 
     describe('plugin - local', function() {
 
-      it('should resolve ($PKG/rules/$NAME)', async function() {
+      describe('should resolve', function() {
 
-        // when
-        const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'rule');
+        it('via custom path (exported through $PKG.rules[$NAME])', async function() {
 
-        // then
-        expect(resolvedRule).to.eql({
-          path: './rules/rule'
+          // when
+          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'exported-path');
+
+          // then
+          expect(resolvedRule).to.eql({
+            path: './lib/rules/exported-path'
+          });
         });
+
+
+        it('via default location ($PKG/rules/$NAME)', async function() {
+
+          // when
+          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'non-exported');
+
+          // then
+          expect(resolvedRule).to.eql({
+            path: './rules/non-exported'
+          });
+        });
+
       });
 
 
-      it('should fail to resolve', async function() {
+      describe('should fail to resolve', function() {
 
-        let err;
+        it('handling non-existing rule', async function() {
 
-        // when
-        try {
-          await resolver.resolveRule('bpmnlint-plugin-local', 'non-existing');
-        } catch (e) {
+          let err;
+
+          // when
+          try {
+            await resolver.resolveRule('bpmnlint-plugin-local', 'non-existing');
+          } catch (e) {
+
+            err = e;
+          }
 
           // then
-          expect(e.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
+          expect(err).to.exist;
+          expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
+        });
 
-          err = e;
-        }
 
-        // verify
-        expect(err).to.exist;
+        it('handling illegal $PKG.rules[$NAME] export', async function() {
+
+          let err;
+
+          // when
+          try {
+            await resolver.resolveRule('bpmnlint-plugin-local', 'exported-invalid');
+          } catch (e) {
+            err = e;
+          }
+
+          // then
+          expect(err).to.exist;
+          expect(err.message).to.eql(
+            'Cannot resolve rule <exported-invalid> from <bpmnlint-plugin-local>: illegal rule export (expected path reference)'
+          );
+        });
+
       });
 
     });
@@ -295,15 +397,12 @@ describe('resolver/node-resolver', function() {
         try {
           await resolver.resolveConfig('bpmnlint', 'non-existing');
         } catch (e) {
-
-          // then
-          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint>');
-
           err = e;
         }
 
-        // verify
+        // then
         expect(err).to.exist;
+        expect(err.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint>');
       });
 
     });
