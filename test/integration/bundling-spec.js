@@ -10,7 +10,7 @@ import { expect } from 'chai';
 
   before(function() {
 
-    this.timeout(30000);
+    this.timeout(100000);
 
     return exec('install-local', [], __dirname + '/bundling');
   });
@@ -25,7 +25,9 @@ import { expect } from 'chai';
 
 function test(bundler, options = { it: it }) {
 
-  it(`should bundle with ${bundler}`, async function() {
+  options.it(`should bundle with ${bundler}`, async function() {
+
+    this.timeout(100000);
 
     // when
     const {
@@ -42,12 +44,17 @@ function test(bundler, options = { it: it }) {
       fs.writeFileSync(expectedFile, read(actualFile), 'utf8');
     }
 
+    const actualContents = read(actualFile);
+
     // and
     expect(
-      read(actualFile), `${ actualFile } and ${ expectedFile } equal`
+      actualContents, `${ actualFile } and ${ expectedFile } equal`
     ).to.eql(
       read(expectedFile)
     );
+
+    expect(actualContents).not.to.include('function bar()');
+    expect(actualContents).to.include('function foo()');
   });
 
 }

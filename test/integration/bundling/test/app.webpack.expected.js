@@ -20,6 +20,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bpmnlint/rules/end-event-required */ "./node_modules/bpmnlint/rules/end-event-required.js");
 /* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
 
 const cache = {};
 
@@ -53,7 +55,8 @@ const resolver = new Resolver();
 const rules = {
   "label-required": 1,
   "start-event-required": "info",
-  "end-event-required": 2
+  "end-event-required": 2,
+  "exported/foo": "error"
 };
 
 const config = {
@@ -71,14 +74,35 @@ const bundle = {
 
 
 
-
 cache['bpmnlint/label-required'] = (bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0___default());
+
 
 
 cache['bpmnlint/start-event-required'] = (bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default());
 
 
+
 cache['bpmnlint/end-event-required'] = (bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default());
+
+
+
+cache['bpmnlint-plugin-exported/foo'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
+
+/***/ }),
+
+/***/ "./node_modules/bpmnlint-plugin-exported/src/foo.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/bpmnlint-plugin-exported/src/foo.js ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+module.exports = function foo() {
+  return {
+    check: function() {
+      console.log('foo');
+    }
+  };
+};
 
 /***/ }),
 

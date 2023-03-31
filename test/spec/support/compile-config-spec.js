@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 
-import NodeResolver from '../../../lib/resolver/node-resolver';
+const NodeResolver = require('../../../lib/resolver/node-resolver');
 
-import compileConfig from '../../../lib/support/compile-config';
+const compileConfig = require('../../../lib/support/compile-config');
 
 
 describe('support/compile-config', function() {
@@ -67,39 +67,135 @@ describe('support/compile-config', function() {
   });
 
 
-  it('should import local', async function() {
+  describe('should import custom path rules', function() {
 
-    // given
-    const resolver = new NodeResolver({
-      require: function(path) {
+    it('through external source', async function() {
 
-        if (path === './package.json') {
-          return {
-            name: 'bpmnlint-plugin-local'
-          };
+      // given
+      const resolver = new NodeResolver({
+        require: function(path) {
+          if (path === 'bpmnlint-plugin-foreign') {
+            return {
+              configs: {
+                recommended: {
+                  rules: {
+                    'exported-path': 'error'
+                  }
+                }
+              },
+              rules: {
+                'exported-path': 'lib/rules/exported-path'
+              }
+            };
+          }
+
+          throw new Error('not found');
         }
+      });
 
-        if (path === './config/recommended') {
-          return {
-            rules: {
-              'foo': 'error'
-            }
-          };
-        }
 
-        throw new Error('not found');
-      }
+      // when
+      const code = await compileConfig({
+        extends: 'plugin:foreign/recommended'
+      }, resolver);
+
+      // then
+      expect(code).to.contain('import rule_0 from \'bpmnlint-plugin-foreign/lib/rules/exported-path\'');
+      expect(code).to.contain('cache[\'bpmnlint-plugin-foreign/exported-path\'] = rule_0');
     });
 
 
-    // when
-    const code = await compileConfig({
-      extends: 'plugin:local/recommended'
-    }, resolver);
+    it('through local source', async function() {
 
-    // then
-    expect(code).to.contain('import rule_0 from \'./rules/foo\'');
-    expect(code).to.contain('cache[\'bpmnlint-plugin-local/foo\'] = rule_0');
+      // given
+      const resolver = new NodeResolver({
+        require: function(path) {
+          if (path === './package.json') {
+            return {
+              name: 'bpmnlint-plugin-local'
+            };
+          }
+
+          if (path === '.') {
+            return {
+              configs: {
+                recommended: {
+                  rules: {
+                    'exported-path': 'error'
+                  }
+                }
+              },
+              rules: {
+                'exported-function': () => {},
+                'exported-path': 'lib/rules/exported-path'
+              }
+            };
+          }
+
+          throw new Error('not found');
+        }
+      });
+
+
+      // when
+      const code = await compileConfig({
+        extends: 'plugin:local/recommended'
+      }, resolver);
+
+      // then
+      expect(code).to.contain('import rule_0 from \'./lib/rules/exported-path\'');
+      expect(code).to.contain('cache[\'bpmnlint-plugin-local/exported-path\'] = rule_0');
+    });
+
+
+    it('handling illegal path errors', async function() {
+
+      // given
+      const resolver = new NodeResolver({
+        require: function(path) {
+          if (path === './package.json') {
+            return {
+              name: 'bpmnlint-plugin-local'
+            };
+          }
+
+          if (path === '.') {
+            return {
+              configs: {
+                recommended: {
+                  rules: {
+                    'not-a-path': 'error'
+                  }
+                }
+              },
+              rules: {
+                'not-a-path': () => {}
+              }
+            };
+          }
+
+          throw new Error('not found');
+        }
+      });
+
+      let err;
+
+      // when
+      try {
+        await compileConfig({
+          extends: 'plugin:local/recommended'
+        }, resolver);
+      } catch (error) {
+        err = error;
+      }
+
+      // then
+      expect(err).to.exist;
+      expect(err.message).to.eql(
+        'failed to bundle rule <not-a-path> from <.>: illegal rule export (expected path reference)'
+      );
+    });
+
   });
 
 

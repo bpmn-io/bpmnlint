@@ -13,7 +13,7 @@ describe('cli', function() {
 
   before(function() {
 
-    this.timeout(30000);
+    this.timeout(100000);
 
     return exec('install-local', [], __dirname + '/cli');
   });
@@ -193,7 +193,7 @@ describe('cli', function() {
 
     before(function() {
 
-      this.timeout(30000);
+      this.timeout(100000);
 
       return exec('install-local', [], __dirname + '/cli/child');
     });
@@ -211,7 +211,7 @@ describe('cli', function() {
 
     before(function() {
 
-      this.timeout(30000);
+      this.timeout(100000);
 
       return exec('install-local', [], __dirname + '/cli/ns');
     });
@@ -367,7 +367,7 @@ function test(options) {
 
   (only ? it.only : it)(cmd.join(' ') + (cwd ? ` (cwd: ${cwd})` : ''), async function() {
 
-    this.timeout(3000);
+    this.timeout(100000);
 
     // when
     const {

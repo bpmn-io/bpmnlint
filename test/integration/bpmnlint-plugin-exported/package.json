@@ -1,0 +1,7 @@
+{
+  "name": "bpmnlint-plugin-exported",
+  "version": "0.0.0",
+  "description": "A test bpmnlint plug-in that exports rules",
+  "main": "src/index.js",
+  "sideEffects": false
+}
