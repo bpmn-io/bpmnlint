@@ -105,10 +105,6 @@ const reports = linter.lint(definitions);
 // }
 ```
 
-## Bundling
-
-For browser usage include your [linting configuration](#configuration) using your favorite bundler plug-in ([Rollup](https://www.npmjs.com/package/rollup-plugin-bpmnlint), [Webpack](https://www.npmjs.com/package/bpmnlint-loader)).
-
 
 ## Writing a Plug-in
 
@@ -119,6 +115,11 @@ npm init bpmnlint-plugin {PLUGIN_NAME}
 ```
 
 Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) for details on how to define, test, and consume custom lint rules. Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
+
+
+## Bundling
+
+For browser usage include your [linting configuration](#configuration) using your favorite bundler plug-in ([Rollup](https://www.npmjs.com/package/rollup-plugin-bpmnlint), [Webpack](https://www.npmjs.com/package/bpmnlint-loader)).
 
 
 ## Visual Feedback
