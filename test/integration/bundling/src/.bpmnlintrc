@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "label-required": 1,
+    "start-event-required": "info",
+    "end-event-required": 2
+  }
+}
