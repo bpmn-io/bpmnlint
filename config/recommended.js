@@ -12,6 +12,7 @@ module.exports = {
     'no-gateway-join-fork': 'error',
     'no-implicit-split': 'error',
     'no-implicit-end': 'error',
+    'no-implicit-start': 'error',
     'no-inclusive-gateway': 'error',
     'single-blank-start-event': 'error',
     'single-event-definition': 'error',

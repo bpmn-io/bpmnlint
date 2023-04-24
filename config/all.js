@@ -11,6 +11,7 @@ const allRules = [
   'no-gateway-join-fork',
   'no-implicit-split',
   'no-implicit-end',
+  'no-implicit-start',
   'no-inclusive-gateway',
   'single-blank-start-event',
   'single-event-definition',
