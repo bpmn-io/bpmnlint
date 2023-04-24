@@ -6,7 +6,7 @@ import execa from 'execa';
 import { expect } from 'chai';
 
 
-describe('bundling', function() {
+(/^v1[24]/.test(process.version) ? describe.skip : describe)('bundling', function() {
 
   before(function() {
 
