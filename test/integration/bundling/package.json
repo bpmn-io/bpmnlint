@@ -1,0 +1,22 @@
+{
+  "name": "bundling",
+  "description": "Simple web application to test bpmnlint rule bundling",
+  "private": true,
+  "scripts": {
+    "bundle:webpack": "webpack",
+    "bundle:rollup": "rollup -c --bundleConfigAsCjs"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "bpmnlint-loader": "^0.1.6",
+    "rollup": "^3.21.0",
+    "rollup-plugin-bpmnlint": "^0.4.1",
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2"
+  },
+  "localDependencies": {
+    "bpmnlint": "../../..",
+    "bpmnlint-plugin-test": "../bpmnlint-plugin-test"
+  }
+}
