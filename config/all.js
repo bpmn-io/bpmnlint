@@ -10,6 +10,7 @@ const allRules = [
   'no-duplicate-sequence-flows',
   'no-gateway-join-fork',
   'no-implicit-split',
+  'no-implicit-end',
   'no-inclusive-gateway',
   'single-blank-start-event',
   'single-event-definition',

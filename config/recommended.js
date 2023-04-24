@@ -11,6 +11,7 @@ module.exports = {
     'no-duplicate-sequence-flows': 'error',
     'no-gateway-join-fork': 'error',
     'no-implicit-split': 'error',
+    'no-implicit-end': 'error',
     'no-inclusive-gateway': 'error',
     'single-blank-start-event': 'error',
     'single-event-definition': 'error',
