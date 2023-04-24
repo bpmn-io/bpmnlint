@@ -105,6 +105,8 @@ const reports = linter.lint(definitions);
 // }
 ```
 
+## Bundling
+
 For browser usage include your [linting configuration](#configuration) using your favorite bundler plug-in ([Rollup](https://www.npmjs.com/package/rollup-plugin-bpmnlint), [Webpack](https://www.npmjs.com/package/bpmnlint-loader)).
 
 
