@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "exported/foo": "warn",
+    "exported/foo-absolute": "warn"
+  }
+}

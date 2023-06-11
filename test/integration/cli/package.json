@@ -7,13 +7,15 @@
   },
   "dependencies": {
     "bpmnlint": "file:../../..",
-    "bpmnlint-plugin-test": "file:../bpmnlint-plugin-test"
+    "bpmnlint-plugin-test": "file:../bpmnlint-plugin-test",
+    "bpmnlint-plugin-exported": "file:../bpmnlint-plugin-exported"
   },
   "devDependencies": {
     "execa": "^5.1.1"
   },
   "localDependencies": {
     "bpmnlint": "../../..",
-    "bpmnlint-plugin-test": "../bpmnlint-plugin-test"
+    "bpmnlint-plugin-test": "../bpmnlint-plugin-test",
+    "bpmnlint-plugin-exported": "../bpmnlint-plugin-exported"
   }
 }

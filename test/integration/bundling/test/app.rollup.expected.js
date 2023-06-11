@@ -233,13 +233,11 @@
 
   var foo = function foo() {
     return {
-      check: function() {
-        console.log('foo');
-      }
+      check() {}
     };
   };
 
-  var rule_3 = /*@__PURE__*/getDefaultExportFromCjs(foo);
+  var rule_4 = /*@__PURE__*/getDefaultExportFromCjs(foo);
 
   const cache = {};
 
@@ -256,7 +254,7 @@
     const rule = cache[pkg + '/' + ruleName];
 
     if (!rule) {
-      throw new Error('cannot resolve rule <' + pkg + '/' + ruleName + '>');
+      throw new Error('cannot resolve rule <' + pkg + '/' + ruleName + '>: not bundled');
     }
 
     return rule;
@@ -264,7 +262,7 @@
 
   Resolver.prototype.resolveConfig = function(pkg, configName) {
     throw new Error(
-      'cannot resolve config <' + configName + '> in <' + pkg +'>'
+      'cannot resolve config <' + configName + '> in <' + pkg +'>: not bundled'
     );
   };
 
@@ -274,7 +272,8 @@
     "label-required": 1,
     "start-event-required": "info",
     "end-event-required": 2,
-    "exported/foo": "error"
+    "exported/foo": "error",
+    "exported/foo-absolute": "error"
   };
 
   const config = {
@@ -292,7 +291,9 @@
 
   cache['bpmnlint/end-event-required'] = rule_2;
 
-  cache['bpmnlint-plugin-exported/foo'] = rule_3;
+  cache['bpmnlint-plugin-exported/foo'] = rule_4;
+
+  cache['bpmnlint-plugin-exported/foo-absolute'] = rule_4;
 
   console.log(bundle);
 

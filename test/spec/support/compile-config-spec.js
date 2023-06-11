@@ -73,24 +73,37 @@ describe('support/compile-config', function() {
 
       // given
       const resolver = new NodeResolver({
-        require: function(path) {
-          if (path === 'bpmnlint-plugin-foreign') {
-            return {
-              configs: {
-                recommended: {
-                  rules: {
-                    'exported-path': 'error'
+        require: createRequire(
+          function __require(path) {
+            if (path === 'bpmnlint-plugin-foreign') {
+              return {
+                configs: {
+                  recommended: {
+                    rules: {
+                      'exported-path': 'error',
+                      'exported-external-path': 'some-rule-library'
+                    }
                   }
+                },
+                rules: {
+                  'exported-path': './rules/exported-path',
+                  'exported-external-path': 'some-rule-library'
                 }
-              },
-              rules: {
-                'exported-path': 'lib/rules/exported-path'
-              }
-            };
-          }
+              };
+            }
 
-          throw new Error('not found');
-        }
+            throw new Error('not found: ' + path);
+          },
+          function __resolve(path) {
+
+            if (path === 'bpmnlint-plugin-foreign') {
+              return 'bpmnlint-plugin-foreign/lib/index.js';
+            }
+
+
+            throw new Error('not found: ' + path);
+          }
+        )
       });
 
 
@@ -102,6 +115,9 @@ describe('support/compile-config', function() {
       // then
       expect(code).to.contain('import rule_0 from \'bpmnlint-plugin-foreign/lib/rules/exported-path\'');
       expect(code).to.contain('cache[\'bpmnlint-plugin-foreign/exported-path\'] = rule_0');
+
+      expect(code).to.contain('import rule_1 from \'some-rule-library\'');
+      expect(code).to.contain('cache[\'bpmnlint-plugin-foreign/exported-external-path\'] = rule_1');
     });
 
 
@@ -109,31 +125,41 @@ describe('support/compile-config', function() {
 
       // given
       const resolver = new NodeResolver({
-        require: function(path) {
-          if (path === './package.json') {
-            return {
-              name: 'bpmnlint-plugin-local'
-            };
-          }
+        require: createRequire(
+          function __require(path) {
+            if (path === './package.json') {
+              return {
+                name: 'bpmnlint-plugin-local'
+              };
+            }
 
-          if (path === '.') {
-            return {
-              configs: {
-                recommended: {
-                  rules: {
-                    'exported-path': 'error'
+            if (path === '.') {
+              return {
+                configs: {
+                  recommended: {
+                    rules: {
+                      'exported-path': 'error',
+                      'exported-external-path': 'some-rule-library'
+                    }
                   }
+                },
+                rules: {
+                  'exported-path': './rules/exported-path',
+                  'exported-external-path': 'some-rule-library'
                 }
-              },
-              rules: {
-                'exported-function': () => {},
-                'exported-path': 'lib/rules/exported-path'
-              }
-            };
-          }
+              };
+            }
 
-          throw new Error('not found');
-        }
+            throw new Error('not found: ' + path);
+          },
+          function __resolve(path) {
+            if (path === '.') {
+              return 'bpmnlint-plugin-local/lib/index.js';
+            }
+
+            throw new Error('not found: ' + path);
+          }
+        )
       });
 
 
@@ -143,8 +169,11 @@ describe('support/compile-config', function() {
       }, resolver);
 
       // then
-      expect(code).to.contain('import rule_0 from \'./lib/rules/exported-path\'');
+      expect(code).to.contain('import rule_0 from \'bpmnlint-plugin-local/lib/rules/exported-path\'');
       expect(code).to.contain('cache[\'bpmnlint-plugin-local/exported-path\'] = rule_0');
+
+      expect(code).to.contain('import rule_1 from \'some-rule-library');
+      expect(code).to.contain('cache[\'bpmnlint-plugin-local/exported-external-path\'] = rule_1');
     });
 
 
@@ -174,7 +203,7 @@ describe('support/compile-config', function() {
             };
           }
 
-          throw new Error('not found');
+          throw new Error('not found: ' + path);
         }
       });
 
@@ -213,3 +242,9 @@ describe('support/compile-config', function() {
   });
 
 });
+
+
+
+function createRequire(require, resolve) {
+  return Object.assign(require, { resolve });
+}
