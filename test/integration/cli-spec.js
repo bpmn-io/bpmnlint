@@ -93,6 +93,11 @@ describe('cli', function() {
 
 
     test({
+      cmd: [ 'bpmnlint', '-c', 'exported.json', 'diagram.bpmn' ]
+    });
+
+
+    test({
       cmd: [ 'bpmnlint', 'complex.bpmn' ],
       expect: {
         code: 1,
@@ -179,7 +184,7 @@ describe('cli', function() {
 
     test({
       cmd: [ 'bpmnlint', '--version' ],
-      expct: {
+      expect: {
         code: 0,
         stderr: EMPTY,
         stdout: require('../../package.json').version
@@ -378,23 +383,23 @@ function test(options) {
       }
     });
 
+    const actualStderr = parseOutput(stdout, '---- STDERR');
+    const actualStdout = parseOutput(stdout, '---- STDOUT');
+
+    const actualCode = parseInt(
+      parseOutput(stdout, '---- CODE'), 10
+    );
+
     // then
-    if ('stderr' in expected) {
-      expectOutput(parseOutput(stdout, '---- STDERR'), expected.stderr);
+    if (expected.stderr || actualStderr) {
+      expectOutput(actualStderr, expected.stderr || '');
     }
 
-    if ('stdout' in expected) {
-      expectOutput(parseOutput(stdout, '---- STDOUT'), expected.stdout);
+    if (expected.stdout || actualStdout) {
+      expectOutput(actualStdout, expected.stdout || '');
     }
 
-
-    const code = expected.code || 0;
-
-    expect(
-      parseInt(
-        parseOutput(stdout, '---- CODE'), 10
-      )
-    ).to.eql(code);
+    expect(actualCode).to.eql(expected.code || 0);
   });
 
 }

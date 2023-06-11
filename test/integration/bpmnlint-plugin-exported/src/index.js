@@ -4,12 +4,14 @@ module.exports = {
       rules: {
         'foo': 'error',
         'bar': 'error',
-        'baz': 'error'
+        'baz': 'error',
+        'foo-absolute': 'error'
       }
     }
   },
   rules: {
-    'foo': 'src/foo',
-    'bar': 'src/bar'
+    'foo': './foo',
+    'bar': './bar',
+    'foo-absolute': 'bpmnlint-plugin-exported/src/foo'
   }
 };

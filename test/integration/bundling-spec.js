@@ -40,17 +40,20 @@ function test(bundler, options = { it: it }) {
     const actualFile = path.join(__dirname, `bundling/dist/app.${bundler}.js`);
     const expectedFile = path.join(__dirname, `bundling/test/app.${bundler}.expected.js`);
 
+    const root = process.cwd().replace(/[/\\. -]+/g, '_');
+
     if (process.env.UPDATE_FIXTURES) {
-      fs.writeFileSync(expectedFile, read(actualFile), 'utf8');
+      fs.writeFileSync(expectedFile, read(actualFile).split(root).join(''), 'utf8');
     }
 
     const actualContents = read(actualFile);
 
     // and
     expect(
-      actualContents, `${ actualFile } and ${ expectedFile } equal`
+      actualContents.split(root).join(''),
+      `${ actualFile } and ${ expectedFile } equal`
     ).to.eql(
-      read(expectedFile)
+      read(expectedFile).split(root).join('')
     );
 
     expect(actualContents).not.to.include('function bar()');

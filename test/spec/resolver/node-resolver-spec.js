@@ -9,85 +9,120 @@ describe('resolver/node-resolver', function() {
 
   describe('#resolveRule', function() {
 
-    const resolver = createResolver(function(path) {
+    const resolver = createResolver(
+      createRequire(
+        function __require(path) {
 
-      // mock local package.json resolving
-      if (path === './package.json') {
-        return {
-          name: 'bpmnlint-plugin-local'
-        };
-      }
-
-      /**
-       * Resolve local plugin rules.
-       */
-
-      // mock resolving of exported rules ($PKG.rules[$NAME])
-      if (path === '.') {
-        return {
-          rules: {
-            'exported-invalid': () => {},
-            'exported-path': 'lib/rules/exported-path'
+          // mock local package.json resolving
+          if (path === './package.json') {
+            return {
+              name: 'bpmnlint-plugin-local'
+            };
           }
-        };
-      }
 
-      if (path === './lib/rules/exported-path') {
-        return {
-          path
-        };
-      }
+          /**
+           * Resolve local plugin rules.
+           */
 
-      // mock resolving of non-exported rules ($PKG/rules/$NAME)
-      if (path === './rules/non-exported') {
-        return {
-          path
-        };
-      }
-
-      /**
-       * Resolve foreign plugin rules.
-       */
-
-      // mock resolving of exported rules ($PKG.rules[$NAME])
-      if (path === 'bpmnlint-plugin-foreign') {
-        return {
-          rules: {
-            'exported-invalid': () => {},
-            'exported-path': 'lib/rules/exported-path'
+          // mock resolving of exported rules ($PKG.rules[$NAME])
+          if (path === '.') {
+            return {
+              rules: {
+                'exported-invalid': () => {},
+                'exported-path': './rules/exported-path',
+                'exported-external-path': 'some-external-library'
+              }
+            };
           }
-        };
-      }
 
-      if (path === 'bpmnlint-plugin-foreign/lib/rules/exported-path') {
-        return {
-          path
-        };
-      }
+          if (path === 'ROOT/bpmnlint-plugin-local/lib/rules/exported-path') {
+            return {
+              path
+            };
+          }
 
-      // mock resolving of non-exported rules ($PKG/rules/$NAME)
-      if (path === 'bpmnlint-plugin-foreign/rules/non-exported') {
-        return {
-          path
-        };
-      }
+          // mock resolving of non-exported rules ($PKG/rules/$NAME)
+          if (path === './rules/non-exported') {
+            return {
+              path
+            };
+          }
 
-      throw new Error('not found');
-    }, function(path) {
+          if (path === 'some-external-library') {
+            return {
+              path
+            };
+          }
 
-      /**
-       * Resolve built-in rules.
-       */
+          /**
+           * Resolve foreign plugin rules.
+           */
 
-      // mock resolving local
-      if (path === '../../rules/label-required') {
-        return {
-          path
-        };
-      }
+          // mock resolving of exported rules ($PKG.rules[$NAME])
+          if (path === 'bpmnlint-plugin-foreign') {
+            return {
+              rules: {
+                'exported-invalid': () => {},
+                'exported-path': './rules/exported-path',
+                'exported-external-path': 'some-external-library'
+              }
+            };
+          }
 
-      throw new Error('not found');
-    });
+          if (path === 'bpmnlint-plugin-foreign/lib/rules/exported-path') {
+            return {
+              path
+            };
+          }
+
+          // mock resolving of non-exported rules ($PKG/rules/$NAME)
+          if (path === 'bpmnlint-plugin-foreign/rules/non-exported') {
+            return {
+              path
+            };
+          }
+
+          if (path === 'ROOT/bpmnlint-plugin-foreign/lib/rules/exported-path') {
+            return {
+              path
+            };
+          }
+
+          throw new Error('not found: ' + path);
+        },
+        function __resolve(path) {
+
+          if (path === '.') {
+            return 'ROOT/bpmnlint-plugin-local/lib/index.js';
+          }
+
+          if (path === 'bpmnlint-plugin-foreign') {
+            return 'ROOT/bpmnlint-plugin-foreign/lib/index.js';
+          }
+
+          throw new Error('not found: ' + path);
+        }
+      ), createRequire(
+        function __require(path) {
+
+          /**
+           * Resolve built-in rules.
+           */
+
+          // mock resolving local
+          if (path === '../../rules/label-required') {
+            return {
+              path
+            };
+          }
+
+          throw new Error('not found: ' + path);
+        },
+        function __resolve(path) {
+          throw new Error('not found: ' + path);
+        }
+      )
+    );
 
 
     describe('built-in', function() {
@@ -117,7 +152,7 @@ describe('resolver/node-resolver', function() {
 
         // then
         expect(err).to.exist;
-        expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint>');
+        expect(err.message).to.eql('cannot resolve rule <non-existing> from <bpmnlint>');
       });
 
     });
@@ -127,14 +162,29 @@ describe('resolver/node-resolver', function() {
 
       describe('should resolve', function() {
 
-        it('via custom path (exported through $PKG.rules[$NAME])', async function() {
+        describe('via custom path (exported through $PKG.rules[$NAME])', function() {
 
-          // when
-          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'exported-path');
+          it('relative resolution', async function() {
 
-          // then
-          expect(resolvedRule).to.eql({
-            path: 'bpmnlint-plugin-foreign/lib/rules/exported-path'
+            // when
+            const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'exported-path');
+
+            // then
+            expect(resolvedRule).to.eql({
+              path: 'ROOT/bpmnlint-plugin-foreign/lib/rules/exported-path'
+            });
+          });
+
+
+          it('absolute resolution', async function() {
+
+            // when
+            const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-foreign', 'exported-external-path');
+
+            // then
+            expect(resolvedRule).to.eql({
+              path: 'some-external-library'
+            });
           });
 
         });
@@ -170,7 +220,7 @@ describe('resolver/node-resolver', function() {
 
           // then
           expect(err).to.exist;
-          expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-foreign>');
+          expect(err.message).to.eql('cannot resolve rule <non-existing> from <bpmnlint-plugin-foreign>');
         });
 
 
@@ -188,7 +238,7 @@ describe('resolver/node-resolver', function() {
 
           // then
           expect(err).to.exist;
-          expect(err.message).to.eql('Cannot resolve rule <exported> from <bpmnlint-plugin-non-existing>');
+          expect(err.message).to.eql('cannot resolve rule <exported> from <bpmnlint-plugin-non-existing>');
         });
 
 
@@ -206,7 +256,7 @@ describe('resolver/node-resolver', function() {
           // then
           expect(err).to.exist;
           expect(err.message).to.eql(
-            'Cannot resolve rule <exported-invalid> from <bpmnlint-plugin-foreign>: illegal rule export (expected path reference)'
+            'cannot resolve rule <exported-invalid> from <bpmnlint-plugin-foreign>: illegal rule export (expected path reference)'
           );
         });
 
@@ -219,15 +269,31 @@ describe('resolver/node-resolver', function() {
 
       describe('should resolve', function() {
 
-        it('via custom path (exported through $PKG.rules[$NAME])', async function() {
+        describe('via custom path (exported through $PKG.rules[$NAME])', function() {
 
-          // when
-          const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'exported-path');
+          it('relative resolution', async function() {
 
-          // then
-          expect(resolvedRule).to.eql({
-            path: './lib/rules/exported-path'
+            // when
+            const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'exported-path');
+
+            // then
+            expect(resolvedRule).to.eql({
+              path: 'ROOT/bpmnlint-plugin-local/lib/rules/exported-path'
+            });
           });
+
+
+          it('absolute resolution', async function() {
+
+            // when
+            const resolvedRule = await resolver.resolveRule('bpmnlint-plugin-local', 'exported-external-path');
+
+            // then
+            expect(resolvedRule).to.eql({
+              path: 'some-external-library'
+            });
+          });
+
         });
 
 
@@ -261,7 +327,7 @@ describe('resolver/node-resolver', function() {
 
           // then
           expect(err).to.exist;
-          expect(err.message).to.eql('Cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
+          expect(err.message).to.eql('cannot resolve rule <non-existing> from <bpmnlint-plugin-local>');
         });
 
 
@@ -279,7 +345,7 @@ describe('resolver/node-resolver', function() {
           // then
           expect(err).to.exist;
           expect(err.message).to.eql(
-            'Cannot resolve rule <exported-invalid> from <bpmnlint-plugin-local>: illegal rule export (expected path reference)'
+            'cannot resolve rule <exported-invalid> from <bpmnlint-plugin-local>: illegal rule export (expected path reference)'
           );
         });
 
@@ -345,7 +411,7 @@ describe('resolver/node-resolver', function() {
         };
       }
 
-      throw new Error('not found');
+      throw new Error('not found: ' + path);
     }, function(path) {
 
       /**
@@ -359,7 +425,7 @@ describe('resolver/node-resolver', function() {
         };
       }
 
-      throw new Error('not found');
+      throw new Error('not found: ' + path);
     });
 
 
@@ -402,7 +468,7 @@ describe('resolver/node-resolver', function() {
 
         // then
         expect(err).to.exist;
-        expect(err.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint>');
+        expect(err.message).to.eql('cannot resolve config <non-existing> from <bpmnlint>');
       });
 
     });
@@ -449,7 +515,7 @@ describe('resolver/node-resolver', function() {
         } catch (e) {
 
           // then
-          expect(e.message).to.eql('Cannot resolve config <exported> from <bpmnlint-plugin-non-existing>');
+          expect(e.message).to.eql('cannot resolve config <exported> from <bpmnlint-plugin-non-existing>');
 
           err = e;
         }
@@ -469,7 +535,7 @@ describe('resolver/node-resolver', function() {
         } catch (e) {
 
           // then
-          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint-plugin-foreign>');
+          expect(e.message).to.eql('cannot resolve config <non-existing> from <bpmnlint-plugin-foreign>');
 
           err = e;
         }
@@ -521,7 +587,7 @@ describe('resolver/node-resolver', function() {
         } catch (e) {
 
           // then
-          expect(e.message).to.eql('Cannot resolve config <non-existing> from <bpmnlint-plugin-local>');
+          expect(e.message).to.eql('cannot resolve config <non-existing> from <bpmnlint-plugin-local>');
 
           err = e;
         }
@@ -544,4 +610,8 @@ function createResolver(require, requireLocal) {
     require,
     requireLocal
   });
+}
+
+function createRequire(require, resolve) {
+  return Object.assign(require, { resolve });
 }
