@@ -6,6 +6,14 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.3.0
+
+* `FEAT`: add `no-implicit-start` and `no-implicit-end` rules ([#88](https://github.com/bpmn-io/bpmnlint/issues/88))
+* `FEAT`: allow to resolve rules from custom paths ([#99](https://github.com/bpmn-io/bpmnlint/pull/99))
+* `DEPS`: bump to `bpmn-moddle@8.0.1`
+* `DEPS`: bump to `min-dash@4.1.1`
+* `DEPS`: bump to `bpmnlint-utils@1.1.1`
+
 ## 8.2.0
 
 * `FEAT`: support `info` type ([#102](https://github.com/bpmn-io/bpmnlint/pull/102))
