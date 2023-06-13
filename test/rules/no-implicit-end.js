@@ -18,7 +18,7 @@ RuleTester.verify('no-implicit-end', rule, {
       moddleElement: readModdle(__dirname + '/no-implicit-end/invalid.bpmn'),
       report: [
         {
-          id: 'INTERMEDIATE_EVENT',
+          id: 'INTERMEDIATE_THROW_EVENT',
           message: 'Element is an implicit end'
         },
         {
@@ -32,6 +32,22 @@ RuleTester.verify('no-implicit-end', rule, {
         {
           id: 'START_EVENT',
           message: 'Element is an implicit end',
+        },
+        {
+          id: 'SUB_PROCESS',
+          message: 'Element is an implicit end',
+        },
+        {
+          id: 'BOUNDARY',
+          message: 'Element is an implicit end',
+        },
+        {
+          id: 'INTERMEDIATE_CATCH_EVENT',
+          message: 'Element is an implicit end'
+        },
+        {
+          id: 'LINK_CATCH_EVENT',
+          message: 'Element is an implicit end'
         }
       ]
     }
