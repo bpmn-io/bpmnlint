@@ -11,6 +11,9 @@ RuleTester.verify('no-implicit-start', rule, {
   valid: [
     {
       moddleElement: readModdle(__dirname + '/no-implicit-start/valid.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-implicit-start/valid-collaboration.bpmn')
     }
   ],
   invalid: [
