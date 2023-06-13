@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 8.3.2
+
+* `FIX`: correct `no-implicit-start` and `no-implicit-end` in different scenarios ([#106](https://github.com/bpmn-io/bpmnlint/pull/106))
+
 ## 8.3.1
 
 * `DEPS`: update to `@bpmn-io/moddle-utils@0.2.0`
