@@ -22,7 +22,7 @@ RuleTester.verify('no-implicit-start', rule, {
           message: 'Element is an implicit start',
         },
         {
-          id: 'INTERMEDIATE_EVENT',
+          id: 'INTERMEDIATE_THROW_EVENT',
           message: 'Element is an implicit start'
         },
         {
@@ -31,6 +31,14 @@ RuleTester.verify('no-implicit-start', rule, {
         },
         {
           id: 'GATEWAY',
+          message: 'Element is an implicit start',
+        },
+        {
+          id: 'LINK_THROW',
+          message: 'Element is an implicit start',
+        },
+        {
+          id: 'INTERMEDIATE_CATCH_EVENT',
           message: 'Element is an implicit start',
         }
       ]

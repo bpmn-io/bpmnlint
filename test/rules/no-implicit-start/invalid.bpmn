@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="12.0.0">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0">
   <process id="PROCESS" isExecutable="false">
     <endEvent id="END_EVENT" name="END_EVENT" />
-    <intermediateThrowEvent id="INTERMEDIATE_EVENT" name="INTERMEDIATE_EVENT" />
+    <intermediateThrowEvent id="INTERMEDIATE_THROW_EVENT" name="INTERMEDIATE_THROW_EVENT" />
     <task id="TASK" name="TASK" />
     <exclusiveGateway id="GATEWAY" name="GATEWAY" />
-    <startEvent id="START_EVENT" />
+    <startEvent id="START_EVENT" name="START_EVENT" />
+    <intermediateThrowEvent id="LINK_THROW" name="LINK_THROW">
+      <linkEventDefinition id="LinkEventDefinition_0bbd44c" name="" />
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="INTERMEDIATE_CATCH_EVENT" name="INTERMEDIATE_CATCH_EVENT" />
   </process>
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
     <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="PROCESS">
-      <bpmndi:BPMNShape id="INTERMEDIATE_EVENT_di" bpmnElement="INTERMEDIATE_EVENT">
+      <bpmndi:BPMNShape id="END_EVENT_di" bpmnElement="END_EVENT">
+        <omgdc:Bounds x="252" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="258" y="578" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="INTERMEDIATE_EVENT_di" bpmnElement="INTERMEDIATE_THROW_EVENT">
         <omgdc:Bounds x="252" y="212" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="160" y="223" width="82" height="14" />
+          <omgdc:Bounds x="145" y="216" width="90" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
@@ -25,14 +35,23 @@
           <omgdc:Bounds x="181" y="443" width="54" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="END_EVENT_di" bpmnElement="END_EVENT">
-        <omgdc:Bounds x="252" y="532" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="258" y="578" width="24" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="START_EVENT_di" bpmnElement="START_EVENT">
         <omgdc:Bounds x="252" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="231" y="165" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0mncygt" bpmnElement="INTERMEDIATE_CATCH_EVENT">
+        <omgdc:Bounds x="452" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="358" y="216" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1l1zvwx_di" bpmnElement="LINK_THROW">
+        <omgdc:Bounds x="452" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="434" y="165" width="73" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
