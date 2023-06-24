@@ -13,6 +13,7 @@ const allRules = [
   'no-implicit-end',
   'no-implicit-start',
   'no-inclusive-gateway',
+  'no-overlapping-elements',
   'single-blank-start-event',
   'single-event-definition',
   'start-event-required',
