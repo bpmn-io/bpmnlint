@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0jdx8hq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="12.0.0">
+  <bpmn:collaboration id="Collaboration_0ttb47l">
+    <bpmn:participant id="Participant_1af2hnr" processRef="Process_00tmwln" />
+    <bpmn:participant id="Participant_06xnivi" processRef="Process_17eytgs" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_00tmwln" isExecutable="false">
+    <bpmn:task id="Activity_0pzet26">
+      <bpmn:outgoing>Flow_062v7qx</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_0iby6yw">
+      <bpmn:incoming>Flow_062v7qx</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_062v7qx" sourceRef="Activity_0pzet26" targetRef="Activity_0iby6yw" />
+  </bpmn:process>
+  <bpmn:process id="Process_17eytgs" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0ttb47l">
+      <bpmndi:BPMNShape id="Participant_1af2hnr_di" bpmnElement="Participant_1af2hnr" isHorizontal="true">
+        <dc:Bounds x="160" y="85" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pzet26_di" bpmnElement="Activity_0pzet26">
+        <dc:Bounds x="250" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0iby6yw_di" bpmnElement="Activity_0iby6yw">
+        <dc:Bounds x="400" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_062v7qx_di" bpmnElement="Flow_062v7qx">
+        <di:waypoint x="350" y="210" />
+        <di:waypoint x="400" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_06xnivi_di" bpmnElement="Participant_06xnivi" isHorizontal="true">
+        <dc:Bounds x="220" y="270" width="600" height="250" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

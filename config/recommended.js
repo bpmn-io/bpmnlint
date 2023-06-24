@@ -14,6 +14,7 @@ module.exports = {
     'no-implicit-end': 'error',
     'no-implicit-start': 'error',
     'no-inclusive-gateway': 'error',
+    'no-overlapping-elements': 'warn',
     'single-blank-start-event': 'error',
     'single-event-definition': 'error',
     'start-event-required': 'error',
