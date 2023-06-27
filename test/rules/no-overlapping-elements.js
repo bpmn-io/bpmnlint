@@ -16,7 +16,13 @@ RuleTester.verify('no-overlapping-elements', rule, {
       moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-collaboration.bpmn')
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-single-process.bpmn')
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-process.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-subprocess.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-subprocess-collapsed.bpmn')
     }
   ],
   invalid: [
@@ -47,14 +53,36 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-single-process.bpmn'),
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-process.bpmn'),
       report: [
         {
-          id: 'Activity_0pzet26',
+          id: 'TASK_1',
           message: 'Element overlaps with other element'
         },
         {
-          id: 'Activity_0iby6yw',
+          id: 'TASK_2',
+          message: 'Element overlaps with other element'
+        }
+      ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-subprocess.bpmn'),
+      report: [
+        {
+          id: 'TASK',
+          message: 'Element is outside of parent boundary'
+        }
+      ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-subprocess-collapsed.bpmn'),
+      report: [
+        {
+          id: 'TASK',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'END_EVENT',
           message: 'Element overlaps with other element'
         }
       ]
