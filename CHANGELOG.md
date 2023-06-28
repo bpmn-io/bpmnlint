@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: introduce `rule-error` category for rule errors ([#109](https://github.com/bpmn-io/bpmnlint/pull/109))
+
 ## 8.3.2
 
 * `FIX`: correct `no-implicit-start` and `no-implicit-end` in different scenarios ([#106](https://github.com/bpmn-io/bpmnlint/pull/106))
