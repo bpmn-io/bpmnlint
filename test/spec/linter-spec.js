@@ -76,6 +76,35 @@ describe('linter', function() {
     });
 
 
+    it('should fail with rule error', function() {
+
+      const failingRule = {
+        check() {
+          throw new Error('foo');
+        }
+      };
+
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: failingRule,
+          category: 'warn'
+        }
+      );
+
+      // then
+      expect(results).to.eql([
+        {
+          category: 'rule-error',
+          message: 'foo'
+        }
+      ]);
+    });
+
+
     it('should fail without check', function() {
 
       const failingRule = {};
@@ -94,8 +123,8 @@ describe('linter', function() {
       // then
       expect(results).to.eql([
         {
-          category: 'error',
-          message: 'Rule error: no check implemented'
+          category: 'rule-error',
+          message: 'no check implemented'
         }
       ]);
     });
@@ -119,8 +148,8 @@ describe('linter', function() {
       // then
       expect(results).to.eql([
         {
-          category: 'error',
-          message: 'Rule error: enter is not a function'
+          category: 'rule-error',
+          message: 'enter is not a function'
         }
       ]);
     });
