@@ -17,18 +17,31 @@ module.exports = function() {
 
     const rootElements = node.rootElements || [];
     const elementsToReport = new Set();
+    const elementsOutsideToReport = new Set();
     const diObjects = getAllDiObjects(node);
+    const processElementsParentDiMap = new Map(); // map with sub/process as key and its parent boundary di object
 
-    rootElements.forEach(element => {
-      if (is(element, 'bpmn:Collaboration')) {
-        const participants = element.participants || [];
+    rootElements
+      .filter(element => is(element, 'bpmn:Collaboration'))
+      .forEach(collaboration => {
+        const participants = collaboration.participants || [];
         checkElementsArray(participants, elementsToReport, diObjects);
-      } else if (is(element, 'bpmn:Process')) {
-        checkProcess(element, elementsToReport, diObjects);
-      }
-    });
 
+        participants.forEach(participant => {
+          processElementsParentDiMap.set(participant.processRef, diObjects.get(participant));
+        });
+      });
+
+    rootElements
+      .filter(element => is(element, 'bpmn:Process'))
+      .forEach(process => {
+        const parentDi = processElementsParentDiMap.get(process) || {};
+        checkProcess(process, elementsToReport, elementsOutsideToReport, diObjects, parentDi);
+      });
+
+    // report elements
     elementsToReport.forEach(element => reporter.report(element.id, 'Element overlaps with other element'));
+    elementsOutsideToReport.forEach(element => reporter.report(element.id, 'Element is outside of parent boundary'));
   }
 
   return {
@@ -42,13 +55,30 @@ module.exports = function() {
  * Recursively check subprocesses in a process
  * @param {Object} node Process or SubProcess
  * @param {Set} elementsToReport
+ * @param {Set} elementsOutsideToReport
+ * @param {Map} diObjects
  */
-function checkProcess(node, elementsToReport, diObjects) {
+function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects, parentDi) {
+
+  // check child elements for overlap
   const flowElements = node.flowElements || [];
   checkElementsArray(flowElements, elementsToReport, diObjects);
 
+  // check child elements outside parent boundary
+  // TODO: Skipped DataSoreReferences for now
+  flowElements.filter(element => !is(element, 'bpmn:DataStoreReference')).forEach(element => {
+    if (isOutsideParentBoundary(diObjects.get(element).bounds, parentDi.bounds)) {
+      elementsOutsideToReport.add(element);
+    }
+  });
+
+  // check subprocesses
   const subProcesses = flowElements.filter(element => is(element, 'bpmn:SubProcess'));
-  subProcesses.forEach(subProcess => checkProcess(subProcess, elementsToReport, diObjects));
+  subProcesses.forEach(subProcess => {
+    const subProcessDi = diObjects.get(subProcess) || {};
+    const subProcessParentBoundary = subProcessDi.isExpanded ? subProcessDi : {};
+    checkProcess(subProcess, elementsToReport, elementsOutsideToReport, diObjects, subProcessParentBoundary);
+  });
 }
 
 /**
@@ -80,6 +110,21 @@ function checkElementsArray(elements, elementsToReport, diObjects) {
 }
 
 /**
+ * Check if child element is outside of parent boundary
+ */
+function isOutsideParentBoundary(childBounds, parentBounds) {
+  if (!isValidShapeElement(childBounds) || !isValidShapeElement(parentBounds)) {
+    return false;
+  }
+
+  const isTopLeftCornerInside = childBounds.x >= parentBounds.x && childBounds.y >= parentBounds.y;
+  const isBottomRightCornerInside = childBounds.x + childBounds.width <= parentBounds.x + parentBounds.width && childBounds.y + childBounds.height <= parentBounds.y + parentBounds.height;
+  const isInside = isTopLeftCornerInside && isBottomRightCornerInside;
+
+  return !isInside;
+}
+
+/**
  * Check if two rectangle shapes collides
  */
 function isCollision(firstBounds, secondBounds) {
@@ -99,10 +144,10 @@ function isCollision(firstBounds, secondBounds) {
  */
 function isValidShapeElement(bounds) {
   return !!bounds && is(bounds, 'dc:Bounds') &&
-        typeof (bounds.x) === 'number' &&
-        typeof (bounds.y) === 'number' &&
-        typeof (bounds.width) === 'number' &&
-        typeof (bounds.height) === 'number';
+    typeof (bounds.x) === 'number' &&
+    typeof (bounds.y) === 'number' &&
+    typeof (bounds.width) === 'number' &&
+    typeof (bounds.height) === 'number';
 }
 
 /**
