@@ -10,7 +10,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: introduce `rule-error` category for rule errors ([#109](https://github.com/bpmn-io/bpmnlint/pull/109))
 
-#### Breaking Changes
+### Breaking Changes
 
 * rule errors are now reported as `rule-error` category instead of `error`
 
