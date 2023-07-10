@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.1.0
+
+* `FEAT`: add `no-overlapping-elements` rule ([#107](https://github.com/bpmn-io/bpmnlint/pull/107), [#72](https://github.com/bpmn-io/bpmnlint/issues/72))
+* `FEAT`: detect intermediate events overlapping tasks ([#71](https://github.com/bpmn-io/bpmnlint/issues/71), [#107](https://github.com/bpmn-io/bpmnlint/pull/107))
+
 ## 9.0.0
 
 * `FEAT`: introduce `rule-error` category for rule errors ([#109](https://github.com/bpmn-io/bpmnlint/pull/109))
