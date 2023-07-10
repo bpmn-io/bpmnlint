@@ -16,6 +16,7 @@ This library implements the following lint rules:
 * [No Implicit Split](./no-implicit-split.md)
 * [No Implicit End](./no-implicit-end.md)
 * [No Inclusive Gateway](./no-inclusive-gateway.md)
+* [No Overlapping Elements](./no-overlapping-elements.md)
 * [Single Blank Start Event](./single-blank-start-event.md)
 * [Single Event Definition](./single-event-definition.md)
 * [Start Event Required](./start-event-required.md)
