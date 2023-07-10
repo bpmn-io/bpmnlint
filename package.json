@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@bpmn-io/bpmnlint-generate-docs-images": "^0.4.0",
-    "chai": "^4.3.4",
+    "chai": "^4.3.7",
     "eslint": "^8.42.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
     "esm": "^3.2.25",
