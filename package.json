@@ -1,7 +1,7 @@
 {
   "name": "bpmnlint",
   "description": "Validate your BPMN diagrams based on configurable lint rules",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "main": "lib/index.js",
   "keywords": [
     "bpmnlint",
