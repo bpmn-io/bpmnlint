@@ -95,9 +95,12 @@ describe('support/compile-config', function() {
             throw new Error('not found: ' + path);
           },
           function __resolve(path) {
+            if (path === 'bpmnlint-plugin-foreign/package.json') {
+              return 'C:\\bpmnlint-plugin-foreign/package.json';
+            }
 
             if (path === 'bpmnlint-plugin-foreign') {
-              return 'bpmnlint-plugin-foreign/lib/index.js';
+              return 'C:\\bpmnlint-plugin-foreign/lib/index.js';
             }
 
 
@@ -105,7 +108,6 @@ describe('support/compile-config', function() {
           }
         )
       });
-
 
       // when
       const code = await compileConfig({
@@ -153,6 +155,10 @@ describe('support/compile-config', function() {
             throw new Error('not found: ' + path);
           },
           function __resolve(path) {
+            if (path === './package.json') {
+              return 'bpmnlint-plugin-local/package.json';
+            }
+
             if (path === '.') {
               return 'bpmnlint-plugin-local/lib/index.js';
             }
@@ -161,7 +167,6 @@ describe('support/compile-config', function() {
           }
         )
       });
-
 
       // when
       const code = await compileConfig({
