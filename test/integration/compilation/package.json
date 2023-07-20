@@ -1,0 +1,13 @@
+{
+  "name": "compilation",
+  "description": "Simple project to test bpmnlint rule compilation",
+  "private": true,
+  "scripts": {
+    "compile": "node compile.js"
+  },
+  "localDependencies": {
+    "bpmnlint": "../../..",
+    "bpmnlint-plugin-test": "../bpmnlint-plugin-test",
+    "bpmnlint-plugin-exported": "../bpmnlint-plugin-exported"
+  }
+}
