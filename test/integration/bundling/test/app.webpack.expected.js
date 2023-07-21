@@ -20,8 +20,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bpmnlint/rules/end-event-required */ "./node_modules/bpmnlint/rules/end-event-required.js");
 /* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _test_integration_bundling_node_modules_bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
-/* harmony import */ var _test_integration_bundling_node_modules_bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_test_integration_bundling_node_modules_bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
 
 const cache = {};
 
@@ -87,11 +87,11 @@ cache['bpmnlint/end-event-required'] = (bpmnlint_rules_end_event_required__WEBPA
 
 
 
-cache['bpmnlint-plugin-exported/foo'] = (_test_integration_bundling_node_modules_bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
+cache['bpmnlint-plugin-exported/foo'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
 
 
 
-cache['bpmnlint-plugin-exported/foo-absolute'] = (_test_integration_bundling_node_modules_bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
+cache['bpmnlint-plugin-exported/foo-absolute'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
 
 /***/ }),
 

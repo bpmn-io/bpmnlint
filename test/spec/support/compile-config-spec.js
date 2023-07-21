@@ -4,6 +4,8 @@ const NodeResolver = require('../../../lib/resolver/node-resolver');
 
 const compileConfig = require('../../../lib/support/compile-config');
 
+const os = require('os');
+
 
 describe('support/compile-config', function() {
 
@@ -95,17 +97,27 @@ describe('support/compile-config', function() {
             throw new Error('not found: ' + path);
           },
           function __resolve(path) {
+            if (path === 'bpmnlint-plugin-foreign/package.json') {
 
-            if (path === 'bpmnlint-plugin-foreign') {
-              return 'bpmnlint-plugin-foreign/lib/index.js';
+              if (os.platform() === 'win32') {
+                return 'C:\\\\bpmnlint-plugin-foreign\\package.json';
+              } else {
+                return '/bpmnlint-plugin-foreign/package.json';
+              }
             }
 
+            if (path === 'bpmnlint-plugin-foreign') {
+              if (os.platform() === 'win32') {
+                return 'C:\\\\bpmnlint-plugin-foreign\\lib\\index.js';
+              } else {
+                return '/bpmnlint-plugin-foreign/lib/index.js';
+              }
+            }
 
             throw new Error('not found: ' + path);
           }
         )
       });
-
 
       // when
       const code = await compileConfig({
@@ -153,6 +165,10 @@ describe('support/compile-config', function() {
             throw new Error('not found: ' + path);
           },
           function __resolve(path) {
+            if (path === './package.json') {
+              return 'bpmnlint-plugin-local/package.json';
+            }
+
             if (path === '.') {
               return 'bpmnlint-plugin-local/lib/index.js';
             }
@@ -161,7 +177,6 @@ describe('support/compile-config', function() {
           }
         )
       });
-
 
       // when
       const code = await compileConfig({
