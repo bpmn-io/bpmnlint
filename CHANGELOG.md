@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 9.2.0
+
+* `FEAT`: compile custom rule imports to package local references ([#115](https://github.com/bpmn-io/bpmnlint/pull/115))
+* `FIX`: correct custom rule path compilation on Windows ([#112](https://github.com/bpmn-io/bpmnlint/issues/112), [#114](https://github.com/bpmn-io/bpmnlint/pull/114))
+
 ## 9.1.0
 
 * `FEAT`: add `no-overlapping-elements` rule ([#107](https://github.com/bpmn-io/bpmnlint/pull/107), [#72](https://github.com/bpmn-io/bpmnlint/issues/72))
