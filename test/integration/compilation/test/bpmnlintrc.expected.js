@@ -153,11 +153,11 @@ import rule_20 from 'bpmnlint-plugin-test/rules/no-label-foo';
 
 cache['bpmnlint-plugin-test/no-label-foo'] = rule_20;
 
-import rule_21 from '$ROOT/test/integration/compilation/node_modules/bpmnlint-plugin-exported/src/foo';
+import rule_21 from 'bpmnlint-plugin-exported/src/foo';
 
 cache['bpmnlint-plugin-exported/foo'] = rule_21;
 
-import rule_22 from '$ROOT/test/integration/compilation/node_modules/bpmnlint-plugin-exported/src/bar';
+import rule_22 from 'bpmnlint-plugin-exported/src/bar';
 
 cache['bpmnlint-plugin-exported/bar'] = rule_22;
 

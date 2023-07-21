@@ -63,7 +63,7 @@ function test(options = { it: it }) {
     );
 
     expect(actualContents).to.match(
-      /import rule_[0-9]+ from '\$ROOT\/test\/integration\/compilation\/node_modules\/bpmnlint-plugin-exported\/src\/bar'/
+      /import rule_[0-9]+ from 'bpmnlint-plugin-exported\/src\/bar'/
     );
 
     expect(actualContents).to.match(
