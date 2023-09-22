@@ -1,12 +1,20 @@
-import Linter from '../../lib/linter';
+import {
+  Linter
+} from 'bpmnlint';
 
 import {
   expect,
   readModdle,
   createRule
-} from '../helper';
+} from '../helper.mjs';
 
 import { is } from 'bpmnlint-utils';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 describe('linter', function() {

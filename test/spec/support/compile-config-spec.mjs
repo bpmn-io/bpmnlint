@@ -1,10 +1,18 @@
-const { expect } = require('chai');
+import {
+  expect
+} from '../../helper.mjs';
 
-const NodeResolver = require('../../../lib/resolver/node-resolver');
+import NodeResolver from '../../../lib/resolver/node-resolver.js';
 
-const compileConfig = require('../../../lib/support/compile-config');
+import compileConfig from '../../../lib/support/compile-config.js';
 
-const os = require('os');
+import os from 'node:os';
+
+import { stubCJS } from '../../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 describe('support/compile-config', function() {

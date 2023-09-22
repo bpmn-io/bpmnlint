@@ -1,10 +1,16 @@
-import RuleTester from '../../lib/testers/rule-tester';
+import RuleTester from '../../lib/testers/rule-tester.js';
 
-import rule from '../../rules/superfluous-gateway';
+import rule from '../../rules/superfluous-gateway.js';
 
 import {
   readModdle
-} from '../../lib/testers/helper';
+} from '../../lib/testers/helper.js';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 RuleTester.verify('superfluous-gateway', rule, {

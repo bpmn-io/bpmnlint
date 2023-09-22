@@ -1,10 +1,16 @@
-import traverse from '../../lib/traverse';
+import traverse from '../../lib/traverse.js';
 
 import {
   expect,
   createModdle,
   readModdle
-} from '../helper';
+} from '../helper.mjs';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 describe('traverse', function() {

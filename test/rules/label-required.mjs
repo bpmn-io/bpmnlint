@@ -1,10 +1,16 @@
-import RuleTester from '../../lib/testers/rule-tester';
+import RuleTester from '../../lib/testers/rule-tester.js';
 
-import rule from '../../rules/label-required';
+import rule from '../../rules/label-required.js';
 
 import {
   readModdle
-} from '../../lib/testers/helper';
+} from '../../lib/testers/helper.js';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 const message = 'Element is missing label/name';

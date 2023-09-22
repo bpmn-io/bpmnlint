@@ -1,12 +1,8 @@
-import {
-  expect
-} from '../helper';
-
-import { Linter as ESLinter } from '../..';
+const { expect } = require('chai');
 
 const {
   Linter
-} = require('../..');
+} = require('bpmnlint');
 
 
 describe('index', function() {
@@ -16,8 +12,13 @@ describe('index', function() {
   });
 
 
-  it('should ES export { Linter }', function() {
-    expect(ESLinter).to.exist;
+  it('should ES export { Linter }', async function() {
+
+    // when
+    const { Linter } = await import('bpmnlint');
+
+    // then
+    expect(Linter).to.exist;
   });
 
 });

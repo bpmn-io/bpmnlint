@@ -1,8 +1,8 @@
-import StaticResolver from '../../../lib/resolver/static-resolver';
+import StaticResolver from '../../../lib/resolver/static-resolver.js';
 
 import {
   expect
-} from '../../helper';
+} from '../../helper.mjs';
 
 
 describe('resolver/static-resolver', function() {

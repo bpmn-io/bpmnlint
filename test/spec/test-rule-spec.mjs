@@ -1,8 +1,14 @@
-import testRule from '../../lib/test-rule';
+import testRule from '../../lib/test-rule.js';
 
-import { expect, createRule, readModdle } from '../helper';
+import { expect, createRule, readModdle } from '../helper.mjs';
 
 import { is } from 'bpmnlint-utils';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 describe('test-rule', function() {
