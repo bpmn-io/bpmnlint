@@ -1,9 +1,15 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 
 import execa from 'execa';
 
 import { expect } from 'chai';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 (/^v1[24]/.test(process.version) ? describe.skip : describe)('bundling', function() {

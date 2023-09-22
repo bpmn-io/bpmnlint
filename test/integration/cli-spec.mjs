@@ -1,10 +1,18 @@
 import execa from 'execa';
 
-import path from 'path';
+import path from 'node:path';
 
 import stripIndent from 'strip-indent';
 
 import { expect } from 'chai';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  require,
+  __dirname
+} = stubCJS(import.meta.url);
+
 
 const EMPTY = '';
 

@@ -1,10 +1,16 @@
-import RuleTester from '../../lib/testers/rule-tester';
+import RuleTester from '../../lib/testers/rule-tester.js';
 
-import rule from '../../rules/no-duplicate-sequence-flows';
+import rule from '../../rules/no-duplicate-sequence-flows.js';
 
 import {
   readModdle
-} from '../../lib/testers/helper';
+} from '../../lib/testers/helper.js';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
 
 
 RuleTester.verify('no-duplicate-sequence-flows', rule, {

@@ -5,12 +5,12 @@ import {
   getTitle,
   replacer,
   verify
-} from '../../../lib/testers/rule-tester';
+} from '../../../lib/testers/rule-tester.js';
 
 import {
   createModdle,
   expect
-} from '../../helper';
+} from '../../helper.mjs';
 
 
 describe('rule-tester', function() {

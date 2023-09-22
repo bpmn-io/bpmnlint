@@ -1,10 +1,17 @@
-import RuleTester from '../../lib/testers/rule-tester';
+import RuleTester from '../../lib/testers/rule-tester.js';
 
-import rule from '../../rules/conditional-flows';
+import rule from '../../rules/conditional-flows.js';
+
+import { stubCJS } from '../helper.mjs';
+
+const {
+  __dirname
+} = stubCJS(import.meta.url);
+
 
 import {
   readModdle
-} from '../../lib/testers/helper';
+} from '../../lib/testers/helper.js';
 
 
 RuleTester.verify('conditional-flows', rule, {
