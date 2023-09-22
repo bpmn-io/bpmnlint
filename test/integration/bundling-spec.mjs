@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 
-import execa from 'execa';
+import { execa } from 'execa';
 
 import { expect } from 'chai';
 
