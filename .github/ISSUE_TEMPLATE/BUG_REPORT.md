@@ -5,12 +5,12 @@ labels: "bug"
 ---
 
 
-__Describe the Bug__
+### Describe the Bug
 
 <!-- A clear and concise description of what the bug is. -->
 
 
-__Steps to Reproduce__
+### Steps to Reproduce
 
 <!-- Clear steps that allow us to reproduce the error. -->
 
@@ -19,12 +19,12 @@ __Steps to Reproduce__
 3. now this happens
 
 
-__Expected Behavior__
+### Expected Behavior
 
 <!-- A clear and concise description of what you expected to happen. -->
 
 
-__Environment__
+### Environment
 
 - Host (Browser/Node version), if applicable: [e.g. MS Edge 18, Chrome 69, Node 10 LTS]
 - OS: [e.g. Windows 7]
