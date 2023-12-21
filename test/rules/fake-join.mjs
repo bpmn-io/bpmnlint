@@ -24,7 +24,14 @@ RuleTester.verify('fake-join', rule, {
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/fake-join/invalid.bpmn'),
+      moddleElement: readModdle(__dirname + '/fake-join/invalid-task.bpmn'),
+      report: {
+        id: 'Element',
+        message: 'Incoming flows do not join'
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/fake-join/invalid-callActivity.bpmn'),
       report: {
         id: 'Element',
         message: 'Incoming flows do not join'
