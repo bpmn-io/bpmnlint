@@ -36,6 +36,13 @@ RuleTester.verify('no-implicit-split', rule, {
         id: 'Element',
         message: 'Flow splits implicitly'
       }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-callActivity.bpmn'),
+      report: {
+        id: 'Element',
+        message: 'Flow splits implicitly'
+      }
     }
   ]
 });
