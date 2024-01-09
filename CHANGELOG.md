@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.0.0
+
+* `DEPS`: update to `@bpmn-io/moddle-utils@0.2.1`
+* `FIX`: apply `fake-join` and `no-implicit-split` on all activities ([#126](https://github.com/bpmn-io/bpmnlint/pull/126))
+* `CHORE`: require Node `>= 16`
+
 ## 9.2.0
 
 * `FEAT`: compile custom rule imports to package local references ([#115](https://github.com/bpmn-io/bpmnlint/pull/115))
