@@ -5,6 +5,8 @@
     <bpmn:participant id="Participant_0sw9yxi" processRef="Process_1km6zzm" />
     <bpmn:messageFlow id="Flow_1icn9fy" sourceRef="Activity_0xargbu" targetRef="Participant_0sw9yxi" />
     <bpmn:messageFlow id="Flow_1a1g4m3" sourceRef="Activity_0xargbu" targetRef="Event_1xj61sl" />
+    <bpmn:textAnnotation id="TextAnnotation_165nwjd" />
+    <bpmn:association id="Association_0x7ez1y" associationDirection="None" sourceRef="SUB_PROCESS" targetRef="TextAnnotation_165nwjd" />
   </bpmn:collaboration>
   <bpmn:process id="Process_009qqmc" isExecutable="true">
     <bpmn:startEvent id="Event_12tkt6j">
@@ -29,9 +31,11 @@
       </bpmn:task>
       <bpmn:sequenceFlow id="Flow_1iji09a" sourceRef="Event_1pv8hsb" targetRef="Activity_0xargbu" />
     </bpmn:subProcess>
-    <bpmn:boundaryEvent id="Event_0v5drzk" name="BOUNDARY" attachedToRef="SUB_PROCESS" />
     <bpmn:sequenceFlow id="Flow_1x4x8b3" sourceRef="Event_12tkt6j" targetRef="SUB_PROCESS" />
     <bpmn:sequenceFlow id="Flow_1gpx5pf" sourceRef="SUB_PROCESS" targetRef="Event_0lzgdc4" />
+    <bpmn:boundaryEvent id="Event_0v5drzk" name="BOUNDARY" attachedToRef="SUB_PROCESS" />
+    <bpmn:textAnnotation id="TextAnnotation_0sm2cbh" />
+    <bpmn:association id="Association_1yed2sz" associationDirection="None" sourceRef="Activity_0xargbu" targetRef="TextAnnotation_0sm2cbh" />
   </bpmn:process>
   <bpmn:process id="Process_1km6zzm" isExecutable="false">
     <bpmn:startEvent id="Event_1xj61sl" />
@@ -40,6 +44,9 @@
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_087qi1y">
       <bpmndi:BPMNShape id="Participant_1drzzak_di" bpmnElement="Participant_1drzzak" isHorizontal="true">
         <dc:Bounds x="160" y="50" width="710" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0sm2cbh_di" bpmnElement="TextAnnotation_0sm2cbh">
+        <dc:Bounds x="540" y="100" width="100" height="30" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_12tkt6j_di" bpmnElement="Event_12tkt6j">
         <dc:Bounds x="262" y="172" width="36" height="36" />
@@ -59,13 +66,13 @@
       <bpmndi:BPMNShape id="Activity_0xargbu_di" bpmnElement="Activity_0xargbu">
         <dc:Bounds x="480" y="150" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_10klhlg_di" bpmnElement="DataOutputAssociation_10klhlg">
-        <di:waypoint x="580" y="172" />
-        <di:waypoint x="762" y="107" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1iji09a_di" bpmnElement="Flow_1iji09a">
         <di:waypoint x="428" y="190" />
         <di:waypoint x="480" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1yed2sz_di" bpmnElement="Association_1yed2sz">
+        <di:waypoint x="562" y="150" />
+        <di:waypoint x="578" y="130" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1bxxt8i_di" bpmnElement="Event_0v5drzk">
         <dc:Bounds x="622" y="272" width="36" height="36" />
@@ -87,6 +94,17 @@
       <bpmndi:BPMNShape id="Event_1xj61sl_di" bpmnElement="Event_1xj61sl">
         <dc:Bounds x="292" y="532" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_165nwjd_di" bpmnElement="TextAnnotation_165nwjd">
+        <dc:Bounds x="210" y="80" width="100" height="29.999998092651367" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0x7ez1y_di" bpmnElement="Association_0x7ez1y">
+        <di:waypoint x="350" y="127" />
+        <di:waypoint x="302" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_10klhlg_di" bpmnElement="DataOutputAssociation_10klhlg">
+        <di:waypoint x="580" y="172" />
+        <di:waypoint x="762" y="107" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1icn9fy_di" bpmnElement="Flow_1icn9fy">
         <di:waypoint x="530" y="230" />
         <di:waypoint x="530" y="420" />
