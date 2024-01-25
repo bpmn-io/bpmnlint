@@ -13,4 +13,4 @@ Example of __correct__ usage for this rule:
 
 ![Correct usage example](./examples/superfluous-gateway-correct.png)
 
-Cf. [`superfluous-gateway.bpmn`](./examples/superfluous-gateway.bpmn).
+Cf. [`superfluous-gateway.bpmn`](./examples/superfluous-gateway-correct.bpmn).
