@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1x7j8t1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0-nightly.20240107" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
+  <bpmn:process id="Process_0im3pgs" isExecutable="true">
+    <bpmn:intermediateThrowEvent id="NO_CATCH" name="NO_CATCH">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0l1hwet" name="" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="NO_THROW" name="NO_THROW">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_08twe44" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:subProcess id="Activity_1l5hieb">
+      <bpmn:intermediateCatchEvent id="SCOPE_BOUNDARY_CATCH" name="SCOPE_BOUNDARY">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_0neehpv" name="" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+    <bpmn:intermediateThrowEvent id="SCOPE_BOUNDARY_THROW" name="SCOPE_BOUNDARY">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1h4v9pq" name="" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="DUPLICATE_NAME_THROW_1" name="DUPLICATE_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0yclygy" name="" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="DUPLICATE_NAME_THROW_2" name="DUPLICATE_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0ftn1rm" name="" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="DUPLICATE_NAME_CATCH_1" name="DUPLICATE_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1fy2jsp" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="DUPLICATE_NAME_CATCH_2" name="DUPLICATE_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0qdvq9n" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="THROW_NO_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0l8clut" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateThrowEvent id="CATCH_NO_NAME">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_112gmrg" name="" />
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0im3pgs">
+      <bpmndi:BPMNShape id="Event_00qu043_di" bpmnElement="NO_CATCH">
+        <dc:Bounds x="182" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="171" y="125" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1w9uhf6_di" bpmnElement="NO_THROW">
+        <dc:Bounds x="322" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="309" y="125" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0l0jzrg_di" bpmnElement="DUPLICATE_NAME_THROW_1">
+        <dc:Bounds x="212" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="545" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1qknzzi" bpmnElement="DUPLICATE_NAME_THROW_2">
+        <dc:Bounds x="212" y="612" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="655" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gvpdhn_di" bpmnElement="DUPLICATE_NAME_CATCH_1">
+        <dc:Bounds x="422" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="545" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qgwzkc_di" bpmnElement="DUPLICATE_NAME_CATCH_2">
+        <dc:Bounds x="422" y="612" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="655" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_15n0rzr" bpmnElement="CATCH_NO_NAME">
+        <dc:Bounds x="692" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="669" y="125" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_196apoc_di" bpmnElement="THROW_NO_NAME">
+        <dc:Bounds x="582" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1l5hieb_di" bpmnElement="Activity_1l5hieb" isExpanded="true">
+        <dc:Bounds x="165" y="210" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mpcq3t_di" bpmnElement="SCOPE_BOUNDARY_CATCH">
+        <dc:Bounds x="322" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="298" y="335" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1thzuaq" bpmnElement="SCOPE_BOUNDARY_THROW">
+        <dc:Bounds x="452" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="429" y="125" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

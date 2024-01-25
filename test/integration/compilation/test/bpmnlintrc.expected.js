@@ -34,6 +34,7 @@ const rules = {
   "event-sub-process-typed-start-event": "error",
   "fake-join": "warn",
   "label-required": "error",
+  "link-event": "error",
   "no-bpmndi": "error",
   "no-complex-gateway": "error",
   "no-disconnected": "warn",
@@ -90,86 +91,90 @@ import rule_4 from 'bpmnlint/rules/label-required';
 
 cache['bpmnlint/label-required'] = rule_4;
 
-import rule_5 from 'bpmnlint/rules/no-bpmndi';
+import rule_5 from 'bpmnlint/rules/link-event';
 
-cache['bpmnlint/no-bpmndi'] = rule_5;
+cache['bpmnlint/link-event'] = rule_5;
 
-import rule_6 from 'bpmnlint/rules/no-complex-gateway';
+import rule_6 from 'bpmnlint/rules/no-bpmndi';
 
-cache['bpmnlint/no-complex-gateway'] = rule_6;
+cache['bpmnlint/no-bpmndi'] = rule_6;
 
-import rule_7 from 'bpmnlint/rules/no-disconnected';
+import rule_7 from 'bpmnlint/rules/no-complex-gateway';
 
-cache['bpmnlint/no-disconnected'] = rule_7;
+cache['bpmnlint/no-complex-gateway'] = rule_7;
 
-import rule_8 from 'bpmnlint/rules/no-duplicate-sequence-flows';
+import rule_8 from 'bpmnlint/rules/no-disconnected';
 
-cache['bpmnlint/no-duplicate-sequence-flows'] = rule_8;
+cache['bpmnlint/no-disconnected'] = rule_8;
 
-import rule_9 from 'bpmnlint/rules/no-gateway-join-fork';
+import rule_9 from 'bpmnlint/rules/no-duplicate-sequence-flows';
 
-cache['bpmnlint/no-gateway-join-fork'] = rule_9;
+cache['bpmnlint/no-duplicate-sequence-flows'] = rule_9;
 
-import rule_10 from 'bpmnlint/rules/no-implicit-split';
+import rule_10 from 'bpmnlint/rules/no-gateway-join-fork';
 
-cache['bpmnlint/no-implicit-split'] = rule_10;
+cache['bpmnlint/no-gateway-join-fork'] = rule_10;
 
-import rule_11 from 'bpmnlint/rules/no-implicit-end';
+import rule_11 from 'bpmnlint/rules/no-implicit-split';
 
-cache['bpmnlint/no-implicit-end'] = rule_11;
+cache['bpmnlint/no-implicit-split'] = rule_11;
 
-import rule_12 from 'bpmnlint/rules/no-implicit-start';
+import rule_12 from 'bpmnlint/rules/no-implicit-end';
 
-cache['bpmnlint/no-implicit-start'] = rule_12;
+cache['bpmnlint/no-implicit-end'] = rule_12;
 
-import rule_13 from 'bpmnlint/rules/no-inclusive-gateway';
+import rule_13 from 'bpmnlint/rules/no-implicit-start';
 
-cache['bpmnlint/no-inclusive-gateway'] = rule_13;
+cache['bpmnlint/no-implicit-start'] = rule_13;
 
-import rule_14 from 'bpmnlint/rules/no-overlapping-elements';
+import rule_14 from 'bpmnlint/rules/no-inclusive-gateway';
 
-cache['bpmnlint/no-overlapping-elements'] = rule_14;
+cache['bpmnlint/no-inclusive-gateway'] = rule_14;
 
-import rule_15 from 'bpmnlint/rules/single-blank-start-event';
+import rule_15 from 'bpmnlint/rules/no-overlapping-elements';
 
-cache['bpmnlint/single-blank-start-event'] = rule_15;
+cache['bpmnlint/no-overlapping-elements'] = rule_15;
 
-import rule_16 from 'bpmnlint/rules/single-event-definition';
+import rule_16 from 'bpmnlint/rules/single-blank-start-event';
 
-cache['bpmnlint/single-event-definition'] = rule_16;
+cache['bpmnlint/single-blank-start-event'] = rule_16;
 
-import rule_17 from 'bpmnlint/rules/start-event-required';
+import rule_17 from 'bpmnlint/rules/single-event-definition';
 
-cache['bpmnlint/start-event-required'] = rule_17;
+cache['bpmnlint/single-event-definition'] = rule_17;
 
-import rule_18 from 'bpmnlint/rules/sub-process-blank-start-event';
+import rule_18 from 'bpmnlint/rules/start-event-required';
 
-cache['bpmnlint/sub-process-blank-start-event'] = rule_18;
+cache['bpmnlint/start-event-required'] = rule_18;
 
-import rule_19 from 'bpmnlint/rules/superfluous-gateway';
+import rule_19 from 'bpmnlint/rules/sub-process-blank-start-event';
 
-cache['bpmnlint/superfluous-gateway'] = rule_19;
+cache['bpmnlint/sub-process-blank-start-event'] = rule_19;
 
-import rule_20 from 'bpmnlint/rules/superfluous-termination';
+import rule_20 from 'bpmnlint/rules/superfluous-gateway';
 
-cache['bpmnlint/superfluous-termination'] = rule_20;
+cache['bpmnlint/superfluous-gateway'] = rule_20;
 
-import rule_21 from 'bpmnlint-plugin-test/rules/no-label-foo';
+import rule_21 from 'bpmnlint/rules/superfluous-termination';
 
-cache['bpmnlint-plugin-test/no-label-foo'] = rule_21;
+cache['bpmnlint/superfluous-termination'] = rule_21;
 
-import rule_22 from 'bpmnlint-plugin-exported/src/foo';
+import rule_22 from 'bpmnlint-plugin-test/rules/no-label-foo';
 
-cache['bpmnlint-plugin-exported/foo'] = rule_22;
+cache['bpmnlint-plugin-test/no-label-foo'] = rule_22;
 
-import rule_23 from 'bpmnlint-plugin-exported/src/bar';
+import rule_23 from 'bpmnlint-plugin-exported/src/foo';
 
-cache['bpmnlint-plugin-exported/bar'] = rule_23;
+cache['bpmnlint-plugin-exported/foo'] = rule_23;
 
-import rule_24 from 'bpmnlint-plugin-exported/rules/baz';
+import rule_24 from 'bpmnlint-plugin-exported/src/bar';
 
-cache['bpmnlint-plugin-exported/baz'] = rule_24;
+cache['bpmnlint-plugin-exported/bar'] = rule_24;
 
-import rule_25 from 'bpmnlint-plugin-exported/src/foo';
+import rule_25 from 'bpmnlint-plugin-exported/rules/baz';
 
-cache['bpmnlint-plugin-exported/foo-absolute'] = rule_25;
+cache['bpmnlint-plugin-exported/baz'] = rule_25;
+
+import rule_26 from 'bpmnlint-plugin-exported/src/foo';
+
+cache['bpmnlint-plugin-exported/foo-absolute'] = rule_26;

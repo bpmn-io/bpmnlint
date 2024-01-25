@@ -4,6 +4,7 @@ const allRules = [
   'event-sub-process-typed-start-event',
   'fake-join',
   'label-required',
+  'link-event',
   'no-bpmndi',
   'no-complex-gateway',
   'no-disconnected',
