@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1xzqysc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0-nightly.20240107" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
+  <bpmn:category id="Category_0frzuuu">
+    <bpmn:categoryValue id="CategoryValue_1c207z7" value="YES" />
+  </bpmn:category>
+  <bpmn:process id="Process_1gm33ca" isExecutable="true">
+    <bpmn:task id="Activity_09ai1fm">
+      <bpmn:incoming>DEFAULT_FLOW</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="Activity_13btrmx" default="DEFAULT_FLOW">
+      <bpmn:outgoing>DEFAULT_FLOW</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GATEWAY" name="YES" />
+    <bpmn:sequenceFlow id="DEFAULT_FLOW" name="YES" sourceRef="Activity_13btrmx" targetRef="Activity_09ai1fm" />
+    <bpmn:task id="Activity_1y46za8">
+      <bpmn:outgoing>SIMPLE_FLOW</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1rk2pdz">
+      <bpmn:incoming>SIMPLE_FLOW</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SIMPLE_FLOW" name="YES" sourceRef="Activity_1y46za8" targetRef="Activity_1rk2pdz" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1gm33ca">
+      <bpmndi:BPMNShape id="BPMNShape_1dehp3m" bpmnElement="Activity_09ai1fm">
+        <dc:Bounds x="540" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0w2bqdl" bpmnElement="Activity_13btrmx">
+        <dc:Bounds x="290" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0b6gxc3" bpmnElement="GATEWAY" isMarkerVisible="true">
+        <dc:Bounds x="705" y="122" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="719" y="92" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1y46za8_di" bpmnElement="Activity_1y46za8">
+        <dc:Bounds x="160" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rk2pdz_di" bpmnElement="Activity_1rk2pdz">
+        <dc:Bounds x="340" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_1qj5lpq" bpmnElement="DEFAULT_FLOW">
+        <di:waypoint x="390" y="310" />
+        <di:waypoint x="540" y="310" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="454" y="292" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tg4vy1_di" bpmnElement="SIMPLE_FLOW">
+        <di:waypoint x="260" y="120" />
+        <di:waypoint x="340" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="289" y="102" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
