@@ -20,6 +20,7 @@ module.exports = {
     'start-event-required': 'error',
     'sub-process-blank-start-event': 'error',
     'superfluous-gateway': 'warn',
-    'superfluous-termination': 'warn'
+    'superfluous-termination': 'warn',
+    'superfluous-label': 'warn'
   }
 };

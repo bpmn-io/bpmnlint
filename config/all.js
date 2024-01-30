@@ -19,6 +19,7 @@ const allRules = [
   'start-event-required',
   'sub-process-blank-start-event',
   'superfluous-gateway',
+  'superfluous-label',
   'superfluous-termination'
 ];
 
