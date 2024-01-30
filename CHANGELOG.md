@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.2.0
+
+* `FEAT`: add `link-event` rule ([#128](https://github.com/bpmn-io/bpmnlint/pull/128))
+
 ## 10.1.0
 
 * `FEAT`: add `superfluous-termination` rule ([#19](https://github.com/bpmn-io/bpmnlint/issues/119))
