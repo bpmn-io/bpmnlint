@@ -1,3 +1,7 @@
+const {
+  isAny
+} = require('bpmnlint-utils');
+
 /**
  * A rule that checks that sequence flows outgoing from a
  * conditional forking gateway or activity are
@@ -39,7 +43,14 @@ function isConditionalForking(node) {
   const defaultFlow = node['default'];
   const outgoing = node.outgoing || [];
 
-  return defaultFlow || outgoing.find(hasCondition);
+  const isConditionalGateway = isAny(node, [
+    'bpmn:ExclusiveGateway',
+    'bpmn:InclusiveGateway'
+  ]);
+
+  return defaultFlow
+    || (isConditionalGateway && outgoing.length > 1)
+    || outgoing.some(hasCondition);
 }
 
 function hasCondition(flow) {
