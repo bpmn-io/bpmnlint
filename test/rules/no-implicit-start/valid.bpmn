@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0">
   <process id="PROCESS" isExecutable="false">
     <endEvent id="END_EVENT" name="END_EVENT">
       <incoming>Flow_1w3680k</incoming>
@@ -31,78 +31,94 @@
     <intermediateCatchEvent id="LINK_THROW" name="LINK_THROW">
       <linkEventDefinition id="LinkEventDefinition_11t6tem" name="" />
     </intermediateCatchEvent>
+    <boundaryEvent id="Event_07bzf1s" attachedToRef="TASK">
+      <compensateEventDefinition id="CompensateEventDefinition_0b10fth" />
+    </boundaryEvent>
+    <task id="FOR_COMPENSATION" name="FOR_COMPENSATION" isForCompensation="true" />
     <group id="Group_14ev8gw" />
+    <association id="Association_0flxzv9" associationDirection="One" sourceRef="Event_07bzf1s" targetRef="FOR_COMPENSATION" />
   </process>
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
     <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="PROCESS">
       <bpmndi:BPMNShape id="END_EVENT_di" bpmnElement="END_EVENT">
-        <omgdc:Bounds x="252" y="532" width="36" height="36" />
+        <omgdc:Bounds x="362" y="532" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="258" y="578" width="24" height="14" />
+          <omgdc:Bounds x="347" y="578" width="67" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="INTERMEDIATE_EVENT_di" bpmnElement="INTERMEDIATE_EVENT">
-        <omgdc:Bounds x="252" y="212" width="36" height="36" />
+        <omgdc:Bounds x="362" y="212" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="160" y="223" width="82" height="14" />
+          <omgdc:Bounds x="270" y="223" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
-        <omgdc:Bounds x="220" y="300" width="100" height="80" />
+        <omgdc:Bounds x="330" y="300" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="GATEWAY_di" bpmnElement="GATEWAY" isMarkerVisible="true">
-        <omgdc:Bounds x="245" y="425" width="50" height="50" />
+        <omgdc:Bounds x="355" y="425" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="181" y="443" width="54" height="14" />
+          <omgdc:Bounds x="292" y="443" width="53" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="START_di" bpmnElement="START">
-        <omgdc:Bounds x="252" y="122" width="36" height="36" />
+        <omgdc:Bounds x="362" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="252" y="98" width="36" height="14" />
+          <omgdc:Bounds x="362" y="98" width="36" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_1ef1hck_di" bpmnElement="DataObjectReference_1ef1hck">
-        <omgdc:Bounds x="472" y="165" width="36" height="50" />
+        <omgdc:Bounds x="582" y="165" width="36" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_0bpv41p_di" bpmnElement="DataStoreReference_0bpv41p">
-        <omgdc:Bounds x="415" y="315" width="50" height="50" />
+        <omgdc:Bounds x="525" y="315" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bfzxxp_di" bpmnElement="FOR_COMPENSATION">
+        <omgdc:Bounds x="160" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1jhbus4_di" bpmnElement="EVENT_SUB" isExpanded="true">
-        <omgdc:Bounds x="940" y="40" width="350" height="200" />
+        <omgdc:Bounds x="1050" y="40" width="350" height="200" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_061e7y8_di" bpmnElement="LINK_THROW">
-        <omgdc:Bounds x="492" y="72" width="36" height="36" />
+        <omgdc:Bounds x="602" y="72" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="474" y="115" width="73" height="14" />
+          <omgdc:Bounds x="584" y="115" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0flxzv9_di" bpmnElement="Association_0flxzv9">
+        <di:waypoint x="312" y="340" />
+        <di:waypoint x="260" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1a3fgyg_di" bpmnElement="Event_07bzf1s">
+        <omgdc:Bounds x="312" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Group_14ev8gw_di" bpmnElement="Group_14ev8gw">
-        <omgdc:Bounds x="560" y="190" width="300" height="300" />
+        <omgdc:Bounds x="670" y="190" width="300" height="300" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0wn1jq0_di" bpmnElement="BOUNDARY">
-        <omgdc:Bounds x="302" y="322" width="36" height="36" />
+        <omgdc:Bounds x="412" y="322" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="338" y="363" width="63" height="14" />
+          <omgdc:Bounds x="448" y="363" width="63" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1m6hogu_di" bpmnElement="Flow_1m6hogu">
-        <di:waypoint x="270" y="158" />
-        <di:waypoint x="270" y="212" />
+        <di:waypoint x="380" y="158" />
+        <di:waypoint x="380" y="212" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1d9s7bz_di" bpmnElement="Flow_1d9s7bz">
-        <di:waypoint x="270" y="248" />
-        <di:waypoint x="270" y="300" />
+        <di:waypoint x="380" y="248" />
+        <di:waypoint x="380" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xulfco_di" bpmnElement="Flow_0xulfco">
-        <di:waypoint x="270" y="380" />
-        <di:waypoint x="270" y="425" />
+        <di:waypoint x="380" y="380" />
+        <di:waypoint x="380" y="425" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1w3680k_di" bpmnElement="Flow_1w3680k">
-        <di:waypoint x="270" y="475" />
-        <di:waypoint x="270" y="532" />
+        <di:waypoint x="380" y="475" />
+        <di:waypoint x="380" y="532" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
