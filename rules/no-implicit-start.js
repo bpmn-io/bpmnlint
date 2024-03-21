@@ -20,6 +20,10 @@ module.exports = function() {
   function isImplicitStart(node) {
     const incoming = node.incoming || [];
 
+    if (is(node, 'bpmn:Activity') && node.isForCompensation) {
+      return false;
+    }
+
     if (is(node, 'bpmn:SubProcess') && node.triggeredByEvent) {
       return false;
     }
