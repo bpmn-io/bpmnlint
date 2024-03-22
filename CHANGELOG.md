@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.2.1
+
+* `FIX`: correct compensation activities triggering `no-implicit-start` ([#132](https://github.com/bpmn-io/bpmnlint/pull/132))
+
 ## 10.2.0
 
 * `FEAT`: add `link-event` rule ([#128](https://github.com/bpmn-io/bpmnlint/pull/128))
