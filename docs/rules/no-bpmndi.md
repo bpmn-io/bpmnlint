@@ -1,8 +1,8 @@
 # No BPMNDI information (no-bpmndi)
 
-Checks for missing BPMNDI information for BPMN elements, which should have a visual representation.
+Checks that semantic BPMN elements with a visual representation have graphical information (BPMNDI) attached.
 
-Each BPMN element (which requires a visual representation) is referenced by a BPMNDI element, which defines how to visually display / render the respective element. It might happen, that a user deletes such an BPMNDI element by accident (e.g., by working in the XML directly). This might lead to errors, since the BPMN element would still be interpreted when executing the process, but it would not be visible anymore in graphical modeling tools. This rule identifies these cases.
+A BPMN element is referenced by a BPMNDI element. The BPMNDI defines how to visually display / render the respective element. It might happen, that a user deletes such an BPMNDI element by accident (e.g., by working in the XML directly). This might lead to errors, since the BPMN element would still be interpreted when executing the process, but it would not be visible anymore in graphical modeling tools. This rule identifies these cases.
 
 Example of __incorrect__ usage for this rule. See `task1`:
 
