@@ -67,6 +67,11 @@ function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects
   // check child elements outside parent boundary
   // TODO: Skipped DataSoreReferences for now
   flowElements.filter(element => !is(element, 'bpmn:DataStoreReference')).forEach(element => {
+
+    if (!diObjects.has(element)) {
+      return;
+    }
+
     if (isOutsideParentBoundary(diObjects.get(element).bounds, parentDi.bounds)) {
       elementsOutsideToReport.add(element);
     }
