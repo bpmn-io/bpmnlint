@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="DEFINITIONS" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.12.0">
+  <bpmn:dataStore id="DATA_STORE" name="DATA_STORE" />
+  <bpmn:process id="PROCESS" isExecutable="false">
+    <bpmn:dataObjectReference id="DATA_OBJECT_REFERENCE" name="DATA_OBJECT_REFERENCE" dataObjectRef="DATA_OBJECT" />
+    <bpmn:dataObject id="DATA_OBJECT" name="DATA_OBJECT" />
+    <bpmn:dataStoreReference id="DATA_STORE_REFERENCE" name="DATA_STORE_REFERENCE" dataStoreRef="DATA_STORE" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS">
+      <bpmndi:BPMNShape id="DATA_OBJECT_REFERENCE_di" bpmnElement="DATA_OBJECT_REFERENCE">
+        <dc:Bounds x="100" y="80" width="80" height="100" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DATA_STORE_REFERENCE_di" bpmnElement="DATA_STORE_REFERENCE">
+        <dc:Bounds x="300" y="80" width="80" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

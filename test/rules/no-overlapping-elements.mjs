@@ -31,6 +31,9 @@ RuleTester.verify('no-overlapping-elements', rule, {
       moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-subprocess-collapsed.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-data-objects.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/no-overlapping-elements/ignore-missing-di.bpmn')
     }
   ],
