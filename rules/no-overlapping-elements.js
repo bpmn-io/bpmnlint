@@ -60,24 +60,29 @@ module.exports = function() {
  */
 function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects, parentDi) {
 
-  // check child elements for overlap
   const flowElements = node.flowElements || [];
-  checkElementsArray(flowElements, elementsToReport, diObjects);
+
+  const flowElementsWithDi = flowElements.filter(element => diObjects.has(element));
+
+  // check child elements for overlap
+  checkElementsArray(flowElementsWithDi, elementsToReport, diObjects);
 
   // check child elements outside parent boundary
-  // TODO: Skipped DataSoreReferences for now
-  flowElements.filter(element => !is(element, 'bpmn:DataStoreReference')).forEach(element => {
-
-    if (!diObjects.has(element)) {
-      return;
-    }
-
-    if (isOutsideParentBoundary(diObjects.get(element).bounds, parentDi.bounds)) {
+  //
+  //   * data objects do not have a visual representation
+  //   * for historical reasons data store references may be
+  //     outside of parent boundaries
+  //
+  flowElementsWithDi.forEach(element => {
+    if (
+      !is(element, 'bpmn:DataStoreReference') &&
+      isOutsideParentBoundary(diObjects.get(element).bounds, parentDi.bounds)
+    ) {
       elementsOutsideToReport.add(element);
     }
   });
 
-  // check subprocesses
+  // recurse into subprocesses
   const subProcesses = flowElements.filter(element => is(element, 'bpmn:SubProcess'));
   subProcesses.forEach(subProcess => {
     const subProcessDi = diObjects.get(subProcess) || {};
@@ -93,12 +98,9 @@ function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects
 function checkElementsArray(elements, elementsToReport, diObjects) {
   for (let i = 0; i < elements.length - 1; i++) {
     const element = elements[i];
+
     for (let j = i + 1; j < elements.length; j++) {
       const element2 = elements[j];
-
-      if (!diObjects.has(element) || !diObjects.has(element2)) {
-        continue;
-      }
 
       // ignore if Boundary events overlap their host
       // but still check if they overlap other elements
