@@ -4,6 +4,7 @@ module.exports = {
     'end-event-required': 'error',
     'event-sub-process-typed-start-event': 'error',
     'fake-join': 'warn',
+    'global': 'warn',
     'label-required': 'error',
     'link-event': 'error',
     'no-bpmndi': 'error',
