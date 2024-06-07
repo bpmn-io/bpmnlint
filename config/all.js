@@ -3,6 +3,7 @@ const allRules = [
   'end-event-required',
   'event-sub-process-typed-start-event',
   'fake-join',
+  'global',
   'label-required',
   'link-event',
   'no-bpmndi',

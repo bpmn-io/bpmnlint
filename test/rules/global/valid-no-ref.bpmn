@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0r62jj9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.24.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <bpmn:process id="PROCESS_1" isExecutable="true">
+    <bpmn:endEvent id="MESSAGE_NO_REF" name="MESSAGE_NO_REF">
+      <bpmn:messageEventDefinition id="MESSAGE_EVENT_DEFINITION" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="END_EVENT_ERROR" name="ERROR_NO_REF">
+      <bpmn:errorEventDefinition id="ERROR_EVENT_DEFINTION" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="ESCALATION_NO_REF" name="ESCALATION_NO_REF">
+      <bpmn:escalationEventDefinition id="ESCALATION_EVENT_DEFINITION" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="SIGNAL_NO_REF" name="SIGNAL_NO_REF">
+      <bpmn:signalEventDefinition id="SIGNAL_EVENT_DEFINITION" />
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="MESSAGE_REF" name="MESSAGE_REF">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1" messageRef="MESSAGE" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:subProcess id="SUB_PROCESS" triggeredByEvent="true">
+      <bpmn:startEvent id="ERROR_REF" name="ERROR_REF">
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_1" errorRef="ERROR" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:intermediateThrowEvent id="ESCALATION_REF" name="ESCALATION_REF">
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1" escalationRef="ESCALATION" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="SIGNAL_REF" name="SIGNAL_REF">
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1" signalRef="SIGNAL" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmn:message id="MESSAGE" name="Message" />
+  <bpmn:error id="ERROR" name="Error" />
+  <bpmn:escalation id="ESCALATION" name="Escalation" />
+  <bpmn:signal id="SIGNAL" name="Signal" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS_1">
+      <bpmndi:BPMNShape id="MESSAGE_NO_REF_di" bpmnElement="MESSAGE_NO_REF">
+        <dc:Bounds x="222" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="198" y="125" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_EVENT_ERROR_di" bpmnElement="END_EVENT_ERROR">
+        <dc:Bounds x="312" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="288" y="125" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ESCALATION_NO_REF_di" bpmnElement="ESCALATION_NO_REF">
+        <dc:Bounds x="402" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="379" y="125" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SIGNAL_NO_REF_di" bpmnElement="SIGNAL_NO_REF">
+        <dc:Bounds x="492" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="468" y="125" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MESSAGE_REF_di" bpmnElement="MESSAGE_REF">
+        <dc:Bounds x="222" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="199" y="255" width="83" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ESCALATION_REF_di" bpmnElement="ESCALATION_REF">
+        <dc:Bounds x="402" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="379" y="255" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SIGNAL_REF_di" bpmnElement="SIGNAL_REF">
+        <dc:Bounds x="492" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="476" y="255" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_PROCESS_di" bpmnElement="SUB_PROCESS" isExpanded="true">
+        <dc:Bounds x="155" y="350" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ERROR_REF_di" bpmnElement="ERROR_REF">
+        <dc:Bounds x="195" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="179" y="475" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
