@@ -9,6 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 10.3.0
 
 * `FEAT`: add `global` rule ([#137](https://github.com/bpmn-io/bpmnlint/pull/137))
+* `FEAT`: add types for `RuleTester#verify` API ([#138](https://github.com/bpmn-io/bpmnlint/pull/138))
 * `DEPS`: update to `bpmn-moddle@8.1.0`
 * `DEPS`: update to `min-dash@4.2.1`
 
