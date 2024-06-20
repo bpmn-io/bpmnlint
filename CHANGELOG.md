@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.3.0
+
+* `FEAT`: add `global` rule ([#137](https://github.com/bpmn-io/bpmnlint/pull/137))
+* `DEPS`: update to `bpmn-moddle@8.1.0`
+* `DEPS`: update to `min-dash@4.2.1`
+
 ## 10.2.3
 
 * `CHORE`: eagerly filter non-DI elements in `no-overlapping-elements` rule ([`c40cd8a`](https://github.com/bpmn-io/bpmnlint/pull/136/commits/c40cd8ab1beb4907aefdd3e14035eac8c0bcb916))
