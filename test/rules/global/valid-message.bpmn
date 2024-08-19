@@ -14,8 +14,12 @@
       <bpmn:outgoing>Flow_0zm8aj7</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1sh8wwn" messageRef="Message" />
     </bpmn:intermediateCatchEvent>
+    <bpmn:receiveTask id="Activity_1tqbeze" messageRef="Message_2" />
+    <bpmn:sendTask id="Activity_0p7h23d" messageRef="Message_3" />
   </bpmn:process>
   <bpmn:message id="Message" name="Message" />
+  <bpmn:message id="Message_2" name="Message_2" />
+  <bpmn:message id="Message_3" name="Message_3" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0im3pgs">
       <bpmndi:BPMNShape id="Event_1ek0ibx_di" bpmnElement="Event_1ek0ibx">
@@ -26,6 +30,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0xrh1hk_di" bpmnElement="Event_13nvw6k">
         <dc:Bounds x="242" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tqbeze_di" bpmnElement="Activity_1tqbeze">
+        <dc:Bounds x="210" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p7h23d_di" bpmnElement="Activity_0p7h23d">
+        <dc:Bounds x="210" y="290" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0r5ftth_di" bpmnElement="Flow_0r5ftth">
         <di:waypoint x="188" y="100" />
