@@ -85,6 +85,13 @@ RuleTester.verify('label-required', rule, {
         message,
         path: [ 'name' ]
       }
+    },{
+      moddleElement: readModdle(__dirname + '/label-required/invalid-boundary-event.bpmn'),
+      report: {
+        id: 'Element',
+        message,
+        path: [ 'name' ]
+      }
     }
   ]
 });

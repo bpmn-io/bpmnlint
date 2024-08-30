@@ -187,10 +187,6 @@ module.exports = function() {
       return;
     }
 
-    if (is(node, 'bpmn:BoundaryEvent')) {
-      return;
-    }
-
     // ignore sub-processes
     if (is(node, 'bpmn:SubProcess')) {
 
