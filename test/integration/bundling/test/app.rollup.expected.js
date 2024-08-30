@@ -101,10 +101,6 @@
         return;
       }
 
-      if (is$2(node, 'bpmn:BoundaryEvent')) {
-        return;
-      }
-
       // ignore sub-processes
       if (is$2(node, 'bpmn:SubProcess')) {
 
