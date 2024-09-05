@@ -29,13 +29,14 @@ module.exports = function() {
 
     const events = getEvents(node);
     const eventDefinitions = getEventDefinitions(node);
+    const sendRecieveTaskDefinitions = getSendRecieveTask(node);
 
     events.forEach(event => {
       if (!hasName(event)) {
         reporter.report(event.id, 'Element is missing name');
       }
 
-      if (!isReferenced(event, eventDefinitions)) {
+      if (!isReferenced(event, eventDefinitions, sendRecieveTaskDefinitions)) {
         reporter.report(event.id, 'Element is unused');
       }
 
@@ -77,13 +78,34 @@ module.exports = function() {
     return eventDefinitions;
   }
 
+  function getSendRecieveTask(definition) {
+    const elements = [];
+
+    function traverse(element) {
+      if (element.rootElements) {
+        element.rootElements.forEach(traverse);
+      }
+
+      if (element.flowElements) {
+        element.flowElements.forEach(element => {
+          if (is(element, 'bpmn:ReceiveTask') || is(element, 'bpmn:SendTask')) {
+            elements.push(element);
+          }
+        });
+      }
+    }
+
+    traverse(definition);
+    return elements;
+  }
+
   function hasName(event) {
     return (
       event.name?.trim() !== ''
     );
   }
 
-  function isReferenced(event, eventDefinitions) {
+  function isReferenced(event, eventDefinitions, sendRecieveTaskDefinitions) {
     if (is(event, 'bpmn:Error')) {
       return (
         eventDefinitions.some(node => is(node, 'bpmn:ErrorEventDefinition') && event.id === node.errorRef?.id)
@@ -99,6 +121,7 @@ module.exports = function() {
     if (is(event, 'bpmn:Message')) {
       return (
         eventDefinitions.some(node => is(node, 'bpmn:MessageEventDefinition') && event.id === node.messageRef?.id)
+        || sendRecieveTaskDefinitions.some(node => event.id === node.messageRef?.id)
       );
     }
 
