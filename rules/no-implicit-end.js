@@ -28,15 +28,19 @@ module.exports = function() {
     );
   }
 
-  function isConnectedToActivity(node) {
+  function hasCompensationActivity(node) {
     const parent = findParent(node, 'bpmn:Process');
+
     const artifacts = parent.artifacts || [];
+
     return artifacts.some((element) => {
-      return (
-        is(element, 'bpmn:Association') &&
-        is(element.sourceRef, 'bpmn:BoundaryEvent') &&
-        element.sourceRef.id === node.id
-      );
+      if (!is(element, 'bpmn:Association')) {
+        return false;
+      }
+
+      const source = element.sourceRef;
+
+      return source.id === node.id;
     });
   }
 
@@ -59,10 +63,8 @@ module.exports = function() {
       return false;
     }
 
-    if (is(node, 'bpmn:BoundaryEvent')) {
-      if (isCompensationEvent(node) && isConnectedToActivity(node)) {
-        return false;
-      }
+    if (is(node, 'bpmn:BoundaryEvent') && isCompensationEvent(node) && hasCompensationActivity(node)) {
+      return false;
     }
 
     if (is(node, 'bpmn:Task') && isForCompensation(node)) {
