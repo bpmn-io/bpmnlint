@@ -28,6 +28,8 @@ function disallowNodeType(type) {
 
 }
 
+module.exports.disallowNodeType = disallowNodeType;
+
 /**
  * Find a parent for the given element
  *
@@ -57,4 +59,3 @@ function findParent(node, type) {
 }
 
 module.exports.findParent = findParent;
-module.exports.disallowNodeType = disallowNodeType;
