@@ -1,5 +1,6 @@
 const {
-  isAny, is
+  is,
+  isAny
 } = require('bpmnlint-utils');
 
 
@@ -10,13 +11,13 @@ const {
  *
  *   * `bpmn:Error`
  *   * `bpmn:Escalation`
- *   * `bpmn:Signal`
  *   * `bpmn:Message`
+ *   * `bpmn:Signal`
  *
  * For each of these elements proper usage implies:
  *
  *   * element must have a name
- *   * element is used (referenced) from event definitions
+ *   * element is referenced by at least one element
  *   * there exists only a single element per type with a given name
  */
 module.exports = function() {
@@ -27,21 +28,21 @@ module.exports = function() {
       return false;
     }
 
-    const events = getEvents(node);
-    const eventDefinitions = getEventDefinitions(node);
-    const sendRecieveTaskDefinitions = getSendRecieveTask(node);
+    const rootElements = getRootElements(node);
 
-    events.forEach(event => {
-      if (!hasName(event)) {
-        reporter.report(event.id, 'Element is missing name');
+    const referencingElements = getReferencingElements(node);
+
+    rootElements.forEach(rootElement => {
+      if (!hasName(rootElement)) {
+        reporter.report(rootElement.id, 'Element is missing name');
       }
 
-      if (!isReferenced(event, eventDefinitions, sendRecieveTaskDefinitions)) {
-        reporter.report(event.id, 'Element is unused');
+      if (!isReferenced(rootElement, referencingElements)) {
+        reporter.report(rootElement.id, 'Element is unused');
       }
 
-      if (!isUnique(event, events)) {
-        reporter.report(event.id, 'Element name is not unique');
+      if (!isUnique(rootElement, rootElements)) {
+        reporter.report(rootElement.id, 'Element name is not unique');
       }
     });
 
@@ -53,50 +54,42 @@ module.exports = function() {
 
   // helpers /////////////////////////////
 
-  function getEvents(definition) {
-    return definition.rootElements.filter(node => isAny(node, [ 'bpmn:Error', 'bpmn:Escalation', 'bpmn:Message', 'bpmn:Signal' ]));
+  function getRootElements(definitions) {
+    return definitions.rootElements.filter(node => isAny(node, [ 'bpmn:Error', 'bpmn:Escalation', 'bpmn:Message', 'bpmn:Signal' ]));
   }
 
-  function getEventDefinitions(definition) {
-    const eventDefinitions = [];
+  function getReferencingElements(definitions) {
+    const referencingElements = [];
 
     function traverse(element) {
-      if (element.rootElements) {
-        element.rootElements.forEach(traverse);
+      if (is(element, 'bpmn:Definitions') && element.get('rootElements').length) {
+        element.get('rootElements').forEach(traverse);
       }
 
-      if (element.flowElements) {
-        element.flowElements.forEach(traverse);
+      if (is(element, 'bpmn:FlowElementsContainer') && element.get('flowElements').length) {
+        element.get('flowElements').forEach(traverse);
       }
 
-      if (element.eventDefinitions) {
-        element.eventDefinitions.forEach(eventDefinition => eventDefinitions.push(eventDefinition));
+      if (is(element, 'bpmn:Event') && element.get('eventDefinitions').length) {
+        element.get('eventDefinitions').forEach(eventDefinition => referencingElements.push(eventDefinition));
+      }
+
+      if (is(element, 'bpmn:Collaboration') && element.get('messageFlows').length) {
+        element.get('messageFlows').forEach(traverse);
+      }
+
+      if (isAny(element, [
+        'bpmn:MessageFlow',
+        'bpmn:ReceiveTask',
+        'bpmn:SendTask'
+      ])) {
+        referencingElements.push(element);
       }
     }
 
-    traverse(definition);
-    return eventDefinitions;
-  }
+    traverse(definitions);
 
-  function getSendRecieveTask(definition) {
-    const elements = [];
-
-    function traverse(element) {
-      if (element.rootElements) {
-        element.rootElements.forEach(traverse);
-      }
-
-      if (element.flowElements) {
-        element.flowElements.forEach(element => {
-          if (is(element, 'bpmn:ReceiveTask') || is(element, 'bpmn:SendTask')) {
-            elements.push(element);
-          }
-        });
-      }
-    }
-
-    traverse(definition);
-    return elements;
+    return referencingElements;
   }
 
   function hasName(event) {
@@ -105,36 +98,43 @@ module.exports = function() {
     );
   }
 
-  function isReferenced(event, eventDefinitions, sendRecieveTaskDefinitions) {
-    if (is(event, 'bpmn:Error')) {
-      return (
-        eventDefinitions.some(node => is(node, 'bpmn:ErrorEventDefinition') && event.id === node.errorRef?.id)
-      );
+  function isReferenced(rootElement, referencingElements) {
+    if (is(rootElement, 'bpmn:Error')) {
+      return referencingElements.some(referencingElement => {
+        return is(referencingElement, 'bpmn:ErrorEventDefinition')
+          && rootElement.get('id') === referencingElement.get('errorRef')?.get('id');
+      });
     }
 
-    if (is(event, 'bpmn:Escalation')) {
-      return (
-        eventDefinitions.some(node => is(node, 'bpmn:EscalationEventDefinition') && event.id === node.escalationRef?.id)
-      );
+    if (is(rootElement, 'bpmn:Escalation')) {
+      return referencingElements.some(referencingElement => {
+        return is(referencingElement, 'bpmn:EscalationEventDefinition')
+          && rootElement.get('id') === referencingElement.get('escalationRef')?.get('id');
+      });
     }
 
-    if (is(event, 'bpmn:Message')) {
-      return (
-        eventDefinitions.some(node => is(node, 'bpmn:MessageEventDefinition') && event.id === node.messageRef?.id)
-        || sendRecieveTaskDefinitions.some(node => event.id === node.messageRef?.id)
-      );
+    if (is(rootElement, 'bpmn:Message')) {
+      return referencingElements.some(referencingElement => {
+        return isAny(referencingElement, [
+          'bpmn:MessageEventDefinition',
+          'bpmn:MessageFlow',
+          'bpmn:ReceiveTask',
+          'bpmn:SendTask'
+        ]) && rootElement.get('id') === referencingElement.get('messageRef')?.get('id');
+      });
     }
 
-    if (is(event, 'bpmn:Signal')) {
-      return (
-        eventDefinitions.some(node => is(node, 'bpmn:SignalEventDefinition') && event.id === node.signalRef?.id)
-      );
+    if (is(rootElement, 'bpmn:Signal')) {
+      return referencingElements.some(referencingElement => {
+        return is(referencingElement, 'bpmn:SignalEventDefinition')
+          && rootElement.get('id') === referencingElement.get('signalRef')?.get('id');
+      });
     }
   }
 
-  function isUnique(event, events) {
+  function isUnique(rootElement, rootElements) {
     return (
-      events.filter(node => is(node, event.$type) && event.name === node.name).length === 1
+      rootElements.filter(otherRootElement => is(otherRootElement, rootElement.$type) && rootElement.name === otherRootElement.name).length === 1
     );
   }
 };
