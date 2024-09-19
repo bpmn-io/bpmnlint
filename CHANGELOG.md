@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 10.3.1
+
+* `FIX`: correct false positive in `global` rule ([#139](https://github.com/bpmn-io/bpmnlint/issues/139))
+* `FIX`: correct false positive in `no-implicit-end` rule ([#140](https://github.com/bpmn-io/bpmnlint/issues/140))
+* `FIX`: correct `label-required` not triggering for boundary events ([#141](https://github.com/bpmn-io/bpmnlint/issues/141))
+
 ## 10.3.0
 
 * `FEAT`: add `global` rule ([#137](https://github.com/bpmn-io/bpmnlint/pull/137))
