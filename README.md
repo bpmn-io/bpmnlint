@@ -122,6 +122,23 @@ const xmlStr = `
 
     // Output the linting reports (warnings/errors) to the console
     console.log(reports);
+
+    // {
+    //     'no-bpmndi': [
+    //     {
+    //         id: 'SequenceFlow_06kfaev',
+    //         message: 'Element is missing bpmndi',
+    //         category: 'error'
+    //     },
+    //     {
+    //         id: 'EndEvent_1fx9yp3',
+    //         message: 'Element is missing bpmndi',
+    //         category: 'error'
+    //     },
+    //     ........
+    //     ]
+    // }
+
 })();
 ```
 
