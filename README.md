@@ -67,42 +67,62 @@ Add or customize rules using the `rules` block:
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
 
 ```javascript
-import Linter from 'bpmnlint';
-import NodeResolver from 'bpmnlint/lib/resolver/node-resolver';
+const { Linter } = require("bpmnlint");
+const NodeResolver = require("bpmnlint/lib/resolver/node-resolver");
+const BpmnModdle = require('bpmn-moddle');
 
-import BpmnModdle from 'bpmn-moddle';
+// Create a moddle instance to work with BPMN XML data
+const moddle = new BpmnModdle();
 
-const linter = new Linter({ 
-  config: {
-    extends: 'bpmnlint:recommended'
-  },
-  resolver: new NodeResolver()
+// Initialize the BPMN linter with the recommended configuration and NodeResolver
+const linter = new Linter({
+    config: {
+        extends: 'bpmnlint:recommended'  // Extend the linter configuration using bpmnlint's recommended rules
+    },
+    resolver: new NodeResolver()
 });
 
+// Define a BPMN XML string to be parsed and linted
 const xmlStr = `
   <?xml version="1.0" encoding="UTF-8"?>
-  <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
-                     id="definitions" 
-                     targetNamespace="http://bpmn.io/schema/bpmn">
-    <bpmn:process id="process" />
-  </bpmn:definitions>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0geryc1">
+    <bpmn:participant id="Participant_0ygkg4f" name="Dispatch of goods&#10;Computer Hardware Shop" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_1vl2igx" name="Warehouse">
+        <bpmn:flowNodeRef>Task_05ftug5</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="SequenceFlow_06kfaev" sourceRef="ExclusiveGateway_0z5sib0" targetRef="Task_0sl26uo" />
+    <bpmn:endEvent id="EndEvent_1fx9yp3" name="Shipment&#10;prepared">
+      <bpmn:incoming>SequenceFlow_0v64x8b</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0geryc1">
+      <bpmndi:BPMNShape id="Participant_0ygkg4f_di" bpmnElement="Participant_0ygkg4f">
+        <dc:Bounds x="252" y="88" width="1260" height="752" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
 `;
 
-const {
-  rootElement: definitions
-} = await moddle.fromXML(xmlStr);
+// Wrap in an async function to use async/await since CommonJS does not allow top-level await
+(async () => {
+    // Parse the BPMN XML string into a moddle object representing the BPMN structure
+    const {
+        rootElement: definitions
+    } = await moddle.fromXML(xmlStr);
 
-const reports = linter.lint(definitions);
+    // Run the linter on the parsed BPMN definitions and retrieve any reports
+    const reports = await linter.lint(definitions);
 
-// {
-//    "end-event-required": [
-//      {
-//        "id": "process",
-//        "message": "Process is missing end event"
-//      }
-//    ],
-//    ...
-// }
+    // Output the linting reports (warnings/errors) to the console
+    console.log(reports);
+})();
 ```
 
 
