@@ -72,6 +72,8 @@ import NodeResolver from 'bpmnlint/lib/resolver/node-resolver';
 
 import BpmnModdle from 'bpmn-moddle';
 
+const moddle = new BpmnModdle();
+
 const linter = new Linter({ 
   config: {
     extends: 'bpmnlint:recommended'
