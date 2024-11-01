@@ -44,7 +44,7 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run all
-  Build-Platforms:
+  build_platforms:
     runs-on: ${{ matrix.os }}
 
     strategy:
