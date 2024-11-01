@@ -1,7 +1,7 @@
 name: CI
 on: [ push, pull_request ]
 jobs:
-  Build:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -23,7 +23,8 @@ jobs:
       run: COVERAGE=1 npm run all
     - name: Upload coverage
       uses: codecov/codecov-action@v3
-  Build-Nodes:
+
+  build_nodes:
     runs-on: ${{ matrix.os }}
 
     strategy:
