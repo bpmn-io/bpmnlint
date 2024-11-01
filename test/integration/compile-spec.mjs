@@ -22,14 +22,18 @@ describe('compile', function() {
   });
 
 
-  test();
+  runTest();
 
 });
 
 
-function test(options = { it: it }) {
+function runTest(options = { it: it }) {
 
-  options.it('should compile configuration', async function() {
+  const {
+    it
+  } = options;
+
+  it('should compile configuration', async function() {
 
     this.timeout(100000);
 

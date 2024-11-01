@@ -22,7 +22,7 @@ describe('test-rule', function() {
   });
 
 
-  it('should return check function reported messages (id, message)', () => {
+  it('should return check function reported messages (id, message)', function() {
 
     // given
     const expectedMessages = [
@@ -41,7 +41,7 @@ describe('test-rule', function() {
   });
 
 
-  it('should return check function reported messages (id, message, path)', () => {
+  it('should return check function reported messages (id, message, path)', function() {
 
     // given
     const expectedMessages = [
@@ -61,7 +61,7 @@ describe('test-rule', function() {
   });
 
 
-  it('should return check function reported messages (id, message, { path })', () => {
+  it('should return check function reported messages (id, message, { path })', function() {
 
     // given
     const expectedMessages = [
@@ -82,7 +82,7 @@ describe('test-rule', function() {
   });
 
 
-  it('should return { enter, leave } hook reported messages', () => {
+  it('should return { enter, leave } hook reported messages', function() {
 
     // given
     const expectedMessages = [
@@ -105,7 +105,7 @@ describe('test-rule', function() {
   });
 
 
-  it('should empty messages', () => {
+  it('should empty messages', function() {
 
     // given
     const expectedMessages = [];
