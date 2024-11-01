@@ -1,5 +1,0 @@
-node_modules
-coverage
-test/integration/bundling/dist
-test/integration/bundling/test
-test/integration/compilation/test

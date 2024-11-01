@@ -28,7 +28,7 @@
   "license": "MIT",
   "scripts": {
     "all": "run-s lint test-coverage",
-    "lint": "eslint . --ext js,mjs",
+    "lint": "eslint .",
     "dev": "npm test -- --watch",
     "test": "mocha --exclude 'test/integration/*/**' 'test/**/*.*js'",
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
