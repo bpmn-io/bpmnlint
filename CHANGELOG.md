@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: require Node@20
+
+### Breaking Changes
+
+* Node@20 is required to use this library.
+
 ## 10.3.1
 
 * `FIX`: correct false positive in `global` rule ([#139](https://github.com/bpmn-io/bpmnlint/issues/139))
