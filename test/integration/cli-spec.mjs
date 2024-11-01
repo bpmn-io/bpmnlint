@@ -29,7 +29,7 @@ describe('cli', function() {
 
   describe('should execute', function() {
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
       expect: {
         code: 0,
@@ -39,7 +39,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram-invalid.bpmn' ],
       expect: {
         code: 1,
@@ -56,7 +56,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram-broken.bpmn' ],
       expect: {
         code: 1,
@@ -71,7 +71,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram-import-warnings.bpmn' ],
       expect: {
         code: 1,
@@ -90,22 +90,22 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', '-c', 'extends-builtin.json', 'diagram.bpmn' ]
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', '-c', 'extends-external.json', 'diagram.bpmn' ]
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', '-c', 'exported.json', 'diagram.bpmn' ]
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'complex.bpmn' ],
       expect: {
         code: 1,
@@ -133,7 +133,7 @@ describe('cli', function() {
 
     describe('--max-warnings', function() {
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '--max-warnings=3', 'diagram-warnings.bpmn' ],
         expect: {
           code: 0,
@@ -150,7 +150,7 @@ describe('cli', function() {
       });
 
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '--max-warnings=0', 'diagram-warnings.bpmn' ],
         expect: {
           code: 1,
@@ -169,7 +169,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', '-c', 'non-existing.json', 'diagram.bpmn' ],
       expect: {
         code: 1,
@@ -179,7 +179,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
       cwd: __dirname + '/cli/empty',
       expect: {
@@ -190,7 +190,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', '--version' ],
       expect: {
         code: 0,
@@ -212,7 +212,7 @@ describe('cli', function() {
     });
 
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
       cwd: __dirname + '/cli/child'
     });
@@ -232,13 +232,13 @@ describe('cli', function() {
 
     describe('providing rules', function() {
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '-c', 'uses-rules.json', 'diagram.bpmn' ],
         cwd: __dirname + '/cli/ns',
       });
 
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '-c', 'uses-rules.json', 'diagram-invalid.bpmn' ],
         cwd: __dirname + '/cli/ns',
         expect: {
@@ -260,13 +260,13 @@ describe('cli', function() {
 
     describe('providing configuration', function() {
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '-c', 'extends.json', 'diagram.bpmn' ],
         cwd: __dirname + '/cli/ns',
       });
 
 
-      test({
+      verify({
         cmd: [ 'bpmnlint', '-c', 'extends.json', 'diagram-invalid.bpmn' ],
         cwd: __dirname + '/cli/ns',
         expect: {
@@ -288,7 +288,7 @@ describe('cli', function() {
 
 
   describe('should handle glob star patterns', function() {
-    test({
+    verify({
       cmd: [ 'bpmnlint', '*.bpmn' ],
       cwd: __dirname + '/cli',
       expect: {
@@ -331,7 +331,7 @@ describe('cli', function() {
       }
     });
 
-    test({
+    verify({
       cmd: [ 'bpmnlint', 'glob/**/*.bpmn' ],
       cwd: __dirname + '/cli',
       expect: {
@@ -367,7 +367,7 @@ function exec(prog, args, cwd, options = {}) {
   });
 }
 
-function test(options) {
+function verify(options) {
 
   const {
     cmd,
@@ -413,8 +413,8 @@ function test(options) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function testOnly(options) {
-  test({
+function verifyOnly(options) {
+  verify({
     only: true,
     ...options
   });
