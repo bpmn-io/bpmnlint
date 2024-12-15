@@ -170,6 +170,13 @@ RuleTester.verify('no-bpmndi', rule, {
         id: 'danglingMessageFlow',
         message: 'Element is missing bpmndi'
       }
-    }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-no-bpmn-diagram.bpmn'),
+      report: {
+        id: 'StartEvent_1',
+        message: 'Element is missing bpmndi'
+      }
+    },
   ]
 });
