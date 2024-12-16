@@ -103,7 +103,7 @@ function getAllBpmnElements(rootElements) {
  */
 function getAllDiBpmnReferences(definitionsNode) {
   return flatten(
-    definitionsNode.diagrams.map((diagram) => {
+    definitionsNode.get('diagrams').map((diagram) => {
 
       const diElements = diagram.plane.planeElement || [];
 
