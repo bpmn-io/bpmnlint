@@ -35,6 +35,9 @@ RuleTester.verify('no-overlapping-elements', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-overlapping-elements/ignore-missing-di.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/ignore-missing-bounds.bpmn')
     }
   ],
   invalid: [

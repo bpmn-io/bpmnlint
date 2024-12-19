@@ -108,7 +108,15 @@ function checkElementsArray(elements, elementsToReport, diObjects) {
         continue;
       }
 
-      if (isCollision(diObjects.get(element).bounds, diObjects.get(element2).bounds)) {
+      const bounds1 = diObjects.get(element)?.bounds;
+      const bounds2 = diObjects.get(element2)?.bounds;
+
+      // ignore if an element doesn't have bounds
+      if (!bounds1 || !bounds2) {
+        continue;
+      }
+
+      if (isCollision(bounds1, bounds2)) {
         elementsToReport.add(element);
         elementsToReport.add(element2);
       }
