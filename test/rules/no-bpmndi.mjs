@@ -56,6 +56,9 @@ RuleTester.verify('no-bpmndi', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/no-bpmndi/valid-message-flow.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-bpmndi/ignore-edge-without-bpmn-element.bpmn')
     }
   ],
   invalid: [
