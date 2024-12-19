@@ -109,7 +109,7 @@ function getAllDiBpmnReferences(definitionsNode) {
 
       return diElements.map((element) => {
 
-        return element.bpmnElement.id;
+        return element.bpmnElement?.id;
       });
     })
   );
