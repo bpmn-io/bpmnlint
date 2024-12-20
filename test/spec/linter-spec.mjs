@@ -65,6 +65,78 @@ describe('linter', function() {
       expect(results).to.eql(buildFakeResults('error'));
     });
 
+    it('should succeed with rule metadata containing documentation url', function() {
+
+      // when
+      const meta = {
+        documentation: {
+          url: 'https://testurl.com/'
+        }
+      };
+      let rule = createRule(fakeRule);
+      rule.meta = meta;
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: rule,
+          category: 'error'
+        }
+      );
+
+      let expectedResult = buildFakeResults('error', null, 'https://testurl.com/');
+
+      // then
+      expect(results).to.eql(expectedResult);
+    });
+
+    it('should succeed with rule metadata containing no documentation url', function() {
+
+      // when
+      const meta = {};
+      let rule = createRule(fakeRule);
+      rule.meta = meta;
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule: rule,
+          category: 'error'
+        }
+      );
+
+      let expectedResult = buildFakeResults('error');
+
+      // then
+      expect(results).to.eql(expectedResult);
+    });
+
+
+
+    it('should succeed with rule metadata containing no documentation url and matchingrule name', function() {
+
+      // when
+      const meta = {};
+      let rule = createRule(fakeRule);
+      rule.meta = meta;
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'camunda-compat/element-type',
+          config: { },
+          rule: rule,
+          category: 'error'
+        }
+      );
+
+      let expectedResult = buildFakeResults('error', null , 'https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/element-type');
+
+      // then
+      expect(results).to.eql(expectedResult);
+    });
+
 
     it('should succeed with <enter> and <leave> hooks', function() {
 
@@ -995,7 +1067,7 @@ function fakeRule(config = {}) {
 }
 
 
-function buildFakeResults(category, message) {
+function buildFakeResults(category, message, documentationUrl = null) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
@@ -1010,7 +1082,12 @@ function buildFakeResults(category, message) {
   return results.map((result) => {
     return {
       ...result,
-      category
+      category,
+      meta: {
+        documentation: {
+          url: documentationUrl
+        }
+      }
     };
   });
 }
@@ -1063,7 +1140,12 @@ function buildFakeEnterLeaveResults(category) {
   return results.map((result) => {
     return {
       ...result,
-      category
+      category,
+      meta: {
+        documentation: {
+          url: null
+        }
+      }
     };
   });
 }
