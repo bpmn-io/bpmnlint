@@ -10,8 +10,9 @@ ___Note:__ Yet to be released changes appear here._
 
 * `DEPS`: update to `bpmn-moddle@9`
 * `DEPS`: update to `min-dash@4.2.2`
+* `FIX`: gracefully handle missing `bounds` in `no-overlapping-elements` rule ([#156](https://github.com/bpmn-io/bpmnlint/pull/157))
 * `FIX`: gracefully handle missing `bpmnElement` in `no-bpmndi` rule ([#156](https://github.com/bpmn-io/bpmnlint/pull/156))
-* `FIX`: gracefully handle missing `bounds` in `no-overlapping-elements` rule ([#157](https://github.com/bpmn-io/bpmnlint/pull/157))
+* `FIX`: gracefully handle missing `diagram` in `no-bpmndi` rule ([#154](https://github.com/bpmn-io/bpmnlint/pull/154))
 * `CHORE`: require Node@20
 
 ### Breaking Changes
