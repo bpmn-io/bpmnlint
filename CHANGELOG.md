@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.0.0
+
+* `DEPS`: update to `bpmn-moddle@9`
+* `DEPS`: update to `min-dash@4.2.2`
 * `FIX`: gracefully handle missing `bpmnElement` in `no-bpmndi` rule ([#156](https://github.com/bpmn-io/bpmnlint/pull/156))
 * `FIX`: gracefully handle missing `bounds` in `no-overlapping-elements` rule ([#157](https://github.com/bpmn-io/bpmnlint/pull/157))
 * `CHORE`: require Node@20
