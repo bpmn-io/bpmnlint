@@ -6,6 +6,7 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: gracefully handle missing `bounds` in `no-overlapping-elements` ([#157](https://github.com/bpmn-io/bpmnlint/pull/157))
 * `CHORE`: require Node@20
 
 ### Breaking Changes
