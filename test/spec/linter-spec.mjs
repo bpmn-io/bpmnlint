@@ -157,7 +157,7 @@ describe('linter', function() {
       expect(results).to.eql([
         {
           category: 'rule-error',
-          message: 'enter is not a function'
+          message: 'no check implemented'
         }
       ]);
     });
