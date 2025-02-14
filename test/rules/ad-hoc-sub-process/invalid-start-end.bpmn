@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1ntx4rf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.32.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:adHocSubProcess id="SubProcess_0zz45ap">
+      <bpmn:startEvent id="StartEvent" />
+      <bpmn:endEvent id="EndEvent" />
+    </bpmn:adHocSubProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="SubProcess_0zz45ap_di" bpmnElement="SubProcess_0zz45ap" isExpanded="true">
+        <dc:Bounds x="112" y="65" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qx3a74_di" bpmnElement="StartEvent">
+        <dc:Bounds x="162" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lvdffn_di" bpmnElement="EndEvent">
+        <dc:Bounds x="382" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

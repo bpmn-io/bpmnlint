@@ -1,4 +1,5 @@
 const allRules = [
+  'ad-hoc-sub-process',
   'conditional-flows',
   'end-event-required',
   'event-sub-process-typed-start-event',
