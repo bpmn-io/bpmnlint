@@ -1,5 +1,6 @@
 module.exports = {
   rules: {
+    'ad-hoc-sub-process': 'error',
     'conditional-flows': 'error',
     'end-event-required': 'error',
     'event-sub-process-typed-start-event': 'error',

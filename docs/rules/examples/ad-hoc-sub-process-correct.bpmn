@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.32.0-rc.0">
+  <process id="Process_1" isExecutable="false">
+    <adHocSubProcess id="Activity_1yjcy2x">
+      <task id="Activity_0o1bgqx">
+        <outgoing>Flow_0njsews</outgoing>
+      </task>
+      <task id="Activity_142jk6n">
+        <incoming>Flow_0njsews</incoming>
+      </task>
+      <sequenceFlow id="Flow_0njsews" sourceRef="Activity_0o1bgqx" targetRef="Activity_142jk6n" />
+      <intermediateCatchEvent id="Event_0q40via">
+        <outgoing>Flow_1ykoger</outgoing>
+        <conditionalEventDefinition id="ConditionalEventDefinition_0q04q9v">
+          <condition xsi:type="tFormalExpression" />
+        </conditionalEventDefinition>
+      </intermediateCatchEvent>
+      <task id="Activity_12w8ibt" />
+      <task id="Activity_1u082wx">
+        <incoming>Flow_1ykoger</incoming>
+      </task>
+      <sequenceFlow id="Flow_1ykoger" sourceRef="Event_0q40via" targetRef="Activity_1u082wx" />
+    </adHocSubProcess>
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Activity_02xy6cc_di" bpmnElement="Activity_1yjcy2x" isExpanded="true">
+        <omgdc:Bounds x="160" y="80" width="390" height="410" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12w8ibt_di" bpmnElement="Activity_12w8ibt">
+        <omgdc:Bounds x="220" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0o1bgqx_di" bpmnElement="Activity_0o1bgqx">
+        <omgdc:Bounds x="220" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1b353o5" bpmnElement="Activity_142jk6n">
+        <omgdc:Bounds x="380" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1u082wx_di" bpmnElement="Activity_1u082wx">
+        <omgdc:Bounds x="380" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_069bzsw_di" bpmnElement="Event_0q40via">
+        <omgdc:Bounds x="252" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="408" y="485" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0njsews_di" bpmnElement="Flow_0njsews">
+        <omgdi:waypoint x="320" y="280" />
+        <omgdi:waypoint x="380" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ykoger_di" bpmnElement="Flow_1ykoger">
+        <omgdi:waypoint x="288" y="400" />
+        <omgdi:waypoint x="380" y="400" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
