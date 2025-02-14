@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collaboration_675045400">
+    <bpmn:participant id="participant_882032013" name="Participant 1" />
+    <bpmn:participant id="participant_882032012" name="Participant 2" />
+  </bpmn:collaboration>
+</bpmn:definitions>
