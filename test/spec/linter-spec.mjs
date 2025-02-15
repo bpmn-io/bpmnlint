@@ -949,8 +949,63 @@ describe('linter', function() {
 
   it('caching behavior');
 
+
+  describe('reporting', function() {
+
+    let moddleRoot;
+
+    const linter = new Linter({
+      resolver: fakeResolver()
+    });
+
+    const annotateRule = (rule, meta) => {
+
+      return {
+        ...rule,
+        meta
+      };
+    };
+
+    beforeEach(async function() {
+      const result = await readModdle(__dirname + '/diagram.bpmn');
+
+      moddleRoot = result.root;
+    });
+
+
+    it('should attach rule <meta> to report', function() {
+
+      // given
+      const meta = { foo: 'BAR' };
+
+      const rule = annotateRule(
+        createRule(fakeRule),
+        meta
+      );
+
+      // when
+      const results = linter.applyRule(
+        moddleRoot,
+        {
+          name: 'test-rule',
+          config: { },
+          rule,
+          category: 'error'
+        }
+      );
+
+      const expectedResult = buildFakeResults('error', null, meta);
+
+      // then
+      expect(results).to.eql(expectedResult);
+    });
+
+  });
+
 });
 
+
+// helpers //////////////
 
 function fakeResolver(cache = {}) {
   return {
@@ -963,7 +1018,6 @@ function fakeResolver(cache = {}) {
     }
   };
 }
-
 
 async function fakeAsyncRule() {
 
@@ -995,7 +1049,7 @@ function fakeRule(config = {}) {
 }
 
 
-function buildFakeResults(category, message) {
+function buildFakeResults(category, message, meta) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
@@ -1010,11 +1064,11 @@ function buildFakeResults(category, message) {
   return results.map((result) => {
     return {
       ...result,
-      category
+      category,
+      meta
     };
   });
 }
-
 
 function fakeEnterLeaveRule() {
 
@@ -1047,8 +1101,7 @@ function fakeEnterLeaveRule() {
   };
 }
 
-
-function buildFakeEnterLeaveResults(category, message) {
+function buildFakeEnterLeaveResults(category, message, meta) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
@@ -1063,7 +1116,8 @@ function buildFakeEnterLeaveResults(category, message) {
   return results.map((result) => {
     return {
       ...result,
-      category
+      category,
+      meta
     };
   });
 }
