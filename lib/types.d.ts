@@ -33,6 +33,11 @@ export type CheckDefinition = EnterFn | {
 };
 
 export type RuleDefinition = {
+  meta?: {
+    documentation?: {
+      url?: string
+    }
+  },
   check: CheckDefinition
 };
 
