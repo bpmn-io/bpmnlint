@@ -1048,11 +1048,11 @@ function fakeEnterLeaveRule() {
 }
 
 
-function buildFakeEnterLeaveResults(category) {
+function buildFakeEnterLeaveResults(category, message) {
   const results = [
     {
       id: 'sid-38422fae-e03e-43a3-bef4-bd33b32041b2',
-      message: 'Definitions seen'
+      message: message || 'Definitions seen'
     }
   ];
 
