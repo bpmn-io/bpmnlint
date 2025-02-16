@@ -1,100 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/   var __webpack_modules__ = ({
 
-/***/ "./src/.bpmnlintrc":
-/*!*************************!*\
-  !*** ./src/.bpmnlintrc ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   config: () => (/* binding */ config),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   resolver: () => (/* binding */ resolver)
-/* harmony export */ });
-/* harmony import */ var bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bpmnlint/rules/label-required */ "./node_modules/bpmnlint/rules/label-required.js");
-/* harmony import */ var bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bpmnlint/rules/start-event-required */ "./node_modules/bpmnlint/rules/start-event-required.js");
-/* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bpmnlint/rules/end-event-required */ "./node_modules/bpmnlint/rules/end-event-required.js");
-/* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
-/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
-
-const cache = {};
-
-/**
- * A resolver that caches rules and configuration as part of the bundle,
- * making them accessible in the browser.
- *
- * @param {Object} cache
- */
-function Resolver() {}
-
-Resolver.prototype.resolveRule = function(pkg, ruleName) {
-
-  const rule = cache[pkg + '/' + ruleName];
-
-  if (!rule) {
-    throw new Error('cannot resolve rule <' + pkg + '/' + ruleName + '>: not bundled');
-  }
-
-  return rule;
-};
-
-Resolver.prototype.resolveConfig = function(pkg, configName) {
-  throw new Error(
-    'cannot resolve config <' + configName + '> in <' + pkg +'>: not bundled'
-  );
-};
-
-const resolver = new Resolver();
-
-const rules = {
-  "label-required": 1,
-  "start-event-required": "info",
-  "end-event-required": 2,
-  "exported/foo": "error",
-  "exported/foo-absolute": "error"
-};
-
-const config = {
-  rules: rules
-};
-
-const bundle = {
-  resolver: resolver,
-  config: config
-};
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bundle);
-
-
-
-cache['bpmnlint/label-required'] = (bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0___default());
-
-
-
-cache['bpmnlint/start-event-required'] = (bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default());
-
-
-
-cache['bpmnlint/end-event-required'] = (bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default());
-
-
-
-cache['bpmnlint-plugin-exported/foo'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
-
-
-
-cache['bpmnlint-plugin-exported/foo-absolute'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
-
-/***/ }),
-
 /***/ "./node_modules/bpmnlint-plugin-exported/src/foo.js":
 /*!**********************************************************!*\
   !*** ./node_modules/bpmnlint-plugin-exported/src/foo.js ***!
@@ -106,6 +12,59 @@ module.exports = function foo() {
     check() {}
   };
 };
+
+/***/ }),
+
+/***/ "./node_modules/bpmnlint-utils/dist/index.esm.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/bpmnlint-utils/dist/index.esm.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   is: () => (/* binding */ is),
+/* harmony export */   isAny: () => (/* binding */ isAny)
+/* harmony export */ });
+/**
+ * Checks whether node is of specific bpmn type.
+ *
+ * @param {ModdleElement} node
+ * @param {String} type
+ *
+ * @return {Boolean}
+ */
+function is(node, type) {
+
+  if (type.indexOf(':') === -1) {
+    type = 'bpmn:' + type;
+  }
+
+  return (
+    (typeof node.$instanceOf === 'function')
+      ? node.$instanceOf(type)
+      : node.$type === type
+  );
+}
+
+/**
+ * Checks whether node has any of the specified types.
+ *
+ * @param {ModdleElement} node
+ * @param {Array<String>} types
+ *
+ * @return {Boolean}
+ */
+function isAny(node, types) {
+  return types.some(function(type) {
+    return is(node, type);
+  });
+}
+
+
+//# sourceMappingURL=index.esm.js.map
+
 
 /***/ }),
 
@@ -280,56 +239,97 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ "./node_modules/bpmnlint-utils/dist/index.esm.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/bpmnlint-utils/dist/index.esm.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/.bpmnlintrc":
+/*!*************************!*\
+  !*** ./src/.bpmnlintrc ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   is: () => (/* binding */ is),
-/* harmony export */   isAny: () => (/* binding */ isAny)
+/* harmony export */   config: () => (/* binding */ config),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   resolver: () => (/* binding */ resolver)
 /* harmony export */ });
-/**
- * Checks whether node is of specific bpmn type.
- *
- * @param {ModdleElement} node
- * @param {String} type
- *
- * @return {Boolean}
- */
-function is(node, type) {
+/* harmony import */ var bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bpmnlint/rules/label-required */ "./node_modules/bpmnlint/rules/label-required.js");
+/* harmony import */ var bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bpmnlint/rules/start-event-required */ "./node_modules/bpmnlint/rules/start-event-required.js");
+/* harmony import */ var bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bpmnlint/rules/end-event-required */ "./node_modules/bpmnlint/rules/end-event-required.js");
+/* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
+/* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
 
-  if (type.indexOf(':') === -1) {
-    type = 'bpmn:' + type;
+const cache = {};
+
+/**
+ * A resolver that caches rules and configuration as part of the bundle,
+ * making them accessible in the browser.
+ *
+ * @param {Object} cache
+ */
+function Resolver() {}
+
+Resolver.prototype.resolveRule = function(pkg, ruleName) {
+
+  const rule = cache[pkg + '/' + ruleName];
+
+  if (!rule) {
+    throw new Error('cannot resolve rule <' + pkg + '/' + ruleName + '>: not bundled');
   }
 
-  return (
-    (typeof node.$instanceOf === 'function')
-      ? node.$instanceOf(type)
-      : node.$type === type
+  return rule;
+};
+
+Resolver.prototype.resolveConfig = function(pkg, configName) {
+  throw new Error(
+    'cannot resolve config <' + configName + '> in <' + pkg +'>: not bundled'
   );
-}
+};
 
-/**
- * Checks whether node has any of the specified types.
- *
- * @param {ModdleElement} node
- * @param {Array<String>} types
- *
- * @return {Boolean}
- */
-function isAny(node, types) {
-  return types.some(function(type) {
-    return is(node, type);
-  });
-}
+const resolver = new Resolver();
+
+const rules = {
+  "label-required": 1,
+  "start-event-required": "info",
+  "end-event-required": 2,
+  "exported/foo": "error",
+  "exported/foo-absolute": "error"
+};
+
+const config = {
+  rules: rules
+};
+
+const bundle = {
+  resolver: resolver,
+  config: config
+};
 
 
-//# sourceMappingURL=index.esm.js.map
 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bundle);
+
+
+
+cache['bpmnlint/label-required'] = (bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0___default());
+
+
+
+cache['bpmnlint/start-event-required'] = (bpmnlint_rules_start_event_required__WEBPACK_IMPORTED_MODULE_1___default());
+
+
+
+cache['bpmnlint/end-event-required'] = (bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default());
+
+
+
+cache['bpmnlint-plugin-exported/foo'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
+
+
+
+cache['bpmnlint-plugin-exported/foo-absolute'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
 
 /***/ })
 
