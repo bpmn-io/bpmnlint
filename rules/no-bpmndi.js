@@ -59,7 +59,6 @@ module.exports = function() {
  */
 function getAllBpmnElements(rootElements) {
 
-  // @ts-ignore-error <min-dash@v4.2.2 type bug>
   return flatten(rootElements.map((rootElement) => {
     const laneSet =
       rootElement.laneSets && rootElement.laneSets[0] || rootElement.childLaneSet;
