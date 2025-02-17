@@ -1002,6 +1002,80 @@ describe('linter', function() {
 
   });
 
+
+  describe('rule transformation', function() {
+
+    let moddleRoot;
+
+    beforeEach(async function() {
+      const result = await readModdle(__dirname + '/diagram.bpmn');
+
+      moddleRoot = result.root;
+    });
+
+
+    it('should transform rules via hook', async function() {
+
+      // given
+      const resolver = {
+        resolveRule(pkg, ruleName) {
+
+          // assume
+          expect(pkg).to.eql('bpmnlint');
+          expect(ruleName).to.eql('testRule');
+
+          return fakeRule;
+        },
+
+        resolveConfig(pkg, configName) {
+
+          // assume
+          expect(pkg).to.eql('bpmnlint');
+          expect(configName).to.eql('recommended');
+
+          return {
+            rules: {
+              testRule: 'error'
+            }
+          };
+        }
+      };
+
+      const meta = { foo: 'BAR' };
+
+      const linter = new Linter({
+        resolver,
+        transformRule: (rule, ruleMeta) => {
+          expect(ruleMeta).to.eql({
+            pkg: 'bpmnlint',
+            ruleName: 'testRule'
+          });
+
+          return {
+            ...rule,
+            meta
+          };
+        }
+      });
+
+      const config = {
+        extends: 'bpmnlint:recommended'
+      };
+
+      // when
+      const lintResults = await linter.lint(
+        moddleRoot,
+        config
+      );
+
+      // then
+      expect(lintResults).to.eql({
+        testRule: buildFakeResults('error', null, meta)
+      });
+    });
+
+  });
+
 });
 
 
