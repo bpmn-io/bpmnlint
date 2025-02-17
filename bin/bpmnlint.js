@@ -19,6 +19,7 @@ const {
 
 const tinyGlob = require('tiny-glob');
 
+// @ts-expect-error 'missing <bpmn-moddle> types'
 const BpmnModdle = require('bpmn-moddle');
 
 const Linter = require('../lib/linter');
@@ -29,6 +30,11 @@ const Table = require('cli-table');
 const pluralize = require('pluralize');
 
 const { pathStringify } = require('@bpmn-io/moddle-utils');
+
+/**
+ * @typedef { import('../lib/types').ModdleElement } ModdleElement
+ * @typedef { Error & { element: ModdleElement } } BPMNImportWarning
+ */
 
 const CONFIG_NAME = '.bpmnlintrc';
 
@@ -76,7 +82,7 @@ function glob(files) {
  *
  * @param {string} diagramXML
  *
- * @return { { rootElement: any; warnings: Error[], error?: Error } } parseResult
+ * @return { Promise<{ moddleElement: any; warnings: Error[], error?: Error }> } parseResult
  */
 async function parseDiagram(diagramXML) {
 
@@ -93,10 +99,14 @@ async function parseDiagram(diagramXML) {
   } catch (error) {
 
     const {
+
+      // @ts-expect-error
       warnings = []
     } = error;
 
     return {
+
+      // @ts-expect-error
       error,
       warnings
     };
@@ -232,7 +242,7 @@ async function lintDiagram(diagramPath, config) {
   try {
     diagramXML = await readFile(resolvePath(diagramPath), 'utf-8');
   } catch (error) {
-    throw errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
+    throw errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, /** @type { Error } */ (error).message);
   }
 
 
@@ -259,7 +269,7 @@ async function lintDiagram(diagramPath, config) {
       const {
         element,
         message
-      } = warning;
+      } = /** @type { BPMNImportWarning } */ (warning);
 
       const id = element && element.id;
 
@@ -387,7 +397,7 @@ Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#confi
   try {
     config = JSON.parse(configString);
   } catch (error) {
-    throw errorAndExit('Error: Could not parse %s\n\n%s', configPath, error.message);
+    throw errorAndExit('Error: Could not parse %s\n\n%s', configPath, /** @type { Error } */ (error).message);
   }
 
   const actualFiles = await glob(files);
