@@ -68,6 +68,11 @@ export type Config = {
   rules?: RuleConfigs
 };
 
+export type TransformRuleFn = (
+  rule: RuleDefinition,
+  options: { pkg: string, ruleName: string }
+) => RuleDefinition;
+
 export type Report = {
   id?: string,
   path?: string[],
