@@ -41,7 +41,7 @@
    *
    * @return {Boolean}
    */
-  function is$3(node, type) {
+  function is$4(node, type) {
 
     if (type.indexOf(':') === -1) {
       type = 'bpmn:' + type;
@@ -64,22 +64,137 @@
    */
   function isAny$3(node, types) {
     return types.some(function(type) {
-      return is$3(node, type);
+      return is$4(node, type);
     });
   }
 
   var index_esm = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    is: is$3,
+    is: is$4,
     isAny: isAny$3
   });
 
   var require$$0 = /*@__PURE__*/getAugmentedNamespace(index_esm);
 
+  var helper = {};
+
+  const {
+    is: is$3
+  } = require$$0;
+
+  /**
+   * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
+   *
+   * @typedef { import('../lib/types.js').RuleFactory } RuleFactory
+   * @typedef { import('../lib/types.js').RuleDefinition } RuleDefinition
+   */
+
+
+  /**
+   * Create a checker that disallows the given element type.
+   *
+   * @param { string } type
+   *
+   * @return { RuleFactory } ruleFactory
+   */
+  function disallowNodeType(type, ruleName) {
+
+    /**
+     * @type { RuleFactory }
+     */
+    return function() {
+
+      function check(node, reporter) {
+
+        if (is$3(node, type)) {
+          reporter.report(node.id, 'Element has disallowed type <' + type + '>');
+        }
+      }
+
+      return annotateRule$3(ruleName, {
+        check
+      });
+
+    };
+
+  }
+
+  helper.disallowNodeType = disallowNodeType;
+
+
+  /**
+   * Find a parent for the given element
+   *
+   * @param { ModdleElement } node
+   * @param { string } type
+   *
+   * @return { ModdleElement } element
+   */
+  function findParent(node, type) {
+    if (!node) {
+      return null;
+    }
+
+    const parent = node.$parent;
+
+    if (!parent) {
+      return node;
+    }
+
+    if (is$3(parent, type)) {
+      return parent;
+    }
+
+    return findParent(parent, type);
+  }
+
+  helper.findParent = findParent;
+
+
+  const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs/rules';
+
+  /**
+   * Annotate a rule with core information, such as the documentation url.
+   *
+   * @param {string} ruleName
+   * @param {RuleDefinition} options
+   *
+   * @return {RuleDefinition}
+   */
+  function annotateRule$3(ruleName, options) {
+
+    const {
+      meta: {
+        documentation = {},
+        ...restMeta
+      } = {},
+      ...restOptions
+    } = options;
+
+    const documentationUrl = `${documentationBaseUrl}/${ruleName}.md`;
+
+    return {
+      meta: {
+        documentation: {
+          url: documentationUrl,
+          ...documentation
+        },
+        ...restMeta
+      },
+      ...restOptions
+    };
+  }
+
+  helper.annotateRule = annotateRule$3;
+
   const {
     is: is$2,
     isAny: isAny$2
   } = require$$0;
+
+  const {
+    annotateRule: annotateRule$2
+  } = helper;
 
 
   /**
@@ -131,7 +246,9 @@
       }
     }
 
-    return { check };
+    return annotateRule$2('label-required', {
+      check
+    });
   };
 
 
@@ -153,6 +270,10 @@
     is: is$1,
     isAny: isAny$1
   } = require$$0;
+
+  const {
+    annotateRule: annotateRule$1
+  } = helper;
 
 
   /**
@@ -186,7 +307,9 @@
       }
     }
 
-    return { check };
+    return annotateRule$1('start-event-required', {
+      check
+    });
   };
 
   var rule_1 = /*@__PURE__*/getDefaultExportFromCjs(startEventRequired);
@@ -195,6 +318,10 @@
     is,
     isAny
   } = require$$0;
+
+  const {
+    annotateRule
+  } = helper;
 
 
   /**
@@ -228,7 +355,9 @@
       }
     }
 
-    return { check };
+    return annotateRule('end-event-required', {
+      check
+    });
   };
 
   var rule_2 = /*@__PURE__*/getDefaultExportFromCjs(endEventRequired);

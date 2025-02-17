@@ -2,6 +2,10 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that checks that start events inside a normal sub-processes
@@ -33,8 +37,8 @@ module.exports = function() {
     });
   }
 
-  return {
+  return annotateRule('sub-process-blank-start-event', {
     check
-  };
+  });
 
 };

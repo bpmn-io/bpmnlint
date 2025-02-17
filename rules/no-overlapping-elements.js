@@ -2,6 +2,10 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * Rule that checks if two elements overlap except:
@@ -47,9 +51,9 @@ module.exports = function() {
     elementsOutsideToReport.forEach(element => reporter.report(element.id, 'Element is outside of parent boundary'));
   }
 
-  return {
-    check: check
-  };
+  return annotateRule('no-overlapping-elements', {
+    check
+  });
 };
 
 // helpers /////////////////

@@ -2,6 +2,11 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that checks that start events inside an event sub-process
  * are typed.
@@ -32,8 +37,8 @@ module.exports = function() {
     });
   }
 
-  return {
+  return annotateRule('event-sub-process-typed-start-event', {
     check
-  };
+  });
 
 };

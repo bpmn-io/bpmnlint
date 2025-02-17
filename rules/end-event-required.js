@@ -3,6 +3,10 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that checks the presence of an end event per scope.
@@ -35,5 +39,7 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('end-event-required', {
+    check
+  });
 };

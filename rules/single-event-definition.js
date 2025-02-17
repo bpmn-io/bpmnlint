@@ -2,6 +2,10 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that verifies that an event contains maximum one event definition.
@@ -23,8 +27,8 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('single-event-definition', {
     check
-  };
+  });
 
 };

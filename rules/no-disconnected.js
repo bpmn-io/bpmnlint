@@ -3,6 +3,10 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that verifies that there exists no disconnected
@@ -38,9 +42,9 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('no-disconnected', {
     check
-  };
+  });
 };
 
 

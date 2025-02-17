@@ -2,6 +2,10 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that checks that no implicit split is modeled
@@ -34,9 +38,9 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('no-implicit-split', {
     check
-  };
+  });
 
 };
 

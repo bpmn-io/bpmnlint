@@ -2,6 +2,11 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that checks whether not more than one blank start event
  * exists per scope.
@@ -36,8 +41,8 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('single-blank-start-event', {
     check
-  };
+  });
 
 };

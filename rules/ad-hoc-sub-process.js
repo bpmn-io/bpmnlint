@@ -3,6 +3,11 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that ensures that an Ad Hoc Sub Process is valid according to the BPMN spec:
  *
@@ -40,8 +45,8 @@ module.exports = function() {
     });
   }
 
-  return {
+  return annotateRule('ad-hoc-sub-process', {
     check
-  };
+  });
 
 };

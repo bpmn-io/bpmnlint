@@ -3,6 +3,10 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that checks the presence of a label.
@@ -53,7 +57,9 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('label-required', {
+    check
+  });
 };
 
 
