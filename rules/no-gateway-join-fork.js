@@ -6,6 +6,8 @@ const {
 /**
  * A rule that checks, whether a gateway forks and joins
  * at the same time.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

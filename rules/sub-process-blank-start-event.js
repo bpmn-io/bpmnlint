@@ -6,6 +6,8 @@ const {
 /**
  * A rule that checks that start events inside a normal sub-processes
  * are blank (do not have an event definition).
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

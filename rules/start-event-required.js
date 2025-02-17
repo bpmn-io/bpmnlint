@@ -6,6 +6,8 @@ const {
 
 /**
  * A rule that checks for the presence of a start event per scope.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

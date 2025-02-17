@@ -7,8 +7,10 @@ const {
  * A rule that checks that no implicit split is modeled
  * starting from a task.
  *
- * users should model the parallel splitting gateway
+ * Users should model the parallel splitting gateway
  * explicitly instead.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

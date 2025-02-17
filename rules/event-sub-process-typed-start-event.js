@@ -5,6 +5,8 @@ const {
 /**
  * A rule that checks that start events inside an event sub-process
  * are typed.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

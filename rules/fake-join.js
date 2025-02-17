@@ -8,6 +8,8 @@ const {
  *
  * Users should model a parallel joining gateway
  * to achieve the desired behavior.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

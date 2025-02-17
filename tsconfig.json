@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "DOM",
+      "ES2018"
+    ],
+    "strict": true,
+    "checkJs": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./lib/**/*.d.ts",
+    "./lib/**/*.js",
+    "./rules/*.js",
+    "./config/*.js",
+    "./bin/*.js"
+  ]
+}

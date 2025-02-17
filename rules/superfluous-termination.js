@@ -1,11 +1,14 @@
 const {
-  is, isAny
+  is,
+  isAny
 } = require('bpmnlint-utils');
 
 /**
  * A rule that checks, whether a gateway has only one source and target.
  *
  * Those gateways are superfluous since they don't do anything.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

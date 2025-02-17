@@ -5,6 +5,8 @@ const {
 
 /**
  * A rule that verifies that an event contains maximum one event definition.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

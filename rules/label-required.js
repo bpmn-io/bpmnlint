@@ -6,6 +6,8 @@ const {
 
 /**
  * A rule that checks the presence of a label.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

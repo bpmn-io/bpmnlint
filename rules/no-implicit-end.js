@@ -9,6 +9,8 @@ const {
 
 /**
  * A rule that checks that an element is not an implicit end (token sink).
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 
