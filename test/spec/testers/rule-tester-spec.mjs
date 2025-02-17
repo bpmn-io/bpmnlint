@@ -149,6 +149,34 @@ describe('rule-tester', function() {
 
     });
 
+
+    describe('with <meta>', function() {
+
+      const meta = { foo: 1 };
+
+      verify('with-local-config', (config) => {
+        return {
+          check: (node, reporter) => {
+            reporter.report(node.get('id'), config);
+          },
+          meta
+        };
+      }, {
+        valid: [],
+        invalid: [
+          {
+            name: 'with config',
+            config: 'foo',
+            moddleElement: createModdle('<bpmn:Task id="Task_1" />', 'bpmn:Task'),
+            report: {
+              id: 'Task_1',
+              message: 'foo'
+            }
+          }
+        ]
+      });
+
+    });
   });
 
 });
