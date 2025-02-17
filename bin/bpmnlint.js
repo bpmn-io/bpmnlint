@@ -1,7 +1,10 @@
 #!/usr/bin/env node
+
+const { readFile } = require('node:fs/promises');
+const { writeFileSync, existsSync } = require('node:fs');
+const { resolve: resolvePath } = require('node:path');
+
 const mri = require('mri');
-const fs = require('fs');
-const path = require('path');
 const colors = require('ansi-colors');
 
 colors.enabled = require('color-support').hasBasic;
@@ -14,10 +17,7 @@ const {
   magenta
 } = colors;
 
-const { promisify } = require('util');
-
 const tinyGlob = require('tiny-glob');
-const readFile = promisify(fs.readFile);
 
 const BpmnModdle = require('bpmn-moddle');
 
@@ -215,7 +215,7 @@ function printReports(filePath, results) {
 
   if (problemCount) {
     console.log();
-    console.log(underline(path.resolve(filePath)));
+    console.log(underline(resolvePath(filePath)));
     console.log(table.toString());
   }
 
@@ -230,7 +230,7 @@ async function lintDiagram(diagramPath, config) {
   let diagramXML;
 
   try {
-    diagramXML = await readFile(path.resolve(diagramPath), 'utf-8');
+    diagramXML = await readFile(resolvePath(diagramPath), 'utf-8');
   } catch (error) {
     return errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
   }
@@ -306,17 +306,10 @@ async function lint(files, config, maxWarnings) {
 
   const problemCount = errorCount + warningCount;
 
-  let color;
-
-  if (warningCount) {
-    color = boldYellow;
-  }
-
-  if (errorCount) {
-    color = boldRed;
-  }
-
   if (problemCount) {
+
+    const color = warningCount ? boldYellow : boldRed;
+
     console.log();
     console.log(color(
       `✖ ${problemCount} ${pluralize('problem', problemCount)} (${errorCount} ${pluralize('error', errorCount)}, ${warningCount} ${pluralize('warning', warningCount)})`
@@ -357,11 +350,11 @@ async function run() {
   }
 
   if (init) {
-    if (fs.existsSync(CONFIG_NAME)) {
+    if (existsSync(CONFIG_NAME)) {
       return errorAndExit('Not overriding existing .bpmnlintrc');
     }
 
-    fs.writeFileSync(CONFIG_NAME, DEFAULT_CONFIG_CONTENTS, 'utf8');
+    writeFileSync(CONFIG_NAME, DEFAULT_CONFIG_CONTENTS, 'utf8');
 
     return infoAndExit(`Created ${magenta(CONFIG_NAME)} file`);
   }
