@@ -232,7 +232,7 @@ async function lintDiagram(diagramPath, config) {
   try {
     diagramXML = await readFile(resolvePath(diagramPath), 'utf-8');
   } catch (error) {
-    return errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
+    throw errorAndExit(`Error: Failed to read ${diagramPath}\n\n%s`, error.message);
   }
 
 
@@ -286,7 +286,7 @@ async function lintDiagram(diagramPath, config) {
 
     return printReports(diagramPath, allResults);
   } catch (e) {
-    return errorAndExit(e);
+    throw errorAndExit(e);
   }
 }
 
@@ -351,16 +351,16 @@ async function run() {
 
   if (init) {
     if (existsSync(CONFIG_NAME)) {
-      return errorAndExit('Not overriding existing .bpmnlintrc');
+      throw errorAndExit('Not overriding existing .bpmnlintrc');
     }
 
     writeFileSync(CONFIG_NAME, DEFAULT_CONFIG_CONTENTS, 'utf8');
 
-    return infoAndExit(`Created ${magenta(CONFIG_NAME)} file`);
+    throw infoAndExit(`Created ${magenta(CONFIG_NAME)} file`);
   }
 
   if (files.length === 0) {
-    return errorAndExit('Error: bpmn file path missing');
+    throw errorAndExit('Error: bpmn file path missing');
   }
 
   const configPath = configOverridePath || CONFIG_NAME;
@@ -381,13 +381,13 @@ async function run() {
 Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#configuration`
     );
 
-    return errorAndExit(message);
+    throw errorAndExit(message);
   }
 
   try {
     config = JSON.parse(configString);
-  } catch (err) {
-    return errorAndExit('Error: Could not parse %s\n\n%s', configPath, err.message);
+  } catch (error) {
+    throw errorAndExit('Error: Could not parse %s\n\n%s', configPath, error.message);
   }
 
   const actualFiles = await glob(files);
