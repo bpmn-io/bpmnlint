@@ -29,7 +29,7 @@
   "scripts": {
     "all": "run-s lint lint:types test-coverage",
     "lint": "eslint .",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "tsc",
     "dev": "npm test -- --watch",
     "test": "mocha --exclude 'test/integration/*/**' 'test/**/*.*js'",
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test",

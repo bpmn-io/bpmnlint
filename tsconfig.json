@@ -7,7 +7,8 @@
     "strict": true,
     "checkJs": true,
     "noImplicitAny": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noEmit": true
   },
   "include": [
     "./lib/**/*.d.ts",
