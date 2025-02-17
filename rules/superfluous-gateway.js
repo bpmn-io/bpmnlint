@@ -2,6 +2,11 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that checks, whether a gateway has only one source and target.
  *
@@ -25,8 +30,8 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('superfluous-gateway', {
     check
-  };
+  });
 
 };

@@ -2,6 +2,11 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that checks that no fake join is modeled by attempting
  * to give a task or event join semantics.
@@ -29,8 +34,8 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('fake-join', {
     check
-  };
+  });
 
 };

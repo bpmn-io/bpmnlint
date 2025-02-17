@@ -4,8 +4,10 @@ const {
 } = require('bpmnlint-utils');
 
 const {
-  findParent
+  findParent,
+  annotateRule
 } = require('./helper');
+
 
 /**
  * A rule that checks that an element is not an implicit end (token sink).
@@ -87,5 +89,7 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('no-implicit-end', {
+    check
+  });
 };

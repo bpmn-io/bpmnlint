@@ -79,6 +79,10 @@ const {
   isAny
 } = __webpack_require__(/*! bpmnlint-utils */ "./node_modules/bpmnlint-utils/dist/index.esm.js");
 
+const {
+  annotateRule
+} = __webpack_require__(/*! ./helper */ "./node_modules/bpmnlint/rules/helper.js");
+
 
 /**
  * A rule that checks the presence of an end event per scope.
@@ -111,9 +115,128 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('end-event-required', {
+    check
+  });
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/bpmnlint/rules/helper.js":
+/*!***********************************************!*\
+  !*** ./node_modules/bpmnlint/rules/helper.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const {
+  is
+} = __webpack_require__(/*! bpmnlint-utils */ "./node_modules/bpmnlint-utils/dist/index.esm.js");
+
+/**
+ * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
+ *
+ * @typedef { import('../lib/types.js').RuleFactory } RuleFactory
+ * @typedef { import('../lib/types.js').RuleDefinition } RuleDefinition
+ */
+
+
+/**
+ * Create a checker that disallows the given element type.
+ *
+ * @param { string } type
+ *
+ * @return { RuleFactory } ruleFactory
+ */
+function disallowNodeType(type, ruleName) {
+
+  /**
+   * @type { RuleFactory }
+   */
+  return function() {
+
+    function check(node, reporter) {
+
+      if (is(node, type)) {
+        reporter.report(node.id, 'Element has disallowed type <' + type + '>');
+      }
+    }
+
+    return annotateRule(ruleName, {
+      check
+    });
+
+  };
+
+}
+
+module.exports.disallowNodeType = disallowNodeType;
+
+
+/**
+ * Find a parent for the given element
+ *
+ * @param { ModdleElement } node
+ * @param { string } type
+ *
+ * @return { ModdleElement } element
+ */
+function findParent(node, type) {
+  if (!node) {
+    return null;
+  }
+
+  const parent = node.$parent;
+
+  if (!parent) {
+    return node;
+  }
+
+  if (is(parent, type)) {
+    return parent;
+  }
+
+  return findParent(parent, type);
+}
+
+module.exports.findParent = findParent;
+
+
+const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs/rules';
+
+/**
+ * Annotate a rule with core information, such as the documentation url.
+ *
+ * @param {string} ruleName
+ * @param {RuleDefinition} options
+ *
+ * @return {RuleDefinition}
+ */
+function annotateRule(ruleName, options) {
+
+  const {
+    meta: {
+      documentation = {},
+      ...restMeta
+    } = {},
+    ...restOptions
+  } = options;
+
+  const documentationUrl = `${documentationBaseUrl}/${ruleName}.md`;
+
+  return {
+    meta: {
+      documentation: {
+        url: documentationUrl,
+        ...documentation
+      },
+      ...restMeta
+    },
+    ...restOptions
+  };
+}
+
+module.exports.annotateRule = annotateRule;
 
 /***/ }),
 
@@ -127,6 +250,10 @@ const {
   is,
   isAny
 } = __webpack_require__(/*! bpmnlint-utils */ "./node_modules/bpmnlint-utils/dist/index.esm.js");
+
+const {
+  annotateRule
+} = __webpack_require__(/*! ./helper */ "./node_modules/bpmnlint/rules/helper.js");
 
 
 /**
@@ -178,7 +305,9 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('label-required', {
+    check
+  });
 };
 
 
@@ -206,6 +335,10 @@ const {
   is,
   isAny
 } = __webpack_require__(/*! bpmnlint-utils */ "./node_modules/bpmnlint-utils/dist/index.esm.js");
+
+const {
+  annotateRule
+} = __webpack_require__(/*! ./helper */ "./node_modules/bpmnlint/rules/helper.js");
 
 
 /**
@@ -239,7 +372,9 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('start-event-required', {
+    check
+  });
 };
 
 

@@ -1,3 +1,8 @@
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that checks that sequence flows outgoing from a
  * conditional forking gateway or activity are
@@ -27,9 +32,9 @@ module.exports = function() {
     });
   }
 
-  return {
+  return annotateRule('conditional-flows', {
     check
-  };
+  });
 
 };
 

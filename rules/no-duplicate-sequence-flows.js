@@ -2,6 +2,11 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
+
 /**
  * A rule that verifies that there are no disconnected
  * flow elements, i.e. elements without incoming or outgoing sequence flows.
@@ -45,9 +50,9 @@ module.exports = function() {
     }
   }
 
-  return {
+  return annotateRule('no-duplicate-sequence-flows', {
     check
-  };
+  });
 
 };
 

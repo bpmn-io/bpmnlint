@@ -3,6 +3,9 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
 
 /**
  * A rule that checks that an element is not an implicit start (token spawn).
@@ -52,5 +55,7 @@ module.exports = function() {
     }
   }
 
-  return { check };
+  return annotateRule('no-implicit-start', {
+    check
+  });
 };

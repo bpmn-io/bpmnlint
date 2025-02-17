@@ -6,6 +6,10 @@ const {
   is
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that verifies that link events are properly used.
@@ -71,9 +75,9 @@ module.exports = function() {
 
   }
 
-  return {
+  return annotateRule('link-event', {
     check
-  };
+  });
 };
 
 

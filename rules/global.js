@@ -3,6 +3,10 @@ const {
   isAny
 } = require('bpmnlint-utils');
 
+const {
+  annotateRule
+} = require('./helper');
+
 
 /**
  * A rule that verifies that global elements are properly used.
@@ -50,9 +54,9 @@ module.exports = function() {
 
   }
 
-  return {
+  return annotateRule('global', {
     check
-  };
+  });
 
   // helpers /////////////////////////////
 

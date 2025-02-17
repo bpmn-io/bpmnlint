@@ -6,9 +6,14 @@ const {
   flatten
 } = require('min-dash');
 
+const {
+  annotateRule
+} = require('./helper');
+
 /**
  * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
  */
+
 
 /**
  * A rule that checks that there is no BPMNDI information missing for elements,
@@ -41,9 +46,9 @@ module.exports = function() {
     });
   }
 
-  return {
+  return annotateRule('no-bpmndi', {
     check
-  };
+  });
 
 };
 
