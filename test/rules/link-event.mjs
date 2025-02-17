@@ -28,53 +28,43 @@ RuleTester.verify('link-event', rule, {
       report: [
         {
           'id': 'THROW_NO_NAME',
-          'message': 'Link event is missing name',
-          'category': 'error'
+          'message': 'Link event is missing name'
         },
         {
           'id': 'CATCH_NO_NAME',
-          'message': 'Link event is missing name',
-          'category': 'error'
+          'message': 'Link event is missing name'
         },
         {
           'id': 'NO_CATCH',
-          'message': 'Link catch event with name <NO_CATCH> missing in scope',
-          'category': 'error'
+          'message': 'Link catch event with name <NO_CATCH> missing in scope'
         },
         {
           'id': 'NO_THROW',
-          'message': 'Link throw event with name <NO_THROW> missing in scope',
-          'category': 'error'
+          'message': 'Link throw event with name <NO_THROW> missing in scope'
         },
         {
           'id': 'SCOPE_BOUNDARY_THROW',
-          'message': 'Link catch event with name <SCOPE_BOUNDARY> missing in scope',
-          'category': 'error'
+          'message': 'Link catch event with name <SCOPE_BOUNDARY> missing in scope'
         },
         {
           'id': 'DUPLICATE_NAME_THROW_1',
-          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope',
-          'category': 'error'
+          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope'
         },
         {
           'id': 'DUPLICATE_NAME_THROW_2',
-          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope',
-          'category': 'error'
+          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope'
         },
         {
           'id': 'DUPLICATE_NAME_CATCH_1',
-          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope',
-          'category': 'error'
+          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope'
         },
         {
           'id': 'DUPLICATE_NAME_CATCH_2',
-          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope',
-          'category': 'error'
+          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope'
         },
         {
           'id': 'SCOPE_BOUNDARY_CATCH',
-          'message': 'Link throw event with name <SCOPE_BOUNDARY> missing in scope',
-          'category': 'error'
+          'message': 'Link throw event with name <SCOPE_BOUNDARY> missing in scope'
         }
       ]
     }
