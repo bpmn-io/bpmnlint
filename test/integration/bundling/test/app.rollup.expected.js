@@ -84,6 +84,8 @@
 
   /**
    * A rule that checks the presence of a label.
+   *
+   * @type { import('../lib/types.js').RuleFactory }
    */
   var labelRequired = function() {
 
@@ -155,6 +157,8 @@
 
   /**
    * A rule that checks for the presence of a start event per scope.
+   *
+   * @type { import('../lib/types.js').RuleFactory }
    */
   var startEventRequired = function() {
 
@@ -195,6 +199,8 @@
 
   /**
    * A rule that checks the presence of an end event per scope.
+   *
+   * @type { import('../lib/types.js').RuleFactory }
    */
   var endEventRequired = function() {
 

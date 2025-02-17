@@ -82,6 +82,8 @@ const {
 
 /**
  * A rule that checks the presence of an end event per scope.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 
@@ -129,6 +131,8 @@ const {
 
 /**
  * A rule that checks the presence of a label.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 
@@ -206,6 +210,8 @@ const {
 
 /**
  * A rule that checks for the presence of a start event per scope.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 
