@@ -19,6 +19,8 @@ const {
  *   * element must have a name
  *   * element is referenced by at least one element
  *   * there exists only a single element per type with a given name
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

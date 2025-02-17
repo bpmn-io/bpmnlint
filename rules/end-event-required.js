@@ -6,6 +6,8 @@ const {
 
 /**
  * A rule that checks the presence of an end event per scope.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

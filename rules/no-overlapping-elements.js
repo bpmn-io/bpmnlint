@@ -5,8 +5,11 @@ const {
 
 /**
  * Rule that checks if two elements overlap except:
+ *
  * - Boundary events overlap their host
  * - Child elements overlap / are on top of their parent (e.g., elements within a subProcess)
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

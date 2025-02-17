@@ -6,8 +6,9 @@ const {
 
 /**
  * A rule that verifies that there exists no disconnected
- * flow elements, i.e. elements without incoming
- * _or_ outgoing sequence flows
+ * flow elements, i.e. elements without incoming or outgoing sequence flows.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

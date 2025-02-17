@@ -18,6 +18,7 @@ const {
  *     with a given name, per scope
  *   * link events have a name
  *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

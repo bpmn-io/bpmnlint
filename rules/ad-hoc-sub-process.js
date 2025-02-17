@@ -8,6 +8,8 @@ const {
  *
  * - No start or end events
  * - Every intermediate event has an outgoing sequence flow
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

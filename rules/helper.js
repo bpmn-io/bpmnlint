@@ -3,14 +3,24 @@ const {
 } = require('bpmnlint-utils');
 
 /**
+ * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
+ *
+ * @typedef { import('../lib/types.js').RuleFactory } RuleFactory
+ */
+
+
+/**
  * Create a checker that disallows the given element type.
  *
- * @param {String} type
+ * @param { string } type
  *
- * @return {Function} ruleImpl
+ * @return { RuleFactory } ruleFactory
  */
 function disallowNodeType(type) {
 
+  /**
+   * @type { RuleFactory }
+   */
   return function() {
 
     function check(node, reporter) {
@@ -30,16 +40,15 @@ function disallowNodeType(type) {
 
 module.exports.disallowNodeType = disallowNodeType;
 
+
 /**
  * Find a parent for the given element
  *
- * @param {ModdleElement} node
+ * @param { ModdleElement } node
+ * @param { string } type
  *
- *  @param {String} type
- *
- * @return {ModdleElement} element
+ * @return { ModdleElement } element
  */
-
 function findParent(node, type) {
   if (!node) {
     return null;

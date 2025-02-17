@@ -5,6 +5,8 @@ const {
 /**
  * A rule that checks whether not more than one blank start event
  * exists per scope.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 

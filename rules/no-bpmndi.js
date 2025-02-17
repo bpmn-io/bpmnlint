@@ -7,8 +7,14 @@ const {
 } = require('min-dash');
 
 /**
+ * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
+ */
+
+/**
  * A rule that checks that there is no BPMNDI information missing for elements,
  * which require BPMNDI.
+ *
+ * @type { import('../lib/types.js').RuleFactory }
  */
 module.exports = function() {
 
@@ -47,11 +53,13 @@ module.exports = function() {
 /**
  * Get all BPMN elements within a bpmn:Definitions node
  *
- * @param {array<ModdleElement>} rootElements - An array of Moddle rootElements
- * @return {array<Object>} A flat array with all BPMN elements, each represented with { id: elementId, $type: elementType }
+ * @param { ModdleElement[] } rootElements - An array of Moddle rootElements
  *
+ * @return { { id: string, $type: string }[] } A flat array with all BPMN elements, each represented with { id: elementId, $type: elementType }
  */
 function getAllBpmnElements(rootElements) {
+
+  // @ts-ignore-error <min-dash@v4.2.2 type bug>
   return flatten(rootElements.map((rootElement) => {
     const laneSet =
       rootElement.laneSets && rootElement.laneSets[0] || rootElement.childLaneSet;
@@ -96,10 +104,10 @@ function getAllBpmnElements(rootElements) {
  * Get all BPMN elements within a bpmn:Definitions node
  *
  * @param {ModdleElement} definitionsNode - A moddleElement representing the
- * bpmn:Definitions element
- * @return {array<String>} A flat array with all BPMNDI element ids part of
- * this bpmn:Definitions node
+ *   bpmn:Definitions element
  *
+ * @return {string[]} ids of all BPMNDI element part of
+ *   this bpmn:Definitions node
  */
 function getAllDiBpmnReferences(definitionsNode) {
   return flatten(
@@ -115,16 +123,31 @@ function getAllDiBpmnReferences(definitionsNode) {
   );
 }
 
+/**
+ * @param { ModdleElement } element
+ *
+ * @return {boolean}
+ */
 function hasVisualRepresentation(element) {
   const noVisRepresentation = [ 'bpmn:DataObject' ];
 
   return noVisRepresentation.includes(element.$type) ? false : true;
 }
 
+/**
+ * @param { ModdleElement } element
+ *
+ * @return {boolean}
+ */
 function hasFlowElements(element) {
   return element.flowElements ? true : false;
 }
 
+/**
+ * @param { ModdleElement } element
+ *
+ * @return {boolean}
+ */
 function hasChildLaneSet(element) {
   return element.childLaneSet ? true : false;
 }
