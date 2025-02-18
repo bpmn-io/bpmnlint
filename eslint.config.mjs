@@ -31,6 +31,7 @@ export default [
       ...config,
       files: files.lib,
       languageOptions: {
+        ...config.languageOptions,
         sourceType: 'commonjs'
       }
     };
