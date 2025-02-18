@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 11.1.0
 
-* `FEAT`: add `ad-hoc-subprocess` rule ([#160](https://github.com/bpmn-io/bpmnlint/pull/160))
+* `FEAT`: add `ad-hoc-sub-process` rule ([#160](https://github.com/bpmn-io/bpmnlint/pull/160))
 * `CHORE`: improve error message on missing rule hook ([#162](https://github.com/bpmn-io/bpmnlint/pull/162))
 * `CHORE`: simplify local require ([#161](https://github.com/bpmn-io/bpmnlint/pull/161))
 
