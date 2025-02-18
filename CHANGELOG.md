@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.2.0
+
+* `FEAT`: allow to pass custom meta data with rules ([#18](https://github.com/bpmn-io/bpmnlint/issues/18), [#165](https://github.com/bpmn-io/bpmnlint/pull/165))
+* `FEAT`: allow to transform rules ([#165](https://github.com/bpmn-io/bpmnlint/pull/165))
+* `FEAT`: add documentation URL to built-in rules ([#167](https://github.com/bpmn-io/bpmnlint/pull/167))
+
 ## 11.1.0
 
 * `FEAT`: add `ad-hoc-sub-process` rule ([#160](https://github.com/bpmn-io/bpmnlint/pull/160))
