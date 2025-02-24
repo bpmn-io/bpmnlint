@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="DEFINITIONS_1" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="12.0.0">
+  <collaboration id="COLLABORATION">
+    <participant id="PARTICIPANT_A" name="A" processRef="PROCESS_1" />
+    <participant id="PARTICIPANT_B" name="B" />
+    <messageFlow id="MESSAGE_FLOW" sourceRef="PARTICIPANT_A" targetRef="PARTICIPANT_B" />
+  </collaboration>
+  <process id="PROCESS_1" isExecutable="false">
+    <endEvent id="END" name="bar">
+      <incoming>FLOW_1</incoming>
+    </endEvent>
+    <startEvent id="START">
+      <outgoing>FLOW_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="FLOW_1" sourceRef="START" targetRef="END" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="COLLABORATION">
+      <bpmndi:BPMNShape id="PARTICIPANT_A_di" bpmnElement="PARTICIPANT_A">
+        <omgdc:Bounds x="177" y="115" width="446" height="138" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="442" y="156" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="450" y="199" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="261" y="156" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="267" y="199" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_1_di" bpmnElement="FLOW_1">
+        <omgdi:waypoint x="297" y="174" />
+        <omgdi:waypoint x="442" y="174" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="PARTICIPANT_B_di" bpmnElement="PARTICIPANT_B">
+        <omgdc:Bounds x="169" y="328" width="453" height="104" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MESSAGE_FLOW_di" bpmnElement="MESSAGE_FLOW">
+        <omgdi:waypoint x="400" y="253" />
+        <omgdi:waypoint x="400" y="328" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

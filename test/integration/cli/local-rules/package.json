@@ -1,0 +1,10 @@
+{
+  "name": "local-rules",
+  "version": "0.0.0",
+  "description": "An application that provides local rules",
+  "main": "index.js",
+  "dependencies": {
+    "bpmnlint": "file:../../../..",
+    "bpmnlint-plugin-local": "file:./lib/bpmnlint-plugin"
+  }
+}
