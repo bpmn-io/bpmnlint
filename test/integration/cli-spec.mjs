@@ -220,6 +220,35 @@ describe('cli', function() {
   });
 
 
+  describe('should resolve plug-in sources from working directory', function() {
+
+    before(function() {
+
+      this.timeout(100000);
+
+      return exec('install-local', [], __dirname + '/cli/local-rules');
+    });
+
+
+    verify({
+      cmd: [ 'bpmnlint', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/local-rules',
+      expect: {
+        code: 1,
+        stderr: EMPTY,
+        stdout: `
+
+          ${diagramPath('local-rules/diagram.bpmn')}
+            END  error  Element has non-sense label <bar>  local/no-label-bar
+
+          ✖ 1 problem (1 error, 0 warnings)
+        `
+      }
+    });
+
+  });
+
+
   describe('should handle namespaced packages', function() {
 
     before(function() {

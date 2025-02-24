@@ -1,0 +1,6 @@
+{
+  "name": "bpmnlint-plugin-local",
+  "version": "0.0.0",
+  "description": "Local bpmnlint rules",
+  "main": "index.js"
+}
