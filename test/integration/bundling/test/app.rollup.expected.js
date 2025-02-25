@@ -97,7 +97,7 @@
    *
    * @return { RuleFactory } ruleFactory
    */
-  function disallowNodeType(type, ruleName) {
+  function checkDiscouragedNodeType(type, ruleName) {
 
     /**
      * @type { RuleFactory }
@@ -107,7 +107,7 @@
       function check(node, reporter) {
 
         if (is$3(node, type)) {
-          reporter.report(node.id, 'Element has disallowed type <' + type + '>');
+          reporter.report(node.id, 'Element type <' + type + '> is discouraged');
         }
       }
 
@@ -119,7 +119,7 @@
 
   }
 
-  helper.disallowNodeType = disallowNodeType;
+  helper.checkDiscouragedNodeType = checkDiscouragedNodeType;
 
 
   /**
