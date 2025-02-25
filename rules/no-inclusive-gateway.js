@@ -1,3 +1,3 @@
-const disallowNodeType = require('./helper').disallowNodeType;
+const checkDiscouragedNodeType = require('./helper').checkDiscouragedNodeType;
 
-module.exports = disallowNodeType('bpmn:InclusiveGateway', 'no-inclusive-gateway');
+module.exports = checkDiscouragedNodeType('bpmn:InclusiveGateway', 'no-inclusive-gateway');
