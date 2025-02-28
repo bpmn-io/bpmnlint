@@ -28,7 +28,7 @@ module.exports = function() {
     if (!isAny(node, [
       'bpmn:Process',
       'bpmn:SubProcess'
-    ])) {
+    ]) || is(node, 'bpmn:AdHocSubProcess')) {
       return;
     }
 

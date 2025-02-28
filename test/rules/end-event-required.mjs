@@ -20,6 +20,9 @@ RuleTester.verify('end-event-required', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/end-event-required/valid-sub-process.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/end-event-required/valid-sub-process-sub-types.bpmn')
     }
   ],
   invalid: [
@@ -36,6 +39,19 @@ RuleTester.verify('end-event-required', rule, {
         id: 'SubProcess',
         message: 'Sub process is missing end event'
       }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/end-event-required/invalid-sub-process-sub-types.bpmn'),
+      report: [
+        {
+          id: 'TRANSACTION',
+          message: 'Sub process is missing end event'
+        },
+        {
+          id: 'EVENT_SUBPROCESS',
+          message: 'Sub process is missing end event'
+        }
+      ]
     }
   ]
 });
