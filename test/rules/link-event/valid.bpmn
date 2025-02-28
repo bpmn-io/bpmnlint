@@ -1,33 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1x7j8t1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0-nightly.20240107" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1x7j8t1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.23.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
   <bpmn:process id="Process_0im3pgs" isExecutable="true">
-    <bpmn:intermediateThrowEvent id="Event_0fvzchs" name="LINK">
-      <bpmn:linkEventDefinition id="LinkEventDefinition_0l1hwet" name="" />
+    <bpmn:intermediateThrowEvent id="Event_0fvzchs" name="no matching event name, but link name">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0l1hwet" name="LINK" />
     </bpmn:intermediateThrowEvent>
-    <bpmn:intermediateCatchEvent id="Event_0hnrksg" name="LINK">
-      <bpmn:linkEventDefinition id="LinkEventDefinition_08twe44" name="" />
+    <bpmn:intermediateCatchEvent id="Event_0hnrksg">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_08twe44" name="LINK" />
     </bpmn:intermediateCatchEvent>
     <bpmn:subProcess id="Activity_1l5hieb">
       <bpmn:intermediateCatchEvent id="Event_0jbtgvh" name="OTHER_LINK">
-        <bpmn:linkEventDefinition id="LinkEventDefinition_0neehpv" name="" />
+        <bpmn:linkEventDefinition id="LinkEventDefinition_0neehpv" name="OTHER_LINK" />
       </bpmn:intermediateCatchEvent>
       <bpmn:intermediateThrowEvent id="Event_1kl28vf" name="OTHER_LINK">
-        <bpmn:linkEventDefinition id="LinkEventDefinition_13ndre8" name="" />
+        <bpmn:linkEventDefinition id="LinkEventDefinition_13ndre8" name="OTHER_LINK" />
       </bpmn:intermediateThrowEvent>
     </bpmn:subProcess>
+    <bpmn:intermediateCatchEvent id="Event_0a7jh6y" name="duplicate element name but different link">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_051vbd4" name="A" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_0szepuh" name="duplicate element name but different link">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_18hz5qo" name="B" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateThrowEvent id="Event_06f7cmv" name="A">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1bk4su3" name="A" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Event_1g4m2t2" name="B">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0unef2n" name="B" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Event_1pnsf0v" name="MULTI_THROW_ONE_CATCH">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0spf3uh" name="MULTI_THROW_ONE_CATCH" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Event_15nie4l" name="MULTI_THROW_ONE_CATCH">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0ae8004" name="MULTI_THROW_ONE_CATCH" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Event_09g1b3s" name="MULTI_THROW_ONE_CATCH">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1uyz22p" name="MULTI_THROW_ONE_CATCH" />
+    </bpmn:intermediateCatchEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0im3pgs">
       <bpmndi:BPMNShape id="Event_00qu043_di" bpmnElement="Event_0fvzchs">
         <dc:Bounds x="232" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="238" y="125" width="25" height="14" />
+          <dc:Bounds x="209" y="125" width="90" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1w9uhf6_di" bpmnElement="Event_0hnrksg">
         <dc:Bounds x="372" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="378" y="125" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0a7jh6y_di" bpmnElement="Event_0a7jh6y">
+        <dc:Bounds x="572" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="551" y="175" width="89" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0m7nekj" bpmnElement="Event_0szepuh">
+        <dc:Bounds x="572" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="551" y="285" width="89" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00qbkxg_di" bpmnElement="Event_06f7cmv">
+        <dc:Bounds x="682" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="696" y="175" width="8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1881ztk" bpmnElement="Event_1g4m2t2">
+        <dc:Bounds x="682" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="696" y="285" width="8" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ac0d24_di" bpmnElement="Event_1pnsf0v">
+        <dc:Bounds x="212" y="512" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="193" y="555" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1515262" bpmnElement="Event_15nie4l">
+        <dc:Bounds x="212" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="193" y="635" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01y36lt_di" bpmnElement="Event_09g1b3s">
+        <dc:Bounds x="312" y="512" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="290" y="555" width="80" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1l5hieb_di" bpmnElement="Activity_1l5hieb" isExpanded="true">

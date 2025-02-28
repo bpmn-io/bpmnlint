@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.4.1
+
+* `FIX`: make `link-event` rule check only BPMN compliance
+
 ## 11.4.0
 
 * `FEAT`: rework message on elements that should not be used ([#173](https://github.com/bpmn-io/bpmnlint/pull/173))
