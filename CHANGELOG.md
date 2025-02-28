@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.4.2
+
+* `FIX`: do not require start and end events in ad-hoc subprocess ([#176](https://github.com/bpmn-io/bpmnlint/pull/176))
+
 ## 11.4.1
 
 * `FIX`: make `link-event` rule check only BPMN compliance
