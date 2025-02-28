@@ -61,6 +61,19 @@ Add or customize rules using the `rules` block:
 }
 ```
 
+You may also extend from multiple configurations, including those provided by [custom plug-ins](#writing-a-plug-in):
+
+```json
+{
+  "extends": [
+    "bpmnlint:recommended",
+    "plugin:foo/recommended",
+    "plugin:@bar/bpmnlint-plugin-bar/recommended"
+  ]
+}
+```
+
+This will amend core `recommended` rules with `recommended` rulesets provided by `bpmnlint-plugin-foo` and `@bar/bpmnlint-plugin-bar`, respectively.
 
 ## API
 
@@ -117,6 +130,25 @@ npm init bpmnlint-plugin {PLUGIN_NAME}
 ```
 
 Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugin-example) for details on how to define, test, and consume custom lint rules. Use the [bpmnlint playground](https://github.com/bpmn-io/bpmnlint-playground) to implement new rules with quick visual feedback.
+
+> [!NOTE]
+> Plug-ins must always follow the naming scheme `bpmnlint-plugin-{NAME_OF_YOUR_PLUGIN}` and may contain a namespace prefix.
+
+When using your custom plug-in, reference its configuration or rules via the shorthand plug-in name, or the full identifier:
+
+```json
+{
+  "extends": [
+    "bpmnlint:recommended",
+    "plugin:foo/recommended",
+    "plugin:@bar/bpmnlint-plugin-bar/recommended"
+  ],
+  "rules": {
+    "foo/special-rule": "off",
+    "@bar/other-rule": "warn"
+  }
+}
+```
 
 
 ## Bundling
