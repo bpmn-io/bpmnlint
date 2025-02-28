@@ -27,44 +27,36 @@ RuleTester.verify('link-event', rule, {
       moddleElement: readModdle(__dirname + '/link-event/invalid.bpmn'),
       report: [
         {
-          'id': 'THROW_NO_NAME',
-          'message': 'Link event is missing name'
+          'id': 'CATCH_NO_NAME',
+          'message': 'Link event is missing link name'
         },
         {
-          'id': 'CATCH_NO_NAME',
-          'message': 'Link event is missing name'
+          'id': 'THROW_NO_NAME',
+          'message': 'Link event is missing link name'
         },
         {
           'id': 'NO_CATCH',
-          'message': 'Link catch event with name <NO_CATCH> missing in scope'
+          'message': 'Link catch event with link name <NO_CATCH> missing in scope'
         },
         {
           'id': 'NO_THROW',
-          'message': 'Link throw event with name <NO_THROW> missing in scope'
+          'message': 'Link throw event with link name <NO_THROW> missing in scope'
         },
         {
           'id': 'SCOPE_BOUNDARY_THROW',
-          'message': 'Link catch event with name <SCOPE_BOUNDARY> missing in scope'
-        },
-        {
-          'id': 'DUPLICATE_NAME_THROW_1',
-          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope'
-        },
-        {
-          'id': 'DUPLICATE_NAME_THROW_2',
-          'message': 'Duplicate link throw event with name <DUPLICATE_NAME> in scope'
+          'message': 'Link catch event with link name <SCOPE_BOUNDARY> missing in scope'
         },
         {
           'id': 'DUPLICATE_NAME_CATCH_1',
-          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope'
+          'message': 'Duplicate link catch event with link name <DUPLICATE_LINK_NAME> in scope'
         },
         {
           'id': 'DUPLICATE_NAME_CATCH_2',
-          'message': 'Duplicate link catch event with name <DUPLICATE_NAME> in scope'
+          'message': 'Duplicate link catch event with link name <DUPLICATE_LINK_NAME> in scope'
         },
         {
           'id': 'SCOPE_BOUNDARY_CATCH',
-          'message': 'Link throw event with name <SCOPE_BOUNDARY> missing in scope'
+          'message': 'Link throw event with link name <SCOPE_BOUNDARY> missing in scope'
         }
       ]
     }

@@ -2,7 +2,7 @@
 
 A rule that checks that link events are used in accordance with the BPMN specification:
 
-* A link event must be named
+* A link event definition must be named
 * For every link throw event there exists a matching catch event in the same scope
 
 
