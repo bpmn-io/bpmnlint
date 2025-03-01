@@ -145,7 +145,7 @@ When using your custom plug-in, reference its configuration or rules via the sho
   ],
   "rules": {
     "foo/special-rule": "off",
-    "@bar/other-rule": "warn"
+    "@bar/bar/other-rule": "warn"
   }
 }
 ```
