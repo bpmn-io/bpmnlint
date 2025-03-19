@@ -63,6 +63,10 @@ module.exports = function() {
       return false;
     }
 
+    if (is(node, 'bpmn:Activity') && is(node.$parent, 'bpmn:AdHocSubProcess')) {
+      return false;
+    }
+
     if (is(node, 'bpmn:EndEvent')) {
       return false;
     }
