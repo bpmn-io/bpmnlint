@@ -25,6 +25,9 @@ RuleTester.verify('no-disconnected', rule, {
       moddleElement: readModdle(__dirname + '/no-disconnected/valid-event-subprocess.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/no-disconnected/valid-adhoc-subprocess.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/no-disconnected/valid-compensation.bpmn')
     }
   ],
@@ -35,6 +38,22 @@ RuleTester.verify('no-disconnected', rule, {
         id: 'Element',
         message: 'Element is not connected'
       }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-disconnected/invalid-adhoc-subprocess.bpmn'),
+      report:[
+        {
+          id: 'Gateway_1',
+          message: 'Element is not connected'
+        },
+        {
+          id: 'StartEvent_1',
+          message: 'Element is not connected'
+        },{
+          id: 'EndEvent_1',
+          message: 'Element is not connected'
+        }
+      ]
     }
   ]
 });
