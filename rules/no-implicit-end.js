@@ -63,7 +63,7 @@ module.exports = function() {
       return false;
     }
 
-    if (is(node, 'bpmn:Activity') && is(node.$parent, 'bpmn:AdHocSubProcess')) {
+    if (is(node.$parent, 'bpmn:AdHocSubProcess')) {
       return false;
     }
 

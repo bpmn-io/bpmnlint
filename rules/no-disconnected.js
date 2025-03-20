@@ -35,7 +35,7 @@ module.exports = function() {
     }
 
     // adhoc subprocesses can have disconnected activities
-    if (is(node.$parent, 'bpmn:AdHocSubProcess') && is(node, 'bpmn:Activity')) {
+    if (is(node.$parent, 'bpmn:AdHocSubProcess')) {
       return;
     }
 
