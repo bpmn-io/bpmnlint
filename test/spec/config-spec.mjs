@@ -2,8 +2,8 @@ import { expect } from 'chai';
 
 import fs from 'node:fs';
 
-import allConfig from 'bpmnlint/config/all.js';
-import correctnessConfig from 'bpmnlint/config/correctness.js';
+import allConfig from '../../config/all.js';
+import correctnessConfig from '../../config/correctness.js';
 
 
 describe('config', function() {

@@ -1,6 +1,6 @@
 import {
   Linter
-} from 'bpmnlint';
+} from '../../lib/index.js';
 
 import {
   expect,
