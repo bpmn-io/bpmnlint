@@ -34,6 +34,11 @@ module.exports = function() {
       return;
     }
 
+    // adhoc subprocesses can have disconnected activities
+    if (is(node.$parent, 'bpmn:AdHocSubProcess')) {
+      return;
+    }
+
     const incoming = node.incoming || [];
     const outgoing = node.outgoing || [];
 

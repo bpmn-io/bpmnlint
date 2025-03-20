@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.34.0-dev">
   <process id="PROCESS" isExecutable="false">
     <endEvent id="END_EVENT" name="END_EVENT">
       <incoming>Flow_1w3680k</incoming>
@@ -35,6 +35,19 @@
       <compensateEventDefinition id="CompensateEventDefinition_0b10fth" />
     </boundaryEvent>
     <task id="FOR_COMPENSATION" name="FOR_COMPENSATION" isForCompensation="true" />
+    <adHocSubProcess id="Activity_15yansu">
+      <incoming>Flow_093ukve</incoming>
+      <outgoing>Flow_1wmltqf</outgoing>
+      <task id="Activity_1snzwjt" />
+    </adHocSubProcess>
+    <startEvent id="StartEvent_AdHoc" name="START ADHOC">
+      <outgoing>Flow_093ukve</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_093ukve" sourceRef="StartEvent_AdHoc" targetRef="Activity_15yansu" />
+    <endEvent id="EndEvent_Adhoc" name="END ADHOC">
+      <incoming>Flow_1wmltqf</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1wmltqf" sourceRef="Activity_15yansu" targetRef="EndEvent_Adhoc" />
     <group id="Group_14ev8gw" />
     <association id="Association_0flxzv9" associationDirection="One" sourceRef="Event_07bzf1s" targetRef="FOR_COMPENSATION" />
   </process>
@@ -74,9 +87,17 @@
       <bpmndi:BPMNShape id="DataStoreReference_0bpv41p_di" bpmnElement="DataStoreReference_0bpv41p">
         <omgdc:Bounds x="525" y="315" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0bfzxxp_di" bpmnElement="FOR_COMPENSATION">
-        <omgdc:Bounds x="160" y="300" width="100" height="80" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="Event_0xy6ro7_di" bpmnElement="StartEvent_AdHoc">
+        <omgdc:Bounds x="572" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="554" y="705" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10dxc44_di" bpmnElement="EndEvent_Adhoc">
+        <omgdc:Bounds x="1032" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1018" y="705" width="66" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1jhbus4_di" bpmnElement="EVENT_SUB" isExpanded="true">
         <omgdc:Bounds x="1050" y="40" width="350" height="200" />
@@ -88,15 +109,29 @@
           <omgdc:Bounds x="584" y="115" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0flxzv9_di" bpmnElement="Association_0flxzv9">
-        <di:waypoint x="312" y="340" />
-        <di:waypoint x="260" y="340" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1a3fgyg_di" bpmnElement="Event_07bzf1s">
-        <omgdc:Bounds x="312" y="322" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_0bfzxxp_di" bpmnElement="FOR_COMPENSATION">
+        <omgdc:Bounds x="160" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1drnytr_di" bpmnElement="Activity_15yansu" isExpanded="true">
+        <omgdc:Bounds x="645" y="580" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1snzwjt_di" bpmnElement="Activity_1snzwjt">
+        <omgdc:Bounds x="770" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_093ukve_di" bpmnElement="Flow_093ukve">
+        <di:waypoint x="608" y="680" />
+        <di:waypoint x="645" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wmltqf_di" bpmnElement="Flow_1wmltqf">
+        <di:waypoint x="995" y="680" />
+        <di:waypoint x="1032" y="680" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Group_14ev8gw_di" bpmnElement="Group_14ev8gw">
         <omgdc:Bounds x="670" y="190" width="300" height="300" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1a3fgyg_di" bpmnElement="Event_07bzf1s">
+        <omgdc:Bounds x="312" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0wn1jq0_di" bpmnElement="BOUNDARY">
         <omgdc:Bounds x="412" y="322" width="36" height="36" />
@@ -119,6 +154,10 @@
       <bpmndi:BPMNEdge id="Flow_1w3680k_di" bpmnElement="Flow_1w3680k">
         <di:waypoint x="380" y="475" />
         <di:waypoint x="380" y="532" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0flxzv9_di" bpmnElement="Association_0flxzv9">
+        <di:waypoint x="312" y="340" />
+        <di:waypoint x="260" y="340" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

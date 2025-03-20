@@ -29,6 +29,10 @@ module.exports = function() {
       return false;
     }
 
+    if (is(node.$parent, 'bpmn:AdHocSubProcess')) {
+      return false;
+    }
+
     if (is(node, 'bpmn:SubProcess') && node.triggeredByEvent) {
       return false;
     }
