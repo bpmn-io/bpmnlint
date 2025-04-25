@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.4.3
+
+* `FIX`: allow disconnected elements and missing start/end events within ad-hoc subprocess ([#181](https://github.com/bpmn-io/bpmnlint/pull/181))
+
 ## 11.4.2
 
 * `FIX`: do not require start and end events in ad-hoc subprocess ([#176](https://github.com/bpmn-io/bpmnlint/pull/176))
