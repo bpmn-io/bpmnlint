@@ -37,12 +37,8 @@ RuleTester.verify('ad-hoc-sub-process', rule, {
       moddleElement: readModdle(__dirname + '/ad-hoc-sub-process/invalid-intermediate.bpmn'),
       report: [
         {
-          id: 'ThrowEvent',
-          message: 'An intermediate event inside <Ad Hoc Sub Process> must have an outgoing sequence flow'
-        },
-        {
           id: 'CatchEvent',
-          message: 'An intermediate event inside <Ad Hoc Sub Process> must have an outgoing sequence flow'
+          message: 'An intermediate catch event inside <Ad Hoc Sub Process> must have an outgoing sequence flow'
         }
       ]
     }
