@@ -3,7 +3,7 @@
 Ensure that an Ad-Hoc Sub-Process is valid according to the BPMN specification:
 
 - Must not contain start or end events.
-- Every intermediate event must have an outgoing sequence flow.
+- Every intermediate catch event must have an outgoing sequence flow.
 
 
 Example of __incorrect__ usage for this rule:

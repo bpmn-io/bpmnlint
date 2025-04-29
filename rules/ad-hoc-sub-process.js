@@ -1,6 +1,5 @@
 const {
-  is,
-  isAny
+  is
 } = require('bpmnlint-utils');
 
 const {
@@ -36,9 +35,9 @@ module.exports = function() {
         reporter.report(flowElement.id, 'An <End Event> is not allowed in <Ad Hoc Sub Process>');
       }
 
-      if (isAny(flowElement, [ 'bpmn:IntermediateCatchEvent', 'bpmn:IntermediateThrowEvent' ])) {
+      if (is(flowElement, 'bpmn:IntermediateCatchEvent')) {
         if (!flowElement.outgoing || flowElement.outgoing.length === 0) {
-          reporter.report(flowElement.id, 'An intermediate event inside <Ad Hoc Sub Process> must have an outgoing sequence flow');
+          reporter.report(flowElement.id, 'An intermediate catch event inside <Ad Hoc Sub Process> must have an outgoing sequence flow');
         }
       }
 
