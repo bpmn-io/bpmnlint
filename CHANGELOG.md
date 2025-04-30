@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.4.4
+
+* `FIX`: allow outgoing sequence flows on intermediate throw events in ad-hoc-subprocess ([#186](https://github.com/bpmn-io/bpmnlint/pull/186))
+
 ## 11.4.3
 
 * `FIX`: allow disconnected elements and missing start/end events within ad-hoc subprocess ([#181](https://github.com/bpmn-io/bpmnlint/pull/181))
