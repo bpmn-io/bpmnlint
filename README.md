@@ -75,6 +75,12 @@ You may also extend from multiple configurations, including those provided by [c
 
 This will amend core `recommended` rules with `recommended` rulesets provided by `bpmnlint-plugin-foo` and `@bar/bpmnlint-plugin-bar`, respectively.
 
+### Available Configurations
+
+* [`bpmnlint:all`](./config/all.js) - all rules as errors
+* [`bpmnlint:recommended`](./config/recommended.js) - opinionated rules ("best practices") and rules enforcing BPMN compliance
+* [`bpmnlint:correctness`](./config/correctness.js) - rules enforcing BPMN compliance
+
 ## API
 
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):

@@ -4,6 +4,7 @@ module.exports = {
     'event-sub-process-typed-start-event': 'error',
     'link-event': 'error',
     'no-duplicate-sequence-flows': 'warn',
-    'sub-process-blank-start-event': 'error'
+    'sub-process-blank-start-event': 'error',
+    'single-blank-start-event': 'error'
   }
 };
