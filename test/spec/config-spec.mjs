@@ -41,7 +41,8 @@ describe('config', function() {
         'event-sub-process-typed-start-event',
         'link-event',
         'no-duplicate-sequence-flows',
-        'sub-process-blank-start-event'
+        'sub-process-blank-start-event',
+        'single-blank-start-event'
       ];
 
       // when
