@@ -426,6 +426,23 @@ describe('cli', function() {
         stdout: EMPTY
       }
     });
+
+
+    verify({
+      cmd: [ 'bpmnlint', '-c', 'bpmnlintrc-relative-extension.json', 'diagram.bpmn' ],
+      cwd: __dirname + '/cli/moddle-extension',
+      expect: {
+        code: 1,
+        stderr: EMPTY,
+        stdout: `
+
+        ${diagramPath('moddle-extension/diagram.bpmn')}
+          ServiceTask  error  Element is a camunda:ServiceTaskLike <Service Task>  test-camunda/no-service-task-like
+
+        ✖ 1 problem (1 error, 0 warnings)
+      `
+      }
+    });
   });
 
 });
