@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.6.0
+
+* `FEAT`: add `single-blank-start-event` to `correctness` ruleset ([#187](https://github.com/bpmn-io/bpmnlint/pull/187))
+
 ## 11.5.0
 
 * `FEAT`: allow to pass moddle extensions when validating via CLI ([#62](https://github.com/bpmn-io/bpmnlint/issues/62), [#8](https://github.com/bpmn-io/bpmnlint/issues/8), [#188](https://github.com/bpmn-io/bpmnlint/pull/188))
