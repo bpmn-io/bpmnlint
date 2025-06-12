@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.5.0
+
+* `FEAT`: allow to pass moddle extensions when validating via CLI ([#62](https://github.com/bpmn-io/bpmnlint/issues/62), [#8](https://github.com/bpmn-io/bpmnlint/issues/8), [#188](https://github.com/bpmn-io/bpmnlint/pull/188))
+
 ## 11.4.4
 
 * `FIX`: allow outgoing sequence flows on intermediate throw events in ad-hoc-subprocess ([#186](https://github.com/bpmn-io/bpmnlint/pull/186))
