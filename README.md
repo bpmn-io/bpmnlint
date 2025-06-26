@@ -81,6 +81,22 @@ This will amend core `recommended` rules with `recommended` rulesets provided by
 * [`bpmnlint:recommended`](./config/recommended.js) - opinionated rules ("best practices") and rules enforcing BPMN compliance
 * [`bpmnlint:correctness`](./config/correctness.js) - rules enforcing BPMN compliance
 
+### Moddle extensions
+
+You can also configure moddle extensions to support rules with custom extensions:
+
+```json
+{
+  "extends": [
+    "bpmnlint:recommended",
+    "plugin:custom/recommended"
+  ],
+  "moddleExtensions": {
+    "custom": "custom-bpmn-moddle/resources/custom.json"
+  }
+}
+```
+
 ## API
 
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
