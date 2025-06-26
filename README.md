@@ -83,7 +83,7 @@ This will amend core `recommended` rules with `recommended` rulesets provided by
 
 ### Moddle extensions
 
-You can also configure moddle extensions to support rules with custom extensions:
+You can also configure moddle extensions to support rules with custom types:
 
 ```json
 {
