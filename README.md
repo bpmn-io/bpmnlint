@@ -83,7 +83,7 @@ This will amend core `recommended` rules with `recommended` rulesets provided by
 
 ### Moddle extensions
 
-You can also configure moddle extensions to support rules with custom types:
+To validate your diagrams with custom [moddle](https://github.com/bpmn-io/moddle) extensions, add `moddleExtensions` to the root configuration file:
 
 ```json
 {
@@ -97,6 +97,7 @@ You can also configure moddle extensions to support rules with custom types:
 }
 ```
 
+The extension will be loaded relative to the configuration file location.
 ## API
 
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
