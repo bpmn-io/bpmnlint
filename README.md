@@ -81,6 +81,23 @@ This will amend core `recommended` rules with `recommended` rulesets provided by
 * [`bpmnlint:recommended`](./config/recommended.js) - opinionated rules ("best practices") and rules enforcing BPMN compliance
 * [`bpmnlint:correctness`](./config/correctness.js) - rules enforcing BPMN compliance
 
+### Moddle extensions
+
+To validate your diagrams with custom [moddle](https://github.com/bpmn-io/moddle) extensions, add `moddleExtensions` to the root configuration file:
+
+```json
+{
+  "extends": [
+    "bpmnlint:recommended",
+    "plugin:custom/recommended"
+  ],
+  "moddleExtensions": {
+    "custom": "custom-bpmn-moddle/resources/custom.json"
+  }
+}
+```
+
+The extension will be loaded relative to the configuration file location.
 ## API
 
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
