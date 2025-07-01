@@ -75,6 +75,20 @@ You may also extend from multiple configurations, including those provided by [c
 
 This will amend core `recommended` rules with `recommended` rulesets provided by `bpmnlint-plugin-foo` and `@bar/bpmnlint-plugin-bar`, respectively.
 
+Non-relative paths to plugins are loaded from `node_modules`, e.g.
+
+```
+project
+├── .bpmnlintrc
+├── node_modules
+│   ├── @bar
+│   │   └── bpmnlint-plugin-bar
+│   ├── bpmnlint
+│   └── foo
+├── package.json
+└── diagram.bpmn
+```
+
 ### Available Configurations
 
 * [`bpmnlint:all`](./config/all.js) - all rules as errors
@@ -98,6 +112,21 @@ To validate your diagrams with custom [moddle](https://github.com/bpmn-io/moddle
 ```
 
 The extension will be loaded relative to the configuration file location.
+
+Non-relative paths to moddle extensions are loaded from `node_modules`, e.g.
+
+```
+project
+├── .bpmnlintrc
+├── node_modules
+│   ├── bpmnlint
+│   └── custom-bpmn-moddle
+│       └── resources
+│           └── custom.json
+├── package.json
+└── diagram.bpmn
+```
+
 ## API
 
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
