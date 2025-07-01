@@ -84,7 +84,7 @@ project
 │   ├── @bar
 │   │   └── bpmnlint-plugin-bar
 │   ├── bpmnlint
-│   └── foo
+│   └── bpmnlint-plugin-foo
 ├── package.json
 └── diagram.bpmn
 ```
