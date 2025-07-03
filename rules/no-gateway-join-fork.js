@@ -29,7 +29,7 @@ module.exports = function() {
     }
   }
 
-  return annotateRule('no-gateway-fork-join', {
+  return annotateRule('no-gateway-join-fork', {
     check
   });
 
