@@ -75,19 +75,8 @@ You may also extend from multiple configurations, including those provided by [c
 
 This will amend core `recommended` rules with `recommended` rulesets provided by `bpmnlint-plugin-foo` and `@bar/bpmnlint-plugin-bar`, respectively.
 
-Non-relative paths to plugins are loaded from `node_modules`, e.g.
+Plug-ins will be resolved relative to the configuration file location, using [node module resolution](https://nodejs.org/api/modules.html#loading-from-node_modules-folders).
 
-```
-project
-├── .bpmnlintrc
-├── node_modules
-│   ├── @bar
-│   │   └── bpmnlint-plugin-bar
-│   ├── bpmnlint
-│   └── bpmnlint-plugin-foo
-├── package.json
-└── diagram.bpmn
-```
 
 ### Available Configurations
 
@@ -111,21 +100,7 @@ To validate your diagrams with custom [moddle](https://github.com/bpmn-io/moddle
 }
 ```
 
-The extension will be loaded relative to the configuration file location.
-
-Non-relative paths to moddle extensions are loaded from `node_modules`, e.g.
-
-```
-project
-├── .bpmnlintrc
-├── node_modules
-│   ├── bpmnlint
-│   └── custom-bpmn-moddle
-│       └── resources
-│           └── custom.json
-├── package.json
-└── diagram.bpmn
-```
+The extension will be resolved relative to the configuration file location, using [node module resolution](https://nodejs.org/api/modules.html#loading-from-node_modules-folders).
 
 ## API
 
