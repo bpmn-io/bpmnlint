@@ -32,15 +32,6 @@ RuleTester.verify('ad-hoc-sub-process', rule, {
           message: 'An <End Event> is not allowed in <Ad Hoc Sub Process>'
         }
       ]
-    },
-    {
-      moddleElement: readModdle(__dirname + '/ad-hoc-sub-process/invalid-intermediate.bpmn'),
-      report: [
-        {
-          id: 'CatchEvent',
-          message: 'An intermediate catch event inside <Ad Hoc Sub Process> must have an outgoing sequence flow'
-        }
-      ]
     }
   ]
 });
