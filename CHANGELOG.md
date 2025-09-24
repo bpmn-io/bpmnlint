@@ -6,6 +6,11 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.6.1
+
+* `FIX`: remove ad-hoc flow check
+* `FIX`: correct documentationUrl for `no-gateway-join-fork`
+
 ## 11.6.0
 
 * `FEAT`: add `single-blank-start-event` to `correctness` ruleset ([#187](https://github.com/bpmn-io/bpmnlint/pull/187))
