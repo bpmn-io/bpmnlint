@@ -2,6 +2,7 @@ const allRules = [
   'ad-hoc-sub-process',
   'conditional-flows',
   'end-event-required',
+  'event-based-gateway',
   'event-sub-process-typed-start-event',
   'fake-join',
   'global',

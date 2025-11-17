@@ -5,6 +5,7 @@ This library implements the following lint rules:
 * [Ad-Hoc Sub-Process](./ad-hoc-sub-process.md)
 * [Conditional Flows](./conditional-flows.md)
 * [End Event Required](./end-event-required.md)
+* [Event-based Gateway](./event-based-gateway.md)
 * [Event Sub-Process Typed Start Event](./event-sub-process-typed-start-event.md)
 * [Fake Join](./fake-join.md)
 * [Superfluous Gateway](./superfluous-gateway.md)
