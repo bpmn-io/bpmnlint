@@ -38,6 +38,7 @@ describe('config', function() {
       // given
       const expectedRules = [
         'ad-hoc-sub-process',
+        'event-based-gateway',
         'event-sub-process-typed-start-event',
         'link-event',
         'no-duplicate-sequence-flows',

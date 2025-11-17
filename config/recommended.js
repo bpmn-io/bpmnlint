@@ -3,6 +3,7 @@ module.exports = {
     'ad-hoc-sub-process': 'error',
     'conditional-flows': 'error',
     'end-event-required': 'error',
+    'event-based-gateway': 'error',
     'event-sub-process-typed-start-event': 'error',
     'fake-join': 'warn',
     'global': 'warn',
