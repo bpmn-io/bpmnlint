@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.7.0
+
+* `FEAT`: add a new `event-based-gateway` rule to `recommended` and `correctness` rulesets ([#194](https://github.com/bpmn-io/bpmnlint/pull/194))
+
 ## 11.6.1
 
 * `FIX`: remove ad-hoc flow check
