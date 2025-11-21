@@ -24,14 +24,14 @@ RuleTester.verify('event-based-gateway', rule, {
       moddleElement: readModdle(__dirname + '/event-based-gateway/invalid-no-outgoing.bpmn'),
       report: {
         id: 'Gateway_1',
-        message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flow>'
+        message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flows>'
       }
     },
     {
       moddleElement: readModdle(__dirname + '/event-based-gateway/invalid-one-outgoing.bpmn'),
       report: {
         id: 'Gateway_1',
-        message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flow>'
+        message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flows>'
       }
     },
     {

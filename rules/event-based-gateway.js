@@ -25,7 +25,7 @@ module.exports = function() {
     const outgoing = node.outgoing || [];
 
     if (outgoing.length < 2) {
-      reporter.report(node.id, 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flow>');
+      reporter.report(node.id, 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flows>');
     }
 
     outgoing.forEach((flow) => {
