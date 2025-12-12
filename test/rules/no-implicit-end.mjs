@@ -19,6 +19,9 @@ RuleTester.verify('no-implicit-end', rule, {
       moddleElement: readModdle(__dirname + '/no-implicit-end/valid.bpmn')
     },
     {
+      moddleElement: readModdle(__dirname + '/no-implicit-end/valid-compensation.bpmn')
+    },
+    {
       moddleElement: readModdle(__dirname + '/no-implicit-end/valid-collaboration.bpmn')
     }
   ],
