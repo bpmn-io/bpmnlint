@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.7.2
+
+* `FIX`: allow-list sub process ([#196](https://github.com/bpmn-io/bpmnlint/issues/196, [#197](https://github.com/bpmn-io/bpmnlint/pull/197))
+
 ## 11.7.1
 
 * `CHORE`: adjust `event-based-gateway` error message
