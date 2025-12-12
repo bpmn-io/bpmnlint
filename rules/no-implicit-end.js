@@ -75,7 +75,7 @@ module.exports = function() {
       return false;
     }
 
-    if (is(node, 'bpmn:Task') && isForCompensation(node)) {
+    if (isForCompensation(node)) {
       return false;
     }
 

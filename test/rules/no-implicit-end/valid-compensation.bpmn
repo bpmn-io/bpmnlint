@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.9.0">
+  <process id="PROCESS" isExecutable="false">
+    <task id="TASK" name="choose recipe">
+      <outgoing>FLOW_1</outgoing>
+    </task>
+    <boundaryEvent id="COMPENSATION_BOUNDARY_1" attachedToRef="TASK">
+      <compensateEventDefinition id="CompensateEventDefinition_1y0ckud" />
+    </boundaryEvent>
+    <task id="COMPENSATION_TASK" isForCompensation="true" />
+    <endEvent id="END_EVENT">
+      <incoming>FLOW_1</incoming>
+    </endEvent>
+    <sequenceFlow id="FLOW_1" sourceRef="TASK" targetRef="END_EVENT" />
+    <boundaryEvent id="COMPENSATION_BOUNDARY_1_2" attachedToRef="TASK">
+      <compensateEventDefinition id="CompensateEventDefinition_0o5h2ps" />
+    </boundaryEvent>
+    <subProcess id="COMPENSATION_SUB_PROCESS" isForCompensation="true" />
+    <association id="COMPENSATION_ASSOCIATION_1" associationDirection="One" sourceRef="COMPENSATION_BOUNDARY_1" targetRef="COMPENSATION_TASK" />
+    <association id="COMPENSATION_ASSOCIATION_2" associationDirection="One" sourceRef="COMPENSATION_BOUNDARY_1_2" targetRef="COMPENSATION_SUB_PROCESS" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="PROCESS">
+      <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
+        <omgdc:Bounds x="160" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMPENSATION_TASK_di" bpmnElement="COMPENSATION_TASK">
+        <omgdc:Bounds x="290" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_EVENT_di" bpmnElement="END_EVENT">
+        <omgdc:Bounds x="312" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="COMPENSATION_ASSOCIATION_2_di" bpmnElement="COMPENSATION_ASSOCIATION_2">
+        <omgdi:waypoint x="220" y="182" />
+        <omgdi:waypoint x="220" y="120" />
+        <omgdi:waypoint x="290" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_011a34x_di" bpmnElement="COMPENSATION_SUB_PROCESS">
+        <omgdc:Bounds x="290" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0sa7niy_di" bpmnElement="COMPENSATION_BOUNDARY_1">
+        <omgdc:Bounds x="202" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_036w2z2_di" bpmnElement="COMPENSATION_BOUNDARY_1_2">
+        <omgdc:Bounds x="202" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_1_di" bpmnElement="FLOW_1">
+        <omgdi:waypoint x="260" y="240" />
+        <omgdi:waypoint x="312" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="COMPENSATION_ASSOCIATION_1_di" bpmnElement="COMPENSATION_ASSOCIATION_1">
+        <omgdi:waypoint x="220" y="298" />
+        <omgdi:waypoint x="220" y="360" />
+        <omgdi:waypoint x="290" y="360" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1206eam">
+    <bpmndi:BPMNPlane id="BPMNPlane_1pf2p6n" bpmnElement="COMPENSATION_SUB_PROCESS" />
+  </bpmndi:BPMNDiagram>
+</definitions>
