@@ -1,21 +1,21 @@
 import {
   expect
-} from '../../helper.mjs';
+} from '../../helper.js';
 
-import NodeResolver from '../../../lib/resolver/node-resolver.js';
+import { NodeResolver } from 'bpmnlint/lib/resolver/node-resolver.js';
 
-import compileConfig from '../../../lib/support/compile-config.js';
+import { compileConfig } from 'bpmnlint/lib/support/compile-config.js';
 
 import os from 'node:os';
 
-import { stubCJS } from '../../helper.mjs';
+import { stubCJS } from '../../helper.js';
 
 const {
   __dirname
 } = stubCJS(import.meta.url);
 
 
-describe('support/compile-config', function() {
+describe.only('support/compile-config', function() {
 
   it('should import rules', async function() {
 
@@ -32,16 +32,16 @@ describe('support/compile-config', function() {
 
     // then
     // imports enabled rule
-    expect(code).to.contain('import rule_0 from \'bpmnlint/rules/conditional-flows\'');
+    expect(code).to.contain('import rule_0 from \'bpmnlint/rules/conditional-flows.js\'');
     expect(code).to.contain('cache[\'bpmnlint/conditional-flows\'] = rule_0');
 
-    expect(code).to.contain('import rule_2 from \'bpmnlint/rules/end-event-required\'');
+    expect(code).to.contain('import rule_2 from \'bpmnlint/rules/end-event-required.js\'');
     expect(code).to.contain('cache[\'bpmnlint/end-event-required\'] = rule_2');
 
-    expect(code).to.contain('import rule_3 from \'bpmnlint/rules/no-bpmndi\'');
+    expect(code).to.contain('import rule_3 from \'bpmnlint/rules/no-bpmndi.js\'');
     expect(code).to.contain('cache[\'bpmnlint/no-bpmndi\'] = rule_3');
 
-    expect(code).to.contain('import rule_4 from \'bpmnlint/rules/no-implicit-split\'');
+    expect(code).to.contain('import rule_4 from \'bpmnlint/rules/no-implicit-split.js\'');
     expect(code).to.contain('cache[\'bpmnlint/no-implicit-split\'] = rule_4');
 
     // does not import disabled rule

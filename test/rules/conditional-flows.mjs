@@ -1,8 +1,8 @@
-import RuleTester from '../../lib/testers/rule-tester.js';
+import { verify } from '../../lib/testers/rule-tester.js';
 
 import rule from '../../rules/conditional-flows.js';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
@@ -14,7 +14,7 @@ import {
 } from '../../lib/testers/helper.js';
 
 
-RuleTester.verify('conditional-flows', rule, {
+verify('conditional-flows', rule, {
   valid: [
     {
       name: 'split',

@@ -8,6 +8,7 @@ const files = {
   ],
   test: [
     'test/**/*.js',
+    'test/**/*.cjs',
     'test/**/*.mjs'
   ],
   ignored: [
@@ -32,7 +33,7 @@ export default [
       files: files.lib,
       languageOptions: {
         ...config.languageOptions,
-        sourceType: 'commonjs'
+        sourceType: 'module'
       }
     };
   }),
@@ -42,7 +43,7 @@ export default [
 
     return {
       ...config,
-      ignores: files.lib,
+      ignores: files.lib
     };
   }),
 

@@ -1,6 +1,6 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
 /**
  * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
@@ -17,7 +17,7 @@ const {
  *
  * @return { RuleFactory } ruleFactory
  */
-function checkDiscouragedNodeType(type, ruleName) {
+export function checkDiscouragedNodeType(type, ruleName) {
 
   /**
    * @type { RuleFactory }
@@ -39,8 +39,6 @@ function checkDiscouragedNodeType(type, ruleName) {
 
 }
 
-module.exports.checkDiscouragedNodeType = checkDiscouragedNodeType;
-
 
 /**
  * Find a parent for the given element
@@ -50,7 +48,7 @@ module.exports.checkDiscouragedNodeType = checkDiscouragedNodeType;
  *
  * @return { ModdleElement } element
  */
-function findParent(node, type) {
+export function findParent(node, type) {
   if (!node) {
     return null;
   }
@@ -68,8 +66,6 @@ function findParent(node, type) {
   return findParent(parent, type);
 }
 
-module.exports.findParent = findParent;
-
 
 const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs/rules';
 
@@ -81,7 +77,7 @@ const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs
  *
  * @return {RuleDefinition}
  */
-function annotateRule(ruleName, options) {
+export function annotateRule(ruleName, options) {
 
   const {
     meta: {
@@ -104,5 +100,3 @@ function annotateRule(ruleName, options) {
     ...restOptions
   };
 }
-
-module.exports.annotateRule = annotateRule;

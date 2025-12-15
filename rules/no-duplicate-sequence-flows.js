@@ -1,10 +1,10 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -13,7 +13,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function noDuplicateSequenceFlowsRule() {
 
   const keyed = {};
 
@@ -54,7 +54,7 @@ module.exports = function() {
     check
   });
 
-};
+}
 
 
 // helpers /////////////////

@@ -1,10 +1,10 @@
 import testRule from '../../lib/test-rule.js';
 
-import { expect, createRule, readModdle } from '../helper.mjs';
+import { expect, createRule, readModdle } from '../helper.js';
 
 import { is } from 'bpmnlint-utils';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
