@@ -1,12 +1,12 @@
-const {
+import {
   is,
   isAny
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   findParent,
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -14,7 +14,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function noImplictEndRule() {
 
   function isLinkEvent(node) {
     const eventDefinitions = node.eventDefinitions || [];
@@ -96,4 +96,4 @@ module.exports = function() {
   return annotateRule('no-implicit-end', {
     check
   });
-};
+}

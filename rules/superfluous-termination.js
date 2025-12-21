@@ -1,11 +1,11 @@
-const {
+import {
   is,
   isAny
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -15,7 +15,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function superfluousTerminationRule() {
 
   function check(node, reporter) {
 
@@ -54,7 +54,7 @@ module.exports = function() {
     check
   });
 
-};
+}
 
 function isTerminateEnd(element) {
   return is(element, 'bpmn:EndEvent') && (element.eventDefinitions || []).some(

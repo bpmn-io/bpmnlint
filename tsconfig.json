@@ -8,7 +8,8 @@
     "checkJs": true,
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "module": "nodenext"
   },
   "include": [
     "./lib/**/*.d.ts",

@@ -5,7 +5,7 @@ import { execa } from 'execa';
 
 import { expect } from 'chai';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname

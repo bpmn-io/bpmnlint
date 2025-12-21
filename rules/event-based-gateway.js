@@ -1,10 +1,10 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -14,7 +14,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function eventBasedGatewayRule() {
 
   function check(node, reporter) {
 
@@ -38,7 +38,7 @@ module.exports = function() {
   return annotateRule('event-based-gateway', {
     check
   });
-};
+}
 
 function hasCondition(flow) {
   return !!flow.conditionExpression;

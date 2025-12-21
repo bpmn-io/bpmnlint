@@ -10,7 +10,7 @@ import {
 import {
   createModdle,
   expect
-} from '../../helper.mjs';
+} from '../../helper.js';
 
 
 describe('rule-tester', function() {

@@ -26,8 +26,7 @@ const allRules = [
   'superfluous-termination'
 ];
 
-
-module.exports = {
+export default {
   rules: allRules.reduce(function(rules, ruleName) {
     rules[ruleName] = 'error';
 

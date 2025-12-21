@@ -1,10 +1,10 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -14,7 +14,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function superfluousGatewayRule() {
 
   function check(node, reporter) {
 
@@ -34,4 +34,4 @@ module.exports = function() {
     check
   });
 
-};
+}

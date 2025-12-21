@@ -1,14 +1,14 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   flatten
-} = require('min-dash');
+} from 'min-dash';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 /**
  * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
@@ -21,7 +21,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function noBpmndiRule() {
 
   function check(node, reporter) {
 
@@ -50,7 +50,7 @@ module.exports = function() {
     check
   });
 
-};
+}
 
 
 // helpers /////////////////////////////

@@ -1,4 +1,4 @@
-import RuleTester from '../../lib/testers/rule-tester.js';
+import { verify } from '../../lib/testers/rule-tester.js';
 
 import rule from '../../rules/link-event.js';
 
@@ -6,14 +6,14 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
 } = stubCJS(import.meta.url);
 
 
-RuleTester.verify('link-event', rule, {
+verify('link-event', rule, {
   valid: [
     {
       moddleElement: readModdle(__dirname + '/link-event/valid.bpmn')

@@ -1,18 +1,19 @@
-const {
+import {
   is,
   isAny
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
+
 
 /**
  * A rule that checks that an element is not an implicit start (token spawn).
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function noImplicitStartRule() {
 
   function isLinkEvent(node) {
     const eventDefinitions = node.eventDefinitions || [];
@@ -66,4 +67,4 @@ module.exports = function() {
   return annotateRule('no-implicit-start', {
     check
   });
-};
+}

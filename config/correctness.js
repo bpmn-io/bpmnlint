@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   rules: {
     'ad-hoc-sub-process': 'error',
     'event-based-gateway': 'error',

@@ -6,11 +6,11 @@ import {
   expect,
   readModdle,
   createRule
-} from '../helper.mjs';
+} from '../helper.js';
 
 import { is } from 'bpmnlint-utils';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
