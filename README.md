@@ -1,6 +1,6 @@
 # bpmnlint
 
-[![CI](https://github.com/bpmn-io/bpmnlint/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmnlint/actions?query=workflow%3ACI)
+[![CI](https://github.com/bpmn-io/bpmnlint/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmnlint/actions/workflows/CI.yml)
 
 Validate your BPMN diagrams based on configurable lint rules.
 
