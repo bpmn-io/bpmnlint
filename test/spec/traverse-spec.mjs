@@ -12,6 +12,8 @@ const {
   __dirname
 } = stubCJS(import.meta.url);
 
+import { default as BpmnModdle } from 'bpmn-moddle';
+
 
 describe('traverse', function() {
 
@@ -329,6 +331,96 @@ describe('traverse', function() {
       ]);
     });
 
+    it('should skip if node is simple type', async function() {
+
+      // given
+      const xmlStr = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <bpmn:definitions
+            xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+            xmlns:stm="http://about:blank/schema/bpmn/stm"
+            id="Definitions"
+            targetNamespace="http://bpmn.io/bpmn">
+          <bpmn:process id="Process_1">
+            <bpmn:task id="Task_1">
+              <bpmn:extensionElements>
+                <stm:SimpleTypeParameters>
+                  <stm:p1>hello world</stm:p1>
+                  <stm:p2>true</stm:p2>
+                  <stm:p3>1</stm:p3>
+                  <stm:p4>1.2</stm:p4>
+                </stm:SimpleTypeParameters>
+              </bpmn:extensionElements>
+            </bpmn:task>
+          </bpmn:process>
+        </bpmn:definitions>
+      `;
+
+      const customPackages = {
+        stm: {
+          name: 'SimpleTypeModdle',
+          uri: 'http://about:blank/schema/bpmn/stm',
+          prefix: 'stm',
+          xml: {
+            tagAlias: 'lowerCase'
+          },
+          types: [
+            {
+              name: 'SimpleTypeParameters',
+              superClass: [ 'Element' ],
+              properties: [
+                {
+                  name: 'p1',
+                  type: 'String'
+                },
+                {
+                  name: 'p2',
+                  type: 'Boolean'
+                },
+                {
+                  name: 'p3',
+                  type: 'Integer'
+                },
+                {
+                  name: 'p4',
+                  type: 'Real'
+                }
+              ]
+            }
+          ]
+        }
+      };
+      const moddle = BpmnModdle(customPackages);
+
+      const {
+        rootElement: root
+      } = await moddle.fromXML(xmlStr, 'bpmn:Definitions', { lax: true });
+
+      const {
+        nodes,
+        log
+      } = createLogger([ 'enter', 'leave' ]);
+
+      // when
+      traverse(root, {
+        enter: log.enter,
+        leave: log.leave
+      });
+
+      // then
+      expect(nodes).to.eql([
+        'bpmn:Definitions#Definitions - enter',
+        'bpmn:Process#Process_1 - enter',
+        'bpmn:Task#Task_1 - enter',
+        'bpmn:ExtensionElements - enter',
+        'stm:SimpleTypeParameters - enter',
+        'stm:SimpleTypeParameters - leave',
+        'bpmn:ExtensionElements - leave',
+        'bpmn:Task#Task_1 - leave',
+        'bpmn:Process#Process_1 - leave',
+        'bpmn:Definitions#Definitions - leave'
+      ]);
+    });
   });
 
 });
