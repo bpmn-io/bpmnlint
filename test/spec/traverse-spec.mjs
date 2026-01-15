@@ -390,7 +390,7 @@ describe('traverse', function() {
           ]
         }
       };
-      const moddle = BpmnModdle(customPackages);
+      const moddle = new BpmnModdle(customPackages);
 
       const {
         rootElement: root
