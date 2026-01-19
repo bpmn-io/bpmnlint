@@ -1,6 +1,6 @@
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -10,7 +10,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function conditionalFlowsRule() {
 
   function check(node, reporter) {
 
@@ -36,7 +36,7 @@ module.exports = function() {
     check
   });
 
-};
+}
 
 
 // helpers /////////////////////////////

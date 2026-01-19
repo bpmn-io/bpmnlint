@@ -1,8 +1,8 @@
-import NodeResolver from '../../../lib/resolver/node-resolver.js';
+import { NodeResolver } from 'bpmnlint/lib/resolver/node-resolver.js';
 
 import {
   expect
-} from '../../helper.mjs';
+} from '../../helper.js';
 
 
 describe('resolver/node-resolver', function() {

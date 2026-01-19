@@ -6,7 +6,7 @@ import stripIndent from 'strip-indent';
 
 import { expect } from 'chai';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   require,
@@ -474,30 +474,36 @@ function verify(options) {
 
     // when
     const {
-      stdout
+      stdout: _stdout
     } = await exec('npm', [ 'test', '--', ...cmd ], __dirname + '/cli', {
       env: {
         BPMNLINT_TEST_CWD: cwd || ''
       }
     });
 
-    const actualStderr = parseOutput(stdout, '---- STDERR');
-    const actualStdout = parseOutput(stdout, '---- STDOUT');
+    const stderr = parseOutput(_stdout, '---- STDERR');
+    const stdout = parseOutput(_stdout, '---- STDOUT');
 
-    const actualCode = parseInt(
-      parseOutput(stdout, '---- CODE'), 10
+    const code = parseInt(
+      parseOutput(_stdout, '---- CODE'), 10
     );
 
+    console.log('actual', {
+      stdout,
+      stderr,
+      code
+    });
+
     // then
-    if (expected.stderr || actualStderr) {
-      expectOutput(actualStderr, expected.stderr || '', 'stderr');
+    if (expected.stderr || stderr) {
+      expectOutput(stderr, expected.stderr || '', 'stderr');
     }
 
-    if (expected.stdout || actualStdout) {
-      expectOutput(actualStdout, expected.stdout || '', 'stdout');
+    if (expected.stdout || stdout) {
+      expectOutput(stdout, expected.stdout || '', 'stdout');
     }
 
-    expect(actualCode).to.eql(expected.code || 0);
+    expect(code).to.eql(expected.code || 0);
   });
 
 }

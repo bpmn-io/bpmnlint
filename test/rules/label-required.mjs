@@ -1,4 +1,4 @@
-import RuleTester from '../../lib/testers/rule-tester.js';
+import { verify } from '../../lib/testers/rule-tester.js';
 
 import rule from '../../rules/label-required.js';
 
@@ -6,7 +6,7 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
@@ -16,7 +16,7 @@ const {
 const message = 'Element is missing label/name';
 
 
-RuleTester.verify('label-required', rule, {
+verify('label-required', rule, {
   valid: [
     {
       moddleElement: readModdle(__dirname + '/label-required/valid-boundary-event.bpmn')

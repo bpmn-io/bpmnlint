@@ -1,4 +1,4 @@
-import RuleTester from '../../lib/testers/rule-tester.js';
+import { verify } from '../../lib/testers/rule-tester.js';
 
 import rule from '../../rules/no-implicit-split.js';
 
@@ -6,14 +6,14 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
+import { stubCJS } from '../helper.js';
 
 const {
   __dirname
 } = stubCJS(import.meta.url);
 
 
-RuleTester.verify('no-implicit-split', rule, {
+verify('no-implicit-split', rule, {
   valid: [
     {
       moddleElement: readModdle(__dirname + '/no-implicit-split/valid.bpmn')

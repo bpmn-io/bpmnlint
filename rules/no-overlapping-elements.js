@@ -1,10 +1,10 @@
-const {
+import {
   is
-} = require('bpmnlint-utils');
+} from 'bpmnlint-utils';
 
-const {
+import {
   annotateRule
-} = require('./helper');
+} from './helper.js';
 
 
 /**
@@ -15,7 +15,7 @@ const {
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
-module.exports = function() {
+export default function noOverlappingElementsRule() {
 
   function check(node, reporter) {
     if (!is(node, 'bpmn:Definitions')) {
@@ -54,7 +54,7 @@ module.exports = function() {
   return annotateRule('no-overlapping-elements', {
     check
   });
-};
+}
 
 // helpers /////////////////
 
