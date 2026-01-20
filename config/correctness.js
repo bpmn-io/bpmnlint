@@ -1,6 +1,7 @@
 module.exports = {
   rules: {
     'ad-hoc-sub-process': 'error',
+    'conditional-event': 'error',
     'event-based-gateway': 'error',
     'event-sub-process-typed-start-event': 'error',
     'link-event': 'error',
