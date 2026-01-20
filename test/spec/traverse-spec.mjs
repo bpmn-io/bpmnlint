@@ -331,6 +331,7 @@ describe('traverse', function() {
       ]);
     });
 
+
     it('should skip if node is simple type', async function() {
 
       // given
