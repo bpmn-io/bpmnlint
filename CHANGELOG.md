@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.7.3
+
+* `FIX`: do not attempt to traverse simple properties ([#195](https://github.com/bpmn-io/bpmnlint/issues/195), [#201](https://github.com/bpmn-io/bpmnlint/pull/201))
+
 ## 11.7.2
 
 * `FIX`: allow-list sub process ([#196](https://github.com/bpmn-io/bpmnlint/issues/196), [#197](https://github.com/bpmn-io/bpmnlint/pull/197))
