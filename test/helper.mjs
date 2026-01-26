@@ -1,6 +1,6 @@
 import * as utils from 'bpmnlint-utils';
 
-export * from '../lib/testers/helper.js';
+export * from 'bpmnlint/lib/testers/helper.js';
 
 export { expect } from 'chai';
 

@@ -5,7 +5,7 @@ import {
   getTitle,
   replacer,
   verify
-} from '../../../lib/testers/rule-tester.js';
+} from 'bpmnlint/lib/testers/rule-tester.js';
 
 import {
   createModdle,
