@@ -5,5 +5,8 @@
     "end-event-required": 2,
     "bpmnlint-plugin-exported/foo": "error",
     "bpmnlint-plugin-exported/foo-absolute": "error"
+  },
+  "moddleExtensions": {
+    "spell": "./spell.json"
   }
 }

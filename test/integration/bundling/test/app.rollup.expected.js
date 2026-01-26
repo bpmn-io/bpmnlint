@@ -386,6 +386,41 @@
 
   var rule_4 = /*@__PURE__*/getDefaultExportFromCjs(foo);
 
+  var name = "Spell";
+  var uri = "http://example.magic/schema/spell";
+  var prefix = "spell";
+  var xml = {
+    tagAlias: "lowerCase"
+  };
+  var types = [
+    {
+      name: "MagicNode",
+      "extends": [
+        "bpmn:FlowNode"
+      ],
+      properties: [
+        {
+          name: "magic",
+          isAttr: true,
+          type: "Boolean"
+        }
+      ]
+    }
+  ];
+  var enumerations = [
+  ];
+  var associations = [
+  ];
+  var moddle_extension_0 = {
+    name: name,
+    uri: uri,
+    prefix: prefix,
+    xml: xml,
+    types: types,
+    enumerations: enumerations,
+    associations: associations
+  };
+
   const cache = {};
 
   /**
@@ -427,9 +462,12 @@
     rules: rules
   };
 
+  const moddleExtensions = {};
+
   const bundle = {
     resolver: resolver,
-    config: config
+    config: config,
+    moddleExtensions: moddleExtensions
   };
 
   cache['bpmnlint/label-required'] = rule_0;
@@ -441,6 +479,8 @@
   cache['bpmnlint-plugin-exported/foo'] = rule_4;
 
   cache['bpmnlint-plugin-exported/foo-absolute'] = rule_4;
+
+  moddleExtensions['spell'] = moddle_extension_0;
 
   console.log(bundle);
 

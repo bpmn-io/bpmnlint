@@ -12,6 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   config: () => (/* binding */ config),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   moddleExtensions: () => (/* binding */ moddleExtensions),
 /* harmony export */   resolver: () => (/* binding */ resolver)
 /* harmony export */ });
 /* harmony import */ var bpmnlint_rules_label_required__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bpmnlint/rules/label-required */ "./node_modules/bpmnlint/rules/label-required.js");
@@ -22,6 +23,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_rules_end_event_required__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bpmnlint-plugin-exported/src/foo */ "./node_modules/bpmnlint-plugin-exported/src/foo.js");
 /* harmony import */ var bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _spell_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./spell.json */ "./src/spell.json");
 
 const cache = {};
 
@@ -64,9 +66,12 @@ const config = {
   rules: rules
 };
 
+const moddleExtensions = {};
+
 const bundle = {
   resolver: resolver,
-  config: config
+  config: config,
+  moddleExtensions: moddleExtensions
 };
 
 
@@ -92,6 +97,10 @@ cache['bpmnlint-plugin-exported/foo'] = (bpmnlint_plugin_exported_src_foo__WEBPA
 
 
 cache['bpmnlint-plugin-exported/foo-absolute'] = (bpmnlint_plugin_exported_src_foo__WEBPACK_IMPORTED_MODULE_3___default());
+
+
+
+moddleExtensions['spell'] = _spell_json__WEBPACK_IMPORTED_MODULE_4__;
 
 /***/ },
 
@@ -487,6 +496,17 @@ function isAny(node, types) {
 
 //# sourceMappingURL=index.esm.js.map
 
+
+/***/ },
+
+/***/ "./src/spell.json"
+/*!************************!*\
+  !*** ./src/spell.json ***!
+  \************************/
+(module) {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"name":"Spell","uri":"http://example.magic/schema/spell","prefix":"spell","xml":{"tagAlias":"lowerCase"},"types":[{"name":"MagicNode","extends":["bpmn:FlowNode"],"properties":[{"name":"magic","isAttr":true,"type":"Boolean"}]}],"enumerations":[],"associations":[]}');
 
 /***/ }
 
