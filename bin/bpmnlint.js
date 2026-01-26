@@ -20,7 +20,7 @@ const {
 const tinyGlob = require('tiny-glob');
 
 // @ts-expect-error 'missing <bpmn-moddle> types'
-const BpmnModdle = require('bpmn-moddle');
+const { BpmnModdle } = require('bpmn-moddle');
 
 const Linter = require('../lib/linter');
 const NodeResolver = require('../lib/resolver/node-resolver');
