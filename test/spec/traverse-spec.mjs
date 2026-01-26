@@ -12,8 +12,6 @@ const {
   __dirname
 } = stubCJS(import.meta.url);
 
-import { BpmnModdle } from 'bpmn-moddle';
-
 
 describe('traverse', function() {
 
@@ -391,11 +389,10 @@ describe('traverse', function() {
           ]
         }
       };
-      const moddle = new BpmnModdle(customPackages);
 
       const {
-        rootElement: root
-      } = await moddle.fromXML(xmlStr, 'bpmn:Definitions', { lax: true });
+        root
+      } = await createModdle(xmlStr, customPackages);
 
       const {
         nodes,
