@@ -12,7 +12,7 @@ const {
   __dirname
 } = stubCJS(import.meta.url);
 
-import { default as BpmnModdle } from 'bpmn-moddle';
+import { BpmnModdle } from 'bpmn-moddle';
 
 
 describe('traverse', function() {
