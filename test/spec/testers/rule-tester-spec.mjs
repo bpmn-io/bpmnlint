@@ -13,7 +13,7 @@ import {
 } from '../../helper.mjs';
 
 
-describe('rule-tester', function() {
+describe('testers/rule-tester', function() {
 
   let moddle;
 
