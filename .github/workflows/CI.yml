@@ -5,6 +5,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest ]
         node-version: [ 24 ]
@@ -28,6 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest ]
         node-version: [ 20 ]
@@ -44,10 +46,12 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run all
+
   build_platforms:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest ]
         node-version: [ 24 ]
