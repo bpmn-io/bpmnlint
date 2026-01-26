@@ -1,0 +1,25 @@
+{
+  "name": "Spell",
+  "uri": "http://example.magic/schema/spell",
+  "prefix": "spell",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "MagicNode",
+      "extends": [
+        "bpmn:FlowNode"
+      ],
+      "properties": [
+        {
+          "name": "magic",
+          "isAttr": true,
+          "type": "Boolean"
+        }
+      ]
+    }
+  ],
+  "enumerations": [],
+  "associations": []
+}
