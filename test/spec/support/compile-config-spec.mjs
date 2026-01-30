@@ -56,7 +56,32 @@ describe('support/compile-config', function() {
     expect(code).to.contain('"no-implicit-split": "warn"');
 
     // exports config and resolver
-    expect(code).to.contain('export { resolver, config };');
+    expect(code).to.contain('export { resolver, config, moddleExtensions };');
+
+    expect(code).to.contain('export default bundle;');
+  });
+
+
+  it('should import moddle extensions', async function() {
+
+    // when
+    const code = await compileConfig({
+      moddleExtensions: {
+        abs: 'abs-moddle/resources/abs.json',
+        rel: './relative-moddle.json'
+      }
+    });
+
+    // then
+    // imports enabled rule
+    expect(code).to.contain('import moddle_extension_0 from \'abs-moddle/resources/abs.json\'');
+    expect(code).to.contain('moddleExtensions[\'abs\'] = moddle_extension_0;');
+
+    expect(code).to.contain('import moddle_extension_1 from \'./relative-moddle.json\'');
+    expect(code).to.contain('moddleExtensions[\'rel\'] = moddle_extension_1;');
+
+    // exports config and resolver
+    expect(code).to.contain('export { resolver, config, moddleExtensions };');
 
     expect(code).to.contain('export default bundle;');
   });

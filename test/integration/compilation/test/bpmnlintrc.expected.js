@@ -65,12 +65,15 @@ const config = {
   rules: rules
 };
 
+const moddleExtensions = {};
+
 const bundle = {
   resolver: resolver,
-  config: config
+  config: config,
+  moddleExtensions: moddleExtensions
 };
 
-export { resolver, config };
+export { resolver, config, moddleExtensions };
 
 export default bundle;
 
