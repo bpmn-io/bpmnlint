@@ -3,7 +3,8 @@ const {
 } = require('bpmnlint-utils');
 
 const {
-  annotateRule
+  annotateRule,
+  isInExecutableProcess
 } = require('./helper');
 
 
@@ -15,6 +16,10 @@ const {
 module.exports = function() {
 
   function check(node, reporter) {
+
+    if (!isInExecutableProcess(node)) {
+      return;
+    }
 
     const eventDefinition = getConditionalEventDefinition(node);
 

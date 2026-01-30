@@ -1,6 +1,6 @@
 # Conditional Event (conditional-event)
 
-Ensures that a conditional event has a condition specified.
+Ensures that a conditional event has a condition specified, if it is a part of an executable process.
 
 
 Example of __incorrect__ usage for this rule:

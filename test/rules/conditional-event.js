@@ -17,6 +17,9 @@ RuleTester.verify('conditional-event', rule, {
   valid: [
     {
       moddleElement: readModdle(__dirname + '/conditional-event/valid.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/conditional-event/not-executable.bpmn')
     }
   ],
   invalid: [
