@@ -71,6 +71,22 @@ function findParent(node, type) {
 module.exports.findParent = findParent;
 
 
+/**
+ * Check if the node is inside of an executable process.
+ *
+ * @param { ModdleElement } node
+ *
+ * @return { boolean }
+ */
+function isInExecutableProcess(node) {
+  const process = findParent(node, 'bpmn:Process');
+
+  return process && process.isExecutable;
+}
+
+module.exports.isInExecutableProcess = isInExecutableProcess;
+
+
 const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs/rules';
 
 /**
