@@ -58,7 +58,7 @@
     "eslint-plugin-bpmn-io": "^2.2.0",
     "execa": "^9.6.1",
     "install-local": "^4.1.0",
-    "mocha": "^11.0.1",
+    "mocha": "^11.7.5",
     "npm-run-all2": "^8.0.4",
     "nyc": "^17.1.0",
     "strip-indent": "^4.1.1",
