@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.8.0
+
+* `DEPS`: update to `min-dash@5.0.0`
+* `DEPS`: update to `bpmn-moddle@10.0.0`
+* `DEPS`: update to `pluralize@8.0.0`
+
 ## 11.7.3
 
 * `FIX`: do not attempt to traverse simple properties ([#195](https://github.com/bpmn-io/bpmnlint/issues/195), [#201](https://github.com/bpmn-io/bpmnlint/pull/201))
