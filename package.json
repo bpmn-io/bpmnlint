@@ -51,7 +51,7 @@
     "tiny-glob": "^0.2.9"
   },
   "devDependencies": {
-    "@bpmn-io/bpmnlint-generate-docs-images": "^1.1.0",
+    "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0",
     "@types/mocha": "^10.0.10",
     "chai": "^6.2.2",
     "eslint": "^9.39.2",
