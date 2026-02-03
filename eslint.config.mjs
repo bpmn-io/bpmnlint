@@ -13,9 +13,9 @@ const files = {
   ignored: [
     'coverage',
     '.nyc_output',
-    'test/integration/bundling/dist',
-    'test/integration/bundling/test',
-    'test/integration/compilation/test'
+    'test/fixtures/bundling/dist',
+    'test/fixtures/bundling/test',
+    'test/fixtures/compilation/test'
   ]
 };
 
@@ -53,5 +53,11 @@ export default [
       ...config,
       files: files.test
     };
-  })
+  }),
+  {
+    files: files.test,
+    languageOptions: {
+      ecmaVersion: 2025
+    }
+  }
 ];

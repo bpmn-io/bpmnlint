@@ -5,11 +5,8 @@ import { execa } from 'execa';
 
 import { expect } from 'chai';
 
-import { stubCJS } from '../helper.mjs';
 
-const {
-  __dirname
-} = stubCJS(import.meta.url);
+const fixtureDirectory = new URL('../fixtures/compilation/', import.meta.url);
 
 
 describe('compile', function() {
@@ -18,7 +15,7 @@ describe('compile', function() {
 
     this.timeout(100000);
 
-    return exec('install-local', [], __dirname + '/compilation');
+    return exec('install-local', [], fixtureDirectory);
   });
 
 
@@ -40,15 +37,15 @@ function runTest(options = { it: it }) {
     // when
     const {
       exitCode
-    } = await exec('npm', [ 'run', 'compile' ], path.join(__dirname, 'compilation'), {
+    } = await exec('npm', [ 'run', 'compile' ], fixtureDirectory, {
       stdio: 'inherit'
     });
 
     // then
     expect(exitCode).to.eql(0);
 
-    const actualFile = path.join(__dirname, 'compilation', 'test', 'bpmnlintrc.actual.js');
-    const expectedFile = path.join(__dirname, 'compilation', 'test', 'bpmnlintrc.expected.js');
+    const actualFile = new URL('./test/bpmnlintrc.actual.js', fixtureDirectory);
+    const expectedFile = new URL('./test/bpmnlintrc.expected.js', fixtureDirectory);
 
     const root = path.posix.normalize(
       process.cwd().split(path.sep).join(path.posix.sep)

@@ -1,20 +1,15 @@
 import { execa } from 'execa';
 
-import path from 'node:path';
-
 import stripIndent from 'strip-indent';
 
 import { expect } from 'chai';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  require,
-  __dirname
-} = stubCJS(import.meta.url);
+import pkg from '../../package.json' with { type: 'json' };
 
 
 const EMPTY = '';
+
+const fixtureDirectory = new URL('../fixtures/cli/', import.meta.url);
 
 
 describe('cli', function() {
@@ -23,7 +18,7 @@ describe('cli', function() {
 
     this.timeout(100000);
 
-    return exec('install-local', [], __dirname + '/cli');
+    return exec('install-local', [], fixtureDirectory);
   });
 
 
@@ -181,7 +176,7 @@ describe('cli', function() {
 
     verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/empty',
+      cwd: new URL('./empty/', fixtureDirectory),
       expect: {
         code: 1,
         stderr: /^Error: Could not locate local \.bpmnlintrc file/,
@@ -195,7 +190,7 @@ describe('cli', function() {
       expect: {
         code: 0,
         stderr: EMPTY,
-        stdout: require('../../package.json').version
+        stdout: pkg.version
       }
     });
 
@@ -204,17 +199,20 @@ describe('cli', function() {
 
   describe('should resolve plug-ins from working directory', function() {
 
+    const cwd = new URL('./child/', fixtureDirectory);
+
+
     before(function() {
 
       this.timeout(100000);
 
-      return exec('install-local', [], __dirname + '/cli/child');
+      return exec('install-local', [], cwd);
     });
 
 
     verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/child'
+      cwd
     });
 
   });
@@ -222,17 +220,20 @@ describe('cli', function() {
 
   describe('should resolve plug-in sources from working directory', function() {
 
+    const cwd = new URL('./local-rules/', fixtureDirectory);
+
+
     before(function() {
 
       this.timeout(100000);
 
-      return exec('install-local', [], __dirname + '/cli/local-rules');
+      return exec('install-local', [], cwd);
     });
 
 
     verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/local-rules',
+      cwd,
       expect: {
         code: 1,
         stderr: EMPTY,
@@ -251,11 +252,14 @@ describe('cli', function() {
 
   describe('should handle namespaced packages', function() {
 
+    const cwd = new URL('./ns/', fixtureDirectory);
+
+
     before(function() {
 
       this.timeout(100000);
 
-      return exec('install-local', [], __dirname + '/cli/ns');
+      return exec('install-local', [], cwd);
     });
 
 
@@ -263,13 +267,13 @@ describe('cli', function() {
 
       verify({
         cmd: [ 'bpmnlint', '-c', 'uses-rules.json', 'diagram.bpmn' ],
-        cwd: __dirname + '/cli/ns',
+        cwd,
       });
 
 
       verify({
         cmd: [ 'bpmnlint', '-c', 'uses-rules.json', 'diagram-invalid.bpmn' ],
-        cwd: __dirname + '/cli/ns',
+        cwd,
         expect: {
           code: 1,
           stderr: EMPTY,
@@ -291,13 +295,13 @@ describe('cli', function() {
 
       verify({
         cmd: [ 'bpmnlint', '-c', 'extends.json', 'diagram.bpmn' ],
-        cwd: __dirname + '/cli/ns',
+        cwd,
       });
 
 
       verify({
         cmd: [ 'bpmnlint', '-c', 'extends.json', 'diagram-invalid.bpmn' ],
-        cwd: __dirname + '/cli/ns',
+        cwd,
         expect: {
           code: 1,
           stderr: EMPTY,
@@ -317,9 +321,10 @@ describe('cli', function() {
 
 
   describe('should handle glob star patterns', function() {
+
     verify({
       cmd: [ 'bpmnlint', '*.bpmn' ],
-      cwd: __dirname + '/cli',
+      cwd: fixtureDirectory,
       expect: {
         code: 1,
         stderr: EMPTY,
@@ -362,7 +367,7 @@ describe('cli', function() {
 
     verify({
       cmd: [ 'bpmnlint', 'glob/**/*.bpmn' ],
-      cwd: __dirname + '/cli',
+      cwd: fixtureDirectory,
       expect: {
         code: 1,
         stderr: EMPTY,
@@ -387,17 +392,20 @@ describe('cli', function() {
 
   describe('should handle moddle extensions', function() {
 
+    const cwd = new URL('./moddle-extension/', fixtureDirectory);
+
+
     before(function() {
 
       this.timeout(30000);
 
-      return exec('install-local', [], __dirname + '/cli/moddle-extension');
+      return exec('install-local', [], cwd);
     });
 
 
     verify({
       cmd: [ 'bpmnlint', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/moddle-extension',
+      cwd,
       expect: {
         code: 1,
         stderr: EMPTY,
@@ -414,7 +422,7 @@ describe('cli', function() {
 
     verify({
       cmd: [ 'bpmnlint', '-c', 'bpmnlintrc-missing-extension.json', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/moddle-extension',
+      cwd,
       expect: {
         code: 1,
         stderr: `
@@ -430,7 +438,7 @@ describe('cli', function() {
 
     verify({
       cmd: [ 'bpmnlint', '-c', 'bpmnlintrc-relative-extension.json', 'diagram.bpmn' ],
-      cwd: __dirname + '/cli/moddle-extension',
+      cwd,
       expect: {
         code: 1,
         stderr: EMPTY,
@@ -446,6 +454,7 @@ describe('cli', function() {
   });
 
 });
+
 
 // helper /////////////////////////////
 
@@ -468,16 +477,18 @@ function verify(options) {
 
   const expected = _expect || { code: 0 };
 
-  (only ? it.only : it)(cmd.join(' ') + (cwd ? ` (cwd: ${cwd})` : ''), async function() {
+  const workingDirectory = cwd instanceof URL ? cwd.pathname : cwd;
+
+  (only ? it.only : it)(cmd.join(' ') + (cwd ? ` (cwd: ${workingDirectory})` : ''), async function() {
 
     this.timeout(100000);
 
     // when
     const {
       stdout
-    } = await exec('npm', [ 'test', '--', ...cmd ], __dirname + '/cli', {
+    } = await exec('npm', [ 'test', '--', ...cmd ], fixtureDirectory, {
       env: {
-        BPMNLINT_TEST_CWD: cwd || ''
+        BPMNLINT_TEST_CWD: workingDirectory || ''
       }
     });
 
@@ -511,7 +522,7 @@ function verifyOnly(options) {
 }
 
 function diagramPath(diagramName) {
-  return path.resolve(`${__dirname}/cli/${diagramName}`);
+  return new URL(diagramName, fixtureDirectory).pathname;
 }
 
 function parseOutput(output, separator) {

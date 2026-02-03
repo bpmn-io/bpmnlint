@@ -1,15 +1,11 @@
-import path from 'node:path';
 import fs from 'node:fs';
 
 import { execa } from 'execa';
 
 import { expect } from 'chai';
 
-import { stubCJS } from '../helper.mjs';
 
-const {
-  __dirname
-} = stubCJS(import.meta.url);
+const fixtureDirectory = new URL('../fixtures/bundling/', import.meta.url);
 
 
 describe('bundling', function() {
@@ -18,7 +14,7 @@ describe('bundling', function() {
 
     this.timeout(100000);
 
-    return exec('install-local', [], __dirname + '/bundling');
+    return exec('install-local', [], fixtureDirectory);
   });
 
 
@@ -38,13 +34,13 @@ function test(bundler, options = { it: it }) {
     // when
     const {
       exitCode
-    } = await exec('npm', [ 'run', `bundle:${bundler}` ], path.join(__dirname, 'bundling'));
+    } = await exec('npm', [ 'run', `bundle:${bundler}` ], fixtureDirectory);
 
     // then
     expect(exitCode).to.eql(0);
 
-    const actualFile = path.join(__dirname, `bundling/dist/app.${bundler}.js`);
-    const expectedFile = path.join(__dirname, `bundling/test/app.${bundler}.expected.js`);
+    const actualFile = new URL(`./dist/app.${bundler}.js`, fixtureDirectory);
+    const expectedFile = new URL(`./test/app.${bundler}.expected.js`, fixtureDirectory);
 
     const root = process.cwd().replace(/[/\\. -]+/g, '_');
 
