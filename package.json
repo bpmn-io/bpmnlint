@@ -39,7 +39,7 @@
     "bpmnlint": "./bin/bpmnlint.js"
   },
   "dependencies": {
-    "@bpmn-io/moddle-utils": "^0.2.1",
+    "@bpmn-io/moddle-utils": "^0.3.0",
     "ansi-colors": "^4.1.3",
     "bpmn-moddle": "^10.0.0",
     "bpmnlint-utils": "^1.1.1",
