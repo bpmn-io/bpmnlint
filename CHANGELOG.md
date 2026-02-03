@@ -38,7 +38,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 11.6.1
 
-* `FIX`: remove ad-hoc flow check
+* `FIX`: remove ad-hoc flow check ([#192](https://github.com/bpmn-io/bpmnlint/pull/192))
 * `FIX`: correct documentationUrl for `no-gateway-join-fork`
 
 ## 11.6.0
