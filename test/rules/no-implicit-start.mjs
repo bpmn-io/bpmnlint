@@ -6,25 +6,19 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-implicit-start', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-start/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-start/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-start/valid-collaboration.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-start/valid-collaboration.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-start/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./no-implicit-start/invalid.bpmn', import.meta.url)),
       report: [
         {
           id: 'END_EVENT',

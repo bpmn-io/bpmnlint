@@ -6,22 +6,16 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('ad-hoc-sub-process', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/ad-hoc-sub-process/valid.bpmn')
+      moddleElement: readModdle(new URL('./ad-hoc-sub-process/valid.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/ad-hoc-sub-process/invalid-start-end.bpmn'),
+      moddleElement: readModdle(new URL('./ad-hoc-sub-process/invalid-start-end.bpmn', import.meta.url)),
       report: [
         {
           id: 'StartEvent',

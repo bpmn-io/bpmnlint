@@ -4,19 +4,13 @@ import { expect, createRule, readModdle } from '../helper.mjs';
 
 import { is } from 'bpmnlint-utils';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 describe('test-rule', function() {
 
   let moddleRoot;
 
   beforeEach(async function() {
-    const result = await readModdle(__dirname + '/diagram.bpmn');
+    const result = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
     moddleRoot = result.root;
   });

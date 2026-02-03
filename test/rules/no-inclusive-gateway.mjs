@@ -6,22 +6,16 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-inclusive-gateway', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-inclusive-gateway/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-inclusive-gateway/valid.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-inclusive-gateway/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./no-inclusive-gateway/invalid.bpmn', import.meta.url)),
       report: {
         id: 'Gateway',
         message: 'Element type <bpmn:InclusiveGateway> is discouraged'

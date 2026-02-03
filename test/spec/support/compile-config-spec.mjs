@@ -8,12 +8,6 @@ import compileConfig from '../../../lib/support/compile-config.js';
 
 import os from 'node:os';
 
-import { stubCJS } from '../../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 describe('support/compile-config', function() {
 

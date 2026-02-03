@@ -6,22 +6,16 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-duplicate-sequence-flows', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-duplicate-sequence-flows/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-duplicate-sequence-flows/valid.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-duplicate-sequence-flows/invalid-no-condition.bpmn'),
+      moddleElement: readModdle(new URL('./no-duplicate-sequence-flows/invalid-no-condition.bpmn', import.meta.url)),
       report: [
         {
           id: 'SequenceFlow_2',
@@ -38,7 +32,7 @@ RuleTester.verify('no-duplicate-sequence-flows', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-duplicate-sequence-flows/invalid-condition.bpmn'),
+      moddleElement: readModdle(new URL('./no-duplicate-sequence-flows/invalid-condition.bpmn', import.meta.url)),
       report: [
         {
           id: 'SequenceFlow_1',
@@ -55,7 +49,7 @@ RuleTester.verify('no-duplicate-sequence-flows', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-duplicate-sequence-flows/invalid-multiple.bpmn'),
+      moddleElement: readModdle(new URL('./no-duplicate-sequence-flows/invalid-multiple.bpmn', import.meta.url)),
       report: [
         {
           id: 'SequenceFlow_2',

@@ -6,12 +6,6 @@ import {
   readModdle
 } from '../helper.mjs';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 import { BpmnModdle } from 'bpmn-moddle';
 
 
@@ -92,7 +86,7 @@ describe('traverse', function() {
       // given
       const {
         root
-      } = await readModdle(__dirname + '/diagram.bpmn');
+      } = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
       const {
         nodes,
@@ -128,7 +122,7 @@ describe('traverse', function() {
       // given
       const {
         root
-      } = await readModdle(__dirname + '/process-diagram.bpmn');
+      } = await readModdle(new URL('./process-diagram.bpmn', import.meta.url));
 
       const {
         nodes,

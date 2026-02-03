@@ -6,25 +6,19 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('conditional-event', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/conditional-event/valid.bpmn')
+      moddleElement: readModdle(new URL('./conditional-event/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/conditional-event/not-executable.bpmn')
+      moddleElement: readModdle(new URL('./conditional-event/not-executable.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/conditional-event/missing-condition.bpmn'),
+      moddleElement: readModdle(new URL('./conditional-event/missing-condition.bpmn', import.meta.url)),
       report: [
         {
           id: 'Event_1',

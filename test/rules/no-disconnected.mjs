@@ -6,34 +6,28 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-disconnected', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-disconnected/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/valid-text-annotation.bpmn')
+      moddleElement: readModdle(new URL('./no-disconnected/valid-text-annotation.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/valid-event-subprocess.bpmn')
+      moddleElement: readModdle(new URL('./no-disconnected/valid-event-subprocess.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/valid-adhoc-subprocess.bpmn')
+      moddleElement: readModdle(new URL('./no-disconnected/valid-adhoc-subprocess.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/valid-compensation.bpmn')
+      moddleElement: readModdle(new URL('./no-disconnected/valid-compensation.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-disconnected/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./no-disconnected/invalid.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Element is not connected'

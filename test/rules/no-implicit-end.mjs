@@ -6,28 +6,22 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-implicit-end', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-end/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-end/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-end/valid-compensation.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-end/valid-compensation.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-end/valid-collaboration.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-end/valid-collaboration.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-end/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./no-implicit-end/invalid.bpmn', import.meta.url)),
       report: [
         {
           id: 'INTERMEDIATE_THROW_EVENT',

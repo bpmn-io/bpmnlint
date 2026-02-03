@@ -6,42 +6,36 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('end-event-required', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/valid.bpmn')
+      moddleElement: readModdle(new URL('./end-event-required/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/valid-sub-process.bpmn')
+      moddleElement: readModdle(new URL('./end-event-required/valid-sub-process.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/valid-sub-process-sub-types.bpmn')
+      moddleElement: readModdle(new URL('./end-event-required/valid-sub-process-sub-types.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./end-event-required/invalid.bpmn', import.meta.url)),
       report: {
         id: 'Process',
         message: 'Process is missing end event'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/invalid-sub-process.bpmn'),
+      moddleElement: readModdle(new URL('./end-event-required/invalid-sub-process.bpmn', import.meta.url)),
       report: {
         id: 'SubProcess',
         message: 'Sub process is missing end event'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/end-event-required/invalid-sub-process-sub-types.bpmn'),
+      moddleElement: readModdle(new URL('./end-event-required/invalid-sub-process-sub-types.bpmn', import.meta.url)),
       report: [
         {
           id: 'TRANSACTION',

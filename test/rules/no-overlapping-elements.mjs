@@ -6,43 +6,37 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-overlapping-elements', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-boundary-event.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-boundary-event.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-collaboration.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-collaboration.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-process.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-process.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-subprocess.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-subprocess.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-subprocess-collapsed.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-subprocess-collapsed.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/valid-data-objects.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/valid-data-objects.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/ignore-missing-di.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/ignore-missing-di.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/ignore-missing-bounds.bpmn')
+      moddleElement: readModdle(new URL('./no-overlapping-elements/ignore-missing-bounds.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-boundary-event.bpmn'),
+      moddleElement: readModdle(new URL('./no-overlapping-elements/invalid-boundary-event.bpmn', import.meta.url)),
       report: [
         {
           id: 'TASK',
@@ -55,7 +49,7 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-collaboration.bpmn'),
+      moddleElement: readModdle(new URL('./no-overlapping-elements/invalid-collaboration.bpmn', import.meta.url)),
       report: [
         {
           id: 'Participant_1af2hnr',
@@ -68,7 +62,7 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-process.bpmn'),
+      moddleElement: readModdle(new URL('./no-overlapping-elements/invalid-process.bpmn', import.meta.url)),
       report: [
         {
           id: 'TASK_1',
@@ -81,7 +75,7 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-subprocess.bpmn'),
+      moddleElement: readModdle(new URL('./no-overlapping-elements/invalid-subprocess.bpmn', import.meta.url)),
       report: [
         {
           id: 'TASK',
@@ -90,7 +84,7 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
-      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-subprocess-collapsed.bpmn'),
+      moddleElement: readModdle(new URL('./no-overlapping-elements/invalid-subprocess-collapsed.bpmn', import.meta.url)),
       report: [
         {
           id: 'TASK',

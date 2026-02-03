@@ -6,25 +6,19 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('link-event', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/link-event/valid.bpmn')
+      moddleElement: readModdle(new URL('./link-event/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/link-event/valid-collaboration.bpmn')
+      moddleElement: readModdle(new URL('./link-event/valid-collaboration.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/link-event/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./link-event/invalid.bpmn', import.meta.url)),
       report: [
         {
           'id': 'CATCH_NO_NAME',

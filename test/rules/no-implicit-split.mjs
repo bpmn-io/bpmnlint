@@ -6,39 +6,33 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-implicit-split', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-split/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-split/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-split/valid-default-conditional-flow.bpmn')
+      moddleElement: readModdle(new URL('./no-implicit-split/valid-default-conditional-flow.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-event.bpmn'),
+      moddleElement: readModdle(new URL('./no-implicit-split/invalid-event.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Flow splits implicitly'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-task.bpmn'),
+      moddleElement: readModdle(new URL('./no-implicit-split/invalid-task.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Flow splits implicitly'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-implicit-split/invalid-call-activity.bpmn'),
+      moddleElement: readModdle(new URL('./no-implicit-split/invalid-call-activity.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Flow splits implicitly'

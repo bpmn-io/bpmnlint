@@ -10,12 +10,6 @@ import {
 
 import { is } from 'bpmnlint-utils';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 describe('linter', function() {
 
@@ -42,7 +36,7 @@ describe('linter', function() {
 
 
     beforeEach(async function() {
-      const result = await readModdle(__dirname + '/diagram.bpmn');
+      const result = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
       moddleRoot = result.root;
     });
@@ -170,7 +164,7 @@ describe('linter', function() {
     let moddleRoot;
 
     before(async function() {
-      const result = await readModdle(__dirname + '/diagram.bpmn');
+      const result = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
       moddleRoot = result.root;
     });
@@ -967,7 +961,7 @@ describe('linter', function() {
     };
 
     beforeEach(async function() {
-      const result = await readModdle(__dirname + '/diagram.bpmn');
+      const result = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
       moddleRoot = result.root;
     });
@@ -1008,7 +1002,7 @@ describe('linter', function() {
     let moddleRoot;
 
     beforeEach(async function() {
-      const result = await readModdle(__dirname + '/diagram.bpmn');
+      const result = await readModdle(new URL('./diagram.bpmn', import.meta.url));
 
       moddleRoot = result.root;
     });

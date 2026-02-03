@@ -6,36 +6,30 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('event-based-gateway', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/event-based-gateway/valid.bpmn')
+      moddleElement: readModdle(new URL('./event-based-gateway/valid.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/event-based-gateway/invalid-no-outgoing.bpmn'),
+      moddleElement: readModdle(new URL('./event-based-gateway/invalid-no-outgoing.bpmn', import.meta.url)),
       report: {
         id: 'Gateway_1',
         message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flows>'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/event-based-gateway/invalid-one-outgoing.bpmn'),
+      moddleElement: readModdle(new URL('./event-based-gateway/invalid-one-outgoing.bpmn', import.meta.url)),
       report: {
         id: 'Gateway_1',
         message: 'An <Event-based Gateway> must have at least 2 outgoing <Sequence Flows>'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/event-based-gateway/invalid-conditional-flow.bpmn'),
+      moddleElement: readModdle(new URL('./event-based-gateway/invalid-conditional-flow.bpmn', import.meta.url)),
       report: {
         id: 'Flow_2',
         message: 'A <Sequence Flow> outgoing from an <Event-based Gateway> must not be conditional'

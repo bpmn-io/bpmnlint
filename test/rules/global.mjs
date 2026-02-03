@@ -6,87 +6,81 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('global', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/global/valid-error.bpmn')
+      moddleElement: readModdle(new URL('./global/valid-error.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/global/valid-escalation.bpmn')
+      moddleElement: readModdle(new URL('./global/valid-escalation.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/global/valid-message.bpmn')
+      moddleElement: readModdle(new URL('./global/valid-message.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/global/valid-no-ref.bpmn')
+      moddleElement: readModdle(new URL('./global/valid-no-ref.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-error-missing-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-error-missing-name.bpmn', import.meta.url)),
       report: {
         id: 'Error',
         message: 'Element is missing name'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-escalation-missing-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-escalation-missing-name.bpmn', import.meta.url)),
       report: {
         id: 'Escalation',
         message: 'Element is missing name'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-message-missing-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-message-missing-name.bpmn', import.meta.url)),
       report: {
         id: 'Message',
         message: 'Element is missing name'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-signal-missing-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-signal-missing-name.bpmn', import.meta.url)),
       report: {
         id: 'Signal',
         message: 'Element is missing name'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-error-missing-reference.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-error-missing-reference.bpmn', import.meta.url)),
       report: {
         id: 'Error',
         message: 'Element is unused'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-escalation-missing-reference.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-escalation-missing-reference.bpmn', import.meta.url)),
       report: {
         id: 'Escalation',
         message: 'Element is unused'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-message-missing-reference.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-message-missing-reference.bpmn', import.meta.url)),
       report: {
         id: 'Message',
         message: 'Element is unused'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-signal-missing-reference.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-signal-missing-reference.bpmn', import.meta.url)),
       report: {
         id: 'Signal',
         message: 'Element is unused'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-error-duplicate-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-error-duplicate-name.bpmn', import.meta.url)),
       report: [ {
         id: 'Error_1',
         message: 'Element name is not unique'
@@ -97,7 +91,7 @@ RuleTester.verify('global', rule, {
       } ]
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-escalation-duplicate-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-escalation-duplicate-name.bpmn', import.meta.url)),
       report: [ {
         id: 'Escalation_1',
         message: 'Element name is not unique'
@@ -108,7 +102,7 @@ RuleTester.verify('global', rule, {
       } ]
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-message-duplicate-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-message-duplicate-name.bpmn', import.meta.url)),
       report: [ {
         id: 'Message_1',
         message: 'Element name is not unique'
@@ -119,7 +113,7 @@ RuleTester.verify('global', rule, {
       } ]
     },
     {
-      moddleElement: readModdle(__dirname + '/global/invalid-signal-duplicate-name.bpmn'),
+      moddleElement: readModdle(new URL('./global/invalid-signal-duplicate-name.bpmn', import.meta.url)),
       report: [ {
         id: 'Signal_1',
         message: 'Element name is not unique'

@@ -6,176 +6,170 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('no-bpmndi', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-sub-processes.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-sub-processes.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-data-object.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-data-object.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-error.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-error.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-extension-elements.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-extension-elements.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-signavio.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-signavio.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-complex.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-complex.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-group.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-group.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-nested-boundary.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-nested-boundary.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-lanes.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-lanes.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-multiple-nested-levels.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-multiple-nested-levels.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-empty.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-empty.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-no-lanes.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-no-lanes.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/valid-message-flow.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/valid-message-flow.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/ignore-edge-without-bpmn-element.bpmn')
+      moddleElement: readModdle(new URL('./no-bpmndi/ignore-edge-without-bpmn-element.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-catch-event.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-catch-event.bpmn', import.meta.url)),
       report: {
         id: 'boundaryEvent',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-sub-processes.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-sub-processes.bpmn', import.meta.url)),
       report: {
         id: 'boundaryEvent_1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-multiple-sub-processes.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-multiple-sub-processes.bpmn', import.meta.url)),
       report: {
         id: 'boundaryEvent',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-sequence-flow.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-sequence-flow.bpmn', import.meta.url)),
       report: {
         id: 'sequenceFlow',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-participant.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-participant.bpmn', import.meta.url)),
       report: {
         id: 'Participant_1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-group.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-group.bpmn', import.meta.url)),
       report: {
         id: 'Group_1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-group.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-group.bpmn', import.meta.url)),
       report: {
         id: 'Group_1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-lane.bpmn', import.meta.url)),
       report: {
         id: 'lane2',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-lane.bpmn', import.meta.url)),
       report: {
         id: 'lane2',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-collapsed-pool.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-collapsed-pool.bpmn', import.meta.url)),
       report: {
         id: 'participant1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-nested-boundary.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-nested-boundary.bpmn', import.meta.url)),
       report: {
         id: 'boundaryEvent',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-multiple-nested-levels.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-multiple-nested-levels.bpmn', import.meta.url)),
       report: {
         id: 'task1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-nested-lanes.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-nested-lanes.bpmn', import.meta.url)),
       report: {
         id: 'task1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-missing-nested-lane.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-missing-nested-lane.bpmn', import.meta.url)),
       report: {
         id: 'lane_1',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-missing-nested-lane-deep.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-missing-nested-lane-deep.bpmn', import.meta.url)),
       report: {
         id: 'lane7',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-message-flow.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-message-flow.bpmn', import.meta.url)),
       report: {
         id: 'danglingMessageFlow',
         message: 'Element is missing bpmndi'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-no-bpmn-diagram.bpmn'),
+      moddleElement: readModdle(new URL('./no-bpmndi/invalid-no-bpmn-diagram.bpmn', import.meta.url)),
       report: {
         id: 'StartEvent_1',
         message: 'Element is missing bpmndi'

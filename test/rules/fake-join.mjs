@@ -6,32 +6,26 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('fake-join', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/fake-join/valid.bpmn')
+      moddleElement: readModdle(new URL('./fake-join/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/fake-join/valid-gateway.bpmn')
+      moddleElement: readModdle(new URL('./fake-join/valid-gateway.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/fake-join/invalid-task.bpmn'),
+      moddleElement: readModdle(new URL('./fake-join/invalid-task.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Incoming flows do not join'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/fake-join/invalid-callActivity.bpmn'),
+      moddleElement: readModdle(new URL('./fake-join/invalid-callActivity.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message: 'Incoming flows do not join'

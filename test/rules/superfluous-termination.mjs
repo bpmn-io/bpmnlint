@@ -6,31 +6,25 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('superfluous-termination', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/valid.bpmn')
+      moddleElement: readModdle(new URL('./superfluous-termination/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/valid-implicit-end.bpmn')
+      moddleElement: readModdle(new URL('./superfluous-termination/valid-implicit-end.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/valid-boundary-non-interrupting.bpmn')
+      moddleElement: readModdle(new URL('./superfluous-termination/valid-boundary-non-interrupting.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/valid-event-sub-process-non-interrupting.bpmn')
+      moddleElement: readModdle(new URL('./superfluous-termination/valid-event-sub-process-non-interrupting.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./superfluous-termination/invalid.bpmn', import.meta.url)),
       report: {
         id: 'TERMINATE_EVENT',
         message: 'Termination is superfluous.'
@@ -38,14 +32,14 @@ RuleTester.verify('superfluous-termination', rule, {
     },
     {
       it: it.skip,
-      moddleElement: readModdle(__dirname + '/superfluous-termination/invalid-boundary-interrupting.bpmn'),
+      moddleElement: readModdle(new URL('./superfluous-termination/invalid-boundary-interrupting.bpmn', import.meta.url)),
       report: {
         id: 'TERMINATE_EVENT',
         message: 'Termination is superfluous.'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/invalid-event-sub-process-interrupting.bpmn'),
+      moddleElement: readModdle(new URL('./superfluous-termination/invalid-event-sub-process-interrupting.bpmn', import.meta.url)),
       report: {
         id: 'TERMINATE_EVENT',
         message: 'Termination is superfluous.'
@@ -53,14 +47,14 @@ RuleTester.verify('superfluous-termination', rule, {
     },
     {
       it: it.skip,
-      moddleElement: readModdle(__dirname + '/superfluous-termination/invalid-exclusive-paths.bpmn'),
+      moddleElement: readModdle(new URL('./superfluous-termination/invalid-exclusive-paths.bpmn', import.meta.url)),
       report: {
         id: 'TERMINATE_EVENT',
         message: 'Termination is superfluous.'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/superfluous-termination/invalid-sub-process.bpmn'),
+      moddleElement: readModdle(new URL('./superfluous-termination/invalid-sub-process.bpmn', import.meta.url)),
       report: {
         id: 'TERMINATE_EVENT',
         message: 'Termination is superfluous.'

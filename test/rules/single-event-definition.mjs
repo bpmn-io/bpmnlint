@@ -6,25 +6,19 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('single-event-definition', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/single-event-definition/valid.bpmn')
+      moddleElement: readModdle(new URL('./single-event-definition/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-event-definition/valid-blank.bpmn')
+      moddleElement: readModdle(new URL('./single-event-definition/valid-blank.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/single-event-definition/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./single-event-definition/invalid.bpmn', import.meta.url)),
       report: {
         id: 'Event',
         message: 'Event has multiple event definitions',

@@ -6,47 +6,41 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 RuleTester.verify('single-blank-start-event', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-empty.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-empty.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-end-event.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-end-event.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-sub-process.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-sub-process.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-typed.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-typed.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-typed-sub-process.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-typed-sub-process.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/valid-scopes.bpmn')
+      moddleElement: readModdle(new URL('./single-blank-start-event/valid-scopes.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/invalid.bpmn'),
+      moddleElement: readModdle(new URL('./single-blank-start-event/invalid.bpmn', import.meta.url)),
       report: {
         id: 'Process',
         message: 'Process has multiple blank start events'
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/single-blank-start-event/invalid-sub-process.bpmn'),
+      moddleElement: readModdle(new URL('./single-blank-start-event/invalid-sub-process.bpmn', import.meta.url)),
       report: {
         id: 'SubProcess',
         message: 'Sub process has multiple blank start events'

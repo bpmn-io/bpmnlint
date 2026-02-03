@@ -6,12 +6,6 @@ import {
   readModdle
 } from '../../lib/testers/helper.js';
 
-import { stubCJS } from '../helper.mjs';
-
-const {
-  __dirname
-} = stubCJS(import.meta.url);
-
 
 const message = 'Element is missing label/name';
 
@@ -19,27 +13,27 @@ const message = 'Element is missing label/name';
 RuleTester.verify('label-required', rule, {
   valid: [
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-boundary-event.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-boundary-event.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-conditional-flow.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-conditional-flow.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-data-objects.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-data-objects.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-gateways.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-gateways.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-start-event.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-start-event.bpmn', import.meta.url))
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/valid-participant-lanes.bpmn')
+      moddleElement: readModdle(new URL('./label-required/valid-participant-lanes.bpmn', import.meta.url))
     }
   ],
   invalid: [
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-conditional-flow.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-conditional-flow.bpmn', import.meta.url)),
       report: {
         id: 'ConditionalFlow',
         message,
@@ -47,7 +41,7 @@ RuleTester.verify('label-required', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-event.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-event.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
@@ -55,7 +49,7 @@ RuleTester.verify('label-required', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-gateway-split.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-gateway-split.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
@@ -63,7 +57,7 @@ RuleTester.verify('label-required', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-participant.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-participant.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
@@ -71,7 +65,7 @@ RuleTester.verify('label-required', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-lane.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-lane.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
@@ -79,14 +73,14 @@ RuleTester.verify('label-required', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/label-required/invalid-task.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-task.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
         path: [ 'name' ]
       }
     },{
-      moddleElement: readModdle(__dirname + '/label-required/invalid-boundary-event.bpmn'),
+      moddleElement: readModdle(new URL('./label-required/invalid-boundary-event.bpmn', import.meta.url)),
       report: {
         id: 'Element',
         message,
