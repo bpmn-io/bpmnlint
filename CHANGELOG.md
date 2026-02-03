@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.9.0
+
+* `DEPS`: update to `@bpmn-io/moddle-utils@0.3.0`
+
 ## 11.8.0
 
 * `DEPS`: update to `min-dash@5.0.0`
