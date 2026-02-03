@@ -11,7 +11,6 @@ const {
  * A rule that ensures that an Ad Hoc Sub Process is valid according to the BPMN spec:
  *
  * - No start or end events
- * - Every intermediate event has an outgoing sequence flow
  *
  * @type { import('../lib/types.js').RuleFactory }
  */
