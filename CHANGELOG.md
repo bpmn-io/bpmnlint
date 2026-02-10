@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.11.0
+
+* `FEAT`: allow passing custom moddle extensions to rule tester helpers ([#205](https://github.com/bpmn-io/bpmnlint/pull/205))
+
 ## 11.10.0
 
 * `FEAT`: add `conditional-event` rule to `correctness` ruleset ([#203](https://github.com/bpmn-io/bpmnlint/pull/203))
