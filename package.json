@@ -31,7 +31,7 @@
     "lint": "eslint .",
     "lint:types": "tsc",
     "dev": "npm test -- --watch",
-    "test": "mocha --exclude 'test/integration/*/**' 'test/**/*.*js'",
+    "test": "mocha --exclude \"test/integration/*/**\" test/**/*.*js",
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
     "generate-docs-images": "npx @bpmn-io/bpmnlint-generate-docs-images ."
   },
