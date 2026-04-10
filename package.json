@@ -54,7 +54,7 @@
     "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0",
     "@types/mocha": "^10.0.10",
     "chai": "^6.2.2",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.4",
     "eslint-plugin-bpmn-io": "^2.2.0",
     "execa": "^9.6.1",
     "install-local": "^4.1.0",
