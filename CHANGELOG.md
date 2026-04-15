@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.12.1
+
+* `FIX`: change `no-inclusive-gateway` to warn ([#212](https://github.com/bpmn-io/bpmnlint/pull/212))
+
 ## 11.12.0
 
 * `FEAT`: compile config with moddle extensions ([#206](https://github.com/bpmn-io/bpmnlint/pull/206))
