@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: add `standard-size` rule to validate elements against configurable standard sizes ([#2485](https://github.com/bpmn-io/bpmn-js/issues/2485))
+
 ## 11.12.1
 
 * `FIX`: change `no-inclusive-gateway` to warn ([#212](https://github.com/bpmn-io/bpmnlint/pull/212))

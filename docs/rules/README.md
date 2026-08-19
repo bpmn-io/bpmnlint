@@ -21,5 +21,6 @@ This library implements the following lint rules:
 * [No Overlapping Elements](./no-overlapping-elements.md)
 * [Single Blank Start Event](./single-blank-start-event.md)
 * [Single Event Definition](./single-event-definition.md)
+* [Standard Size](./standard-size.md)
 * [Start Event Required](./start-event-required.md)
 * [Sub-Process Blank Start Event](./sub-process-blank-start-event.md)
