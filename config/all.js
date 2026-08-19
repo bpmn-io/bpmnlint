@@ -21,6 +21,7 @@ const allRules = [
   'no-overlapping-elements',
   'single-blank-start-event',
   'single-event-definition',
+  'standard-size',
   'start-event-required',
   'sub-process-blank-start-event',
   'superfluous-gateway',
