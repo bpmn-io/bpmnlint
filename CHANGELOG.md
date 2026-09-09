@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: add `superfluous-label` rule to discourage labels on unconditional sequence flows ([#123](https://github.com/bpmn-io/bpmnlint/issues/123), [#129](https://github.com/bpmn-io/bpmnlint/pull/129))
+
 ## 11.13.0
 
 * `FEAT`: add `standard-size` rule to validate elements against configurable standard sizes ([#2485](https://github.com/bpmn-io/bpmn-js/issues/2485))

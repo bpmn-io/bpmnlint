@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js" exporterVersion="17.0.0">
+  <bpmn:process id="Process" isExecutable="true">
+
+    <!-- labeled unconditional flow from start event -->
+    <bpmn:startEvent id="StartEvent">
+      <bpmn:outgoing>Flow_Labeled_StartEvent</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_Labeled_StartEvent" name="Start" sourceRef="StartEvent" targetRef="Task" />
+
+    <!-- labeled unconditional flow from task -->
+    <bpmn:task id="Task">
+      <bpmn:incoming>Flow_Labeled_StartEvent</bpmn:incoming>
+      <bpmn:outgoing>Flow_Labeled_Task</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_Labeled_Task" name="Done" sourceRef="Task" targetRef="ParallelGateway" />
+
+    <!-- labeled unconditional flow from non-XOR/OR gateway -->
+    <bpmn:parallelGateway id="ParallelGateway">
+      <bpmn:incoming>Flow_Labeled_Task</bpmn:incoming>
+      <bpmn:outgoing>Flow_Labeled_Gateway</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_Labeled_Gateway" name="Next" sourceRef="ParallelGateway" targetRef="PassthroughGateway" />
+
+    <!-- labeled unconditional flow from non-forking XOR gateway -->
+    <bpmn:exclusiveGateway id="PassthroughGateway">
+      <bpmn:incoming>Flow_Labeled_Gateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_Labeled_Passthrough</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_Labeled_Passthrough" name="Then" sourceRef="PassthroughGateway" targetRef="EndEvent" />
+
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>Flow_Labeled_Passthrough</bpmn:incoming>
+    </bpmn:endEvent>
+
+  </bpmn:process>
+</bpmn:definitions>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js" exporterVersion="17.0.0">
+  <bpmn:process id="Process" isExecutable="true">
+
+    <!-- unlabeled flow -->
+    <bpmn:startEvent id="StartEvent">
+      <bpmn:outgoing>Flow_Unlabeled</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_Unlabeled" sourceRef="StartEvent" targetRef="Task" />
+    <bpmn:task id="Task">
+      <bpmn:incoming>Flow_Unlabeled</bpmn:incoming>
+      <bpmn:outgoing>Flow_Conditional_Task</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- labeled conditional flow from task -->
+    <bpmn:sequenceFlow id="Flow_Conditional_Task" name="Yes" sourceRef="Task" targetRef="ExclusiveGateway">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <!-- labeled flows forking out of XOR gateway, incl. labeled default flow -->
+    <bpmn:exclusiveGateway id="ExclusiveGateway" default="Flow_Default">
+      <bpmn:incoming>Flow_Conditional_Task</bpmn:incoming>
+      <bpmn:outgoing>Flow_XOR</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Default</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_XOR" name="Path A" sourceRef="ExclusiveGateway" targetRef="InclusiveGateway" />
+    <bpmn:sequenceFlow id="Flow_Default" name="Otherwise" sourceRef="ExclusiveGateway" targetRef="EndEvent" />
+
+    <!-- labeled flows forking out of OR gateway, incl. labeled conditional flow -->
+    <bpmn:inclusiveGateway id="InclusiveGateway">
+      <bpmn:incoming>Flow_XOR</bpmn:incoming>
+      <bpmn:outgoing>Flow_OR</bpmn:outgoing>
+      <bpmn:outgoing>Flow_OR_Conditional</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_OR" name="Path B" sourceRef="InclusiveGateway" targetRef="EndEvent" />
+    <bpmn:sequenceFlow id="Flow_OR_Conditional" name="Path C" sourceRef="InclusiveGateway" targetRef="EndEvent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${flag}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>Flow_Default</bpmn:incoming>
+      <bpmn:incoming>Flow_OR</bpmn:incoming>
+      <bpmn:incoming>Flow_OR_Conditional</bpmn:incoming>
+    </bpmn:endEvent>
+
+  </bpmn:process>
+</bpmn:definitions>

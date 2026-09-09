@@ -53,6 +53,7 @@ const rules = {
   "start-event-required": "error",
   "sub-process-blank-start-event": "error",
   "superfluous-gateway": "warn",
+  "superfluous-label": "warn",
   "superfluous-termination": "warn",
   "test/no-label-foo": "error",
   "exported/foo": "error",
@@ -173,26 +174,30 @@ import rule_23 from 'bpmnlint/rules/superfluous-gateway';
 
 cache['bpmnlint/superfluous-gateway'] = rule_23;
 
-import rule_24 from 'bpmnlint/rules/superfluous-termination';
+import rule_24 from 'bpmnlint/rules/superfluous-label';
 
-cache['bpmnlint/superfluous-termination'] = rule_24;
+cache['bpmnlint/superfluous-label'] = rule_24;
 
-import rule_25 from 'bpmnlint-plugin-test/rules/no-label-foo';
+import rule_25 from 'bpmnlint/rules/superfluous-termination';
 
-cache['bpmnlint-plugin-test/no-label-foo'] = rule_25;
+cache['bpmnlint/superfluous-termination'] = rule_25;
 
-import rule_26 from 'bpmnlint-plugin-exported/src/foo';
+import rule_26 from 'bpmnlint-plugin-test/rules/no-label-foo';
 
-cache['bpmnlint-plugin-exported/foo'] = rule_26;
+cache['bpmnlint-plugin-test/no-label-foo'] = rule_26;
 
-import rule_27 from 'bpmnlint-plugin-exported/src/bar';
+import rule_27 from 'bpmnlint-plugin-exported/src/foo';
 
-cache['bpmnlint-plugin-exported/bar'] = rule_27;
+cache['bpmnlint-plugin-exported/foo'] = rule_27;
 
-import rule_28 from 'bpmnlint-plugin-exported/rules/baz';
+import rule_28 from 'bpmnlint-plugin-exported/src/bar';
 
-cache['bpmnlint-plugin-exported/baz'] = rule_28;
+cache['bpmnlint-plugin-exported/bar'] = rule_28;
 
-import rule_29 from 'bpmnlint-plugin-exported/src/foo';
+import rule_29 from 'bpmnlint-plugin-exported/rules/baz';
 
-cache['bpmnlint-plugin-exported/foo-absolute'] = rule_29;
+cache['bpmnlint-plugin-exported/baz'] = rule_29;
+
+import rule_30 from 'bpmnlint-plugin-exported/src/foo';
+
+cache['bpmnlint-plugin-exported/foo-absolute'] = rule_30;
