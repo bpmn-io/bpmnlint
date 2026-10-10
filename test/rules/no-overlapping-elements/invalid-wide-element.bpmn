@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:task id="TASK_FAR" name="TASK_FAR" />
+    <bpmn:task id="TASK_1" name="TASK_1" />
+    <bpmn:task id="TASK_2" name="TASK_2" />
+    <bpmn:task id="TASK_3" name="TASK_3" />
+    <bpmn:task id="WIDE_TASK" name="WIDE_TASK" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="TASK_FAR_di" bpmnElement="TASK_FAR">
+        <dc:Bounds x="850" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_1_di" bpmnElement="TASK_1">
+        <dc:Bounds x="150" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_2_di" bpmnElement="TASK_2">
+        <dc:Bounds x="350" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_3_di" bpmnElement="TASK_3">
+        <dc:Bounds x="550" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WIDE_TASK_di" bpmnElement="WIDE_TASK">
+        <dc:Bounds x="100" y="80" width="900" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
