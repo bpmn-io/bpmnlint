@@ -101,6 +101,70 @@ RuleTester.verify('no-overlapping-elements', rule, {
           message: 'Element overlaps with other element'
         }
       ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-wide-element.bpmn'),
+      report: [
+        {
+          id: 'TASK_FAR',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'WIDE_TASK',
+          message: 'Element overlaps with other element'
+        }
+      ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-touching-elements.bpmn'),
+      report: [
+        {
+          id: 'TASK_LEFT',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_RIGHT',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_TOP',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_BOTTOM',
+          message: 'Element overlaps with other element'
+        }
+      ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-multiple-overlaps.bpmn'),
+      report: [
+        {
+          id: 'TASK_RIGHT',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'WIDE_TASK',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_LEFT',
+          message: 'Element overlaps with other element'
+        }
+      ]
+    },
+    {
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-nan-bounds.bpmn'),
+      report: [
+        {
+          id: 'TASK_LEFT',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_RIGHT',
+          message: 'Element overlaps with other element'
+        }
+      ]
     }
   ]
 });
