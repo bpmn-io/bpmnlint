@@ -6,6 +6,18 @@ const {
   annotateRule
 } = require('./helper');
 
+/**
+ * @typedef { import('../lib/types.js').ModdleElement } ModdleElement
+ *
+ * @typedef { {
+ *   element: ModdleElement,
+ *   left: number,
+ *   right: number,
+ *   top: number,
+ *   bottom: number
+ * } } Shape
+ */
+
 
 /**
  * Rule that checks if two elements overlap except:
@@ -99,37 +111,39 @@ function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects
 }
 
 /**
+ * Check elements for overlap.
+ *
+ * Sweeps the shapes of the elements from left to right, so that every shape
+ * is only compared with the shapes that start before it ends.
+ *
  * @param {Array} elements
  * @param {Set} elementsToReport
  * @param {Map} diObjects
  */
 function checkElementsArray(elements, elementsToReport, diObjects) {
+  const shapes = getShapes(elements, diObjects).sort((a, b) => a.left - b.left);
+
   const overlapping = new Set();
 
-  for (let i = 0; i < elements.length - 1; i++) {
-    const element = elements[i];
+  for (let i = 0; i < shapes.length; i++) {
+    const shape = shapes[i];
 
-    for (let j = i + 1; j < elements.length; j++) {
-      const element2 = elements[j];
+    // shapes starting right of this one cannot overlap it
+    for (let j = i + 1; j < shapes.length && shapes[j].left <= shape.right; j++) {
+      const otherShape = shapes[j];
+
+      if (!isCollision(shape, otherShape)) {
+        continue;
+      }
 
       // ignore if Boundary events overlap their host
       // but still check if they overlap other elements
-      if (element.attachedToRef === element2 || element2.attachedToRef === element) {
+      if (shape.element.attachedToRef === otherShape.element || otherShape.element.attachedToRef === shape.element) {
         continue;
       }
 
-      const bounds1 = diObjects.get(element)?.bounds;
-      const bounds2 = diObjects.get(element2)?.bounds;
-
-      // ignore if an element doesn't have bounds
-      if (!bounds1 || !bounds2) {
-        continue;
-      }
-
-      if (isCollision(bounds1, bounds2)) {
-        overlapping.add(element);
-        overlapping.add(element2);
-      }
+      overlapping.add(shape.element);
+      overlapping.add(otherShape.element);
     }
   }
 
@@ -139,6 +153,46 @@ function checkElementsArray(elements, elementsToReport, diObjects) {
       elementsToReport.add(element);
     }
   });
+}
+
+/**
+ * Get the shapes of all elements with valid bounds, the only elements
+ * that can overlap.
+ *
+ * @param {Array} elements
+ * @param {Map} diObjects
+ *
+ * @return {Shape[]}
+ */
+function getShapes(elements, diObjects) {
+  const shapes = [];
+
+  elements.forEach(element => {
+    const bounds = diObjects.get(element)?.bounds;
+
+    if (!isValidShapeElement(bounds)) {
+      return;
+    }
+
+    const left = bounds.x;
+    const right = bounds.x + bounds.width;
+
+    // shapes with a NaN left or right edge never collide,
+    // and a NaN left edge would break the sweep
+    if (Number.isNaN(left) || Number.isNaN(right)) {
+      return;
+    }
+
+    shapes.push({
+      element,
+      left,
+      right,
+      top: bounds.y,
+      bottom: bounds.y + bounds.height
+    });
+  });
+
+  return shapes;
 }
 
 /**
@@ -158,14 +212,15 @@ function isOutsideParentBoundary(childBounds, parentBounds) {
 
 /**
  * Check if two rectangle shapes collides
+ *
+ * @param {Shape} firstShape
+ * @param {Shape} secondShape
+ *
+ * @return {boolean}
  */
-function isCollision(firstBounds, secondBounds) {
-  if (!isValidShapeElement(firstBounds) || !isValidShapeElement(secondBounds)) {
-    return false;
-  }
-
-  const collisionX = firstBounds.x + firstBounds.width >= secondBounds.x && secondBounds.x + secondBounds.width >= firstBounds.x;
-  const collisionY = firstBounds.y + firstBounds.height >= secondBounds.y && secondBounds.y + secondBounds.height >= firstBounds.y;
+function isCollision(firstShape, secondShape) {
+  const collisionX = firstShape.right >= secondShape.left && secondShape.right >= firstShape.left;
+  const collisionY = firstShape.bottom >= secondShape.top && secondShape.bottom >= firstShape.top;
 
   // collision on both axis
   return collisionX && collisionY;
