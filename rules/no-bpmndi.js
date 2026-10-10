@@ -35,12 +35,12 @@ module.exports = function() {
     // (2) Filter BPMN elements without visual representation
     const visualBpmnElements = bpmnElements.filter(hasVisualRepresentation);
 
-    // (3) Construct array of BPMNDI references
-    const diBpmnReferences = getAllDiBpmnReferences(node);
+    // (3) Construct set of BPMNDI references
+    const referencedBpmnElementIds = getReferencedBpmnElementIds(node);
 
     // (4) Report elements without BPMNDI
     visualBpmnElements.forEach((element) => {
-      if (diBpmnReferences.indexOf(element.id) === -1) {
+      if (!referencedBpmnElementIds.has(element.id)) {
         reporter.report(element.id, 'Element is missing bpmndi');
       }
     });
@@ -105,16 +105,17 @@ function getAllBpmnElements(rootElements) {
 }
 
 /**
- * Get all BPMN elements within a bpmn:Definitions node
+ * Get the ids of all BPMN elements referenced by BPMNDI elements
+ * within a bpmn:Definitions node
  *
  * @param {ModdleElement} definitionsNode - A moddleElement representing the
  *   bpmn:Definitions element
  *
- * @return {string[]} ids of all BPMNDI element part of
- *   this bpmn:Definitions node
+ * @return {Set<string>} ids of all BPMN elements referenced by BPMNDI
+ *   elements part of this bpmn:Definitions node
  */
-function getAllDiBpmnReferences(definitionsNode) {
-  return flatten(
+function getReferencedBpmnElementIds(definitionsNode) {
+  return new Set(flatten(
     definitionsNode.get('diagrams').map((diagram) => {
 
       const diElements = diagram.plane.planeElement || [];
@@ -124,7 +125,7 @@ function getAllDiBpmnReferences(definitionsNode) {
         return element.bpmnElement?.id;
       });
     })
-  );
+  ));
 }
 
 /**

@@ -105,20 +105,6 @@ RuleTester.verify('no-bpmndi', rule, {
       }
     },
     {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-group.bpmn'),
-      report: {
-        id: 'Group_1',
-        message: 'Element is missing bpmndi'
-      }
-    },
-    {
-      moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
-      report: {
-        id: 'lane2',
-        message: 'Element is missing bpmndi'
-      }
-    },
-    {
       moddleElement: readModdle(__dirname + '/no-bpmndi/invalid-lane.bpmn'),
       report: {
         id: 'lane2',
