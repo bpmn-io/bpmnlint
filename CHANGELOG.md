@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.14.1
+
+* `FIX`: improve performance of `no-bpmndi` rule ([#217](https://github.com/bpmn-io/bpmnlint/pull/217))
+
 ## 11.14.0
 
 * `FEAT`: add `superfluous-label` rule to discourage labels on unconditional sequence flows ([#123](https://github.com/bpmn-io/bpmnlint/issues/123), [#129](https://github.com/bpmn-io/bpmnlint/pull/129))
