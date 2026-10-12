@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 11.15.0
+
+* `FEAT`: improve performance of `no-overlapping-elements` rule ([#218](https://github.com/bpmn-io/bpmnlint/pull/218))
+
 ## 11.14.1
 
 * `FIX`: improve performance of `no-bpmndi` rule ([#217](https://github.com/bpmn-io/bpmnlint/pull/217))
