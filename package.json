@@ -27,11 +27,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "all": "run-s lint lint:types test-coverage",
+    "all": "run-s lint lint:types test-coverage test:perf",
     "lint": "eslint .",
     "lint:types": "tsc",
     "dev": "npm test -- --watch",
-    "test": "mocha --exclude \"test/integration/*/**\" \"test/**/*.*js\"",
+    "test": "mocha --exclude \"test/integration/*/**\" --exclude \"test/performance/**\" \"test/**/*.*js\"",
+    "test:perf": "mocha \"test/performance/**/*.*js\"",
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
     "generate-docs-images": "npx @bpmn-io/bpmnlint-generate-docs-images ."
   },
