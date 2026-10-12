@@ -101,8 +101,11 @@ function checkProcess(node, elementsToReport, elementsOutsideToReport, diObjects
 /**
  * @param {Array} elements
  * @param {Set} elementsToReport
+ * @param {Map} diObjects
  */
 function checkElementsArray(elements, elementsToReport, diObjects) {
+  const overlapping = new Set();
+
   for (let i = 0; i < elements.length - 1; i++) {
     const element = elements[i];
 
@@ -124,11 +127,18 @@ function checkElementsArray(elements, elementsToReport, diObjects) {
       }
 
       if (isCollision(bounds1, bounds2)) {
-        elementsToReport.add(element);
-        elementsToReport.add(element2);
+        overlapping.add(element);
+        overlapping.add(element2);
       }
     }
   }
+
+  // report in element order, independent of the order overlaps are detected
+  elements.forEach(element => {
+    if (overlapping.has(element)) {
+      elementsToReport.add(element);
+    }
+  });
 }
 
 /**

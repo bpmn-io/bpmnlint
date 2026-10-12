@@ -137,6 +137,28 @@ RuleTester.verify('no-overlapping-elements', rule, {
       ]
     },
     {
+      name: 'report in element order',
+      moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-report-order.bpmn'),
+      report: [
+        {
+          id: 'TASK_A',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_B',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_C',
+          message: 'Element overlaps with other element'
+        },
+        {
+          id: 'TASK_D',
+          message: 'Element overlaps with other element'
+        }
+      ]
+    },
+    {
       moddleElement: readModdle(__dirname + '/no-overlapping-elements/invalid-nan-bounds.bpmn'),
       report: [
         {
