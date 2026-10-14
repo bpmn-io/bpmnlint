@@ -1,0 +1,6 @@
+{
+  "name": "@ns/dmnlint-plugin-test",
+  "version": "0.0.0",
+  "description": "A namespaced test dmnlint plug-in",
+  "main": "index.js"
+}

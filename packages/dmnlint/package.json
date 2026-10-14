@@ -1,0 +1,89 @@
+{
+  "name": "dmnlint",
+  "description": "Validate your DMN diagrams based on configurable lint rules",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/linter": "./lib/linter.js",
+    "./lib/linter.js": "./lib/linter.js",
+    "./lib/resolver/node-resolver": "./lib/resolver/node-resolver.js",
+    "./lib/resolver/node-resolver.js": "./lib/resolver/node-resolver.js",
+    "./lib/resolver/static-resolver": "./lib/resolver/static-resolver.js",
+    "./lib/resolver/static-resolver.js": "./lib/resolver/static-resolver.js",
+    "./lib/support/compile-config": "./lib/support/compile-config.js",
+    "./lib/support/compile-config.js": "./lib/support/compile-config.js",
+    "./lib/testers/rule-tester": {
+      "types": "./lib/testers/rule-tester.d.ts",
+      "default": "./lib/testers/rule-tester.js"
+    },
+    "./lib/testers/rule-tester.js": {
+      "types": "./lib/testers/rule-tester.d.ts",
+      "default": "./lib/testers/rule-tester.js"
+    },
+    "./lib/types": {
+      "types": "./lib/types.d.ts"
+    },
+    "./lib/testers/helper": "./lib/testers/helper.js",
+    "./lib/testers/helper.js": "./lib/testers/helper.js",
+    "./rules/helper": null,
+    "./rules/helper.js": null,
+    "./rules/*.js": "./rules/*.js",
+    "./rules/*": "./rules/*.js",
+    "./config/*.js": "./config/*.js",
+    "./config/*": "./config/*.js",
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "dmnlint",
+    "dmn",
+    "linter",
+    "cli",
+    "validation",
+    "rules"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git",
+    "directory": "packages/dmnlint"
+  },
+  "author": {
+    "name": "Maciej Barelkowski",
+    "url": "https://github.com/barmac"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "engines": {
+    "node": ">= 24"
+  },
+  "license": "MIT",
+  "scripts": {
+    "all": "run-s lint lint:types test-coverage",
+    "lint": "eslint .",
+    "lint:types": "tsc -p ../..",
+    "dev": "npm test -- --watch",
+    "test": "mocha \"test/**/*.mjs\"",
+    "test-coverage": "nyc --reporter=lcov --reporter=html npm test"
+  },
+  "bin": {
+    "dmnlint": "./bin/dmnlint.js"
+  },
+  "dependencies": {
+    "@bpmn-io/lint-core": "^0.1.0",
+    "dmn-moddle": "^12.0.0",
+    "dmnlint-utils": "^0.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "config",
+    "lib",
+    "rules"
+  ]
+}

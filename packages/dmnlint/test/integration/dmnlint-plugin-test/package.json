@@ -1,0 +1,6 @@
+{
+  "name": "dmnlint-plugin-test",
+  "version": "0.0.0",
+  "description": "A test dmnlint plug-in",
+  "main": "index.js"
+}

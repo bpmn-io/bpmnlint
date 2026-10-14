@@ -1,0 +1,11 @@
+{
+  "name": "sibling",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "dmnlint-plugin-test2": "file:../../dmnlint-plugin-test2"
+  },
+  "localDependencies": {
+    "dmnlint-plugin-test2": "../../dmnlint-plugin-test2"
+  }
+}

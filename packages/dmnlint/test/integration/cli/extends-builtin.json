@@ -1,0 +1,6 @@
+{
+  "extends": "dmnlint:recommended",
+  "rules": {
+    "dmnlint/no-disconnected": "warn"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "extends": "plugin:test/recommended",
+  "rules": {
+    "test/no-label-bar": "warn"
+  }
+}

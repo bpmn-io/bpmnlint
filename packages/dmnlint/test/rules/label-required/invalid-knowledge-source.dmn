@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_0kbsmah" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <knowledgeSource id="Element" name="" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0sa0tek">
+      <dmndi:DMNShape id="DMNShape_07wlimm" dmnElementRef="Element">
+        <dc:Bounds height="63" width="100" x="195" y="81" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

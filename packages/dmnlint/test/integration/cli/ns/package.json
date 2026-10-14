@@ -1,0 +1,9 @@
+{
+  "name": "ns",
+  "version": "0.0.0",
+  "private": true,
+  "localDependencies": {
+    "dmnlint-plugin-test2": "../../dmnlint-plugin-test2",
+    "@ns/dmnlint-plugin-test": "../../dmnlint-plugin-test-ns"
+  }
+}

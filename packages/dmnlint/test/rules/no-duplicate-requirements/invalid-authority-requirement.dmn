@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0kbsmah" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <decision id="Decision" name="Decision">
+    <informationRequirement id="InformationRequirement_1vfd90t">
+      <requiredInput href="#InputData" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_055tfi0">
+      <requiredKnowledge href="#BusinessKnowledgeModel" />
+    </knowledgeRequirement>
+    <authorityRequirement id="AuthorityRequirement_1gxy44i">
+      <requiredAuthority href="#KnowledgeSource" />
+    </authorityRequirement>
+    <authorityRequirement id="AuthorityRequirement_1uezrrv">
+      <requiredAuthority href="#KnowledgeSource" />
+    </authorityRequirement>
+  </decision>
+  <inputData id="InputData" name="InputData" />
+  <knowledgeSource id="KnowledgeSource" name="KnowledgeSource" />
+  <businessKnowledgeModel id="BusinessKnowledgeModel" name="BusinessKnowledgeModel">
+    <authorityRequirement id="AuthorityRequirement_05o4dch">
+      <requiredAuthority href="#KnowledgeSource" />
+    </authorityRequirement>
+  </businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0cnx5vn">
+      <dmndi:DMNShape id="DMNShape_0ljon61" dmnElementRef="Decision">
+        <dc:Bounds height="80" width="180" x="156" y="233" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_14vvofx" dmnElementRef="KnowledgeRequirement_055tfi0">
+        <di:waypoint x="485" y="136" />
+        <di:waypoint x="316" y="233" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_074bwx0" dmnElementRef="InformationRequirement_1vfd90t">
+        <di:waypoint x="282" y="460" />
+        <di:waypoint x="296" y="313" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_08hxdfk" dmnElementRef="AuthorityRequirement_1gxy44i">
+        <di:waypoint x="532" y="315" />
+        <di:waypoint x="509" y="136" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0z4s55a" dmnElementRef="AuthorityRequirement_1gxy44i">
+        <di:waypoint x="520" y="338" />
+        <di:waypoint x="336" y="303" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_05qqr2e" dmnElementRef="InputData">
+        <dc:Bounds height="45" width="125" x="217" y="460" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0a1u4j9" dmnElementRef="KnowledgeSource">
+        <dc:Bounds height="63" width="100" x="520" y="315" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0xuusxj" dmnElementRef="BusinessKnowledgeModel">
+        <dc:Bounds height="46" width="135" x="457" y="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1342nwn" dmnElementRef="AuthorityRequirement_05o4dch">
+        <di:waypoint x="336" y="297" />
+        <di:waypoint x="520" y="346" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
