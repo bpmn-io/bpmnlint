@@ -1,8 +1,8 @@
 import testRule from '../../lib/test-rule.js';
 
-import { expect, createRule, readModdle } from '../helper.mjs';
+import { expect, createRule, readModdle, utils } from '../helper.mjs';
 
-import { is } from 'bpmnlint-utils';
+const { is } = utils;
 
 import { stubCJS } from '../helper.mjs';
 

@@ -1,0 +1,75 @@
+{
+  "name": "@bpmn-io/lint-core",
+  "description": "Shared implementation of bpmnlint and dmnlint. Internal: depend on bpmnlint or dmnlint instead.",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/linter": "./lib/linter.js",
+    "./lib/linter.js": "./lib/linter.js",
+    "./lib/traverse": "./lib/traverse.js",
+    "./lib/traverse.js": "./lib/traverse.js",
+    "./lib/test-rule": "./lib/test-rule.js",
+    "./lib/test-rule.js": "./lib/test-rule.js",
+    "./lib/resolver/node-resolver": "./lib/resolver/node-resolver.js",
+    "./lib/resolver/node-resolver.js": "./lib/resolver/node-resolver.js",
+    "./lib/resolver/static-resolver": "./lib/resolver/static-resolver.js",
+    "./lib/resolver/static-resolver.js": "./lib/resolver/static-resolver.js",
+    "./lib/resolver/helper": "./lib/resolver/helper.js",
+    "./lib/resolver/helper.js": "./lib/resolver/helper.js",
+    "./lib/support/compile-config": "./lib/support/compile-config.js",
+    "./lib/support/compile-config.js": "./lib/support/compile-config.js",
+    "./lib/testers/rule-tester": {
+      "types": "./lib/testers/rule-tester.d.ts",
+      "default": "./lib/testers/rule-tester.js"
+    },
+    "./lib/testers/rule-tester.js": {
+      "types": "./lib/testers/rule-tester.d.ts",
+      "default": "./lib/testers/rule-tester.js"
+    },
+    "./lib/testers/helper": "./lib/testers/helper.js",
+    "./lib/testers/helper.js": "./lib/testers/helper.js",
+    "./lib/types": {
+      "types": "./lib/types.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "bpmnlint",
+    "dmnlint",
+    "linter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git",
+    "directory": "packages/lint-core"
+  },
+  "author": {
+    "name": "bpmn.io contributors",
+    "url": "https://github.com/bpmn-io"
+  },
+  "engines": {
+    "node": ">= 24"
+  },
+  "license": "MIT",
+  "scripts": {
+    "all": "run-s lint lint:types test-coverage",
+    "lint": "eslint .",
+    "lint:types": "tsc -p ../..",
+    "test": "mocha \"test/**/*.*js\"",
+    "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
+    "dev": "npm test -- --watch"
+  },
+  "dependencies": {
+    "min-dash": "^5.1.0"
+  },
+  "devDependencies": {
+    "bpmn-moddle": "^10.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ]
+}

@@ -1,5 +1,23 @@
 export type ModdleElement = any;
 
+/**
+ * A linter that is built on top of the shared implementation, i.e. `bpmnlint`.
+ */
+export type Product = {
+
+  /**
+   * Name of the package that rules and configurations are
+   * resolved from, if no package is given (i.e. `bpmnlint`).
+   */
+  name: string,
+
+  /**
+   * Prefix of the packages that provide plugins.
+   * Defaults to `{name}-plugin-`.
+   */
+  pluginPrefix?: string
+};
+
 export interface Reporter {
 
   report(id: string, message: string): void;
@@ -65,7 +83,8 @@ export type RuleConfigs = Record<string, RuleConfig>;
 
 export type Config = {
   extends?: string | string[],
-  rules?: RuleConfigs
+  rules?: RuleConfigs,
+  moddleExtensions?: Record<string, string>
 };
 
 export type TransformRuleFn = (

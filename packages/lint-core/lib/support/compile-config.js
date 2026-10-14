@@ -2,19 +2,37 @@ const path = require('path');
 
 const { isString } = require('min-dash');
 
-const Linter = require('../linter');
-
-const NodeResolver = require('../resolver/node-resolver');
+/**
+ * @typedef { import('../types.js').Config } Config
+ *
+ * @typedef { {
+ *   Linter: any,
+ *   NodeResolver: any
+ * } } Product
+ */
 
 /**
- * Compile the bpmnlint configuration to a JavaScript file that exports
+ * Create a `compileConfig` function that is bound to a product,
+ * i.e. its `Linter` and `NodeResolver`.
+ *
+ * @param { Product } product
+ *
+ * @return { (config: Config, resolver?: any) => Promise<string> }
+ */
+function createCompileConfig(product) {
+  return (config, resolver) => compileConfig(product, config, resolver);
+}
+
+/**
+ * Compile the linter configuration to a JavaScript file that exports
  * a { config, resolver } bundle, resolving all enabled rules.
  *
- * @param  {Object} config the parsed bpmnlint configuration
- * @param  {NodeResolver} [resolver]
+ * @param  {Product} product
+ * @param  {Config} config the parsed linter configuration
+ * @param  {any} [resolver]
  * @return {Promise<String>} the configuration compiled to a JS file
  */
-async function compileConfig(config, resolver) {
+async function compileConfig({ Linter, NodeResolver }, config, resolver) {
 
   resolver = resolver || new NodeResolver();
 
@@ -115,7 +133,9 @@ export default bundle;
   return `${preambleCode}${ruleImportCode}\n${moddleExtensionsImportCode}`;
 }
 
-module.exports = compileConfig;
+module.exports = {
+  createCompileConfig
+};
 
 function requirePkg(resolver, pkg) {
   try {
