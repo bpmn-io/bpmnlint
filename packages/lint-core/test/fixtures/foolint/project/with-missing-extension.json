@@ -1,0 +1,5 @@
+{
+  "moddleExtensions": {
+    "ext": "./does-not-exist"
+  }
+}

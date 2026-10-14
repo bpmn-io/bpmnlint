@@ -1,0 +1,6 @@
+{
+  "extends": "foolint:recommended",
+  "moddleExtensions": {
+    "ext": "./ext/index.js"
+  }
+}

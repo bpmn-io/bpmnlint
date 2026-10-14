@@ -73,16 +73,9 @@
   },
   "dependencies": {
     "@bpmn-io/lint-core": "^0.1.0",
-    "@bpmn-io/moddle-utils": "^0.3.0",
-    "ansi-colors": "^4.1.3",
     "bpmn-moddle": "^10.1.0",
     "bpmnlint-utils": "^1.1.1",
-    "cli-table": "^0.3.11",
-    "color-support": "^1.1.3",
-    "min-dash": "^5.1.0",
-    "mri": "^1.2.0",
-    "pluralize": "^8.0.0",
-    "tiny-glob": "^0.2.9"
+    "min-dash": "^5.1.0"
   },
   "devDependencies": {
     "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0"

@@ -7,6 +7,8 @@
     ".": "./lib/index.js",
     "./lib/linter": "./lib/linter.js",
     "./lib/linter.js": "./lib/linter.js",
+    "./lib/cli": "./lib/cli.js",
+    "./lib/cli.js": "./lib/cli.js",
     "./lib/traverse": "./lib/traverse.js",
     "./lib/traverse.js": "./lib/traverse.js",
     "./lib/test-rule": "./lib/test-rule.js",
@@ -56,12 +58,19 @@
     "all": "run-s lint lint:types test-coverage",
     "lint": "eslint .",
     "lint:types": "tsc -p ../..",
-    "test": "mocha \"test/**/*.*js\"",
+    "test": "mocha \"test/spec/**/*.*js\"",
     "test-coverage": "nyc --reporter=lcov --reporter=html npm test",
     "dev": "npm test -- --watch"
   },
   "dependencies": {
-    "min-dash": "^5.1.0"
+    "@bpmn-io/moddle-utils": "^0.3.0",
+    "ansi-colors": "^4.1.3",
+    "cli-table": "^0.3.11",
+    "color-support": "^1.1.3",
+    "min-dash": "^5.1.0",
+    "mri": "^1.2.0",
+    "pluralize": "^8.0.0",
+    "tiny-glob": "^0.2.9"
   },
   "devDependencies": {
     "bpmn-moddle": "^10.1.0"
