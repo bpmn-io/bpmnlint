@@ -12,6 +12,7 @@
   "localDependencies": {
     "dmnlint": "../../..",
     "@bpmn-io/lint-core": "../../../../lint-core",
+    "dmnlint-utils": "../../../../dmnlint-utils",
     "dmnlint-plugin-test": "../dmnlint-plugin-test"
   }
 }

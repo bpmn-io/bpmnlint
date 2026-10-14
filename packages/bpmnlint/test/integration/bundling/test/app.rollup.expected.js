@@ -34,6 +34,10 @@
   }
 
   /**
+   * @typedef { any } ModdleElement
+   */
+
+  /**
    * Checks whether node is of specific bpmn type.
    *
    * @param {ModdleElement} node

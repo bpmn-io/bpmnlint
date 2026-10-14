@@ -19,6 +19,7 @@
   "localDependencies": {
     "bpmnlint": "../../..",
     "@bpmn-io/lint-core": "../../../../lint-core",
+    "bpmnlint-utils": "../../../../bpmnlint-utils",
     "bpmnlint-plugin-test": "../bpmnlint-plugin-test",
     "bpmnlint-plugin-exported": "../bpmnlint-plugin-exported"
   }

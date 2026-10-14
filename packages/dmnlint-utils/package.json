@@ -1,0 +1,41 @@
+{
+  "name": "dmnlint-utils",
+  "description": "Utilities for creating dmnlint rules",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm.js",
+  "keywords": [
+    "dmnlint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git",
+    "directory": "packages/dmnlint-utils"
+  },
+  "author": {
+    "name": "Maciej Barelkowski",
+    "url": "https://github.com/barmac"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "license": "MIT",
+  "scripts": {
+    "all": "run-s lint bundle test",
+    "bundle": "rollup -c --bundleConfigAsCjs",
+    "dev": "npm test -- --watch",
+    "lint": "eslint .",
+    "prepublishOnly": "run-s bundle",
+    "test": "mocha \"test/**/*.js\""
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -22,7 +22,8 @@
     "test": "npm test --workspaces --if-present",
     "release": "npx @bpmn-io/release",
     "generate-docs-images": "npm run generate-docs-images -w bpmnlint",
-    "generate-doc-stubs": "node scripts/generate-doc-stubs.mjs"
+    "generate-doc-stubs": "node scripts/generate-doc-stubs.mjs",
+    "prepare": "npm run bundle -w bpmnlint-utils -w dmnlint-utils"
   },
   "devDependencies": {
     "@bpmn-io/release": "^0.7.0",
@@ -36,6 +37,7 @@
     "mocha": "^11.8.0",
     "npm-run-all2": "^9.0.3",
     "nyc": "^18.0.0",
+    "rollup": "^4.0.0",
     "strip-indent": "^4.1.1",
     "typescript": "^5.9.3"
   }

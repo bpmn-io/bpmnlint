@@ -459,6 +459,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isAny: () => (/* binding */ isAny)
 /* harmony export */ });
 /**
+ * @typedef { any } ModdleElement
+ */
+
+/**
  * Checks whether node is of specific bpmn type.
  *
  * @param {ModdleElement} node

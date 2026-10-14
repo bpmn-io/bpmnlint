@@ -9,6 +9,8 @@ Validate your BPMN and DMN diagrams based on configurable lint rules.
 | [`bpmnlint`](./packages/bpmnlint) | Validate your BPMN diagrams based on configurable lint rules. |
 | [`dmnlint`](./packages/dmnlint) | Validate your DMN diagrams based on configurable lint rules. |
 | [`@bpmn-io/lint-core`](./packages/lint-core) | Shared implementation of both linters. Internal, use `bpmnlint` or `dmnlint` instead. |
+| [`bpmnlint-utils`](./packages/bpmnlint-utils) | Utilities for creating bpmnlint rules, without a dependency on `bpmnlint`. |
+| [`dmnlint-utils`](./packages/dmnlint-utils) | Utilities for creating dmnlint rules, without a dependency on `dmnlint`. |
 
 ## Build and Run
 
@@ -43,7 +45,9 @@ npm run release
 Packages are located via their `<name>@<version>` tag. The very first release
 from this repository has to run `npm run release -- --force-release`, entering
 the version `0.1.0` for `@bpmn-io/lint-core` (do not skip it, `bpmnlint` and
-`dmnlint` depend on it). Subsequent releases detect changes on their own.
+`dmnlint` depend on it). Skip the packages that did not change, i.e.
+`bpmnlint-utils` and `dmnlint-utils`. Subsequent releases detect changes on
+their own.
 
 Keep each package's `CHANGELOG.md` up to date before releasing. Packages that
 depend on a released workspace package, such as `bpmnlint` and `dmnlint` on

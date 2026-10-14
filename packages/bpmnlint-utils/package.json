@@ -1,0 +1,41 @@
+{
+  "name": "bpmnlint-utils",
+  "description": "Utilities for creating bpmnlint rules",
+  "version": "1.1.1",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm.js",
+  "keywords": [
+    "bpmnlint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git",
+    "directory": "packages/bpmnlint-utils"
+  },
+  "author": {
+    "name": "nikku",
+    "url": "https://github.com/nikku"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "license": "MIT",
+  "scripts": {
+    "all": "run-s lint bundle test",
+    "bundle": "rollup -c --bundleConfigAsCjs",
+    "dev": "npm test -- --watch",
+    "lint": "eslint .",
+    "prepublishOnly": "run-s bundle",
+    "test": "mocha \"test/**/*.js\""
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ]
+}

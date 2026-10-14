@@ -16,5 +16,8 @@
     "./packages/*/rules/*.js",
     "./packages/*/config/*.js",
     "./packages/*/bin/*.js"
+  ],
+  "exclude": [
+    "./packages/*-utils"
   ]
 }
