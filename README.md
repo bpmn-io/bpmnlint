@@ -22,6 +22,14 @@ npm run all
 npm run all -w bpmnlint
 ```
 
+## Configuration
+
+Both linters are configured via a `.bpmnlintrc` / `.dmnlintrc` file in your working directory. Read about the configuration in the documentation of the respective package:
+
+* [bpmnlint configuration](./packages/bpmnlint#configuration)
+* [dmnlint configuration](./packages/dmnlint#configuration)
+
+
 ## Releasing
 
 Packages are versioned independently. [`bio-release`](https://github.com/bpmn-io/release)
@@ -32,7 +40,14 @@ publishes and tags (`<name>@<version>`):
 npm run release
 ```
 
-Keep each package's `CHANGELOG.md` up to date before releasing.
+Packages are located via their `<name>@<version>` tag. The very first release
+from this repository has to run `npm run release -- --force-release`, entering
+the version `0.1.0` for `@bpmn-io/lint-core` (do not skip it, `bpmnlint` and
+`dmnlint` depend on it). Subsequent releases detect changes on their own.
+
+Keep each package's `CHANGELOG.md` up to date before releasing. Packages that
+depend on a released workspace package, such as `bpmnlint` and `dmnlint` on
+`@bpmn-io/lint-core`, are released along with it.
 
 ## License
 

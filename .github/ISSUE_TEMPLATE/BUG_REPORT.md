@@ -28,4 +28,4 @@ labels: "bug"
 
 - Host (Browser/Node version), if applicable: [e.g. MS Edge 18, Chrome 69, Node 10 LTS]
 - OS: [e.g. Windows 7]
-- Library version: [e.g. 2.0.0]
+- Package and version: [e.g. bpmnlint@11.0.0, dmnlint@2.0.0]

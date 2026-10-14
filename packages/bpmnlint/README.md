@@ -35,7 +35,7 @@ Validate your diagrams via the commandline:
 
 ## Rules
 
-Our [documentation](https://github.com/bpmn-io/bpmnlint/tree/main/docs/rules#rules) lists all currenty implemented rules, the [`./rules` folder](https://github.com/bpmn-io/bpmnlint/tree/main/rules) contains each rules implementation.
+Our [documentation](https://github.com/bpmn-io/bpmnlint/tree/main/packages/bpmnlint/docs/rules#rules) lists all currenty implemented rules, the [`./rules` folder](https://github.com/bpmn-io/bpmnlint/tree/main/packages/bpmnlint/rules) contains each rules implementation.
 
 Do you miss a rule that should be included? [Propose a new rule](https://github.com/bpmn-io/bpmnlint/issues/new?assignees=&labels=rules&template=NEW_RULE.md).
 
@@ -148,6 +148,24 @@ const reports = linter.lint(definitions);
 ```
 
 
+### Exports
+
+The package exposes the following modules. Other paths are not part of the public API.
+
+| Module | Description |
+| --- | --- |
+| `bpmnlint` | The `Linter` |
+| `bpmnlint/lib/linter` | The `Linter` (default export) |
+| `bpmnlint/lib/resolver/node-resolver` | Resolve rules and configurations via Node.js |
+| `bpmnlint/lib/resolver/static-resolver` | Resolve rules and configurations from a static cache, i.e. in the browser |
+| `bpmnlint/lib/support/compile-config` | Compile a configuration for bundling |
+| `bpmnlint/lib/testers/rule-tester` | Test rules |
+| `bpmnlint/lib/testers/helper` | Read test diagrams (`createModdle`, `readModdle`) |
+| `bpmnlint/lib/types` | TypeScript types (`Reporter`, `RuleDefinition`, `Config`, ...) |
+| `bpmnlint/rules/*` | The rules |
+| `bpmnlint/config/*` | The configurations |
+
+
 ## Writing a Plug-in
 
 Create your first plug-in using the [plugin creator](https://github.com/nikku/create-bpmnlint-plugin):
@@ -160,6 +178,24 @@ Checkout the [bpmnlint-plugin-example](https://github.com/bpmn-io/bpmnlint-plugi
 
 > [!NOTE]
 > Plug-ins must always follow the naming scheme `bpmnlint-plugin-{NAME_OF_YOUR_PLUGIN}` and may contain a namespace prefix.
+
+Use [`bpmnlint-utils`](https://github.com/bpmn-io/bpmnlint/tree/main/packages/bpmnlint-utils) to check the type of elements in your rules. It does not depend on `bpmnlint`, so your plug-in does not pull it in:
+
+```javascript
+const { is, isAny } = require('bpmnlint-utils');
+
+module.exports = function() {
+
+  function check(node, reporter) {
+
+    if (is(node, 'bpmn:Task') || isAny(node, [ 'ManualTask', 'bpmn:ScriptTask' ])) {
+      reporter.report(node.id, 'Element is a task');
+    }
+  }
+
+  return { check };
+};
+```
 
 When using your custom plug-in, reference its configuration or rules via the shorthand plug-in name, or the full identifier:
 

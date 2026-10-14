@@ -6,6 +6,18 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: link rules to their documentation at `packages/bpmnlint/docs/rules`; links of previous versions keep working
+* `CHORE`: move to [monorepo](https://github.com/bpmn-io/bpmnlint) and build on top of the internal `@bpmn-io/lint-core`
+* `CHORE!`: restrict package `exports`
+* `CHORE!`: require `node@24`
+
+### Breaking Changes
+
+* Node 24 is required to use the library. Make sure to update.
+* The package now restricts what can be imported. The following modules remain available, with and without `.js` extension: `bpmnlint`, `bpmnlint/lib/linter`, `bpmnlint/lib/resolver/node-resolver`, `bpmnlint/lib/resolver/static-resolver`, `bpmnlint/lib/support/compile-config`, `bpmnlint/lib/testers/rule-tester`, `bpmnlint/lib/testers/helper`, `bpmnlint/rules/*`, `bpmnlint/config/*` and `bpmnlint/package.json`. Other internal modules, i.e. `bpmnlint/lib/traverse`, `bpmnlint/lib/test-rule` or `bpmnlint/rules/helper`, cannot be imported anymore.
+* `bpmnlint/lib/resolver/helper` (`createScopedRequire`) is not available anymore. Use `Module.createRequire(path.join(dir, '__placeholder__.js'))` instead.
+* Webpack cannot resolve dynamic requires of rules and configurations, such as ``require(`bpmnlint/rules/${ name }`)``, if a package restricts its `exports` (this is a limitation of recent `enhanced-resolve` versions). Use static imports, e.g. `import rule from 'bpmnlint/rules/label-required'`, or the bundler plug-ins ([Rollup](https://www.npmjs.com/package/rollup-plugin-bpmnlint), [Webpack](https://www.npmjs.com/package/bpmnlint-loader)) which generate those.
+
 ## 11.15.0
 
 * `FEAT`: improve performance of `no-overlapping-elements` rule ([#218](https://github.com/bpmn-io/bpmnlint/pull/218))
