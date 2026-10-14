@@ -3,6 +3,7 @@
 This library implements the following lint rules:
 
 * [Ad-Hoc Sub-Process](./ad-hoc-sub-process.md)
+* [Conditional Event](./conditional-event.md)
 * [Conditional Flows](./conditional-flows.md)
 * [End Event Required](./end-event-required.md)
 * [Event-based Gateway](./event-based-gateway.md)
@@ -10,7 +11,10 @@ This library implements the following lint rules:
 * [Fake Join](./fake-join.md)
 * [Superfluous Gateway](./superfluous-gateway.md)
 * [Superfluous Label](./superfluous-label.md)
+* [Redundant Termination](./superfluous-termination.md)
 * [Label Required](./label-required.md)
+* [Link Event](./link-event.md)
+* [No BPMNDI Information](./no-bpmndi.md)
 * [No Complex Gateway](./no-complex-gateway.md)
 * [No Disconnected](./no-disconnected.md)
 * [No Duplicate Sequence Flows](./no-duplicate-sequence-flows.md)

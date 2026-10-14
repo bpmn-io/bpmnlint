@@ -29,7 +29,7 @@ Validate your diagrams via the commandline:
   Event_27  warning  Element is missing label/name       label-required
   Process   error    Process is missing start event      start-event-required
 
-✖ 6 problems (6 errors, 0 warnings)
+✖ 6 problems (3 errors, 3 warnings)
 ```
 
 
@@ -107,10 +107,10 @@ The extension will be resolved relative to the configuration file location, usin
 Invoke the tool directly from [NodeJS](https://nodejs.org/en):
 
 ```javascript
-import Linter from 'bpmnlint';
+import { Linter } from 'bpmnlint';
 import NodeResolver from 'bpmnlint/lib/resolver/node-resolver';
 
-import BpmnModdle from 'bpmn-moddle';
+import { BpmnModdle } from 'bpmn-moddle';
 
 const moddle = new BpmnModdle();
 
@@ -134,7 +134,7 @@ const {
   rootElement: definitions
 } = await moddle.fromXML(xmlStr);
 
-const reports = linter.lint(definitions);
+const reports = await linter.lint(definitions);
 
 // {
 //    "end-event-required": [

@@ -13,4 +13,4 @@ Example of __correct__ usage for this rule:
 
 ![Correct usage example](./examples/superfluous-termination-correct.png)
 
-Cf. [`superfluous-termination.bpmn`](./examples/superfluous-termination-correct.bpmn).
+Cf. [`superfluous-termination-correct.bpmn`](./examples/superfluous-termination-correct.bpmn).

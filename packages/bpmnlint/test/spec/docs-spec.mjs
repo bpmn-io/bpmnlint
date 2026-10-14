@@ -21,6 +21,46 @@ const URL_PREFIX = 'https://github.com/bpmn-io/bpmnlint/blob/main/';
 
 describe('docs', function() {
 
+  describe('rule documentation', function() {
+
+    const docsDir = join(root, SOURCE_DIR);
+
+    const read = file => readFileSync(join(docsDir, file), 'utf8').replace(/\r\n/g, '\n');
+
+    const pages = readdirSync(docsDir).filter(file => file.endsWith('.md') && file !== 'README.md');
+
+    it('should list every page in the index', function() {
+
+      // when
+      const index = read('README.md');
+
+      // then
+      const missing = pages.filter(page => !index.includes(`(./${ page })`));
+
+      expect(missing).to.eql([]);
+    });
+
+
+    pages.forEach(page => {
+
+      it(`should link existing examples in <${ page }>`, function() {
+
+        // given
+        const links = [ ...read(page).matchAll(/\[`([^`]+)`\]\((\.\/examples\/[^)]+)\)/g) ];
+
+        // then
+        links.forEach(([ , text, target ]) => {
+          expect(existsSync(join(docsDir, target)), `${ target } does not exist`).to.be.true;
+
+          expect(target, `link text <${ text }> does not match its target`).to.eql(`./examples/${ text }`);
+        });
+      });
+
+    });
+
+  });
+
+
   describe('rule documentation links', function() {
 
     const rules = readdirSync(join(root, 'packages/bpmnlint/rules'))
