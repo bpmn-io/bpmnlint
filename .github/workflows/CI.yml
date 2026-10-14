@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
         node-version: [ 24 ]
 
     steps:
@@ -21,50 +21,18 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Build
-      run: COVERAGE=1 npm run all
+      run: npm run all
+    - name: Prepare coverage
+      if: matrix.os == 'ubuntu-latest'
+      # report paths relative to the repository root, as files
+      # of different packages share their names (i.e. lib/linter.js)
+      run: |
+        for report in packages/*/coverage/lcov.info; do
+          dir=$(dirname "$(dirname "$report")")
+          sed -i "s#^SF:#SF:${dir}/#" "$report"
+        done
     - name: Upload coverage
+      if: matrix.os == 'ubuntu-latest'
       uses: codecov/codecov-action@v3
-
-  build_nodes:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest ]
-        node-version: [ 20 ]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v6
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v6
       with:
-        node-version: ${{matrix.node-version}}
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm ci
-    - name: Build
-      run: npm run all
-
-  build_platforms:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-latest, windows-latest ]
-        node-version: [ 24 ]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v6
-    - name: Use Node.js ${{matrix.node-version}}
-      uses: actions/setup-node@v6
-      with:
-        node-version: ${{matrix.node-version}}
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm ci
-    - name: Build
-      run: npm run all
+        files: packages/bpmnlint/coverage/lcov.info,packages/dmnlint/coverage/lcov.info,packages/lint-core/coverage/lcov.info

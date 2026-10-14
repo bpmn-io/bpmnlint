@@ -13,7 +13,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bpmn-io/bpmnlint"
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git",
+    "directory": "packages/bpmnlint"
   },
   "author": "Seif Eddine Ghezala <siffogh3@gmail.com>",
   "contributors": [
@@ -29,7 +30,7 @@
   "scripts": {
     "all": "run-s lint lint:types test-coverage test:perf",
     "lint": "eslint .",
-    "lint:types": "tsc",
+    "lint:types": "tsc -p ../..",
     "dev": "npm test -- --watch",
     "test": "mocha --exclude \"test/integration/*/**\" --exclude \"test/performance/**\" \"test/**/*.*js\"",
     "test:perf": "mocha \"test/performance/**/*.*js\"",
@@ -52,19 +53,10 @@
     "tiny-glob": "^0.2.9"
   },
   "devDependencies": {
-    "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^24.13.3",
-    "chai": "^6.2.2",
-    "eslint": "^9.39.5",
-    "eslint-plugin-bpmn-io": "^2.3.1",
-    "execa": "^9.6.1",
-    "install-local": "^4.1.0",
-    "mocha": "^11.8.0",
-    "npm-run-all2": "^9.0.3",
-    "nyc": "^18.0.0",
-    "strip-indent": "^4.1.1",
-    "typescript": "^5.9.3"
+    "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "bin",

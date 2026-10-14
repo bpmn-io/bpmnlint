@@ -2,20 +2,20 @@ import bpmnIoPlugin from 'eslint-plugin-bpmn-io';
 
 const files = {
   lib: [
-    'lib/**/*.js',
-    'rules/**/*.js',
-    'config/**/*.js'
+    'packages/*/lib/**/*.js',
+    'packages/*/rules/**/*.js',
+    'packages/*/config/**/*.js'
   ],
   test: [
-    'test/**/*.js',
-    'test/**/*.mjs'
+    'packages/*/test/**/*.js',
+    'packages/*/test/**/*.mjs'
   ],
   ignored: [
-    'coverage',
-    '.nyc_output',
-    'test/integration/bundling/dist',
-    'test/integration/bundling/test',
-    'test/integration/compilation/test'
+    '**/coverage',
+    '**/.nyc_output',
+    'packages/bpmnlint/test/integration/bundling/dist',
+    'packages/bpmnlint/test/integration/bundling/test',
+    'packages/bpmnlint/test/integration/compilation/test'
   ]
 };
 

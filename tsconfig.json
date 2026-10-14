@@ -11,10 +11,10 @@
     "noEmit": true
   },
   "include": [
-    "./lib/**/*.d.ts",
-    "./lib/**/*.js",
-    "./rules/*.js",
-    "./config/*.js",
-    "./bin/*.js"
+    "./packages/*/lib/**/*.d.ts",
+    "./packages/*/lib/**/*.js",
+    "./packages/*/rules/*.js",
+    "./packages/*/config/*.js",
+    "./packages/*/bin/*.js"
   ]
 }

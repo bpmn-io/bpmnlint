@@ -1,0 +1,41 @@
+{
+  "name": "bpmnlint-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Validate your BPMN and DMN diagrams based on configurable lint rules",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/bpmnlint.git"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "releaseConfig": {
+    "strategy": "independent"
+  },
+  "scripts": {
+    "all": "run-s lint all:packages",
+    "all:packages": "npm run all --workspaces --if-present",
+    "lint": "eslint .",
+    "lint:types": "tsc",
+    "test": "npm test --workspaces --if-present",
+    "release": "npx @bpmn-io/release",
+    "generate-docs-images": "npm run generate-docs-images -w bpmnlint"
+  },
+  "devDependencies": {
+    "@bpmn-io/release": "^0.7.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.13.3",
+    "chai": "^6.2.2",
+    "eslint": "^9.39.5",
+    "eslint-plugin-bpmn-io": "^2.3.1",
+    "execa": "^9.6.1",
+    "install-local": "^4.1.0",
+    "mocha": "^11.8.0",
+    "npm-run-all2": "^9.0.3",
+    "nyc": "^18.0.0",
+    "strip-indent": "^4.1.1",
+    "typescript": "^5.9.3"
+  }
+}
