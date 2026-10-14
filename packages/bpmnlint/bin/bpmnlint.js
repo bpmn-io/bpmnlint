@@ -24,7 +24,7 @@ const { BpmnModdle } = require('bpmn-moddle');
 
 const Linter = require('../lib/linter');
 const NodeResolver = require('../lib/resolver/node-resolver');
-const { createScopedRequire } = require('../lib/resolver/helper');
+const { createScopedRequire } = require('@bpmn-io/lint-core/lib/resolver/helper');
 
 const Table = require('cli-table');
 
@@ -390,7 +390,7 @@ async function run() {
 
   ${magenta('bpmnlint --init')}
 
-Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint#configuration`
+Learn more about configuring bpmnlint: https://github.com/bpmn-io/bpmnlint/tree/main/packages/bpmnlint#configuration`
     );
 
     throw errorAndExit(message);

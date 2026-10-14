@@ -1,4 +1,4 @@
-import testRule from '../../lib/test-rule.js';
+import testRule from '@bpmn-io/lint-core/lib/test-rule.js';
 
 import { createRule } from '../helper.mjs';
 

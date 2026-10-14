@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "esnext", "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "types": []
+  },
+  "include": [ "./index.ts" ]
+}

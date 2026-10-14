@@ -1,4 +1,4 @@
-export type TestFn = (...any) => any;
+export type TestFn = (...args: any[]) => any;
 
 export type ModdleElement = any;
 
@@ -28,10 +28,22 @@ export type RuleTests = {
 };
 
 /**
- * Verify a rule.
- *
- * @param ruleName
- * @param rule the rule implementation
- * @param tests the tests to verify
+ * Create a rule tester that lints with the `Linter` of a product.
  */
-export function verify(ruleName: string, rule: any, tests: RuleTests): void;
+export function createRuleTester(product: { Linter: any }): {
+
+  /**
+   * Verify a rule.
+   *
+   * @param ruleName
+   * @param rule the rule implementation
+   * @param tests the tests to verify
+   */
+  verify: (ruleName: string, rule: any, tests: RuleTests) => void,
+
+  expectEqual: (a: any, b: any) => void,
+
+  getTitle: (idx: number, name?: string) => string,
+
+  replacer: (key: string, value: any) => any
+};

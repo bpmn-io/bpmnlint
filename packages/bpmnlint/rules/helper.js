@@ -87,7 +87,7 @@ function isInExecutableProcess(node) {
 module.exports.isInExecutableProcess = isInExecutableProcess;
 
 
-const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/docs/rules';
+const documentationBaseUrl = 'https://github.com/bpmn-io/bpmnlint/blob/main/packages/bpmnlint/docs/rules';
 
 /**
  * Annotate a rule with core information, such as the documentation url.
