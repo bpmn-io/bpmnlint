@@ -1,31 +1,13 @@
-export type TestFn = (...any) => any;
+import type { RuleTests } from '@bpmn-io/lint-core/lib/testers/rule-tester';
 
-export type ModdleElement = any;
-
-export type ValidRuleTest = {
-  config?: any,
-  it?: TestFn,
-  moddleElement: ModdleElement,
-  name?: string
-};
-
-export type InvalidReport = {
-  id: string,
-  message: string
-};
-
-export type InvalidRuleTest = {
-  config?: any,
-  it?: TestFn,
-  moddleElement: ModdleElement,
-  name?: string,
-  report: InvalidReport | InvalidReport[]
-};
-
-export type RuleTests = {
-  valid?: ValidRuleTest[],
-  invalid?: InvalidRuleTest[]
-};
+export type {
+  TestFn,
+  ModdleElement,
+  ValidRuleTest,
+  InvalidReport,
+  InvalidRuleTest,
+  RuleTests
+} from '@bpmn-io/lint-core/lib/testers/rule-tester';
 
 /**
  * Verify a rule.
