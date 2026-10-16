@@ -6,6 +6,12 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE!`: require node@24
+
+### Breaking Changes
+
+* Node 24 is required to use the library. Make sure to update.
+
 ## 11.15.0
 
 * `FEAT`: improve performance of `no-overlapping-elements` rule ([#218](https://github.com/bpmn-io/bpmnlint/pull/218))
