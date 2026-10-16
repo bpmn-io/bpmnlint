@@ -6,6 +6,16 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE!`: require node@24
+* `CHORE`: build on top of [`@bpmn-io/lint-core`](https://github.com/bpmn-io/lint-core), shared with [`dmnlint`](https://github.com/bpmn-io/dmnlint)
+* `CHORE`: use `exports` in `package.json`
+* `DEPS`: add `@bpmn-io/lint-core@^0.1.0`
+
+### Breaking Changes
+
+* Node 24 is required to use the library. Make sure to update.
+* `exports` are used; import modules with the `.js` extension, e.g. `bpmnlint/lib/linter.js` instead of `bpmnlint/lib/linter`
+
 ## 11.15.0
 
 * `FEAT`: improve performance of `no-overlapping-elements` rule ([#218](https://github.com/bpmn-io/bpmnlint/pull/218))

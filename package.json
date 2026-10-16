@@ -3,6 +3,29 @@
   "description": "Validate your BPMN diagrams based on configurable lint rules",
   "version": "11.15.0",
   "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/index.js": "./lib/index.js",
+    "./lib/linter.js": "./lib/linter.js",
+    "./lib/resolver/helper.js": "./lib/resolver/helper.js",
+    "./lib/resolver/node-resolver.js": "./lib/resolver/node-resolver.js",
+    "./lib/resolver/static-resolver.js": "./lib/resolver/static-resolver.js",
+    "./lib/support/compile-config.js": "./lib/support/compile-config.js",
+    "./lib/test-rule.js": "./lib/test-rule.js",
+    "./lib/testers/helper.js": "./lib/testers/helper.js",
+    "./lib/traverse.js": "./lib/traverse.js",
+    "./bin/bpmnlint.js": "./bin/bpmnlint.js",
+    "./lib/testers/rule-tester.js": {
+      "types": "./lib/testers/rule-tester.d.ts",
+      "default": "./lib/testers/rule-tester.js"
+    },
+    "./lib/types.js": {
+      "types": "./lib/types.d.ts"
+    },
+    "./rules/*.js": "./rules/*.js",
+    "./config/*.js": "./config/*.js",
+    "./package.json": "./package.json"
+  },
   "keywords": [
     "bpmnlint",
     "bpmn",
@@ -23,7 +46,7 @@
     }
   ],
   "engines": {
-    "node": ">= 20"
+    "node": ">= 24"
   },
   "license": "MIT",
   "scripts": {
@@ -40,16 +63,10 @@
     "bpmnlint": "./bin/bpmnlint.js"
   },
   "dependencies": {
-    "@bpmn-io/moddle-utils": "^0.3.0",
-    "ansi-colors": "^4.1.3",
+    "@bpmn-io/lint-core": "^0.1.0",
     "bpmn-moddle": "^10.1.0",
     "bpmnlint-utils": "^1.1.1",
-    "cli-table": "^0.3.11",
-    "color-support": "^1.1.3",
-    "min-dash": "^5.1.0",
-    "mri": "^1.2.0",
-    "pluralize": "^8.0.0",
-    "tiny-glob": "^0.2.9"
+    "min-dash": "^5.1.0"
   },
   "devDependencies": {
     "@bpmn-io/bpmnlint-generate-docs-images": "^1.2.0",

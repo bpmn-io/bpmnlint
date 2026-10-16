@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const compileConfig = require('bpmnlint/lib/support/compile-config');
+const compileConfig = require('bpmnlint/lib/support/compile-config.js');
 
 const config = {
   extends: [
