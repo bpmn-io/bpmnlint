@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.0.0
+
 * `CHORE!`: require node@24
 * `CHORE`: build on top of [`@bpmn-io/lint-core`](https://github.com/bpmn-io/lint-core), shared with [`dmnlint`](https://github.com/bpmn-io/dmnlint)
 * `CHORE`: use `exports` in `package.json`
