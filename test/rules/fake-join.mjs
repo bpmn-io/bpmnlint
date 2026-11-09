@@ -20,6 +20,9 @@ RuleTester.verify('fake-join', rule, {
     },
     {
       moddleElement: readModdle(__dirname + '/fake-join/valid-gateway.bpmn')
+    },
+    {
+      moddleElement: readModdle(__dirname + '/fake-join/valid-link-event.bpmn')
     }
   ],
   invalid: [
@@ -35,6 +38,20 @@ RuleTester.verify('fake-join', rule, {
       report: {
         id: 'Element',
         message: 'Incoming flows do not join'
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/fake-join/invalid-link-event.bpmn'),
+      report: {
+        id: 'Catch',
+        message: 'Link throw events with link name <L> do not join'
+      }
+    },
+    {
+      moddleElement: readModdle(__dirname + '/fake-join/invalid-link-event-subprocess.bpmn'),
+      report: {
+        id: 'Catch',
+        message: 'Link throw events with link name <L> do not join'
       }
     }
   ]

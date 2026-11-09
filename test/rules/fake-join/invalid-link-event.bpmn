@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:intermediateThrowEvent id="Throw_1">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1" name="L" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Throw_2">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_2" name="L" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_3" name="L" />
+    </bpmn:intermediateCatchEvent>
+
+    <!-- same link name, single pair in subprocess -->
+    <bpmn:subProcess id="SubProcess_1">
+      <bpmn:intermediateThrowEvent id="Throw_3">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_4" name="L" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateCatchEvent id="Catch_2">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_5" name="L" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:process id="Process_2" isExecutable="true">
+
+    <!-- same link name, single pair in another process -->
+    <bpmn:intermediateThrowEvent id="Throw_4">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_6" name="L" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch_3">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_7" name="L" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+</bpmn:definitions>

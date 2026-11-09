@@ -6,6 +6,8 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: report multiple link throw events targeting the same catch event in `fake-join` ([#222](https://github.com/bpmn-io/bpmnlint/issues/222))
+
 ## 12.0.0
 
 * `CHORE!`: require node@24
