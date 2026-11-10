@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="true">
+
+    <!-- single throw / catch pair -->
+    <bpmn:intermediateThrowEvent id="Throw_1">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1" name="A" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch_1">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_2" name="A" />
+    </bpmn:intermediateCatchEvent>
+
+    <!-- same link name, separate scope -->
+    <bpmn:subProcess id="SubProcess_1">
+      <bpmn:intermediateThrowEvent id="Throw_2">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_3" name="A" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateCatchEvent id="Catch_2">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_4" name="A" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+
+  </bpmn:process>
+  <bpmn:process id="Process_2" isExecutable="true">
+
+    <!-- same link name, separate process -->
+    <bpmn:intermediateThrowEvent id="Throw_3">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_5" name="A" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch_3">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_6" name="A" />
+    </bpmn:intermediateCatchEvent>
+
+    <!-- ambiguous catches are validated by <link-event> -->
+    <bpmn:intermediateThrowEvent id="Throw_6">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_10" name="B" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Throw_7">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_11" name="B" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch_5">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_12" name="B" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Catch_6">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_13" name="B" />
+    </bpmn:intermediateCatchEvent>
+
+    <!-- unnamed links are ignored -->
+    <bpmn:intermediateThrowEvent id="Throw_4">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_7" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Throw_5">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_8" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Catch_4">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_9" />
+    </bpmn:intermediateCatchEvent>
+
+  </bpmn:process>
+</bpmn:definitions>

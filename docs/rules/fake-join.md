@@ -1,6 +1,8 @@
 # Fake Join (fake-join)
 
-Checks that no fake join is modeled by attempting to give a task or event join semantics. Users should model a parallel joining gateway to achieve the desired behavior.
+Checks that no fake join is modeled by attempting to give an element join semantics, e.g. a task, an event, or a link catch event targeted by multiple link throw events. Such elements do not synchronize their incoming flows. Users should model a parallel joining gateway to achieve the desired behavior.
+
+Mutually exclusive paths do not need to be synchronized.
 
 
 Example of __incorrect__ usage for this rule:

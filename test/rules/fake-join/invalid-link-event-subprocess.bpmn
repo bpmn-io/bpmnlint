@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:subProcess id="SubProcess_1">
+      <bpmn:intermediateThrowEvent id="Throw_1">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_1" name="L" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateThrowEvent id="Throw_2">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_2" name="L" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:intermediateCatchEvent id="Catch">
+        <bpmn:linkEventDefinition id="LinkEventDefinition_3" name="L" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+</bpmn:definitions>
