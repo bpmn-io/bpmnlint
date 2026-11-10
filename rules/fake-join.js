@@ -14,11 +14,9 @@ const {
 
 /**
  * A rule that checks that no fake join is modeled by attempting
- * to give a task or event join semantics.
- *
- * This includes multiple link throw events targeting the same
- * link catch event within a scope: the catch event does not
- * synchronize the paths.
+ * to give an element join semantics, i.e. a task or event with
+ * multiple incoming flows, or a link catch event targeted by
+ * multiple link throw events.
  *
  * Users should model a parallel joining gateway
  * to achieve the desired behavior.
@@ -51,15 +49,14 @@ module.exports = function() {
 
     const links = (container.flowElements || []).filter(isLinkEvent);
 
-    // links are resolved by name, per scope; ignore unnamed
-    // (validated by <link-event>)
+    // links are resolved by name, per scope
     const names = groupBy(links.filter(getLinkName), getLinkName);
 
     for (const [ name, events ] of Object.entries(names)) {
       const throwEvents = events.filter(event => is(event, 'bpmn:ThrowEvent'));
       const catchEvents = events.filter(event => is(event, 'bpmn:CatchEvent'));
 
-      // ambiguous catch is validated by <link-event>
+      // ignore ambiguous catch
       if (throwEvents.length > 1 && catchEvents.length === 1) {
         reporter.report(
           catchEvents[0].id,
