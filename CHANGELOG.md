@@ -6,6 +6,9 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: restore node@20 support ([#225](https://github.com/bpmn-io/bpmnlint/pull/225))
+* `DEPS`: update to `@bpmn-io/lint-core@^0.1.1`
+
 ## 12.1.0
 
 * `FEAT`: report multiple link throw events targeting the same catch event in `fake-join` ([#222](https://github.com/bpmn-io/bpmnlint/issues/222))
