@@ -1,5 +1,6 @@
 # bpmnlint
 
+<!-- devpilot org-fork probe -->
 [![CI](https://github.com/bpmn-io/bpmnlint/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmnlint/actions/workflows/CI.yml)
 
 Validate your BPMN diagrams based on configurable lint rules.
