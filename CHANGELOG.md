@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.1.1
+
+_Restores Node@20 support removed in `v12.0.0`._
+
 * `FIX`: restore node@20 support ([#225](https://github.com/bpmn-io/bpmnlint/pull/225))
 * `DEPS`: update to `@bpmn-io/lint-core@^0.1.1`
 
