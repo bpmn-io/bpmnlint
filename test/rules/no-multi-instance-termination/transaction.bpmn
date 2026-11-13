@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:transaction id="MultiInstanceTransaction">
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:endEvent id="TransactionTerminate">
+        <bpmn:terminateEventDefinition id="TransactionTerminateDefinition" />
+      </bpmn:endEvent>
+    </bpmn:transaction>
+  </bpmn:process>
+</bpmn:definitions>

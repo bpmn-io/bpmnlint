@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:subProcess id="MultiInstance">
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:endEvent id="ReferencedTerminate">
+        <bpmn:eventDefinitionRef>GlobalTerminateDefinition</bpmn:eventDefinitionRef>
+      </bpmn:endEvent>
+      <bpmn:endEvent id="InlineAndReferencedTerminate">
+        <bpmn:terminateEventDefinition id="InlineTerminateDefinition" />
+        <bpmn:eventDefinitionRef>GlobalTerminateDefinition</bpmn:eventDefinitionRef>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:terminateEventDefinition id="GlobalTerminateDefinition" />
+</bpmn:definitions>

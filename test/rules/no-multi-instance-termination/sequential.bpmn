@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:subProcess id="Sequential">
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true">
+        <bpmn:loopCardinality xsi:type="bpmn:tFormalExpression">3</bpmn:loopCardinality>
+      </bpmn:multiInstanceLoopCharacteristics>
+      <bpmn:startEvent id="Start">
+        <bpmn:outgoing>Flow_Start</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="CheckItem">
+        <bpmn:incoming>Flow_Start</bpmn:incoming>
+        <bpmn:outgoing>Flow_Terminate</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:endEvent id="SequentialTerminate">
+        <bpmn:incoming>Flow_Terminate</bpmn:incoming>
+        <bpmn:terminateEventDefinition id="TerminateDefinition" />
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_Start" sourceRef="Start" targetRef="CheckItem" />
+      <bpmn:sequenceFlow id="Flow_Terminate" sourceRef="CheckItem" targetRef="SequentialTerminate" />
+    </bpmn:subProcess>
+  </bpmn:process>
+</bpmn:definitions>

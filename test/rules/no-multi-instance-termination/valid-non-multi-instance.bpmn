@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:endEvent id="ProcessTerminate">
+      <bpmn:terminateEventDefinition id="ProcessTerminateDefinition" />
+    </bpmn:endEvent>
+    <bpmn:subProcess id="OrdinarySubProcess">
+      <bpmn:endEvent id="SubProcessTerminate">
+        <bpmn:terminateEventDefinition id="SubProcessTerminateDefinition" />
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="StandardLoop">
+      <bpmn:standardLoopCharacteristics />
+      <bpmn:endEvent id="StandardLoopTerminate">
+        <bpmn:terminateEventDefinition id="StandardLoopTerminateDefinition" />
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+</bpmn:definitions>
