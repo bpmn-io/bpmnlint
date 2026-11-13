@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:subProcess id="OuterMultiInstance">
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:endEvent id="OuterTerminate">
+        <bpmn:terminateEventDefinition id="OuterTerminateDefinition" />
+      </bpmn:endEvent>
+      <bpmn:subProcess id="OrdinaryNested">
+        <bpmn:endEvent id="OrdinaryNestedTerminate">
+          <bpmn:terminateEventDefinition id="OrdinaryNestedTerminateDefinition" />
+        </bpmn:endEvent>
+        <bpmn:subProcess id="NestedMultiInstance">
+          <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+          <bpmn:endEvent id="NestedMultiTerminate">
+            <bpmn:terminateEventDefinition id="NestedMultiTerminateDefinition" />
+          </bpmn:endEvent>
+        </bpmn:subProcess>
+      </bpmn:subProcess>
+      <bpmn:subProcess id="DoubleMultiInstance">
+        <bpmn:multiInstanceLoopCharacteristics />
+        <bpmn:endEvent id="DoubleMultiTerminate">
+          <bpmn:terminateEventDefinition id="DoubleMultiTerminateDefinition" />
+        </bpmn:endEvent>
+      </bpmn:subProcess>
+    </bpmn:subProcess>
+  </bpmn:process>
+</bpmn:definitions>
