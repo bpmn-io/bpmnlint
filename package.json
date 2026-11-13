@@ -94,7 +94,7 @@
     "execa": "^9.6.1",
     "install-local": "^4.1.0",
     "mocha": "^11.8.0",
-    "npm-run-all2": "^9.0.3",
+    "npm-run-all2": "^9.0.4",
     "nyc": "^18.0.0",
     "strip-indent": "^4.1.1",
     "typescript": "^5.9.3"
