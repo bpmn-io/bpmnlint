@@ -4,6 +4,7 @@ import fs from 'node:fs';
 
 import allConfig from 'bpmnlint/config/all.js';
 import correctnessConfig from 'bpmnlint/config/correctness.js';
+import recommendedConfig from 'bpmnlint/config/recommended.js';
 
 
 describe('config', function() {
@@ -26,6 +27,50 @@ describe('config', function() {
 
       // then
       expect(configuredRules).to.eql(definedRules);
+    });
+
+  });
+
+
+  describe('recommended', function() {
+
+    it('should contain relevant lint rules', function() {
+
+      // given
+      const expectedRules = {
+        'ad-hoc-sub-process': 'error',
+        'conditional-flows': 'error',
+        'end-event-required': 'error',
+        'event-based-gateway': 'error',
+        'event-sub-process-typed-start-event': 'error',
+        'fake-join': 'warn',
+        'global': 'warn',
+        'label-required': 'error',
+        'link-event': 'error',
+        'no-bpmndi': 'error',
+        'no-complex-gateway': 'error',
+        'no-disconnected': 'error',
+        'no-duplicate-sequence-flows': 'error',
+        'no-gateway-join-fork': 'error',
+        'no-implicit-split': 'error',
+        'no-implicit-end': 'error',
+        'no-implicit-start': 'error',
+        'no-inclusive-gateway': 'warn',
+        'no-overlapping-elements': 'warn',
+        'single-blank-start-event': 'error',
+        'single-event-definition': 'error',
+        'start-event-required': 'error',
+        'sub-process-blank-start-event': 'error',
+        'superfluous-gateway': 'warn',
+        'superfluous-label': 'warn',
+        'superfluous-termination': 'warn'
+      };
+
+      // when
+      const configuredRules = recommendedConfig.rules;
+
+      // then
+      expect(configuredRules).to.eql(expectedRules);
     });
 
   });
