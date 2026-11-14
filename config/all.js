@@ -18,6 +18,7 @@ const allRules = [
   'no-implicit-split',
   'no-implicit-start',
   'no-inclusive-gateway',
+  'no-multi-instance-termination',
   'no-overlapping-elements',
   'single-blank-start-event',
   'single-event-definition',

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:subProcess id="MultiInstance">
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:endEvent id="BlankEnd" />
+      <bpmn:endEvent id="InlineErrorEnd">
+        <bpmn:errorEventDefinition id="InlineErrorDefinition" errorRef="Error" />
+      </bpmn:endEvent>
+      <bpmn:endEvent id="ReferencedErrorEnd">
+        <bpmn:eventDefinitionRef>GlobalErrorDefinition</bpmn:eventDefinitionRef>
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:error id="Error" errorCode="ITEM_FAILED" />
+  <bpmn:errorEventDefinition id="GlobalErrorDefinition" errorRef="Error" />
+</bpmn:definitions>

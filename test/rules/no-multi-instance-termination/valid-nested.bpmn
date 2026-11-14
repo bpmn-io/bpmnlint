@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process">
+    <bpmn:subProcess id="MultiInstance">
+      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:startEvent id="Start">
+        <bpmn:outgoing>Flow_ToNested</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:subProcess id="Nested">
+        <bpmn:incoming>Flow_ToNested</bpmn:incoming>
+        <bpmn:outgoing>Flow_ToEnd</bpmn:outgoing>
+        <bpmn:startEvent id="NestedStart">
+          <bpmn:outgoing>Flow_NestedTerminate</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:endEvent id="NestedTerminate">
+          <bpmn:incoming>Flow_NestedTerminate</bpmn:incoming>
+          <bpmn:terminateEventDefinition id="NestedTerminateDefinition" />
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_NestedTerminate" sourceRef="NestedStart" targetRef="NestedTerminate" />
+      </bpmn:subProcess>
+      <bpmn:endEvent id="End">
+        <bpmn:incoming>Flow_ToEnd</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:subProcess id="EventSubProcess" triggeredByEvent="true">
+        <bpmn:startEvent id="EventStart" isInterrupting="false">
+          <bpmn:outgoing>Flow_EventTerminate</bpmn:outgoing>
+          <bpmn:messageEventDefinition id="MessageDefinition" messageRef="Message" />
+        </bpmn:startEvent>
+        <bpmn:endEvent id="EventTerminate">
+          <bpmn:incoming>Flow_EventTerminate</bpmn:incoming>
+          <bpmn:terminateEventDefinition id="EventTerminateDefinition" />
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_EventTerminate" sourceRef="EventStart" targetRef="EventTerminate" />
+      </bpmn:subProcess>
+      <bpmn:subProcess id="InterruptingEventSubProcess" triggeredByEvent="true">
+        <bpmn:startEvent id="InterruptingEventStart" isInterrupting="true">
+          <bpmn:outgoing>Flow_InterruptingEventTerminate</bpmn:outgoing>
+          <bpmn:messageEventDefinition id="InterruptingMessageDefinition" messageRef="InterruptingMessage" />
+        </bpmn:startEvent>
+        <bpmn:endEvent id="InterruptingEventTerminate">
+          <bpmn:incoming>Flow_InterruptingEventTerminate</bpmn:incoming>
+          <bpmn:terminateEventDefinition id="InterruptingEventTerminateDefinition" />
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_InterruptingEventTerminate" sourceRef="InterruptingEventStart" targetRef="InterruptingEventTerminate" />
+      </bpmn:subProcess>
+      <bpmn:sequenceFlow id="Flow_ToNested" sourceRef="Start" targetRef="Nested" />
+      <bpmn:sequenceFlow id="Flow_ToEnd" sourceRef="Nested" targetRef="End" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:message id="Message" name="Message" />
+  <bpmn:message id="InterruptingMessage" name="Interrupting message" />
+</bpmn:definitions>
