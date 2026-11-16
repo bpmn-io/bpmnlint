@@ -26,15 +26,15 @@ module.exports = function() {
       return;
     }
 
-    const loopCharacteristics = parent.loopCharacteristics;
+    const loopCharacteristics = parent.get('loopCharacteristics');
 
     if (!loopCharacteristics || !is(loopCharacteristics, 'bpmn:MultiInstanceLoopCharacteristics')) {
       return;
     }
 
     const eventDefinitions = [
-      ...(node.eventDefinitions || []),
-      ...(node.eventDefinitionRef || [])
+      ...node.get('eventDefinitions'),
+      ...node.get('eventDefinitionRef')
     ];
 
     if (eventDefinitions.some(definition => is(definition, 'bpmn:TerminateEventDefinition'))) {
