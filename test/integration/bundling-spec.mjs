@@ -1,5 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
+import vm from 'node:vm';
 
 import { execa } from 'execa';
 
@@ -44,23 +45,55 @@ function test(bundler, options = { it: it }) {
     expect(exitCode).to.eql(0);
 
     const actualFile = path.join(__dirname, `bundling/dist/app.${bundler}.js`);
-    const expectedFile = path.join(__dirname, `bundling/test/app.${bundler}.expected.js`);
-
-    const root = process.cwd().replace(/[/\\. -]+/g, '_');
-
-    if (process.env.UPDATE_FIXTURES) {
-      fs.writeFileSync(expectedFile, read(actualFile).split(root).join(''), 'utf8');
-    }
-
     const actualContents = read(actualFile);
 
-    // and
-    expect(
-      actualContents.split(root).join(''),
-      `${ actualFile } and ${ expectedFile } equal`
-    ).to.eql(
-      read(expectedFile).split(root).join('')
+    let bundle;
+
+    vm.runInNewContext(actualContents, {
+      console: {
+        log: value => bundle = value
+      }
+    });
+
+    expect(JSON.parse(JSON.stringify(bundle.config.rules))).to.eql({
+      'label-required': 1,
+      'start-event-required': 'info',
+      'end-event-required': 2,
+      'exported/foo': 'error',
+      'exported/foo-absolute': 'error'
+    });
+
+    expect(JSON.parse(JSON.stringify(bundle.moddleExtensions.spell))).to.eql(
+      JSON.parse(read(path.join(__dirname, 'bundling/src/spell.json')))
     );
+
+    const cases = [
+      [ 'label-required', 'bpmn:FlowNode', 'Element is missing label/name' ],
+      [ 'start-event-required', 'bpmn:Process', 'Process is missing start event' ],
+      [ 'end-event-required', 'bpmn:Process', 'Process is missing end event' ]
+    ];
+
+    for (const [ ruleName, type, message ] of cases) {
+      const rule = bundle.resolver.resolveRule('bpmnlint', ruleName);
+      const reports = [];
+
+      rule().check({
+        id: 'element',
+        $instanceOf: expected => expected === type
+      }, {
+        report: (id, message) => reports.push([ id, message ])
+      });
+
+      expect(reports).to.eql([ [ 'element', message ] ]);
+    }
+
+    const foo = bundle.resolver.resolveRule('bpmnlint-plugin-exported', 'foo');
+    const fooAbsolute = bundle.resolver.resolveRule('bpmnlint-plugin-exported', 'foo-absolute');
+
+    expect(foo().check).to.be.a('function');
+    expect(fooAbsolute).to.equal(foo);
+    expect(() => bundle.resolver.resolveRule('bpmnlint-plugin-exported', 'bar')).to.throw('not bundled');
+    expect(() => bundle.resolver.resolveConfig('bpmnlint', 'recommended')).to.throw('not bundled');
 
     expect(actualContents).not.to.include('function bar()');
     expect(actualContents).to.include('function foo()');
