@@ -13,7 +13,7 @@
     "bpmnlint-loader": "^0.1.6",
     "rollup": "^3.21.0",
     "rollup-plugin-bpmnlint": "^0.4.1",
-    "webpack": "^5.80.0",
+    "webpack": "5.113.0",
     "webpack-cli": "^5.0.2"
   },
   "localDependencies": {
