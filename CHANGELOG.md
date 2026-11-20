@@ -6,6 +6,10 @@ All notable changes to [bpmnlint](https://github.com/bpmn-io/bpmnlint) are docum
 
 ___Note:__ Yet to be released changes appear here._
 
+## 12.2.0
+
+* `FEAT`: add `no-multi-instance-termination` rule to warn about terminate end events inside multi-instance subprocesses; include it in the `recommended` ruleset ([#223](https://github.com/bpmn-io/bpmnlint/issues/223))
+
 ## 12.1.1
 
 _Restores Node@20 support removed in `v12.0.0`._
